@@ -15,7 +15,7 @@ public interface BoardMapper {
 				title,
 				writer,
 				inserted
-			FROM Board
+			FROM QuickMenu
 			ORDER BY id DESC
 			""")
 	List<Board> selectAll();

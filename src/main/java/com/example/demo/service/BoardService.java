@@ -13,7 +13,12 @@ import com.example.demo.mapper.*;
 @Service
 public class BoardService {
 
+	@Autowired
+	private BoardMapper mapper;
 	
-
+	public List<Board> listBoard() {
+		List<Board> QuickMenu = mapper.selectAll();
+		return QuickMenu;
+	}
 
 }

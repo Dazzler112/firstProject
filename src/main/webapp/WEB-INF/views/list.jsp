@@ -37,55 +37,44 @@
 		</nav>
 	</div>
 	<hr />
-	
-
-	<table>
-		<colgroup>
-			<col style="width: 5%;" />
-			<col style="width: auto;" />
-			<col style="width: 15%;" />
-			<col style="width: 10%;" />
-			<col style="width: 10%;" />
-		</colgroup>
-		<thead>
-			<tr>
-				<th>NO</th>
-				<th>글제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${empty boardList }">
-					<tr>
-						<td colspan="5" align="center">데이터가 없습니다.</td>
-					</tr>
-				</c:when>
-				<c:when test="${!empty boardList}">
-					<c:forEach var="list" items="${boardList}">
-						<tr>
-							<td><c:out value="${list.bid}" /></td>
-							<td><c:out value="${list.title}" /></td>
-							<td><c:out value="${list.reg_id}" /></td>
-							<td><c:out value="${list.view_cnt}" /></td>
-							<td><c:out value="${list.reg_dt}" /></td>
-						</tr>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</tbody>
-	</table>
-	
-	
+	<nav class="navbar navbar-expand-lg navbar-wight bg-wight">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Navbar</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+				<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+						<button class="btn btn-wight dropdown-toggle btn-group" data-bs-toggle="dropdown" aria-expanded="false">
+							카테고리</button>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li><a class="dropdown-item" href="#">Action</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Something else here</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<button class="btn btn-wight dropdown-toggle btn-group" data-bs-toggle="dropdown" aria-expanded="false">
+							Dropdown</button>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li><a class="dropdown-item" href="#">Action</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Something else here</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </html>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-		integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+	integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
-
 </html>

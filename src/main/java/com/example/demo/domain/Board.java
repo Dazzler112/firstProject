@@ -7,16 +7,8 @@ import lombok.*;
 
 @Data
 public class Board {
-	private Integer id;
-	private String title;
-	private String body;
-	private LocalDateTime inserted;
-	private String writer;
-	private List<String> fileName;
-	
-	private Boolean liked;
-	
-	private Integer fileCount;
-	private Integer likeCount;
-	private Integer commentCount;
+	private String root_name1;
+	private String root_name2;
+	private String root_name3;
+	private String root_name4;
 }
