@@ -15,10 +15,15 @@ public class BoardService {
 	@Autowired
 	private BoardMapper mapper;
 
-	public List<Board> listBoard(Double price, String title, String address, Optional<LocalDateTime> inserted,
-			String writer, Integer likes) {
+	public List<Board> listBoard(Integer price, String title, Optional<LocalDateTime> inserted, String address) {
+		// TODO Auto-generated method stub
+		return mapper.selectAll1();
+	}
 
-		return mapper.selectAll();
+	public List<Board> listBoard(Integer price, String title, Optional<LocalDateTime> inserted, String address,
+			Integer likes) {
+		// TODO Auto-generated method stub
+		return mapper.selectAll2();
 	}
 
 }

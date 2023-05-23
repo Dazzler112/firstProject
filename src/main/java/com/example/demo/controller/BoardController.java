@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.*;
+
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -18,19 +19,30 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 
-	@GetMapping("list")
-	public String list(Model model,
-			@RequestParam(value = "price", defaultValue = "") Double price,
+	@GetMapping("list1")
+	public String list1(Model model,
+			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "title", defaultValue = "") String title,
-			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "inserted", defaultValue = "") Optional<LocalDateTime> inserted,
-			@RequestParam(value = "writer", defaultValue = "") String writer,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes
-			
+			@RequestParam(value = "address", defaultValue = "") String address
 			) {
 			
-		List<Board> result = service.listBoard(price, title, address, inserted, writer, likes);
-		
+		List<Board> result = service.listBoard(price, title, inserted, address);
+		model.addAttribute("productList1", result);
+		return "list";
+	}
+	
+	@GetMapping("list2")
+	public String list2(Model model,
+			@RequestParam(value = "price", defaultValue = "") Integer price,
+			@RequestParam(value = "title", defaultValue = "") String title,
+			@RequestParam(value = "inserted", defaultValue = "") Optional<LocalDateTime> inserted,
+			@RequestParam(value = "address", defaultValue = "") String address,
+			@RequestParam(value = "Likes", defaultValue = "") Integer likes
+			) {
+			
+		List<Board> result = service.listBoard(price, title, inserted, address, likes);
+		model.addAttribute("productList2", result);
 		return "list";
 	}
 }

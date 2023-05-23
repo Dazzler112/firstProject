@@ -14,12 +14,21 @@ public interface BoardMapper {
 				price,
 				title,
 				address,
+				inserted
+			FROM Product
+			""")
+	List<Board> selectAll1();
+	
+	@Select("""
+			SELECT
+				price,
+				title,
+				address,
 				inserted,
-				writer,
 				likes
 			FROM Product
-			ORDER BY likes
+			ORDER BY Likes DESC
 			""")
-	List<Board> selectAll();
+	List<Board> selectAll2();
 	
 }

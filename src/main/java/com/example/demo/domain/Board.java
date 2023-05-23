@@ -6,11 +6,10 @@ import lombok.*;
 
 @Data
 public class Board {
-		private Double price;
+		private Integer price;
 		private String title;
-		private String address;
 		private LocalDate inserted;
-		private String writer;
-		private int likes;
+		private String address;
+		private Integer likes;
 
 }

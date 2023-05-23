@@ -26,20 +26,15 @@
 					<th>제목</th>
 					<th>주소</th>
 					<th>올린 시간</th>
-					<th>작성자</th>
-					<th>좋아요</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${productList }" var="product">
 					<tr>
-					<td>${productList}</td>
 					<td>${product.price}</td>
 					<td>${product.title}</td>
-					<td>${product.address}</td>
 					<td>${product.inserted}</td>
-					<td>${product.writer}</td>
-					<td>${product.likes}</td>
+					<td>${product.address}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
