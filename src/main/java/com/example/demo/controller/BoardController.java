@@ -76,9 +76,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("update/{id}")
-	public String noticeUpdateProcess(@PathVariable ("id") Integer id, String title, String body, Notice notice) {
+	public String noticeUpdateProcess(Notice notice) {
 	
-		boolean ok = service.update(title, body, id);
+		boolean ok = service.update(notice);
 		if(ok) {
 			return "redirect:/id/" + notice.getId();			
 		}else {

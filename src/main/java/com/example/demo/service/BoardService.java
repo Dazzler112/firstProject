@@ -34,8 +34,8 @@ public class BoardService {
 		return cnt == 1;
 	}
 
-	public boolean update(String title, String body, Integer id) {
-		int cnt = mapper.updateNotice(title, body, id);
+	public boolean update(Notice notice) {
+		int cnt = mapper.updateNotice(notice);
 		return cnt == 1;
 	}
 }

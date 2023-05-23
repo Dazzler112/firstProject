@@ -36,13 +36,13 @@ public interface BoardMapper {
 	Integer removeNotice(Integer id);
 
 	@Update("""
-			UPDATE Board
+			UPDATE Notice
 			SET
 			 	title = #{title},
 			 	body = #{body}
 			WHERE
 				id = #{id}
 			""")
-	Integer updateNotice(String title, String body, Integer id);
+	Integer updateNotice(Notice notice);
 
 }
