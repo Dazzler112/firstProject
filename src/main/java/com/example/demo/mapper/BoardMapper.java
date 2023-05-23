@@ -31,6 +31,41 @@ public interface BoardMapper {
 			""")
 	List<AdBoard> selectAll_AdBoard();
 
+	@Select("""
+			SELECT
+				id,
+				title,
+				writer,
+				inserted
+			FROM PtBoard
+			ORDER BY id DESC
+			""")
+	List<PtBoard> selectAll_PtBoard();
+
+	@Select("""
+			SELECT
+				title,
+				body,
+				writer,
+				inserted
+			FROM Board
+			WHERE id = #{id}
+			""")
+	Board selectById(Integer id);
+
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

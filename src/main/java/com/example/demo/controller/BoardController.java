@@ -18,18 +18,32 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("list")
-	public String list(Model model) {
+	public void list(Model model) {
 		List<Board> list = service.listBoard();
 		
 		model.addAttribute("boardList", list);
-		return "board/list";
+		
 	}
 	
 	@GetMapping("adList")
-	public String adList(Model model) {
+	public void adList(Model model) {
 		List<AdBoard> list = service.listAdBoard();
 		model.addAttribute("adBoardList", list);
-		return "board/adList";
+		
+	}
+	
+	@GetMapping("ptList")
+	public void ptList(Model model) {
+		List<PtBoard> list = service.listPtBoard();
+		model.addAttribute("ptBoardList", list);
+	}
+	
+	@GetMapping("id/{id}")
+	public String board(@PathVariable("id") Integer id, Model model) {
+		Board board = service.getBoard(id);
+		model.addAttribute("board", board);
+		
+		return "board/get";
 	}
 	
 }

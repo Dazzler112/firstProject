@@ -23,6 +23,16 @@ public class BoardService {
 		List<AdBoard> list = mapper.selectAll_AdBoard();
 		return list;
 	}
+
+	public List<PtBoard> listPtBoard() {
+		List<PtBoard> list = mapper.selectAll_PtBoard();
+		return list;
+	}
+
+	public Board getBoard(Integer id) {
+		
+		return mapper.selectById(id);
+	}
 	
 	
 }
