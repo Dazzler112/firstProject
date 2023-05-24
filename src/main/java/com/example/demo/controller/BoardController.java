@@ -20,7 +20,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	//localhost:8080/announcement
+	//localhost:8084/list
 	
 	@GetMapping("list")
 	public String QuickMenu(Model model) {
