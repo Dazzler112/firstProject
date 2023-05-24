@@ -5,7 +5,7 @@ import java.time.*;
 import lombok.*;
 
 @Data
-public class AdBoard {
+public class PtBoard {
 
 	private Integer id;
 	private String title;
@@ -14,4 +14,3 @@ public class AdBoard {
 	private String region;
 	private LocalDateTime inserted;
 }
-

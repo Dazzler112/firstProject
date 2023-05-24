@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
@@ -38,12 +39,37 @@ public class BoardController {
 		model.addAttribute("ptBoardList", list);
 	}
 	
-	@GetMapping("id/{id}")
+	@GetMapping("/id/{id}")
 	public String board(@PathVariable("id") Integer id, Model model) {
-		Board board = service.getBoard(id);
-		model.addAttribute("board", board);
+		Board adBoard = service.getAdBoard(id);
+		model.addAttribute("adBoard", adBoard);
 		
-		return "board/get";
+		return "board/adGet";
+	}
+	
+	@GetMapping("adAdd")
+	public void addForm() {
+		
+	}
+	
+	@PostMapping("adAdd")
+	public String addProcess(AdBoard adBoard, RedirectAttributes rttr) {
+		
+		
+		boolean ok = service.addBoard(adBoard);
+		
+		if (ok) {
+			return "redirect:/board/id/" + adBoard.getId();
+		} else {
+			rttr.addFlashAttribute("adBoard", adBoard);
+			return "redirect:/board/adAdd";
+		}		
+	}
+	
+	@GetMapping("/adModify/{id}")
+	public String modify(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("adBoard",service.getAdBoard(id));
+		return "board/adModify";
 	}
 	
 }

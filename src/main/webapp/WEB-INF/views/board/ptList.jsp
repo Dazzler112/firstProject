@@ -11,32 +11,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
 	<div class="container-lg">
-		<h1>광고게시판 </h1>  
-		<input type="checkbox" />
-		<label for="">이사/용달</label>
-		<input type="checkbox" />
-		<label for="">인테리어/간판</label>
-		<input type="checkbox" />
-		<label for="">청소</label>
-		<input type="checkbox" />
-		<label for="">학원</label>
-		<input type="checkbox" />
-		<label for="">미용</label>
-		<input type="checkbox" />
-		<label for="">운동</label>
-		<input type="checkbox" />
-		<label for="">병원</label>
-		<input type="checkbox" />
-		<label for="">금융</label>
-		<input type="checkbox" />
-		<label for="">기타</label>
-		
-		<div>
-			<a class="btn btn-secondary" href="/board/adAdd">글쓰기</a>
-		</div>
-		
+		<h1>알바게시판</h1>
 		<table class="table">
 			<thead>
 				<tr>
@@ -47,12 +23,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${adBoardList }" var="adBoard">
+				<c:forEach items="${ptBoardList }" var="ptBoard">
 					<tr>
-						<td>${adBoard.id }</td>
-						<td><a href="/board/id/${adBoard.id }">${adBoard.title }</a></td>
-						<td>${adBoard.writer }</td>
-						<td>${adBoard.inserted }</td>
+						<td>${ptBoard.id }</td>
+						<td>${ptBoard.title }</td>
+						<td>${ptBoard.writer }</td>
+						<td>${ptBoard.inserted }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -29,9 +29,15 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoard(Integer id) {
-		
+
+	public Board getAdBoard(Integer id) {
+
 		return mapper.selectById(id);
+	}
+
+	public boolean addBoard(AdBoard adBoard) {
+		int cnt = mapper.insert(adBoard);
+		return cnt == 1;
 	}
 	
 	

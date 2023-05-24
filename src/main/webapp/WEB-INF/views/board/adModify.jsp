@@ -10,51 +10,34 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
 	<div class="container-lg">
-		<h1>자유게시판</h1>
-		<form>
-			<input id="" type="checkbox" />
-			<label for="">동네질문</label>
-			<input id="" type="checkbox" />
-			<label for="">동네사건사고</label>
-			<input id="" type="checkbox" />
-			<label for="">동네맛집</label>
-			<input id="" type="checkbox" />
-			<label for="">동네소식</label>
-			<input id="" type="checkbox" />
-			<label for="">생활정보</label>
-			<input id="" type="checkbox" />
-			<label for="">취미생활</label>
-			<input id="" type="checkbox" />
-			<label for="">일상</label>
-			<input id="" type="checkbox" />
-			<label for="">분실</label>
-			<input id="" type="checkbox" />
-			<label for="">해주세요</label>
-		</form>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>게시판</th>
-					<th>제목</th>
-					<th>닉네임</th>
-					<th>등록일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${boardList }" var="board">
-					<tr>
-						<td>${board.id }</td>
-						<td> <a href="/id/${board.id}">${board.title }</a></td>
-						<td>${board.writer }</td>
-						<td>${board.inserted }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8 col-lg-6">
+				<h1>${adBoard.id }번게시물수정</h1>
+				<input type="hidden" name="id" value="${adBoard.id }" />
+				<div class="mb-3">
+					<label for="titleInput" class="form-label">제목</label>
+					<input class="form-control" id="titleInput" type="text" name="title" value="${adBoard.title }" />
+				</div>
+				<div class="mb-3">
+					<label for="bodyTextarea" class="form-label">본문</label>
+					<textarea class="form-control" id="bodyTextarea" rows="10" name="body">${adBoard.body }</textarea>
+				</div>
+				<div class="mb-3">
+					<label for="writerInput" class="form-label">작성자</label>
+					<input class="writerInput" id="titleInput" type="text" name="title" value="${adBoard.writer }" />
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">작성일시</label>
+					<input class="form-control" type="text" value="${adBoard.inserted }" readonly />
+				</div>
+				<input type="submit" value="수정" />
+
+			</div>
+		</div>
 	</div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

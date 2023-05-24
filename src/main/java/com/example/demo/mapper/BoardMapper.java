@@ -44,14 +44,18 @@ public interface BoardMapper {
 
 	@Select("""
 			SELECT
-				title,
-				body,
-				writer,
-				inserted
-			FROM Board
+				*
+			FROM AdBoard
 			WHERE id = #{id}
 			""")
 	Board selectById(Integer id);
+
+	@Insert("""
+			INSERT INTO AdBoard (title, body, region)
+			VALUES ( #{title}, #{body}, #{region} )			
+			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	int insert(AdBoard adBoard);
 
 	
 
