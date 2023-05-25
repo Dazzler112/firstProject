@@ -26,6 +26,11 @@ public class BoardController {
 	public String QuickMenu(Model model) {
 		return null;
 	}
+	
+	@GetMapping("category")
+	public String CategoryMenu(Model model) {
+		return null;
+	}
 
 	
 
