@@ -13,5 +13,7 @@ public class AdBoard {
 	private String writer;
 	private String region;
 	private LocalDateTime inserted;
+	
+	
 }
 

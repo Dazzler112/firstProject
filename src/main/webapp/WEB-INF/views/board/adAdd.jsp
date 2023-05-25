@@ -21,25 +21,17 @@
 				</div>
 
 
-				<label for="">카테고리 : </label>
-				<input type="checkbox" />
-				<label for="">이사/용달</label>
-				<input type="checkbox" />
-				<label for="">인테리어/간판</label>
-				<input type="checkbox" />
-				<label for="">청소</label>
-				<input type="checkbox" />
-				<label for="">학원</label>
-				<input type="checkbox" />
-				<label for="">미용</label>
-				<input type="checkbox" />
-				<label for="">운동</label>
-				<input type="checkbox" />
-				<label for="">병원</label>
-				<input type="checkbox" />
-				<label for="">금융</label>
-				<input type="checkbox" />
-				<label for="">기타</label>
+				<select name="category">
+					<option value="이사/용달">이사/용달</option>
+					<option value="인테리어/간판">인테리어/간판</option>
+					<option value="청소">청소</option>
+					<option value="학원">학원</option>
+					<option value="미용">미용</option>
+					<option value="운동">운동</option>
+					<option value="병원">병원</option>
+					<option value="금융">금융</option>
+					<option value="기타">기타</option>
+				</select>
 				<form method="post">
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>

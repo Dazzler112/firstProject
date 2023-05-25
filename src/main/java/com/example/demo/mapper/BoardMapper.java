@@ -56,11 +56,25 @@ public interface BoardMapper {
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(AdBoard adBoard);
+	
+	@Update("""
+			UPDATE AdBoard
+			SET
+				title = #{title},
+				body = #{body}
+			WHERE id = #{id}
+			""")
+	int update(AdBoard adBoard);
+
+	@Delete("""
+			DELETE FROM AdBoard
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
 
 	
 
 }
-
 
 
 

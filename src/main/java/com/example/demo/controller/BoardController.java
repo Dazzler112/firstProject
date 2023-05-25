@@ -72,8 +72,20 @@ public class BoardController {
 		return "board/adModify";
 	}
 	
+	@PostMapping("remove")
+	public String remove(Integer id, RedirectAttributes rttr) {
+		boolean ok = service.adRemove(id);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
+			
+			return "redirect:/board/adList"; 
+		} else {
+			return "redirect:/id/" + id;
+		}
+	}
 }
-
+	
 
 
 

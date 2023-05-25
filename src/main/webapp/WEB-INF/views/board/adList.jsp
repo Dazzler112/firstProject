@@ -14,25 +14,17 @@
 
 	<div class="container-lg">
 		<h1>광고게시판 </h1>  
-		<input type="checkbox" />
-		<label for="">이사/용달</label>
-		<input type="checkbox" />
-		<label for="">인테리어/간판</label>
-		<input type="checkbox" />
-		<label for="">청소</label>
-		<input type="checkbox" />
-		<label for="">학원</label>
-		<input type="checkbox" />
-		<label for="">미용</label>
-		<input type="checkbox" />
-		<label for="">운동</label>
-		<input type="checkbox" />
-		<label for="">병원</label>
-		<input type="checkbox" />
-		<label for="">금융</label>
-		<input type="checkbox" />
-		<label for="">기타</label>
-		
+		<select name="category" >
+			<option value="이사/용달">이사/용달</option>
+			<option value="인테리어/간판">인테리어/간판</option>
+			<option value="청소">청소</option>
+			<option value="학원">학원</option>
+			<option value="미용">미용</option>
+			<option value="운동">운동</option>
+			<option value="병원">병원</option>
+			<option value="금융">금융</option>
+			<option value="기타">기타</option>
+		</select>				
 		<div>
 			<a class="btn btn-secondary" href="/board/adAdd">글쓰기</a>
 		</div>
@@ -40,6 +32,7 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>게시판</th>
 					<th>제목</th>
 					<th>닉네임</th>
@@ -50,6 +43,9 @@
 				<c:forEach items="${adBoardList }" var="adBoard">
 					<tr>
 						<td>${adBoard.id }</td>
+						<td>
+							
+						</td>
 						<td><a href="/board/id/${adBoard.id }">${adBoard.title }</a></td>
 						<td>${adBoard.writer }</td>
 						<td>${adBoard.inserted }</td>
