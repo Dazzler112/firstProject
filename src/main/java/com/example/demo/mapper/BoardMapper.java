@@ -71,5 +71,30 @@ public interface BoardMapper {
 			WHERE boardId = #{boardId}
 			""")
 	Integer removeFilebyBoardId(Integer boardId);
+
+	//일반 업데이트
+	@Update("""
+			UPDATE Board
+			SET
+			 title = #{title},
+			 body = #{body},
+			 region = #{region}
+			WHERE id = #{id}
+			""")
+	int updateBoard(Board board);
+	
+	//수정 - 파일삭제
+	@Delete("""
+			DELETE FROM PhotoName
+			WHERE boardId = #{boardId}
+			AND photoName = #{photoName}
+			""")
+	void deleteFileNameUpdate(Integer boardId, String photoName);
+	
+	@Insert("""
+			INSERT INTO PhotoName(boardId, photoName)
+			VALUES(#{boardId}, #{photoName})
+			""")
+	Integer updatetFileName(Integer boardId, String photoName);
 	
 }

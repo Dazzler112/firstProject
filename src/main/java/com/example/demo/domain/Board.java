@@ -16,5 +16,7 @@ public class Board {
 	private LocalDateTime inserted;
 	
 	private List<String> photoName;
-	private List<Integer> price;
+	
+	private Boolean liked;
+	private Integer likeCount;
 }

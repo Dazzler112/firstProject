@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +30,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public String get(@PathVariable("id") Integer id, Model model) {
+	public String get(@PathVariable("id") Integer id, Model model
+						,Authentication authentication) {
 		
-		Board board = service.getProcess(id);
+		Board board = service.getProcess(id, authentication);
 		
 		model.addAttribute("getBoard",board);
 		
@@ -51,8 +54,7 @@ public class BoardController {
 		
 		if(ok) {
 			rttr.addFlashAttribute("message","게시글이 생성되었습니다.");
-//			return "redirect:/id/" + board.getId();
-			return "redirect:list";
+			return "redirect:/id/" + board.getId();
 		}else {
 			rttr.addFlashAttribute("message", board.getId() + "게시글 생성에 실패하였습니다.");
 			return "redirect:/add";
@@ -72,5 +74,44 @@ public class BoardController {
 		return "redirect:/id/" + id;
 		}
 	}
+	
+	@GetMapping("/update/{id}")
+	public String updateView(@PathVariable("id")Integer id,Model model) {
+		
+		model.addAttribute("board",service.getBoard(id));
+		return "update";
+	}
+	
+	@PostMapping("update/{id}")
+	public String update(Board board,
+			@RequestParam(value="removeFiles", required = false) List<String> removePhotoNames,
+			@RequestParam(value = "listFiles" ,required = false) MultipartFile[] addFile,
+			RedirectAttributes rttr) throws Exception {
+		boolean ok = service.updateProcess(board,removePhotoNames,addFile);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message" , board.getId() + "번 게시물이 수정되었습니다");
+			return"redirect:/id/" + board.getId();
+		}else {
+			rttr.addFlashAttribute("message", board.getId() + "게시물 수정에 실패하였습니다.");
+			return"redirect:/update/" + board.getId();
+		}
+	}
+	
+	@PostMapping("/like")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> like(@RequestBody BoardLike like,
+									Authentication authentication) {
+		if(authentication ==null) {
+			return ResponseEntity
+					.status(403)
+					.body(Map.of("message","로그인을 해주세요."));
+		}else {
+			return ResponseEntity
+					.ok()
+					.body(service.like(like,authentication));
+		}
+		
+	}	
 	
 }

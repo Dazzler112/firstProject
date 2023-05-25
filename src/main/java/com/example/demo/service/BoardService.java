@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.multipart.*;
@@ -26,15 +27,25 @@ public class BoardService {
 	@Autowired
 	private BoardMapper mapper;
 
+	@Autowired
+	private BoardLikeMapper likeMapper;
+	
 	public List<Board> listProcess() {
 		List<Board> list = mapper.listForm();
 		
 		return list;
 	}
 
-	public Board getProcess(Integer id) {
+	public Board getProcess(Integer id, Authentication authentication) {
 		Board board = mapper.getBoardList(id); 
 		
+		//좋아요 눌렀는지 안눌렀는지 코드
+		if(authentication != null) {
+			BoardLike like = likeMapper.select(id,authentication.getName());
+			if(like != null) {
+				board.setLiked(true);
+			}
+		}
 		return board;
 	}
 	
@@ -80,6 +91,64 @@ public class BoardService {
 		int cnt = mapper.removeForm(id);
 		return cnt == 1;
 	}
-	
-	
+
+	@Transactional()
+	public boolean updateProcess(Board board, List<String> removePhotoNames,
+			MultipartFile[] addFile) throws Exception{
+		
+		//파일삭제
+		if(removePhotoNames != null && !removePhotoNames.isEmpty()) {
+			for(String fileName : removePhotoNames) {
+				String objectKey = "teamPrj/" + board.getId() + "/" + fileName;
+				DeleteObjectRequest dor = DeleteObjectRequest.builder()
+						.bucket(bucketName)
+						.key(objectKey)
+						.build();
+				
+				s3.deleteObject(dor);
+				//테이블 삭제
+				mapper.deleteFileNameUpdate(board.getId(),fileName);
+			}
+		}
+		
+		//파일 수정추가
+		for(MultipartFile file : addFile) {
+			if(file.getSize() > 0) {
+				mapper.updatetFileName(board.getId(),file.getOriginalFilename());
+				
+				String objectKey = "teamPrj/" + board.getId() + "/" + file.getOriginalFilename();
+				PutObjectRequest por = PutObjectRequest.builder()
+						.acl(ObjectCannedACL.PUBLIC_READ)
+						.bucket(bucketName)
+						.key(objectKey)
+						.build();
+				
+				RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+				s3.putObject(por, rb);
+			}
+		}
+		int cnt = mapper.updateBoard(board);
+		return cnt == 1;
+	}
+
+	public Map<String, Object> like(BoardLike like, Authentication authentication) {
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("like", false);
+		
+		like.setMemberId(authentication.getName());
+		Integer deleteCnt =  likeMapper.delete(like);
+		if(deleteCnt != 1) {
+			Integer insertCnt = likeMapper.insert(like);
+			result.put("like", true);
+		}
+		Integer count = likeMapper.countBoardId(like.getBoardId());
+		result.put("count", count);
+		
+		return result;
+	}	
+	public Object getBoard(Integer id) {
+		// TODO Auto-generated method stub
+		return getProcess(id,null);
+	}
 }
