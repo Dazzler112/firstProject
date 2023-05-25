@@ -10,10 +10,17 @@ import com.example.demo.domain.*;
 @Mapper
 public interface ProductMapper {
 
-	List<Product> selectAll1(Integer price, String title, LocalDateTime inserted, String address);
+	List<Product> selectAll1(String title, LocalDateTime inserted, String content);
 
-//    List<Product> selectAll2(@Param("price") Integer price, @Param("title") String title, @Param("inserted") LocalDateTime inserted, @Param("address") String address);
+    List<Product> selectAll2(Integer price, String title, LocalDateTime inserted, String address);
 
-//    List<Product> selectAll3(@Param("price") Integer price, @Param("title") String title, @Param("inserted") LocalDateTime inserted, @Param("address") String address, @Param("likes") Integer likes);
+    List<Product> selectAll3(Integer price, String title, LocalDateTime inserted, String address, Integer likes);
+    
+	@Select("""
+			SELECT *
+			FROM Product
+			WHERE id = #{id}
+			""")
+	Product selectById(Integer id);
 
 }

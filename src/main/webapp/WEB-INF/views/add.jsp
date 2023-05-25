@@ -18,35 +18,30 @@
 	<div class="container-lg">
 
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
+			<div class="col-1 col-md-3 col-lg-6">
 				<h1>게시물 작성</h1>
 				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
-						<input id="titleInput" class="form-control" type="text" name="title" value="${board.title }" />
+						<input id="titleInput" class="form-control" type="text" name="title" value="${Product.title }" />
 					</div>
 					<div class="mb-3">
-						<label for="bodyTextarea" class="form-label">본문</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
+						<label for="bodyTextarea" class="form-label">내용</label>
+						<textarea rows="5" id="bodyTextarea" class="form-control" name="body"></textarea>
 					</div>
 
 					<div class="mb-3">
-						<label for="bodyTextarea" class="form-label">가격</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
+						<label for="priceTextarea" class="form-label">가격</label>
+						<textarea rows="1" id="priceTextarea" class="form-control" name="price">${Product.price }</textarea>
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="bodyTextarea" class="form-label">시간</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
+						<label for="addressTextarea" class="form-label">주소</label>
+						<textarea rows="1" id="addressTextarea" class="form-control" name="address">${Product.address }</textarea>
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="bodyTextarea" class="form-label">주소</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
-					</div>
-					
-					<div class="mb-3">
-						<label for="fileInput" class="form-label">그림 파일</label>
+						<label for="fileInput" class="form-label">상품 사진</label>
 						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 						<div class="form-text">
 							총 10MB, 하나의 파일은 1MB를 초과할 수 없습니다. 

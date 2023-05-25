@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class Product {
+	private Integer id;
     private Integer price;
     private String title;
     private LocalDateTime inserted;

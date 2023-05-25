@@ -7,4 +7,11 @@
         SELECT * FROM Product
     </select>
 
+	<select id="selectAll2" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+    
+    <select id="selectAll3" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
 </mapper>
