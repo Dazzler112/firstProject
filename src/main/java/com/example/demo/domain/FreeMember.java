@@ -5,7 +5,7 @@ import java.util.*;
 import lombok.*;
 
 @Data
-public class Member {
+public class FreeMember {
 
 	private String id;
 	private String password;

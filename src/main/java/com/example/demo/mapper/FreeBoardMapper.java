@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface BoardMapper {
+public interface FreeBoardMapper {
 
 	@Select("""
 			SELECT 
@@ -20,7 +20,7 @@ public interface BoardMapper {
 			Board
 			ORDER BY id DESC
 			""")
-	List<Board> listForm();
+	List<FreeBoard> listForm();
 
 	@Select("""
 			SELECT
@@ -36,14 +36,14 @@ public interface BoardMapper {
 			WHERE b.id = #{id}
 			""")
 	@ResultMap("getFile")
-	Board getBoardList(Integer id);
+	FreeBoard getBoardList(Integer id);
 	
 	@Insert("""
 			INSERT INTO Board(title,body,writer,region)
 			VALUES(#{title}, #{body}, #{writer},#{region})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	Integer insertForm(Board board);
+	Integer insertForm(FreeBoard board);
 
 	@Insert("""
 			INSERT INTO PhotoName(boardId, photoName)
@@ -81,7 +81,7 @@ public interface BoardMapper {
 			 region = #{region}
 			WHERE id = #{id}
 			""")
-	int updateBoard(Board board);
+	int updateBoard(FreeBoard board);
 	
 	//수정 - 파일삭제
 	@Delete("""

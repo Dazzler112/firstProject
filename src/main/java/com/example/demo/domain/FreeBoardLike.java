@@ -3,7 +3,7 @@ package com.example.demo.domain;
 import lombok.*;
 
 @Data
-public class BoardLike {
+public class FreeBoardLike {
 	private Integer boardId;
 	private String memberId;
 }

@@ -5,7 +5,7 @@ import java.time.*;
 import lombok.*;
 
 @Data
-public class Comment {
+public class FreeComment {
 	
 	private Integer id;
 	private Integer boardId;

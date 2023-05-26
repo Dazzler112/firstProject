@@ -5,20 +5,20 @@ import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface BoardLikeMapper {
+public interface FreeBoardLikeMapper {
 
 	@Insert("""
 			INSERT INTO BoardLike
 			VALUES (#{boardId}, #{memberId})
 			""")
-	int insert(BoardLike like);
+	int insert(FreeBoardLike like);
 
 	@Delete("""
 			DELETE FROM BoardLike
 			WHERE boardId = #{boardId}
 			AND memberId = #{memberId}
 			""")
-	Integer delete(BoardLike like);
+	Integer delete(FreeBoardLike like);
 	
 	//좋아요 카운팅
 	@Select("""
@@ -34,5 +34,5 @@ public interface BoardLikeMapper {
 			WHERE boardId = #{boardId}
 			AND memberId = #{memberId}
 			""")
-	BoardLike select(Integer boardId, String memberId);
+	FreeBoardLike select(Integer boardId, String memberId);
 }

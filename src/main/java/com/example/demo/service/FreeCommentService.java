@@ -4,18 +4,20 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
 @Service
-public class CommentService {
+@Transactional(rollbackFor = Exception.class)
+public class FreeCommentService {
 
 	@Autowired
-	private CommentMapper mapper;
+	private FreeCommentMapper mapper;
 
-	public List<Comment> list(Integer boardId) {
-		List<Comment> comments = mapper.selectAllComment(boardId);
+	public List<FreeComment> list(Integer boardId) {
+		List<FreeComment> comments = mapper.selectAllComment(boardId);
 		
 		/*
 		 * for(Comment comment : comments) {
@@ -25,5 +27,10 @@ public class CommentService {
 		 */
 				
 		return comments;
+	}
+
+	public void add(FreeComment comment) {
+		comment.setMemberId("test1");
+		mapper.insert(comment);
 	}
 }

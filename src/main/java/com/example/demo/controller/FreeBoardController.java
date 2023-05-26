@@ -16,38 +16,38 @@ import com.example.demo.service.*;
 
 @Controller
 @RequestMapping("/")
-public class BoardController {
+public class FreeBoardController {
 
 	@Autowired
-	private BoardService service;
+	private FreeBoardService service;
 	
-	@GetMapping({"/","list"})
+	@GetMapping({"/","freelist"})
 	public String list (Model model) {
-		List<Board> list = service.listProcess();
+		List<FreeBoard> list = service.listProcess();
 		
 		model.addAttribute("boardList",list);
-		return "list";
+		return "freelist";
 	}
 	
 	@GetMapping("/id/{id}")
 	public String get(@PathVariable("id") Integer id, Model model
 						,Authentication authentication) {
 		
-		Board board = service.getProcess(id, authentication);
+		FreeBoard board = service.getProcess(id, authentication);
 		
 		model.addAttribute("getBoard",board);
 		
-		return "get";
+		return "freeget";
 	}
 	
-	@GetMapping("add")
+	@GetMapping("freeadd")
 	public void getAddView() {
 		// TODO Auto-generated method stub
 	}
 	
-	@PostMapping("add")
+	@PostMapping("freeadd")
 	public String addForm(@RequestParam("fileList") MultipartFile[] files
-						,Board board 
+						,FreeBoard board 
 						,RedirectAttributes rttr) 
 								throws Exception{
 		boolean ok = service.addProcess(board,files);
@@ -57,7 +57,7 @@ public class BoardController {
 			return "redirect:/id/" + board.getId();
 		}else {
 			rttr.addFlashAttribute("message", board.getId() + "게시글 생성에 실패하였습니다.");
-			return "redirect:/add";
+			return "redirect:/freeadd";
 		}
 	}
 	
@@ -67,7 +67,7 @@ public class BoardController {
 		
 		if(ok) {
 		rttr.addFlashAttribute("message",id +"번 게시물이 삭제되었습니다.");
-		return "redirect:/list";
+		return "redirect:/freelist";
 		}else {
 		System.out.println("실패");
 		rttr.addFlashAttribute("message","게시물 삭제에 실패하였습니다.");
@@ -75,15 +75,15 @@ public class BoardController {
 		}
 	}
 	
-	@GetMapping("/update/{id}")
+	@GetMapping("/freeupdate/{id}")
 	public String updateView(@PathVariable("id")Integer id,Model model) {
 		
 		model.addAttribute("board",service.getBoard(id));
-		return "update";
+		return "freeupdate";
 	}
 	
-	@PostMapping("update/{id}")
-	public String update(Board board,
+	@PostMapping("freeupdate/{id}")
+	public String update(FreeBoard board,
 			@RequestParam(value="removeFiles", required = false) List<String> removePhotoNames,
 			@RequestParam(value = "listFiles" ,required = false) MultipartFile[] addFile,
 			RedirectAttributes rttr) throws Exception {
@@ -94,13 +94,13 @@ public class BoardController {
 			return"redirect:/id/" + board.getId();
 		}else {
 			rttr.addFlashAttribute("message", board.getId() + "게시물 수정에 실패하였습니다.");
-			return"redirect:/update/" + board.getId();
+			return"redirect:/freeupdate/" + board.getId();
 		}
 	}
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> like(@RequestBody BoardLike like,
+	public ResponseEntity<Map<String, Object>> like(@RequestBody FreeBoardLike like,
 									Authentication authentication) {
 		if(authentication ==null) {
 			return ResponseEntity

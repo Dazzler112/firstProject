@@ -11,13 +11,13 @@ import com.example.demo.mapper.*;
 public class CustomSecurityCheck {
 	
 	@Autowired
-	private BoardMapper boardMapper;
+	private FreeBoardMapper boardMapper;
 	
 	@Autowired
-	private CommentMapper commentMapper;
+	private FreeCommentMapper commentMapper;
 	
 	public boolean checkBoardWriter(Authentication authentication, Integer boardId) {
-		Board board =  boardMapper.getBoardList(boardId);
+		FreeBoard board =  boardMapper.getBoardList(boardId);
 		
 		String username = authentication.getName();
 		String writer = board.getWriter();

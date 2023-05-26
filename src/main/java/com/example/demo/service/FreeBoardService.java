@@ -16,7 +16,7 @@ import software.amazon.awssdk.services.s3.*;
 import software.amazon.awssdk.services.s3.model.*;
 
 @Service
-public class BoardService {
+public class FreeBoardService {
 	
 	@Autowired
 	private S3Client s3;
@@ -25,23 +25,23 @@ public class BoardService {
 	private String bucketName;
 	
 	@Autowired
-	private BoardMapper mapper;
+	private FreeBoardMapper mapper;
 
 	@Autowired
-	private BoardLikeMapper likeMapper;
+	private FreeBoardLikeMapper likeMapper;
 	
-	public List<Board> listProcess() {
-		List<Board> list = mapper.listForm();
+	public List<FreeBoard> listProcess() {
+		List<FreeBoard> list = mapper.listForm();
 		
 		return list;
 	}
 
-	public Board getProcess(Integer id, Authentication authentication) {
-		Board board = mapper.getBoardList(id); 
+	public FreeBoard getProcess(Integer id, Authentication authentication) {
+		FreeBoard board = mapper.getBoardList(id); 
 		
 		//좋아요 눌렀는지 안눌렀는지 코드
 		if(authentication != null) {
-			BoardLike like = likeMapper.select(id,authentication.getName());
+			FreeBoardLike like = likeMapper.select(id,authentication.getName());
 			if(like != null) {
 				board.setLiked(true);
 			}
@@ -50,7 +50,7 @@ public class BoardService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addProcess(Board board, MultipartFile[] files) throws Exception{
+	public boolean addProcess(FreeBoard board, MultipartFile[] files) throws Exception{
 		int cnt = mapper.insertForm(board);
 		System.out.println(files.length);
 		for(MultipartFile file : files) {
@@ -93,7 +93,7 @@ public class BoardService {
 	}
 
 	@Transactional()
-	public boolean updateProcess(Board board, List<String> removePhotoNames,
+	public boolean updateProcess(FreeBoard board, List<String> removePhotoNames,
 			MultipartFile[] addFile) throws Exception{
 		
 		//파일삭제
@@ -131,7 +131,7 @@ public class BoardService {
 		return cnt == 1;
 	}
 
-	public Map<String, Object> like(BoardLike like, Authentication authentication) {
+	public Map<String, Object> like(FreeBoardLike like, Authentication authentication) {
 		Map<String, Object> result = new HashMap<>();
 		
 		result.put("like", false);

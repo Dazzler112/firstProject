@@ -6,7 +6,7 @@ import java.util.*;
 import lombok.*;
 
 @Data
-public class Board {
+public class FreeBoard {
 
 	private Integer id;
 	private String title;
