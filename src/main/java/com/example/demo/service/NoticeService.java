@@ -9,10 +9,10 @@ import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
 @Service
-public class BoardService {
+public class NoticeService {
 
 	@Autowired
-	BoardMapper mapper;
+	NoticeMapper mapper;
 
 	public List<Notice> getNotice() {
 		List<Notice> noticeList = mapper.selectAll();

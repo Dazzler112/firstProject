@@ -12,7 +12,7 @@
 <body>
 
 	<h1>
-		<span id="boardIdText"> ${notice.id } </span> 번 공지사항
+		<span id="boardIdText"> ${notice.id} </span> 번 공지사항
 	</h1>
 
 	<div>
@@ -40,7 +40,7 @@
 	</div>
 
 	<div>
-		<a href="/update/${notice.id }" class="btn btn-secondary">수정</a>
+		<a href="/update/${notice.id}" class="btn btn-secondary">수정</a>
 	</div>
 
 	<div>

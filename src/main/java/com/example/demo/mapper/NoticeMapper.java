@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface BoardMapper {
+public interface NoticeMapper {
 
 	@Select("""
 			SELECT *

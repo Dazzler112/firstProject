@@ -15,10 +15,10 @@ import com.example.demo.service.*;
 
 @Controller
 @RequestMapping("/")
-public class BoardController {
+public class NoticeController {
 	
 	@Autowired
-	BoardService service;
+	NoticeService service;
 
 	@GetMapping("noticeList")
 	public void notice(Model model) {

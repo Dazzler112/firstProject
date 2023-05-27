@@ -10,6 +10,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
+	<div>
+		<nav class="navbar bg-body-tertiary">
+			<div class="container-fluid ms-auto">
+				<a class="navbar-brand" href="#">Bootstrap</a>
+				<form class="d-flex me-auto" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				<div class="btn-group dropstart">
+					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">마이페이지</button>
+					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+						<li><a class="dropdown-item" href="#">로그인</a></li>
+						<li><a class="dropdown-item" href="#">회원가입</a></li>
+						<li><a class="dropdown-item" href="#">Menu item</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
 	<div class="container-lg">
 		<h1>공지 목록</h1>
 
