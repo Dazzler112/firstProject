@@ -20,13 +20,28 @@ public class NoticeController {
 	@Autowired
 	NoticeService service;
 
+//	@GetMapping("noticeList")
+//	public void notice(Model model, @RequestParam(value="page", defaultValue="1") Integer page) {
+//		
+//		List<Notice> noticeList = service.getNotice(); // 페이지 처리 전
+//		model.addAttribute("noticeList", noticeList);
+//		
+//	}		
+	
 	@GetMapping("noticeList")
-	public void notice(Model model) {
-		
-		List<Notice> noticeList = service.getNotice();
-		model.addAttribute("noticeList", noticeList);
-		
-	}		
+	public String list(Model model, 
+					   @RequestParam(value = "page", defaultValue = "1") Integer page,
+					   @RequestParam(value = "search", defaultValue = "") String search,
+					   @RequestParam(value = "type", required = false/* type 파라미터가 null도 가능 */) String type) {
+
+		Map<String, Object> result = service.listNotice(page, search, type); // 페이지 처리
+
+//		List<Notice> noticeList = service.getNotice(); // 페이지 처리 전
+		model.addAllAttributes(result);
+
+		// 4. forward / redirect
+		return "noticeList";
+	}
 	
 	@GetMapping("/id/{id}")
 	public String board(
