@@ -14,7 +14,7 @@
 	<div>
 		<nav class="navbar bg-body-tertiary">
 			<div class="container-fluid ms-auto">
-				<a class="navbar-brand" href="#">Bootstrap</a>
+				<a class="navbar-brand" href="#">Second Stop</a>
 				<form action="/noticeList" class="d-flex" role="search">
 				
 				<div class="input-group">
@@ -70,6 +70,13 @@
 		<div style="text-align: right;">
 			<a href="/addNotice" class="btn btn-primary">공지사항 작성</a>
 		</div>
+		
+		<!-- 검색 결과 화면에서만 보임 -->
+		 <c:if test="${not empty param.search }">
+			<div style="text-align: right;">
+				<a href="/noticeList" class="btn btn-info">목록으로</a>
+			</div>
+		</c:if>
 	</div>
 	
 		<div class="container-lg">
