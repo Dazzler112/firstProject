@@ -1,20 +1,19 @@
 package com.example.demo.controller;
 
 import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
-import org.springframework.ui.Model;
+import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("notice")
 public class NoticeController {
 	
 	@Autowired
@@ -28,7 +27,7 @@ public class NoticeController {
 //		
 //	}		
 	
-	@GetMapping("noticeList")
+	@GetMapping("/noticeList")
 	public String list(Model model, 
 					   @RequestParam(value = "page", defaultValue = "1") Integer page,
 					   @RequestParam(value = "search", defaultValue = "") String search,
