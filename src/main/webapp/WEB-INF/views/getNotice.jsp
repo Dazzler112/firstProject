@@ -11,9 +11,11 @@
 </head>
 <body>
 
-	<h1>
-		<span id="boardIdText"> ${notice.id} </span> 번 공지사항
-	</h1>
+<!-- 	<h1> -->
+<%-- 		<span id="boardIdText"> ${notice.id} </span> 번 공지사항 --%>
+<!-- 	</h1> -->
+	
+	<h1>${notice.title }</h1>
 
 	<div>
 		<div class="mb-3">
