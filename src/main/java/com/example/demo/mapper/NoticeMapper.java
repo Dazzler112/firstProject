@@ -90,6 +90,7 @@ public interface NoticeMapper {
 				OR writer LIKE #{pattern}
 				</if>
 			</where>
+			ORDER BY id DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
