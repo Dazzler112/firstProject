@@ -36,7 +36,7 @@ public class MainController {
         model.addAttribute("productList1", productList1);
         model.addAttribute("productList2", productList2);
         
-        return "list";
+        return "mainList";
     }
     
     @GetMapping("/id/{id}")
