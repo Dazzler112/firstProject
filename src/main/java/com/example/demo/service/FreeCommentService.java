@@ -33,4 +33,18 @@ public class FreeCommentService {
 		comment.setMemberId("test1");
 		mapper.insert(comment);
 	}
+
+	public void remove(Integer id) {
+		mapper.deleteCommentId(id);
+	}
+
+	public FreeComment get(Integer id) {
+		// TODO Auto-generated method stub
+		return mapper.selectById(id);
+	}
+
+	public void update(FreeComment comment) {
+		mapper.update(comment);
+	}
+	
 }

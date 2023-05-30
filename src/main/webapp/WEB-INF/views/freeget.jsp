@@ -28,6 +28,41 @@
 	font-weight: 600;
 	background-color: #83D4F7;
 }
+#updateCommentContainer{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.update_comment-text{
+	margin:10px 0px;
+	width:900px;
+	height: 100px;
+	border-radius: 10px;
+	border: 1px solid rgba(0,0,0,0.1);
+	padding: 0px 12px;
+}
+.update-commit {
+	border: none;
+	border-radius: 8px;
+	height: 100px;
+	font-weight: 600;
+	background-color: rgba(0,0,0,0.4);
+	color:white;
+	}
+.comment_column-div{
+	border:0.5px solid rgba(0,0,0,0.1);
+	margin:0px 3.5px 0px 20px;
+	padding: 1px 3px 1px 3px;
+	background-color: #F5F3E7;
+	border-radius: 7px;
+	color: #A1959C;
+	font-size: 23px;
+}	
+.comment_container-div {
+	margin: 10px 0px ;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
 </style>
 </head>
 <body>
@@ -97,8 +132,25 @@
 	<div class="form-control"  id="commentContainer">
 		<div id="addCommentContainer" style="display: flex; justify-content: center;align-items: center;">
 			<textarea rows="" id="commentTextArea" class="comment_input"></textarea>
-			<button id="sendCommentBtn" class="comment-commit">전송</button>
+			<button id="sendCommentBtn" class="comment-commit">올리기</button>
 		</div>
+		<div id="updateCommentContainer">
+			<input type="hidden" id="commentUpdateIdInput"/>
+			<textarea id="commentUpdateTextArea" class="update_comment-text"></textarea>
+			<button id="updateCommentBtn" class="update-commit">수정</button>
+		</div>
+		<hr />
+			<c:if test="${commentCnt.get(0).commentCount > 0}">
+			<div class="comment_container-div">
+			<span class="comment_column-div">
+			<i class="fa-solid fa-comment"></i>
+    		 <span id="comment_counting-cnt">
+        	  댓글수					
+     	      ${commentCnt.get(0).commentCount}
+    		 </span>
+    		 </span>
+    		 </div>
+			</c:if>
 		<div id="commentListContainer" class="comment-line">
 			<div>댓글1</div>
 			<div>댓글2</div>
@@ -106,7 +158,7 @@
 		</div>
 	</div>
 
-	<div style="display: none;">
+	<div style="display: none; ">
 		<form action="/remove" method="post" id="removeForm">
 			<input id="inputId" type="text" name="id" value="${getBoard.id }" />
 		</form>

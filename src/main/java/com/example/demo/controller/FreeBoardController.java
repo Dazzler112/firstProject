@@ -22,20 +22,25 @@ public class FreeBoardController {
 	private FreeBoardService service;
 	
 	@GetMapping({"/","freelist"})
-	public String list (Model model) {
-		List<FreeBoard> list = service.listProcess();
+	public String list (Model model){
+//		List<FreeBoard> list = service.listProcess();
+		
+		List<FreeBoard> list = service.getCountList();
 		
 		model.addAttribute("boardList",list);
 		return "freelist";
 	}
 	
+	
 	@GetMapping("/id/{id}")
 	public String get(@PathVariable("id") Integer id, Model model
 						,Authentication authentication) {
 		
+		List<FreeBoard> list = service.getCountReply(id);
 		FreeBoard board = service.getProcess(id, authentication);
 		
 		model.addAttribute("getBoard",board);
+		model.addAttribute("commentCnt",list);
 		
 		return "freeget";
 	}

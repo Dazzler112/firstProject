@@ -23,4 +23,32 @@ public interface FreeCommentMapper {
 			""")
 	Integer insert(FreeComment comment);
 
+	@Delete("""
+			DELETE FROM Comment
+			WHERE id = #{id}
+			""")
+	Integer deleteCommentId(Integer id);
+	
+	@Select("""
+			SELECT * FROM
+			Comment 
+			WHERE id = #{id}
+			""")
+	FreeComment selectById(Integer id);
+
+	@Update("""
+			UPDATE Comment
+			SET
+				content= #{content}
+			WHERE
+				id = #{id}
+			""")
+	Integer update(FreeComment comment);
+	
+	@Delete("""
+			DELETE FROM Comment
+			WHERE boardId = #{boardId}
+			""")
+	Integer deleteComment(Integer boardId);
+
 }

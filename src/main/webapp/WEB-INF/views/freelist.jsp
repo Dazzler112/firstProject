@@ -16,6 +16,21 @@
 	right: 0;
 	margin: 0px, 30px, 30px, 0px;
 }
+.image_column {
+	margin:0px 3.5px 0px 0px;
+	padding: 1px 2.5px 1px 2.5px;
+	background-color: #97B8FC;
+	border-radius: 5px;
+	color: rgba(0,0,0,0.5);
+}
+.comment_column{
+	border:0.5px solid rgba(0,0,0,0.1);
+	margin:0px 3.5px 0px 0px;
+	padding: 1px 2.5px 1px 2.5px;
+	background-color: #F5F3E7;
+	border-radius: 7px;
+	color: #A1959C;
+}
 </style>
 </head>
 <body>
@@ -65,7 +80,24 @@
 						<c:forEach items="${boardList}" var="board">
 							<tr>
 								<td>${board.id }</td>
-								<td><a href="/id/${board.id}">${board.title }</a></td>
+								<td>
+								<a href="/id/${board.id}">${board.title }</a>
+								
+								<c:if test="${board.fileCount > 0 }">
+									<span class="image_column">
+									<i class="fa-regular fa-image"></i>
+										${board.fileCount}
+									</span>
+								</c:if>
+								
+								<c:if test="${board.commentCount > 0 }">
+									<span class="comment_column">
+									<i class="fa-solid fa-comment-dots"></i>
+										${board.commentCount }
+									</span>
+								</c:if>
+								
+								</td>
 								<td>${board.writer }</td>
 								<td>${board.region }</td>
 								<td>${board.inserted }</td>

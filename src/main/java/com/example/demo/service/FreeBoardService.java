@@ -30,9 +30,13 @@ public class FreeBoardService {
 	@Autowired
 	private FreeBoardLikeMapper likeMapper;
 	
+	@Autowired
+	private FreeCommentMapper commentMapper;
+	
 	public List<FreeBoard> listProcess() {
-		List<FreeBoard> list = mapper.listForm();
+//		List<FreeBoard> list = mapper.listForm();
 		
+		List<FreeBoard> list = mapper.getCountList();
 		return list;
 	}
 
@@ -73,6 +77,8 @@ public class FreeBoardService {
 	}
 
 	public boolean removeProcess(Integer id) {
+		
+		commentMapper.deleteComment(id);
 		
 		List<String> photoNames = mapper.selectFilebyBoardId(id);
 		
@@ -150,5 +156,16 @@ public class FreeBoardService {
 	public Object getBoard(Integer id) {
 		// TODO Auto-generated method stub
 		return getProcess(id,null);
+	}
+
+	public List<FreeBoard> getCountList() {
+		
+		List<FreeBoard> list = mapper.getCountList();
+		return list;
+	}
+
+	public List<FreeBoard> getCountReply(Integer id) {
+		List<FreeBoard> list = mapper.replyCounting(id);
+		return list;
 	}
 }

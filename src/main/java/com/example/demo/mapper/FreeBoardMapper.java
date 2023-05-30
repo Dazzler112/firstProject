@@ -30,7 +30,10 @@ public interface FreeBoardMapper {
 				b.writer,
 				b.region,
 				b.inserted,
-				p.photoName
+				p.photoName,
+				(SELECT COUNT (*)
+				FROM Comment
+				WHERE boardId = b.id) commentCount
 			FROM Board b LEFT JOIN 
 			PhotoName p ON b.id = p.boardId
 			WHERE b.id = #{id}
@@ -96,5 +99,42 @@ public interface FreeBoardMapper {
 			VALUES(#{boardId}, #{photoName})
 			""")
 	Integer updatetFileName(Integer boardId, String photoName);
+
+	@Select("""
+			SELECT 
+			b.id,
+			b.title,
+			b.writer,
+			b.region,
+			b.inserted,
+			COUNT(p.id) fileCount,
+			(SELECT COUNT (*)
+			FROM Comment
+			WHERE boardId = b.id) commentCount
+			FROM
+			Board b LEFT JOIN PhotoName p ON b.id = p.boardId
+			GROUP BY
+				b.id, b.title, b.writer, b.region, b.inserted
+			ORDER BY id DESC
+			""")
+//	@ResultMap("getListCount")
+	List<FreeBoard> getCountList();
+
+	@Select("""
+			SELECT 
+			b.id,
+			b.title,
+			b.writer,
+			b.region,
+			b.inserted,
+			COUNT(c.id) commentCount
+			FROM Board b LEFT JOIN Comment c ON b.id = c.boardId
+			WHERE b.id = #{id}
+			GROUP BY
+			b.id, b.title, b.writer, b.region, b.inserted
+			""")
+	@ResultMap("replyCount")
+	List<FreeBoard> replyCounting(Integer id);
+
 	
 }

@@ -32,4 +32,26 @@ public class FreeCommentController {
 		
 		return "ok";
 	}
+	
+	@DeleteMapping("id/{id}")
+	@ResponseBody
+	public String remove(@PathVariable("id")Integer id) {
+		service.remove(id);
+		
+		return "ok";
+	}
+	
+	@GetMapping("id/{id}")
+	@ResponseBody
+	public FreeComment get(@PathVariable("id")Integer id ) {
+		return service.get(id);
+	}
+	
+	@PutMapping("update")
+	@ResponseBody
+	public String update(@RequestBody FreeComment comment) {
+		service.update(comment);
+		
+		return "ok";
+	}
 }
