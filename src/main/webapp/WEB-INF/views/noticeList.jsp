@@ -15,7 +15,7 @@
 		<nav class="navbar bg-body-tertiary">
 			<div class="container-fluid ms-auto">
 				<a class="navbar-brand" href="#">Second Stop</a>
-				<form action="/noticeList" class="d-flex" role="search">
+				<form action="./noticeList" class="d-flex" role="search">
 				
 				<div class="input-group">
 					<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
@@ -59,7 +59,7 @@
 				<c:forEach items="${noticeList }" var="notice">
 					<tr>
 <%-- 						<td>${notice.id }</td> --%>
-						<td><a href="/id/${notice.id }"> ${notice.title }</a></td>
+						<td><a href="/notice/noticeId/${notice.id }"> ${notice.title }</a></td>
 						<td>${notice.writer }</td>
 						<td>${notice.inserted }</td>
 					</tr>
@@ -68,13 +68,13 @@
 		</table>
 
 		<div style="text-align: right;">
-			<a href="/addNotice" class="btn btn-primary">공지사항 작성</a>
+			<a href="./addNotice" class="btn btn-primary">공지사항 작성</a>
 		</div>
 		
 		<!-- 검색 결과 화면에서만 보임 -->
 		 <c:if test="${not empty param.search }">
 			<div style="text-align: right;">
-				<a href="/noticeList" class="btn btn-info">목록으로</a>
+				<a href="./noticeList" class="btn btn-info">목록으로</a>
 			</div>
 		</c:if>
 	</div>
@@ -85,7 +85,7 @@
 				<ul class="pagination justify-content-center">
 					<!-- 이전 버튼 -->
 					<c:if test="${pageInfo.currentPageNum gt 1 }">
-						<c:url value="/noticeList" var="pageLink">
+						<c:url value="./noticeList" var="pageLink">
 							<c:param name="page" value="${pageInfo.currentPageNum - 1 }" />
 							<c:if test="${not empty param.search }">
 								<c:param name="search" value="${param.search }" />
@@ -98,7 +98,7 @@
 						</li>
 					</c:if>
 					<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
-						<c:url value="/noticeList" var="pageLink">
+						<c:url value="./noticeList" var="pageLink">
 							<c:param name="page" value="${pageNum }" />
 							<c:if test="${not empty param.search }">
 								<c:param name="search" value="${param.search }" />
@@ -113,7 +113,7 @@
 					</c:forEach>
 					<!-- 다음 버튼 -->
 					<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
-						<c:url value="/noticeList" var="pageLink">
+						<c:url value="./noticeList" var="pageLink">
 							<c:param name="page" value="${pageInfo.currentPageNum + 1 }" />
 							<c:if test="${not empty param.search }">
 								<c:param name="search" value="${param.search }" />
