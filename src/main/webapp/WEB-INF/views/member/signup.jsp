@@ -14,7 +14,7 @@
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
+			<div class="col-12 col-md-8 col-lg-8">
 				<h1>회원 가입</h1>
 				<form method="post">
 					<div class="mb-3">
@@ -22,15 +22,15 @@
 
 						<div class="input-group">
 							<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" />
-<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkIdBtn">중복확인</button> -->
+							<button class="btn btn-outline-success" type="button" id="checkIdBtn">중복확인</button>
 						</div>
 
-<!-- 						<div class="d-none form-text text-primary" id="availableIdMessage"> -->
-<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 ID입니다. -->
-<!-- 						</div> -->
-<!-- 						<div class="d-none form-text text-danger" id="notAvailableIdMessage"> -->
-<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다. -->
-<!-- 						</div> -->
+						<div class="d-none form-text text-primary" id="availableIdMessage">
+							<i class="fa-solid fa-check"></i>사용 가능한 ID입니다.
+						</div>
+						<div class="d-none form-text text-danger" id="notAvailableIdMessage">
+							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다.
+						</div>
 
 
 					</div>
@@ -43,13 +43,13 @@
 						<label for="inputPasswordCheck" class="form-label">패스워드 확인</label> 
 						<input id="inputPasswordCheck" type="password" class="form-control" />
 
-<!-- 						<div id="passwordSuccessText" class="d-none form-text text-primary"> -->
-<!-- 							<i class="fa-solid fa-check"></i> 패스워드가 일치 합니다. -->
-<!-- 						</div> -->
+						<div id="passwordSuccessText" class="d-none form-text text-primary">
+							<i class="fa-solid fa-check"></i> 패스워드가 일치 합니다.
+						</div>
 
-<!-- 						<div id="passwordFailText" class="d-none form-text text-danger"> -->
-<!-- 							<i class="fa-solid fa-triangle-exclamation"></i> 패스워드가 일치하지 않습니다. -->
-<!-- 						</div> -->
+						<div id="passwordFailText" class="d-none form-text text-danger">
+							<i class="fa-solid fa-triangle-exclamation"></i> 패스워드가 일치하지 않습니다.
+						</div>
 
 					</div>
 
@@ -128,7 +128,7 @@
 					</div>
 
 					<div class="mb-3">
-						<input id="signupSubmit" type="submit" class="btn btn-primary" value="가입" />
+						<input id="signupSubmit" type="submit" class="btn btn-primary" disabled value="가입" />
 					</div>
 				</form>
 			</div>
@@ -137,5 +137,8 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script src="/js/member/signup.js"></script>
+
 </body>
 </html>

@@ -21,4 +21,11 @@ public interface MemberMapper {
 			""")
 	List<Member> getAllUserList();
 
+	@Select("""
+			SELECT *
+			FROM Member
+			WHERE id = #{id}
+			""")
+	Member selectById(String id);
+
 }
