@@ -22,47 +22,35 @@
 
 						<div class="input-group">
 							<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" />
-							<button class="btn btn-outline-secondary" type="button" id="checkIdBtn">중복확인</button>
+<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkIdBtn">중복확인</button> -->
 						</div>
 
-						<div class="d-none form-text text-primary" id="availableIdMessage">
-							<i class="fa-solid fa-check"></i>사용 가능한 ID입니다.
-						</div>
-						<div class="d-none form-text text-danger" id="notAvailableIdMessage">
-							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다.
-						</div>
+<!-- 						<div class="d-none form-text text-primary" id="availableIdMessage"> -->
+<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 ID입니다. -->
+<!-- 						</div> -->
+<!-- 						<div class="d-none form-text text-danger" id="notAvailableIdMessage"> -->
+<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다. -->
+<!-- 						</div> -->
 
 
 					</div>
 					<div class="mb-3">
-						<label for="inputPassword" class="form-label">패스워드</label> <input id="inputPassword" type="password" class="form-control" name="password" />
+						<label for="inputPassword" class="form-label">패스워드</label> 
+						<input id="inputPassword" type="password" class="form-control" name="password" />
 					</div>
 
 					<div class="mb-3">
-						<label for="inputPasswordCheck" class="form-label">패스워드 확인</label> <input id="inputPasswordCheck" type="password" class="form-control" />
+						<label for="inputPasswordCheck" class="form-label">패스워드 확인</label> 
+						<input id="inputPasswordCheck" type="password" class="form-control" />
 
-						<div id="passwordSuccessText" class="d-none form-text text-primary">
-							<i class="fa-solid fa-check"></i> 패스워드가 일치 합니다.
-						</div>
+<!-- 						<div id="passwordSuccessText" class="d-none form-text text-primary"> -->
+<!-- 							<i class="fa-solid fa-check"></i> 패스워드가 일치 합니다. -->
+<!-- 						</div> -->
 
-						<div id="passwordFailText" class="d-none form-text text-danger">
-							<i class="fa-solid fa-triangle-exclamation"></i> 패스워드가 일치하지 않습니다.
-						</div>
+<!-- 						<div id="passwordFailText" class="d-none form-text text-danger"> -->
+<!-- 							<i class="fa-solid fa-triangle-exclamation"></i> 패스워드가 일치하지 않습니다. -->
+<!-- 						</div> -->
 
-					</div>
-
-					<div class="mb-3">
-						<label for="inputEmail" class="form-label">이메일</label>
-						<div class="input-group">
-							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
-							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">중복확인</button>
-						</div>
-						<div class="d-none form-text text-primary" id="availableEmailMessage">
-							<i class="fa-solid fa-check"></i>사용 가능한 메일입니다.
-						</div>
-						<div class="d-none form-text text-danger" id="notAvailableEmailMessage">
-							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 메일입니다.
-						</div>
 					</div>
 
 					<div class="mb-3">
@@ -73,19 +61,45 @@
 						</div>
 					</div>
 
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="inputGender" class="form-label">성별</label> -->
+<!-- 						<div class="input-group"> -->
+<%-- 							<input id="inputGender" type="text" class="form-control" name="gender" value="${member.gender }" />							 --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+
 					<div class="mb-3">
-						<label for="inputGender" class="form-label">성별</label>
-						<div class="input-group">
-							<input id="inputGender" type="text" class="form-control" name="gender" value="${member.gender }" />
-							<!-- <button class="btn btn-outline-secondary" type="button" id="checkIdBtn">중복확인</button> -->
+						<p>성별</p>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gender" id="inputGenderM" value="남"> 
+							<label class="form-check-label" for="inputGenderM"> 남 </label>
 						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gender" id="inputGenderW" value="여"> 
+							<label class="form-check-label" for="inputGenderW"> 여 </label>
+						</div>
+					</div>
+
+
+					<div class="mb-3">
+						<label for="inputEmail" class="form-label">이메일</label>
+						<div class="input-group">
+							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
+<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">중복확인</button> -->
+						</div>
+<!-- 						<div class="d-none form-text text-primary" id="availableEmailMessage"> -->
+<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 메일입니다. -->
+<!-- 						</div> -->
+<!-- 						<div class="d-none form-text text-danger" id="notAvailableEmailMessage"> -->
+<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 메일입니다. -->
+<!-- 						</div> -->
 					</div>
 
 					<div class="mb-3">
 						<label for="inputPhoneNum" class="form-label">핸드폰 번호</label>
 						<div class="input-group">
 							<input id="inputPhoneNUm" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" />
-							<button class="btn btn-outline-secondary" type="button" id="checkPhoneNumBtn">중복확인</button>
+<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkPhoneNumBtn">중복확인</button> -->
 						</div>
 					</div>
 
@@ -93,15 +107,15 @@
 						<label for="inputNickName" class="form-label">별명</label>
 						<div class="input-group">
 							<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" />
-							<button class="btn btn-outline-secondary" type="button" id="checkNicknameBtn">중복확인</button>
+<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkNicknameBtn">중복확인</button> -->
 						</div>
 
-						<div class="d-none form-text text-primary" id="availableNicknameMessage">
-							<i class="fa-solid fa-check"></i>사용 가능한 별명입니다.
-						</div>
-						<div class="d-none form-text text-danger" id="notAvailableNicknameMessage">
-							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 별명입니다.
-						</div>
+<!-- 						<div class="d-none form-text text-primary" id="availableNicknameMessage"> -->
+<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 별명입니다. -->
+<!-- 						</div> -->
+<!-- 						<div class="d-none form-text text-danger" id="notAvailableNicknameMessage"> -->
+<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 별명입니다. -->
+<!-- 						</div> -->
 
 					</div>
 
