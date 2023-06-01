@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -15,6 +17,11 @@ public class MemberService {
 	public void signup(Member member) {
 		int cnt = mapper.signUpInsert(member);
 		
+	}
+
+	public List<Member> userList() {
+		List<Member> userList = mapper.getAllUserList();
+		return userList;
 	}
 
 }

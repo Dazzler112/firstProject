@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.*;
 
@@ -32,5 +35,13 @@ public class MemberController {
 			rttr.addFlashAttribute("member", member);		
 			return "redirect:/member/signup";
 		}
+	}
+	
+//	운영자 권한만 볼 수 있음
+	@GetMapping("list")
+	public void userList(Model model) {
+		List<Member> userList = service.userList();
+		model.addAttribute("userList", userList);
+//		System.out.println(userList);
 	}
 }

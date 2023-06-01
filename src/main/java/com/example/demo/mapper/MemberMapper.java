@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
 
+import java.util.*;
+
 import org.apache.ibatis.annotations.*;
 
 import com.example.demo.domain.*;
@@ -12,5 +14,11 @@ public interface MemberMapper {
 			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email})
 			""")
 	Integer signUpInsert(Member member);
+
+	@Select("""
+			SELECT * 
+			FROM Member
+			""")
+	List<Member> getAllUserList();
 
 }
