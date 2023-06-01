@@ -67,7 +67,7 @@
 </head>
 <body>
 	<div class="container-lg">
-	<a href="/">홈</a>
+	<a href="/freeboard/freelist">홈</a>
 	</div>
 	<div class="container-lg">
 		<div class="row justify-content-center">
@@ -121,7 +121,7 @@
 
 
 				<div class="mb-3">
-					<a class="btn btn-secondary" href="/freeupdate/${getBoard.id}">수정</a>
+					<a class="btn btn-secondary" href="/freeboard/freeupdate/${getBoard.id}">수정</a>
 					<button class="btn btn-danger" form="removeForm" type="submit">삭제</button>
 				</div>
 			</div>
@@ -152,14 +152,12 @@
     		 </div>
 			</c:if>
 		<div id="commentListContainer" class="comment-line">
-			<div>댓글1</div>
-			<div>댓글2</div>
-			<div>댓글3</div>
+			<div id="comment_reply">댓글1</div>
 		</div>
 	</div>
 
 	<div style="display: none; ">
-		<form action="/remove" method="post" id="removeForm">
+		<form action="/freeboard/remove" method="post" id="removeForm">
 			<input id="inputId" type="text" name="id" value="${getBoard.id }" />
 		</form>
 	</div>

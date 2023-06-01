@@ -13,13 +13,13 @@ public interface FreeCommentMapper {
 			SELECT *
 			FROM Comment
 			WHERE boardId = #{boardId}
-			ORDER BY id DESC
+			ORDER BY depth ASC
 			""")
 	List<FreeComment> selectAllComment(Integer boardId);
 
 	@Insert("""
-			INSERT INTO Comment(boardId, content,memberId)
-			VALUES(#{boardId}, #{content}, #{memberId})
+			INSERT INTO Comment(boardId, content, memberId, depth)
+			VALUES(#{boardId}, #{content}, #{memberId}, #{depth})
 			""")
 	Integer insert(FreeComment comment);
 
@@ -50,5 +50,12 @@ public interface FreeCommentMapper {
 			WHERE boardId = #{boardId}
 			""")
 	Integer deleteComment(Integer boardId);
+
+	@Insert("""
+			INSERT INTO Comment(boardId, content , memberId, depth, parentId)
+			VALUES(#{boardId}, #{content}, #{memberId} ,#{depth} ,#{parentId})
+			""")
+	Integer insertReply(FreeComment comment);
+
 
 }
