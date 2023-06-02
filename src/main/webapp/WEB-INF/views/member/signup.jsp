@@ -78,6 +78,10 @@
 							<input class="form-check-input" type="radio" name="gender" id="inputGenderW" value="여"> 
 							<label class="form-check-label" for="inputGenderW"> 여 </label>
 						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gender" id="inputGenderX" value="X"> 
+							<label class="form-check-label" for="inputGenderX"> 선택 안함 </label>
+						</div>
 					</div>
 
 
