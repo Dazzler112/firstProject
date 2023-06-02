@@ -4,51 +4,162 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.web.multipart.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
+import software.amazon.awssdk.core.sync.*;
+import software.amazon.awssdk.services.s3.*;
+import software.amazon.awssdk.services.s3.model.*;
+
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AdBoardService {
 
 	@Autowired
+	private S3Client s3;
+
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
+
+	@Autowired
 	private AdBoardMapper mapper;
-	
-	public List<AdBoard> listBoard(){
-		List<AdBoard> list = mapper.selectAll_Board();
+
+	public List<AdBoard> listBoard() {
+		List<AdBoard> list = mapper.selectAll();
 		return list;
 	}
 
-	public List<AdBoard> listAdBoard() {
-		List<AdBoard> list = mapper.selectAll_AdBoard();
-		return list;
+	public AdBoard getBoard(Integer id) {
+		AdBoard board = mapper.selectById(id);
+
+		return board;
 	}
 
-	public List<PtBoard> listPtBoard() {
-		List<PtBoard> list = mapper.selectAll_PtBoard();
-		return list;
-	}
+	public boolean modify(AdBoard board, MultipartFile[] addFiles, List<String> removeFileNames) throws Exception{
 
+		// FileName 테이블 삭제
+		if (removeFileNames != null && !removeFileNames.isEmpty()) {
+			for (String fileName : removeFileNames) {
+				// s3에서 파일(객체) 삭제
+				String objectKey = "teamPrj/" + board.getId() + "/" + fileName;
+				DeleteObjectRequest dor = DeleteObjectRequest.builder()
+						.bucket(bucketName)
+						.key(objectKey)
+						.build();
+				s3.deleteObject(dor);
 
-	public AdBoard getAdBoard(Integer id) {
+				// 테이블에서 삭제
+				mapper.deleteFileNameByBoardIdAndFileName(board.getId(), fileName);
+			}
+		}
 
-		return mapper.selectById(id);
-	}
+		// 새 파일 추가
+		for (MultipartFile newFile : addFiles) {
+			if (newFile.getSize() > 0) {
+				// 테이블에 파일명 추가
+				mapper.insertFileName(board.getId(), newFile.getOriginalFilename());
 
-	public boolean addBoard(AdBoard adBoard) {
-		int cnt = mapper.insert(adBoard);
+				// s3에 파일(객체) 업로드
+				String objectKey = "teamPrj/" + board.getId() + "/" + newFile.getOriginalFilename();
+				PutObjectRequest por = PutObjectRequest.builder()
+						.acl(ObjectCannedACL.PUBLIC_READ)
+						.bucket(bucketName)
+						.key(objectKey)
+						.build();
+				RequestBody rb = RequestBody.fromInputStream(newFile.getInputStream(), newFile.getSize());
+				s3.putObject(por, rb);
+			}
+		}
+
+		int cnt = mapper.update(board);
+
 		return cnt == 1;
+
 	}
-	
-	public boolean adRemove(Integer id) {
+
+	public boolean remove(Integer id) {
+		
+		List<String> fileNames = mapper.selectFileNamesByBoardId(id);
+		
+		mapper.deleteFileNameByBoardId(id);
+		
+		for (String fileName : fileNames) {
+			String objectKey = "teamPrj/" + id + "/" + fileName;
+			DeleteObjectRequest dor = DeleteObjectRequest.builder()
+					.bucket(bucketName)
+					.key(objectKey)
+					.build();
+			s3.deleteObject(dor);
+		}
+		
 		int cnt = mapper.deleteById(id);
+
 		return cnt == 1;
 	}
 
-	public boolean adModify(AdBoard adBoard) {
-		int cnt = mapper.update(adBoard);
+	public boolean addBoard(AdBoard board, MultipartFile[] files) throws Exception {
+
+		// 게시물 insert
+		int cnt = mapper.insert(board);
+
+		for (MultipartFile file : files) {
+			if (file.getSize() > 0) {
+				String objectKey = "teamPrj/" + board.getId() + "/" + file.getOriginalFilename();
+
+				PutObjectRequest por = PutObjectRequest.builder()
+						.bucket(bucketName)
+						.key(objectKey)
+						.acl(ObjectCannedACL.PUBLIC_READ)
+						.build();
+				RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+
+				s3.putObject(por, rb);
+
+				// db에 관련 정보 저장(insert)
+				mapper.insertFileName(board.getId(), file.getOriginalFilename());
+			}
+		}
+
 		return cnt == 1;
 	}
-	
-	
+
+	public Map<String, Object> listBoard(Integer page, String search, String type) {
+		
+		// 페이지당 행의 수
+				Integer rowPerPage = 10;
+
+				// 쿼리 LIMIT 절에 사용할 시작 인덱스
+				Integer startIndex = (page - 1) * rowPerPage;
+
+				// 페이지네이션이 필요한 정보
+				// 전체 레코드 수
+				Integer numOfRecords = mapper.countAll(search, type);
+				// 마지막 페이지 번호
+				Integer lastPageNumber = (numOfRecords - 1) / rowPerPage + 1;
+				// 페이지네이션 왼쪽번호
+				Integer leftPageNum = page - 5;
+				// 1보다 작을 수 없음
+				leftPageNum = Math.max(leftPageNum, 1);
+
+				// 페이지네이션 오른쪽번호
+				Integer rightPageNum = leftPageNum + 9;
+				// 마지막페이지보다 클 수 없음
+				rightPageNum = Math.min(rightPageNum, lastPageNumber);
+
+				Map<String, Object> pageInfo = new HashMap<>();
+				pageInfo.put("rightPageNum", rightPageNum);
+				pageInfo.put("leftPageNum", leftPageNum);
+				pageInfo.put("currentPageNum", page);
+				pageInfo.put("lastPageNum", lastPageNumber);
+
+				// 게시물 목록
+				List<AdBoard> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
+
+				return Map.of("pageInfo", pageInfo,
+						"adBoardList", list);
+	}
+
 }

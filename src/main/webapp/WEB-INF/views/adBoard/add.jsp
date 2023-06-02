@@ -12,45 +12,34 @@
 <body>
 
 	<div class="container-lg">
-
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-
-				<div>
-					<a class="btn btn-secondary" href="/adBoard/adList">HOME</a>
-				</div>
-
-
-				<select name="category" id="category">
-					<option value="이사/용달">이사/용달</option>
-					<option value="인테리어/간판">인테리어/간판</option>
-					<option value="청소">청소</option>
-					<option value="학원">학원</option>
-					<option value="미용">미용</option>
-					<option value="운동">운동</option>
-					<option value="병원">병원</option>
-					<option value="금융">금융</option>
-					<option value="기타">기타</option>
-				</select>
-				<form method="post">
+				<h1>광고게시물 작성</h1>
+				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
+				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
-						<input id="titleInput" class="form-control" type="text" name="title" value="${adBoard.title }" />
+						<input id="titleInput" class="form-control" type="text" name="title" value="${board.title }" />
 					</div>
 					<div class="mb-3">
 						<label for="bodyTextarea" class="form-label">본문</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${adBoard.body }</textarea>
-					</div>
-					<div class="mb-3">
-						<label for="writerInput" class="form-label">작성자</label>
-						<input id="writerInput" class="form-control" type="text" name="writer" value="${adBoard.writer }" />
+						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
 						<label for="regionInput" class="form-label">지역</label>
-						<input id="regionInput" class="form-control" type="text" name="region" value="${adBoard.region }" />
+						<input id="regionInput" class="form-control" type="text" name="region" value="${board.region }" />
 					</div>
-					<div>
-						<input type="submit" value="글쓰기" />
+					<div class="mb-3">
+						<label for="writerInput" class="form-label">작성자</label>
+						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
+					</div>
+					<div class="mb-3">
+						<label for="fileInput" class="form-label">그림 파일</label>
+						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>						
+					</div>
+
+					<div class="mb-3">
+						<input class="btn btn-primary" type="submit" value="등록" />
 					</div>
 				</form>
 			</div>

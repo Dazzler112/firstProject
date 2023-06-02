@@ -10,31 +10,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<div class="container-lg">
 
+	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<div>
-					<a class="btn btn-secondary" href="/adBoard/adList">HOME</a>
-				</div>
-				<h1>${adBoard.id }번게시물수정</h1>
-				<form method="post">
-					<input type="hidden" name="id" value="${adBoard.id }" />
+				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
+				<h1>${board.id }번광고게시물 수정</h1>
+				<form method="post" enctype="multipart/form-data">
+					<input type="hidden" name="id" value="${board.id }" />
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
-						<input class="form-control" id="titleInput" type="text" name="title" value="${adBoard.title }" />
+						<input class="form-control" id="titleInput" type="text" name="title" value="${board.title }" />
 					</div>
 					<div class="mb-3">
 						<label for="bodyTextarea" class="form-label">본문</label>
-						<textarea class="form-control" id="bodyTextarea" rows="10" name="body">${adBoard.body }</textarea>
-					</div>
-					<div class="mb-3">
-						<label for="writerInput" class="form-label">작성자</label>
-						<input class="writerInput" id="titleInput" type="text" name="title" value="${adBoard.writer }" />
+						<textarea class="form-control" id="bodyTextarea" rows="10" name="body">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
 						<label for="" class="form-label">작성일시</label>
-						<input class="form-control" type="text" value="${adBoard.inserted }" readonly />
+						<input class="form-control" type="text" value="${board.inserted }" readonly />
+					</div>
+					<div class="mb-3">
+						<label for="fileInput" class="form-label">그림 파일</label>
+						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 					</div>
 					<div class="mb-3">
 						<input class="btn btn-secondary" type="submit" value="수정" />
@@ -43,7 +41,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

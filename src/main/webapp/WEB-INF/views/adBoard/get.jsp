@@ -11,48 +11,64 @@
 </head>
 <body>
 
-	<div class="row justify-content-center">
-		<div class="col-12 col-md-8 col-lg-6">
-			<div class="d-flex">
+	<div class="container-lg">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8 col-lg-6">
+				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
 				<div class="me-auto">
-					<div>
-						<a class="btn btn-secondary" href="/ptBoard/ptList">HOME</a>
-					</div>
-					<div>
-						<div class="mb-3">
-							<label for="" class="form-label">제목</label>
-							<input type="text" class="form-control" value="${ptBoard.title }" readonly />
-						</div>
-						<div class="mb-3">
-							<label for="" class="form-label">본문</label>
-							<textarea class="form-control" readonly rows="10">${ptBoard.body }</textarea>
-						</div>
-						<div class="mb-3">
-							<label for="" class="form-label">작성자</label>
-							<input type="text" class="form-control" value="${ptBoard.writer }" readonly />
-						</div>
-						<div class="mb-3">
-							<label for="" class="form-label">지역</label>
-							<input type="text" class="form-control" value="${ptBoard.region }" readonly />
-						</div>
-						<div class="mb-3">
-							<label for="" class="form-label">작성일시</label>
-							<input type="text" readonly class="form-control" value="${ptBoard.inserted }" />
-						</div>
-
-						<div>
-							<a class="btn btn-secondary" href="/ptBoard/ptModify/${ptBoard.id }">수정</a>
-							<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
-						</div>
-					</div>
+					<h1>
+						<span id="boardIdText"> ${board.id } </span>
+						번 광고게시물
+					</h1>
 				</div>
+
+				<div>
+					<div class="mb-3">
+						<label for="" class="form-label">제목</label>
+						<input type="text" class="form-control" value="${board.title }" readonly />
+					</div>
+					
+					<!-- 그림 파일 출력 -->
+					<div class="mb-3">
+						<c:forEach items="${board.fileName }" var="fileName">
+							<div class="mb-3">
+								<img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
+							</div>
+						</c:forEach>
+					</div>
+					
+					<div class="mb-3">
+						<label for="" class="form-label">본문</label>
+						<textarea class="form-control" readonly rows="10">${board.body }</textarea>
+					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">작성자</label>
+						<input type="text" class="form-control" value="${board.writer }" readonly />
+					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">작성일시</label>
+						<input type="text" readonly class="form-control" value="${board.inserted }" />
+					</div>
+
+					<a class="btn btn-secondary" href="/adBoard/modify/${board.id }">수정</a>
+					<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+				</div>
+
+				<hr />
+				<div class="commentContainer">
+					<div>댓글 입력창 : 전송</div>
+					<div>댓글1 내용 : 누가 : 언제</div>
+					<div>댓글2 내용 : 누가 : 언제2</div>
+					<div>댓글3 내용 : 누가 : 언제3</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
 
 	<div class="d-none">
-		<form action="/ptBoard/ptRemove" method="post" id="removeForm">
-			<input type="text" name="id" value="${ptBoard.id }" />
+		<form action="/adBoard/remove" method="post" id="removeForm">
+			<input type="text" name="id" value="${board.id }" />
 		</form>
 	</div>
 
@@ -75,5 +91,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script src="/js/adBoard/comment.js"></script>
 </body>
 </html>
