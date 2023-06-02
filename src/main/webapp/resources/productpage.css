@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.container {
+
+  text-align: center;
+  margin-top: 40px; 
+}
+
+.container span {
+  
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container h4 {
+  margin-top: 20px;
+}

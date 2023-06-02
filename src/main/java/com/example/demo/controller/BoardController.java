@@ -22,13 +22,23 @@ public class BoardController {
 	
 	//localhost:8084/list
 	
-	@GetMapping("list")
+	@GetMapping("mainhomepage")
 	public String QuickMenu(Model model) {
 		return null;
 	}
 	
-	@GetMapping("category")
+	@GetMapping("categorypage")
 	public String CategoryMenu(Model model) {
+		return null;
+	}
+	
+	@GetMapping("productpage")
+	public String productpageMenu(Model model) {
+		return null;
+	}
+	
+	@GetMapping("header")
+	public String headerMenu(Model model) {
 		return null;
 	}
 
