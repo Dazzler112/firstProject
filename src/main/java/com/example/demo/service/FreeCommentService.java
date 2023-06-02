@@ -29,6 +29,7 @@ public class FreeCommentService {
 		return comments;
 	}
 
+	//댓글 생성
 	public void add(FreeComment comment) {
 		comment.setMemberId("test1");
 		comment.setDepth(0);

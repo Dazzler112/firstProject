@@ -13,7 +13,7 @@ public interface FreeCommentMapper {
 			SELECT *
 			FROM Comment
 			WHERE boardId = #{boardId}
-			ORDER BY depth ASC
+			ORDER BY parentId ASC, id ASC
 			""")
 	List<FreeComment> selectAllComment(Integer boardId);
 

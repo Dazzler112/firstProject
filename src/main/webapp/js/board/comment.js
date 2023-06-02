@@ -54,7 +54,7 @@ $.ajax("/comment/list?board=" + boardId, {
 					</div>
 					<div id="commentReplyFormContainer${comment.id}" style="display: none; margin:0px 0px 0px 15px;">
        			 	<textarea id="commentReplyContent${comment.id}" rows="3" cols="50"></textarea>
-        			<button id="commentReplySubmitBtn" data-comment-id="${comment.id}">댓글 등록</button>
+        			<button class="commentReplySubmitBtn" data-comment-id="${comment.id}">댓글 등록</button>
     				</div>
 				`);
 			};	
@@ -66,7 +66,7 @@ $.ajax("/comment/list?board=" + boardId, {
 		});
 		
 		//대댓글 클릭시 대댓글 작성
-		$("#commentReplySubmitBtn").click(function(){
+		$(".commentReplySubmitBtn").click(function(){
 			const boardId = $("#boardIdText").text().trim();
 		    const commentId = $(this).attr("data-comment-id");
 		    const content = $(`#commentReplyContent${commentId}`).val();
