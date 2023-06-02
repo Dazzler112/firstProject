@@ -132,7 +132,7 @@
 					</div>
 
 					<div class="mb-3">
-						<input id="signupSubmit" type="submit" class="btn btn-primary" disabled value="가입" />
+						<input id="signupSubmit" type="submit" class="btn btn-primary" value="가입" />
 					</div>
 				</form>
 			</div>

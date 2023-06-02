@@ -19,9 +19,12 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 
+	@Autowired
+	MailService mailService;
+	
 	@GetMapping("signup")
 	public void signUpForm() {
-
+		mailService.sendMail();
 	}
 
 	@PostMapping("signup")
