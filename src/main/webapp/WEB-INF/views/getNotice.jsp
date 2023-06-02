@@ -42,16 +42,16 @@
 	</div>
 
 	<div>
-		<a href="/update/${notice.id}" class="btn btn-secondary">수정</a>
+		<a href="/notice/update/${notice.id}" class="btn btn-secondary">수정</a>
 	</div>
 
 	<div>
-		<a href="/noticeList" class="btn btn-primary" >목록보기</a>
+		<a href="/notice/noticeList" class="btn btn-primary" >목록보기</a>
 	</div>
 
 
 	<div class="d-none">
-		<form action="/remove" method="post" id="removeForm">
+		<form action="/notice/removeNotice" method="post" id="removeForm">
 			<input type="text" name="id" value="${notice.id }" />
 		</form>
 	</div>

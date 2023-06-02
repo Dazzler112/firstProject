@@ -1,49 +1,37 @@
 package com.example.demo.controller;
 
 import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
-import org.springframework.ui.Model;
+import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("notice")
 public class NoticeController {
 	
 	@Autowired
 	NoticeService service;
 
-//	@GetMapping("noticeList")
-//	public void notice(Model model, @RequestParam(value="page", defaultValue="1") Integer page) {
-//		
-//		List<Notice> noticeList = service.getNotice(); // 페이지 처리 전
-//		model.addAttribute("noticeList", noticeList);
-//		
-//	}		
-	
-	@GetMapping("noticeList")
+	@GetMapping("/noticeList")
 	public String list(Model model, 
 					   @RequestParam(value = "page", defaultValue = "1") Integer page,
 					   @RequestParam(value = "search", defaultValue = "") String search,
-					   @RequestParam(value = "type", required = false/* type 파라미터가 null도 가능 */) String type) {
+					   @RequestParam(value = "type", required = false) String type) {
 
-		Map<String, Object> result = service.listNotice(page, search, type); // 페이지 처리
-
-//		List<Notice> noticeList = service.getNotice(); // 페이지 처리 전
+		Map<String, Object> result = service.listNotice(page, search, type); 
 		model.addAllAttributes(result);
 
-		// 4. forward / redirect
 		return "noticeList";
 	}
 	
-	@GetMapping("/id/{id}")
+	@GetMapping("/noticeId/{id}")
 	public String board(
 			@PathVariable("id") Integer id, 
 			Model model,
@@ -54,32 +42,33 @@ public class NoticeController {
 		return "getNotice";
 	}
 	
-	@GetMapping("addNotice")
-	public void noticeAddForm() {
+	@GetMapping("/addNotice")
+	public String noticeAddForm() {
 		
+		return "addNotice";
 	}
 	
-	@PostMapping("addNotice")
+	@PostMapping("/addNotice")
 	public String addNoticeProcess(Notice notice) throws Exception {
 
 		boolean ok = service.addNotice(notice);
 		if (ok) {
-			return "redirect:/id/" + notice.getId();
+			return "redirect:/notice/noticeId/" + notice.getId();
 		} else {
-			return "redirect:/addNotice";
+			return "redirect:/notice/addNotice";
 		}
 	}
 	
 	
-	@PostMapping("remove")
+	@PostMapping("removeNotice")
 	public String noticeRemoceProcess(Integer id) {
 		
 		boolean ok = service.removeNotice(id);
 		
 		if(ok) {
-			return "redirect:/noticeList";
+			return "redirect:/notice/noticeList";
 		}else {
-			return "redirect:/getNotice";			
+			return "redirect:/notice/getNotice";			
 		}
 	}
 	
@@ -95,9 +84,9 @@ public class NoticeController {
 	
 		boolean ok = service.update(notice);
 		if(ok) {
-			return "redirect:/id/" + notice.getId();			
+			return "redirect:/notice/noticeId/" + notice.getId();			
 		}else {
-			return "redirect:/updateNotice/" + notice.getId();						
+			return "redirect:/notice/updateNotice/" + notice.getId();						
 		}
 	}
 }
