@@ -15,20 +15,20 @@ import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("freeboard")
 public class FreeBoardController {
 
 	@Autowired
 	private FreeBoardService service;
 	
-	@GetMapping({"/","freelist"})
+	@GetMapping("freelist")
 	public String list (Model model){
 //		List<FreeBoard> list = service.listProcess();
 		
 		List<FreeBoard> list = service.getCountList();
 		
 		model.addAttribute("boardList",list);
-		return "freelist";
+		return "freeboard/freelist";
 	}
 	
 	
@@ -42,7 +42,7 @@ public class FreeBoardController {
 		model.addAttribute("getBoard",board);
 		model.addAttribute("commentCnt",list);
 		
-		return "freeget";
+		return "freeboard/freeget";
 	}
 	
 	@GetMapping("freeadd")
@@ -59,10 +59,10 @@ public class FreeBoardController {
 		
 		if(ok) {
 			rttr.addFlashAttribute("message","게시글이 생성되었습니다.");
-			return "redirect:/id/" + board.getId();
+			return "redirect:/freeboard/id/" + board.getId();
 		}else {
 			rttr.addFlashAttribute("message", board.getId() + "게시글 생성에 실패하였습니다.");
-			return "redirect:/freeadd";
+			return "redirect:/freeboard/freeadd";
 		}
 	}
 	
@@ -72,11 +72,11 @@ public class FreeBoardController {
 		
 		if(ok) {
 		rttr.addFlashAttribute("message",id +"번 게시물이 삭제되었습니다.");
-		return "redirect:/freelist";
+		return "redirect:/freeboard/freelist";
 		}else {
 		System.out.println("실패");
 		rttr.addFlashAttribute("message","게시물 삭제에 실패하였습니다.");
-		return "redirect:/id/" + id;
+		return "redirect:/freeboard/id/" + id;
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class FreeBoardController {
 	public String updateView(@PathVariable("id")Integer id,Model model) {
 		
 		model.addAttribute("board",service.getBoard(id));
-		return "freeupdate";
+		return "freeboard/freeupdate";
 	}
 	
 	@PostMapping("freeupdate/{id}")
@@ -96,10 +96,10 @@ public class FreeBoardController {
 		
 		if(ok) {
 			rttr.addFlashAttribute("message" , board.getId() + "번 게시물이 수정되었습니다");
-			return"redirect:/id/" + board.getId();
+			return"redirect:/freeboard/id/" + board.getId();
 		}else {
 			rttr.addFlashAttribute("message", board.getId() + "게시물 수정에 실패하였습니다.");
-			return"redirect:/freeupdate/" + board.getId();
+			return"redirect:/freeboard/freeupdate/" + board.getId();
 		}
 	}
 	

@@ -29,8 +29,10 @@ public class FreeCommentService {
 		return comments;
 	}
 
+	//댓글 생성
 	public void add(FreeComment comment) {
 		comment.setMemberId("test1");
+		comment.setDepth(0);
 		mapper.insert(comment);
 	}
 
@@ -46,5 +48,12 @@ public class FreeCommentService {
 	public void update(FreeComment comment) {
 		mapper.update(comment);
 	}
+
+	public void addReply(FreeComment comment) {
+		comment.setMemberId("test1");
+		comment.setDepth(1);
+		mapper.insertReply(comment);
+	}
+
 	
 }

@@ -33,6 +33,15 @@ public class FreeCommentController {
 		return "ok";
 	}
 	
+	@PostMapping("addReply")
+	@ResponseBody
+	public String addReply(@RequestBody FreeComment comment) {
+		
+		service.addReply(comment);
+		
+		return "ok";
+	}
+	
 	@DeleteMapping("id/{id}")
 	@ResponseBody
 	public String remove(@PathVariable("id")Integer id) {
@@ -54,4 +63,5 @@ public class FreeCommentController {
 		
 		return "ok";
 	}
+	
 }

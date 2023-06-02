@@ -37,6 +37,7 @@
 						<input id="add-file" class="form-control" type="file"  name="fileList" accept="image/*" multiple/>
 					</div>
 					<button class="btn btn-primary">글쓰기</button>
+					<a href="/freeboard/freelist" class="btn btn-danger" style="margin: 0px 0px 0px 10px;">취소</a>
 				</form>
 			</div>
 		</div>

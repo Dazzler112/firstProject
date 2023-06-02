@@ -12,4 +12,6 @@ public class FreeComment {
 	private String content;
 	private String memberId;
 	private LocalDateTime inserted;
+	private Integer depth;
+	private Integer parentId;
 }
