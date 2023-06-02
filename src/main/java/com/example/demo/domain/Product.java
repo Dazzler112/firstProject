@@ -9,6 +9,7 @@ public class Product {
     private Integer price;
     private String title;
     private LocalDateTime inserted;
+    private Integer views;
     private String address;
     private Integer likes;
     private String content;

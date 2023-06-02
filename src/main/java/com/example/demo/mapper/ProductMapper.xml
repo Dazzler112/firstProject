@@ -14,4 +14,21 @@
     <select id="selectAll3" resultType="com.example.demo.domain.Product">
         SELECT * FROM Product
     </select>
+    
+    <select id="selectAll4" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+    
+    <select id="selectAll5" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+    
+    <select id="selectAll6" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+    
+    <select id="selectAll7" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+    
 </mapper>

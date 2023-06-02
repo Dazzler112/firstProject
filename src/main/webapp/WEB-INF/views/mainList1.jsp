@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 목록</title>
+<title>로그인 전 메인 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet"
@@ -15,7 +15,7 @@
 	<div class="container-lg">
 		<h1>게시물 목록</h1>
 		<br>
-		<h2>Notices</h2>
+		<h2>공지사항</h2>
 		<table class="table">
 			<thead>
 				<tr>
@@ -35,7 +35,7 @@
 			</tbody>
 		</table>
 		<br>
-		<h2>Product List 1</h2>
+		<h2>최신 상품</h2>
 		<table class="table">
 			<thead>
 				<tr>
@@ -57,7 +57,7 @@
 			</tbody>
 		</table>
 		<br>
-		<h2>Product List 2</h2>
+		<h2>인기 상품</h2>
 		<table class="table">
 			<thead>
 				<tr>

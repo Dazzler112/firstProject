@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>게시물 작성</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -21,6 +21,17 @@
 			<div class="col-1 col-md-3 col-lg-6">
 				<h1>게시물 작성</h1>
 				<form method="post" enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="categorySelect" class="form-label">카테고리 지정</label>
+						<select id="categorySelect" class="form-select" name="category">
+							<option value="1">패션</option>
+							<option value="2">가구</option>
+							<option value="3">게임</option>
+							<option value="4">명품</option>
+							<option value="5">전자기기</option>
+						</select>
+					</div>
+					<div class="mb-3">
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
 						<input id="titleInput" class="form-control" type="text" name="title" value="${Product.title }" />
