@@ -21,10 +21,11 @@ public class MemberController {
 
 	@Autowired
 	MailService mailService;
-	
+
 	@GetMapping("signup")
 	public void signUpForm() {
-		mailService.sendMail();
+//		mailService.sendMail();
+
 	}
 
 	@PostMapping("signup")
@@ -51,7 +52,7 @@ public class MemberController {
 	@GetMapping("checkId/{id}")
 	@ResponseBody
 	public Map<String, Object> checkId(@PathVariable("id") String id) {
-		
+
 		return service.checkId(id);
 	}
 }

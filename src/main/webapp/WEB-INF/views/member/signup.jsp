@@ -89,7 +89,7 @@
 						<label for="inputEmail" class="form-label">이메일</label>
 						<div class="input-group">
 							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
-<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">중복확인</button> -->
+<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">인증하기</button> -->
 						</div>
 <!-- 						<div class="d-none form-text text-primary" id="availableEmailMessage"> -->
 <!-- 							<i class="fa-solid fa-check"></i>사용 가능한 메일입니다. -->

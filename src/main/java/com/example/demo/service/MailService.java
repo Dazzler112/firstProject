@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.mail.*;
 import org.springframework.mail.javamail.*;
 import org.springframework.stereotype.*;
+
 
 @Service
 public class MailService {
@@ -29,4 +29,5 @@ public class MailService {
 		simpleMessage.setText("이메일 인증 test입니다.");
 		javaMailSender.send(simpleMessage);
 	}
+
 }
