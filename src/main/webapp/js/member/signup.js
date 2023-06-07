@@ -1,9 +1,18 @@
 let checkId = false;
-let checkEmail = false;
-let checkNickname = false;
 let checkPassword = false;
+let checkName = false;
+let checkGender = false;
+let checkEmail = false;
 let checkPhoneNum = false;
+let checkNickname = false;
 
+function enableSubmit() {
+	if (checkId && checkPassword && checkName && checkGender && checkEmail && checkPhoneNum && checkNickname) {
+		$("#signupSubmit").removeAttr("disabled");
+	} else {
+		$("#signupSubmit").attr("disabled", "");
+	}
+}
 
 // id 중복확인 버튼이 클릭되면
 $("#checkIdBtn").click(function() {
@@ -24,7 +33,7 @@ $("#checkIdBtn").click(function() {
 				checkId = false;
 			}
 		},
-//		complete: enableSubmit
+		complete: enableSubmit
 	})
 });
 
@@ -44,10 +53,35 @@ $("#inputPassword, #inputPasswordCheck").keyup(function(){
 		$("#passwordFailText").removeClass("d-none");
 		checkPassword = false;
 	}
+	complete: enableSubmit
+})
+
+$("#checkNameBtn").click(function(){
+	checkName = true;
+	enableSubmit(); 
+})
+
+$("#inputGenderM").change(function(){
+	checkGender = true;
+	enableSubmit(); 
+})
+
+$("#inputGenderW").change(function(){
+	checkGender = true;
+	enableSubmit(); 
+})
+
+$("#inputGenderX").change(function(){
+	checkGender = true;
+	enableSubmit(); 
+})
+
+$("#checkEmailBtn").click(function(){
+	checkEmail = true;
+	enableSubmit(); 
 })
 
 // 핸드폰 번호 중복확인 버튼이 클릭되면
-
 $("#checkPhoneNumBtn").click(function() {
 	const userphoneNum = $("#inputPhoneNum").val();
 	// 입력한 ID와 ajax 요청 보내서
@@ -66,7 +100,7 @@ $("#checkPhoneNumBtn").click(function() {
 				checkPhoneNum = false;
 			}
 		},
-//		complete: enableSubmit
+		complete: enableSubmit
 	})
 });
 
@@ -89,6 +123,55 @@ $("#checkNicknameBtn").click(function() {
 				checkNickname = false;
 			}
 		},
-//		complete: enableSubmit
+		complete: enableSubmit
 	})
 });
+
+$("#inputId").keyup(function(){
+	checkId = false;
+	$("#availableIdMessage").addClass("d-none");
+	$("#notAvailableIdMessage").addClass("d-none");
+	enableSubmit(); 
+})
+
+$("#inputPassword").keyup(function(){
+	checkPassword = false;
+	$("#passwordSuccessText").addClass("d-none");
+	$("#passwordFailText").addClass("d-none");
+	enableSubmit(); 
+})
+
+$("#inputName").keyup(function(){
+	checkName = false;
+	enableSubmit(); 
+})
+
+// email 인풋에 키보드 입력 발생시
+$("#inputEmail").keyup(function() {
+	// 이메일 중복확인 다시
+	checkEmail = false;
+	// submit 버튼 비활성화
+	enableSubmit();
+})
+
+// 핸드폰 번호 input에 키보드 입력 발생시
+$("#inputPhoneNum").keyup(function() {
+	// 별명 중복확인 다시
+	checkPhoneNum = false;
+	$("#availableNicknameMessage").addClass("d-none");
+	$("#notAvailableNicknameMessage").addClass("d-none");
+	// submit 버튼 비활성화
+	enableSubmit();
+})
+
+// nickName input에 키보드 입력 발생시
+$("#inputNickName").keyup(function() {
+	// 별명 중복확인 다시
+	checkNickname = false;
+	$("#availablePhoneNumMessage").addClass("d-none");
+	$("#notAvailablePhoneNumMessage").addClass("d-none");
+	// submit 버튼 비활성화
+	enableSubmit();
+})
+
+

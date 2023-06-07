@@ -57,16 +57,9 @@
 						<label for="inputName" class="form-label">이름</label>
 						<div class="input-group">
 							<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" />
-							<!-- <button class="btn btn-outline-secondary" type="button" id="checkIdBtn">중복확인</button> -->
+							<button class="btn btn-outline-secondary" type="button" id="checkNameBtn">확인</button>
 						</div>
 					</div>
-
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="inputGender" class="form-label">성별</label> -->
-<!-- 						<div class="input-group"> -->
-<%-- 							<input id="inputGender" type="text" class="form-control" name="gender" value="${member.gender }" />							 --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
 
 					<div class="mb-3">
 						<p>성별</p>
@@ -79,7 +72,7 @@
 							<label class="form-check-label" for="inputGenderW"> 여 </label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gender" id="inputGenderX" value="X"> 
+							<input class="form-check-input" type="radio" name="gender" id="inputGenderX" value="선택 안함"> 
 							<label class="form-check-label" for="inputGenderX"> 선택 안함 </label>
 						</div>
 					</div>
@@ -89,14 +82,14 @@
 						<label for="inputEmail" class="form-label">이메일</label>
 						<div class="input-group">
 							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
-<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">인증하기</button> -->
+							<button class="btn btn-outline-secondary" type="button" id="checkEmailBtn">인증하기</button>
 						</div>
-<!-- 						<div class="d-none form-text text-primary" id="availableEmailMessage"> -->
-<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 메일입니다. -->
-<!-- 						</div> -->
-<!-- 						<div class="d-none form-text text-danger" id="notAvailableEmailMessage"> -->
-<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 메일입니다. -->
-<!-- 						</div> -->
+						<div class="d-none form-text text-primary" id="availableEmailMessage">
+							<i class="fa-solid fa-check"></i>사용 가능한 메일입니다.
+						</div>
+						<div class="d-none form-text text-danger" id="notAvailableEmailMessage">
+							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 메일입니다.
+						</div>
 					</div>
 
 					<div class="mb-3">
@@ -139,7 +132,7 @@
 					</div>
 
 					<div class="mb-3">
-						<input id="signupSubmit" type="submit" class="btn btn-primary" value="가입" />
+						<input disabled id="signupSubmit" type="submit" class="btn btn-primary" value="가입" />
 					</div>
 				</form>
 			</div>

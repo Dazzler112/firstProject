@@ -82,8 +82,7 @@ public class MemberController {
 	@GetMapping("info")
 	public void getInfo(String id, Model model) {
 		Member member = service.getUser(id);
-		model.addAttribute("member", member);
-		System.out.println(member);
+		model.addAttribute("member", member);		
 	}
 	
 	@GetMapping("modify")
@@ -92,9 +91,20 @@ public class MemberController {
 		model.addAttribute("member", member);
 	}
 	
+	@PostMapping("modify")
+	public String modifyProcess(Member member, RedirectAttributes rttr) {
+		boolean ok = service.modifyAccount(member);
+		if(ok) {
+			return "redirect:/member/info?id=" + member.getId();  
+		}
+		else {
+			return "redirect:/member/modify?id=" + member.getId();
+		}		
+	}
+		
 	@PostMapping("remove")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) {
-		boolean ok = service.removeId(member);
+		boolean ok = service.removeAccount(member);
 		if(ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
 			

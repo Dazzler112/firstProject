@@ -1,6 +1,28 @@
-let checkEmail = true;
 let checkNickName = true;
+let checkPhoneNum = true;
 let checkPassword = true;
+
+function enableSubmit() {
+	if (checkPhoneNum && checkNickName && checkPassword) {
+		$("#modifyButton").removeAttr("disabled");
+	} else {
+		$("#modifyButton").attr("disabled", "");
+	}
+}
+
+$("#inputPhoneNum").keyup(function(){
+	checkPhoneNum = false;
+	$("#availablePhoneNumMessage").addClass("d-none");
+	$("#notAvailablePhoneNumMessage").addClass("d-none");
+	enableSubmit(); 
+})
+
+$("#inputNickName").keyup(function(){
+	checkNickName = false;
+	$("#availableNickNameMessage").addClass("d-none");
+	$("#notAvailableNickNameMessage").addClass("d-none");
+	enableSubmit();
+})
 
 $("#inputPassword, #inputPasswordCheck").keyup(function() {
 	const pw1 = $("#inputPassword").val();
@@ -18,15 +40,34 @@ $("#inputPassword, #inputPasswordCheck").keyup(function() {
 		checkPassword = false;
 	}
 
-//	enableSubmit();
+	enableSubmit();
 });
 
-$("#inputNickName").keyup(function(){
-	checkNickName = false;
-	$("#availableNickNameMessage").addClass("d-none");
-	$("#notAvailableNickNameMessage").addClass("d-none");
-//	enableSubmit();
-})
+
+// 핸드폰 번호 중복확인 버튼 클릭 시
+$("#checkPhoneNumBtn").click(function() {
+	const phoneNum = $("#inputPhoneNum").val();
+	
+	$.ajax("/member/checkPhoneNum/" + phoneNum, {
+		success: function(data) {
+			// `{"available" : true}`
+			if (data.available) {
+				// 사용가능하다는 메세지 출력
+				$("#availablePhoneNumMessage").removeClass("d-none");
+				$("#notAvailablePhoneNumMessage").addClass("d-none");
+				// 중복확인 되었다는 표시 
+				checkPhoneNum = true;
+			} else {
+				// 사용 불가능하다는 메세지 출력
+				$("#availablePhoneNumMessage").addClass("d-none");
+				$("#notAvailablePhoneNumMessage").removeClass("d-none");
+				// 중복확인 안되었다는 표시
+				checkPhoneNum = false
+			}
+		},
+		complete: enableSubmit 
+	});
+});
 
 // 별명 중복확인버튼 클릭 시
 $("#checkNickNameBtn").click(function() {
@@ -49,6 +90,6 @@ $("#checkNickNameBtn").click(function() {
 				checkNickName = false
 			}
 		},
-//		complete: enableSubmit 
+		complete: enableSubmit 
 	});
 });

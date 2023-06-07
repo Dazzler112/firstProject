@@ -48,4 +48,19 @@ public interface MemberMapper {
 			""")
 	Integer remove(String id);
 
+	@Update("""
+			<script>
+			UPDATE Member
+			SET
+			 	<if test="password neq null and password neq ''">
+			 		password = #{password},
+			 	</if>
+			 	
+				phoneNum = #{phoneNum},
+				nickName = #{nickName}
+			WHERE id = #{id}
+			</script>
+			""")
+	Integer modify(Member member);
+
 }

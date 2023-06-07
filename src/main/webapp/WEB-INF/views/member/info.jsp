@@ -40,7 +40,7 @@
 				</div>
 				<div class="mb-3">
 					<label class="form-label" for="">핸드폰 번호</label>
-					<input class="form-control" type="text" value="${member.name }" readonly />
+					<input class="form-control" type="text" value="${member.phoneNum }" readonly />
 				</div>
 				<div class="mb-3">
 					<label class="form-label" for="">별명</label>
