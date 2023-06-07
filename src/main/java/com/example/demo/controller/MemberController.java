@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
+import jakarta.servlet.http.*;
+
 @Controller
 @RequestMapping("member")
 
@@ -33,10 +35,12 @@ public class MemberController {
 
 		try {
 			service.signup(member);
+			rttr.addFlashAttribute("message", "회원가입이 완료되었습니다");
 			return "redirect:/member/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("member", member);
+			rttr.addFlashAttribute("message", "회원가입 중 문제가 발생하였습니다.");
 			return "redirect:/member/signup";
 		}
 	}
@@ -54,5 +58,53 @@ public class MemberController {
 	public Map<String, Object> checkId(@PathVariable("id") String id) {
 
 		return service.checkId(id);
+	}
+
+	@GetMapping("checkPhoneNum/{PhoneNum}")
+	@ResponseBody
+	public Map<String, Object> checkPhoneNum(@PathVariable("PhoneNum") String phoneNum) {
+		
+		return service.checkPhoneNum(phoneNum);
+	}
+
+	@GetMapping("checkNickName/{NickName}")
+	@ResponseBody
+	public Map<String, Object> checkNickName(@PathVariable("NickName") String nickName) {
+		
+		return service.checkNickName(nickName);
+	}
+	
+	@GetMapping("login")
+	public void loginForm() {
+		
+	}
+	
+	@GetMapping("info")
+	public void getInfo(String id, Model model) {
+		Member member = service.getUser(id);
+		model.addAttribute("member", member);
+		System.out.println(member);
+	}
+	
+	@GetMapping("modify")
+	public void modifyForm(String id, Model model) {
+		Member member = service.getUser(id);
+		model.addAttribute("member", member);
+	}
+	
+	@PostMapping("remove")
+	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) {
+		boolean ok = service.removeId(member);
+		if(ok) {
+			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
+			
+			// 로그아웃
+//			request.logout();
+
+			return "redirect:/member/signup";
+		}else {
+			rttr.addFlashAttribute("message", "회원 탈퇴 중 문제가 발생하였습니다.");
+			return "redirect:/member/info?id=" + member.getId();
+		}
 	}
 }

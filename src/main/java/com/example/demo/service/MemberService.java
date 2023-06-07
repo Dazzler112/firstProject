@@ -29,4 +29,24 @@ public class MemberService {
 		return Map.of("available", member == null);
 	}
 
+	public Map<String, Object> checkPhoneNum(String phoneNum) {
+		Member member = mapper.selectByPhoneNum(phoneNum);
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkNickName(String nickName) {
+		Member member = mapper.selectByNickName(nickName);
+		return Map.of("available", member == null);
+	}
+
+	public Member getUser(String id) {
+		return mapper.selectById(id);
+	}
+
+	public boolean removeId(Member member) {
+		int cnt = mapper.remove(member.getId());
+		System.out.println(cnt);
+		return cnt == 1;
+	}
+
 }

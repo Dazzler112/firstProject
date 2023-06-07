@@ -2,6 +2,7 @@ let checkId = false;
 let checkEmail = false;
 let checkNickname = false;
 let checkPassword = false;
+let checkPhoneNum = false;
 
 
 // id 중복확인 버튼이 클릭되면
@@ -44,3 +45,50 @@ $("#inputPassword, #inputPasswordCheck").keyup(function(){
 		checkPassword = false;
 	}
 })
+
+// 핸드폰 번호 중복확인 버튼이 클릭되면
+
+$("#checkPhoneNumBtn").click(function() {
+	const userphoneNum = $("#inputPhoneNum").val();
+	// 입력한 ID와 ajax 요청 보내서
+	$.ajax("/member/checkPhoneNum/" + userphoneNum, {
+		success: function(data) {
+
+			if (data.available) {
+				// 사용 가능하다는 메세지 출력
+				$("#availablePhoneNumMessage").removeClass("d-none");
+				$("#notAvailablePhoneNumMessage").addClass("d-none");
+				checkPhoneNum = true;
+			} else {
+				// 사용 가능하지 않다는 메세지 출력
+				$("#availablePhoneNumMessage").addClass("d-none");
+				$("#notAvailablePhoneNumMessage").removeClass("d-none");
+				checkPhoneNum = false;
+			}
+		},
+//		complete: enableSubmit
+	})
+});
+
+// 별명 중복확인 버튼이 클릭되면
+$("#checkNicknameBtn").click(function() {
+	const usernickName = $("#inputNickName").val();
+	// 입력한 ID와 ajax 요청 보내서
+	$.ajax("/member/checkNickName/" + usernickName, {
+		success: function(data) {
+
+			if (data.available) {
+				// 사용 가능하다는 메세지 출력
+				$("#availableNicknameMessage").removeClass("d-none");
+				$("#notAvailableNicknameMessage").addClass("d-none");
+				checkNickname = true;
+			} else {
+				// 사용 가능하지 않다는 메세지 출력
+				$("#availableNicknameMessage").addClass("d-none");
+				$("#notAvailableNicknameMessage").removeClass("d-none");
+				checkNickname = false;
+			}
+		},
+//		complete: enableSubmit
+	})
+});

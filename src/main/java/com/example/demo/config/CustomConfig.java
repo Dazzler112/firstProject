@@ -15,6 +15,7 @@ import software.amazon.awssdk.services.s3.*;
 @Configuration
 @EnableMethodSecurity
 
+
 public class CustomConfig {
 
 	@Value("${aws.accessKeyId}")
@@ -37,6 +38,8 @@ public class CustomConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http.csrf().disable();
 		http.authorizeHttpRequests().anyRequest().permitAll();
+		
+		http.formLogin().loginPage("/member/login");
 		
 		return http.build();
 		

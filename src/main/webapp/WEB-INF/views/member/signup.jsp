@@ -102,8 +102,15 @@
 					<div class="mb-3">
 						<label for="inputPhoneNum" class="form-label">핸드폰 번호</label>
 						<div class="input-group">
-							<input id="inputPhoneNUm" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" />
-<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkPhoneNumBtn">중복확인</button> -->
+							<input id="inputPhoneNum" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" 
+							title="전화번호를 입력하세요." placeholder="010-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"/>
+							<button class="btn btn-outline-secondary" type="button" id="checkPhoneNumBtn">중복확인</button>
+						</div>
+						<div class="d-none form-text text-primary" id="availablePhoneNumMessage">
+							<i class="fa-solid fa-check"></i>등록 가능한 핸드폰 번호입니다.
+						</div>
+						<div class="d-none form-text text-danger" id="notAvailablePhoneNumMessage">
+							<i class="fa-solid fa-triangle-exclamation"></i>이미 등록된 핸드폰 번호입니다.
 						</div>
 					</div>
 
@@ -111,15 +118,15 @@
 						<label for="inputNickName" class="form-label">별명</label>
 						<div class="input-group">
 							<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" />
-<!-- 							<button class="btn btn-outline-secondary" type="button" id="checkNicknameBtn">중복확인</button> -->
+							<button class="btn btn-outline-secondary" type="button" id="checkNicknameBtn">중복확인</button>
 						</div>
 
-<!-- 						<div class="d-none form-text text-primary" id="availableNicknameMessage"> -->
-<!-- 							<i class="fa-solid fa-check"></i>사용 가능한 별명입니다. -->
-<!-- 						</div> -->
-<!-- 						<div class="d-none form-text text-danger" id="notAvailableNicknameMessage"> -->
-<!-- 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 별명입니다. -->
-<!-- 						</div> -->
+						<div class="d-none form-text text-primary" id="availableNicknameMessage">
+							<i class="fa-solid fa-check"></i>사용 가능한 별명입니다.
+						</div>
+						<div class="d-none form-text text-danger" id="notAvailableNicknameMessage">
+							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 별명입니다.
+						</div>
 
 					</div>
 
