@@ -45,7 +45,8 @@ public class CustomConfig {
 		http.csrf().disable();
 //		http.authorizeHttpRequests().anyRequest().permitAll();
 		
-		http.formLogin().loginPage("/member/login");
+		http.formLogin().loginPage("/member/login")
+						.defaultSuccessUrl("/teamProject/list2", true);
 		http.logout().logoutUrl("/member/logout");
 		return http.build();
 		
