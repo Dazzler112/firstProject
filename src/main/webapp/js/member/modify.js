@@ -1,26 +1,38 @@
 let checkNickName = true;
 let checkPhoneNum = true;
 let checkPassword = true;
+let checkName = true;
+let checkAddress = true;
 
 function enableSubmit() {
-	if (checkPhoneNum && checkNickName && checkPassword) {
+	if (checkName && checkPhoneNum && checkNickName && checkPassword && checkAddress) {
 		$("#modifyButton").removeAttr("disabled");
 	} else {
 		$("#modifyButton").attr("disabled", "");
 	}
 }
 
-$("#inputPhoneNum").keyup(function(){
+$("#inputName").keyup(function() {
+	checkName = false;
+	enableSubmit();
+})
+
+$("#inputPhoneNum").keyup(function() {
 	checkPhoneNum = false;
 	$("#availablePhoneNumMessage").addClass("d-none");
 	$("#notAvailablePhoneNumMessage").addClass("d-none");
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputNickName").keyup(function(){
+$("#inputNickName").keyup(function() {
 	checkNickName = false;
 	$("#availableNickNameMessage").addClass("d-none");
 	$("#notAvailableNickNameMessage").addClass("d-none");
+	enableSubmit();
+})
+
+$("#inputAddress").keyup(function() {
+	checkAddress = false;
 	enableSubmit();
 })
 
@@ -43,11 +55,17 @@ $("#inputPassword, #inputPasswordCheck").keyup(function() {
 	enableSubmit();
 });
 
+// 이름 확인 버튼 클릭 시
+$("#checkNameBtn").click(function() {
+	$("#availableNameMessage").removeClass("d-none");
+	checkName = true;
+	enableSubmit();
+});
 
 // 핸드폰 번호 중복확인 버튼 클릭 시
 $("#checkPhoneNumBtn").click(function() {
 	const phoneNum = $("#inputPhoneNum").val();
-	
+
 	$.ajax("/member/checkPhoneNum/" + phoneNum, {
 		success: function(data) {
 			// `{"available" : true}`
@@ -65,14 +83,14 @@ $("#checkPhoneNumBtn").click(function() {
 				checkPhoneNum = false
 			}
 		},
-		complete: enableSubmit 
+		complete: enableSubmit
 	});
 });
 
 // 별명 중복확인버튼 클릭 시
 $("#checkNickNameBtn").click(function() {
 	const nickName = $("#inputNickName").val();
-	
+
 	$.ajax("/member/checkNickName/" + nickName, {
 		success: function(data) {
 			// `{"available" : true}`
@@ -90,6 +108,13 @@ $("#checkNickNameBtn").click(function() {
 				checkNickName = false
 			}
 		},
-		complete: enableSubmit 
+		complete: enableSubmit
 	});
+});
+
+// 주소 확인 버튼 클릭 시
+$("#checkAddressBtn").click(function() {
+	$("#availableAddressMessage").removeClass("d-none");
+	checkAddress = true;
+	enableSubmit();
 });

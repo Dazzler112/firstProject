@@ -4,19 +4,21 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class MemberService {
 
 	@Autowired
-	MemberMapper mapper;
+	private MemberMapper mapper;
 
-	public void signup(Member member) {
+	public boolean signup(Member member) {
 		int cnt = mapper.signUpInsert(member);
-
+		return cnt == 1;
 	}
 
 	public List<Member> userList() {
@@ -48,13 +50,18 @@ public class MemberService {
 		int cnt = 0;
 		if(oldMember.getPassword().equals(member.getPassword())) {
 			// 암호가 같다면
-			cnt = mapper.remove(member.getId());		
+			cnt = mapper.deleteById(member.getId());		
 		}
 		return cnt == 1;
 	}
 
-	public boolean modifyAccount(Member member) {
-		int cnt = mapper.modify(member);
+	public boolean modifyAccount(Member member, String oldPassword) {
+		Member oldMember = mapper.selectById(member.getId());
+		int cnt = 0;
+		
+		if(oldMember.getPassword().equals(oldPassword)) {
+			cnt = mapper.modify(member);			
+		}
 		return cnt == 1;
 	}
 

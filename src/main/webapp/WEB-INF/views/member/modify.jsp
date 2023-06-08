@@ -41,7 +41,13 @@
 
 					<div class="mb-3">
 						<label class="form-label" for="inputName"> 이름 </label> 
-						<input id="inputName" class="form-control" type="text" name="name" value="${member.name }" readonly />
+						<div class="input-group">
+							<input id="inputName" class="form-control" type="text" name="name" value="${member.name }" />
+							<button class="btn btn-outline-secondary" type="button" id="checkNameBtn">확인</button>
+						</div>
+						<div class="d-none form-text text-primary" id="availableNameMessage">
+							<i class="fa-solid fa-check"></i> 이름이 확인되었습니다.
+						</div>
 					</div>
 
 					<div class="mb-3">
@@ -55,7 +61,6 @@
 							<input id="inputEmail" class="form-control" type="email" name="email" value="${member.email }" readonly />
 						</div>
 					</div>
-
 
 					<div class="mb-3">
 						<label class="form-label" for="inputPhoneNum"> 핸드폰 번호 </label>
@@ -85,8 +90,20 @@
 							<i class="fa-solid fa-triangle-exclamation"></i> 사용 불가능한 별명입니다.
 						</div>
 					</div>
+					
+					<div class="mb-3">
+						<label class="form-label" for="inputName"> 주소 </label> 
+						<div class="input-group">
+							<input id="inputAddress" class="form-control" type="text" name="address" value="${member.address }" />
+							<button class="btn btn-outline-secondary" type="button" id="checkAddressBtn">확인</button>
+						</div>
+						<div class="d-none form-text text-primary" id="availableAddressMessage">
+							<i class="fa-solid fa-check"></i> 주소가 확인되었습니다.
+						</div>
+					</div>
+					
 
-					<button disabled id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary">수정</button>
+					<button id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary">수정</button>
 				</form>
 
 			</div>

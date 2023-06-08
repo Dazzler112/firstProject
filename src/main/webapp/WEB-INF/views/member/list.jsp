@@ -32,16 +32,15 @@
 					<tbody>
 						<c:forEach items="${userList }" var="user">
 							<tr>
-<!-- 								<td> -->
-<%-- 									<c:url value="/member/info" var="memberInfoLink"> --%>
-<%-- 										<c:param name="id" value="${member.id }"></c:param> --%>
-<%-- 									</c:url> --%>
-<%-- 									<a href="${memberInfoLink }"> --%>
-<%-- 										${member.id } --%>
-<!-- 									</a> -->
-								
-<!-- 								</td> -->
-								<td>${user.id }</td>
+
+								<td>
+									<c:url value="/member/info" var="memberInfoLink">
+										<c:param name="id" value="${user.id }"></c:param>
+									</c:url>
+									<a href="${memberInfoLink }">
+										${user.id }
+									</a>
+								</td>
 								<td>${user.password }</td>
 								<td>${user.nickName }</td>
 								<td>${user.email }</td>

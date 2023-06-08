@@ -46,7 +46,7 @@ public interface MemberMapper {
 			DELETE FROM Member
 			WHERE id = #{id}
 			""")
-	Integer remove(String id);
+	Integer deleteById(String id);
 
 	@Update("""
 			<script>
@@ -56,8 +56,10 @@ public interface MemberMapper {
 			 		password = #{password},
 			 	</if>
 			 	
+			 	name = #{name},
 				phoneNum = #{phoneNum},
-				nickName = #{nickName}
+				nickName = #{nickName},
+				address = #{address}
 			WHERE id = #{id}
 			</script>
 			""")

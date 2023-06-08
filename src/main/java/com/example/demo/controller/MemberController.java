@@ -92,8 +92,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("modify")
-	public String modifyProcess(Member member, RedirectAttributes rttr) {
-		boolean ok = service.modifyAccount(member);
+	public String modifyProcess(Member member, RedirectAttributes rttr, String oldPassword) {
+		boolean ok = service.modifyAccount(member, oldPassword);
 		if(ok) {
 			return "redirect:/member/info?id=" + member.getId();  
 		}
