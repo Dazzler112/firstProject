@@ -6,6 +6,7 @@
   <mapper namespace="com.example.demo.mapper.FreeBoardMapper">
   	<resultMap type="com.example.demo.domain.FreeBoard" id="getFile">
   		<id column="id" property="id"></id>
+  		<result column="boardCategory" property="boardCategory"/>
   		<result column="title" property="title" />
   		<result column="body" property="body" />
   		<result column="writer" property="writer" />

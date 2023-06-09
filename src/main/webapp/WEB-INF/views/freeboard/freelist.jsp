@@ -31,68 +31,55 @@
 	border-radius: 7px;
 	color: #A1959C;
 }
+#category_div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px 0px;
+}
+.category_button{
+	margin: 0px 8px;
+	padding: 7px;
+	border-radius: 5px;
+	border: none;
+	font-weight: 600;
+}
 </style>
 </head>
 <body>
+			<my:search></my:search>
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
 			
-			<div style="display: flex; justify-content: space-between;">
-					<div>
-					<a href="#">메인으로 이동</a>
-					</div>
-					<div >
-					<form action="#">
-						<input type="search" />
-						<button><i class="fa-solid fa-magnifying-glass"></i></button>
-					</form>
-					</div>
-					<div>
-						<a href="#">로그인</a>
-					</div>
-				</div>
-			
 				<div style="display: flex; justify-content: center; margin: 10px 0px;">
-					<span style="margin: 0px 10px;"> <a href="#">카테고리</a> </span>
+					<span style="margin: 0px 10px;"> <a href="/categoryList">카테고리</a> </span>
 					<span style="margin: 0px 10px;"> <a href="#">동네생활</a> </span>
 					<span style="margin: 0px 10px;"> <a href="#">신고</a> </span>
 				</div>
 			
 				<div style="display: flex; justify-content: center;margin: 10px 0px;">
-					<span style="margin: 0px 10px;"><a href="#">동네 자유게시판</a></span>
-					<span style="margin: 0px 10px;"><a href="#">광고</a></span>
+					<span style="margin: 0px 10px;"><a href="/freeboard/freelist">동네 자유게시판</a></span>
+					<span style="margin: 0px 10px;"><a href="/adBoard/list">광고</a></span>
 					<span style="margin: 0px 10px;"><a href="#">알바</a></span>
-				</div>
-				
-				<div>
-					<form action="">
-						<label for="cate-que" class="form-label"></label>
-						<input type="checkbox" id="cate-que" class=""/>동네질문
-						<label for="cate-acci" class="form-label"></label>
-						<input type="checkbox" id="cate-acci" class=""/>동네사건사고
-						<label for="cate-jmt" class="form-label"></label>
-						<input type="checkbox" id="cate-jmt" class=""/>동네맛집
-						<label for="cate-al" class="form-label"></label>
-						<input type="checkbox" id="cate-al" class=""/>동네소식
-						<label for="cate-info" class="form-label"></label>
-						<input type="checkbox" id="cate-info" class=""/>생활정보
-						<label for="cate-hobby" class="form-label"></label>
-						<input type="checkbox" id="cate-hobby" class=""/>취미생활
-						<label for="cate-day" class="form-label"></label>
-						<input type="checkbox" id="cate-day" class=""/>일상
-						<label for="cate-lost" class="form-label"></label>
-						<input type="checkbox" id="cate-lost" class=""/>분실
-						<label for="cate-please" class="form-label"></label>
-						<input type="checkbox" id="cate-please" class=""/>해주세요
-					</form>
 				</div>
 			
 			
 			</div>
 		</div>
 	</div>
-
+	<form action="" method="get">
+		<div id="category_div">
+			<input type="button" class="category_button" name="boardCategory" value="동네질문"/>
+			<input type="button" class="category_button" name="boardCategory" value="동네사건사고"/>
+			<input type="button" class="category_button" name="boardCategory" value="동네맛집"/>
+			<input type="button" class="category_button" name="boardCategory" value="동네소식"/>
+			<input type="button" class="category_button" name="boardCategory" value="생활정보"/>
+			<input type="button" class="category_button" name="boardCategory" value="취미생활"/>
+			<input type="button" class="category_button" name="boardCategory" value="일상"/>
+			<input type="button" class="category_button" name="boardCategory" value="분실"/>
+			<input type="button" class="category_button" name="boardCategory" value="해주세요"/>
+		</div>
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
@@ -101,6 +88,7 @@
 					<thead>
 						<tr>
 							<th style="display:none;">게시번호</th>
+							<th>카테고리</th>
 							<th>지역</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -111,6 +99,7 @@
 						<c:forEach items="${boardList}" var="board">
 							<tr>
 								<td style="display:none;">${board.id }</td>
+								<td>${board.boardCategory }</td>
 								<td>${board.region }</td>
 								<td>
 								<a href="/freeboard/id/${board.id}">${board.title }</a>
@@ -139,10 +128,12 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	<div class="div_writer">
 		<a href="/freeboard/freeadd" class="btn btn-primary">글쓰기</a>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/freeboard/category.js"></script>
 </body>
 </html>

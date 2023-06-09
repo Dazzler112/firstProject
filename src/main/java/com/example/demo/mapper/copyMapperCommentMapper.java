@@ -18,10 +18,9 @@ public interface FreeCommentMapper {
 	List<FreeComment> selectAllComment(Integer boardId);
 
 	@Insert("""
-			INSERT INTO Comment(boardId, parentId,memberId,content, depth)
-			VALUES(#{boardId},#{parentId},#{memberId}, #{content}, #{depth})
+			INSERT INTO Comment(boardId, content, memberId, depth)
+			VALUES(#{boardId}, #{content}, #{memberId}, #{depth})
 			""")
-	@Options(useGeneratedKeys = true, keyProperty = "parentId", keyColumn = "parentId")
 	Integer insert(FreeComment comment);
 
 	@Delete("""
@@ -58,12 +57,11 @@ public interface FreeCommentMapper {
 			""")
 	Integer insertReply(FreeComment comment);
 
-	//댓글 정렬
 	@Update("""
 			UPDATE Comment
 			SET depth = depth +1
-			WHERE boardId = #{boardId} AND depth > #{newdepth}
+			WHERE boardId = #{boardId} AND depth > #{depth}
 			""")
-	Integer updateCommentShape(Integer boardId, Integer newdepth);
+	Integer updateCommentShape(Integer boardId, Integer depth);
 
 }

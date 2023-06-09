@@ -64,4 +64,12 @@ public class FreeCommentController {
 		return "ok";
 	}
 	
+	@PostMapping("updateShape")
+	@ResponseBody
+	public String updateCommentShape(@RequestParam("boardId")Integer boardId,
+									@RequestParam("depth")Integer depth) {
+
+		service.updateCommentShape(boardId,depth);
+		return "ok";
+	}
 }

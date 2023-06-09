@@ -22,12 +22,16 @@ public class FreeBoardController {
 	private FreeBoardService service;
 	
 	@GetMapping("freelist")
-	public String list (Model model){
+	public String list (Model model,
+						@RequestParam(value ="boardCategory",required = false )String boardCategory,
+						@RequestParam(value = "search" ,defaultValue = "")String search,
+						@RequestParam(value="type", required = false)String type){
 //		List<FreeBoard> list = service.listProcess();
 		
-		List<FreeBoard> list = service.getCountList();
+//		List<FreeBoard> list = service.getCountList();
+		Map<String, Object> list = service.getCountList(boardCategory,search,type);
 		
-		model.addAttribute("boardList",list);
+		model.addAllAttributes(list);
 		return "freeboard/freelist";
 	}
 	
@@ -51,12 +55,15 @@ public class FreeBoardController {
 	}
 	
 	@PostMapping("freeadd")
-	public String addForm(@RequestParam("fileList") MultipartFile[] files
+	public String addForm(@RequestParam("fileList") MultipartFile[] files,
+						  @RequestParam("boardCategory") String category
 						,FreeBoard board 
-						,RedirectAttributes rttr) 
+						,RedirectAttributes rttr
+						,Model model) 
 								throws Exception{
-		boolean ok = service.addProcess(board,files);
+		boolean ok = service.addProcess(board,files,category);
 		
+		model.addAttribute("category",category);
 		if(ok) {
 			rttr.addFlashAttribute("message","게시글이 생성되었습니다.");
 			return "redirect:/freeboard/id/" + board.getId();

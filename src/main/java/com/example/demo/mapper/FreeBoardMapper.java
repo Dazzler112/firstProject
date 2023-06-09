@@ -15,7 +15,8 @@ public interface FreeBoardMapper {
 			title,
 			writer,
 			region,
-			inserted
+			inserted,
+			boardCategory
 			FROM
 			Board
 			ORDER BY id DESC
@@ -24,6 +25,7 @@ public interface FreeBoardMapper {
 
 	@Select("""
 			SELECT
+				b.boardCategory,
 				b.id,
 				b.title,
 				b.body,
@@ -42,8 +44,8 @@ public interface FreeBoardMapper {
 	FreeBoard getBoardList(Integer id);
 	
 	@Insert("""
-			INSERT INTO Board(title,body,writer,region)
-			VALUES(#{title}, #{body}, #{writer},#{region})
+			INSERT INTO Board(boardCategory,title,body,writer,region)
+			VALUES(#{boardCategory} ,#{title}, #{body}, #{writer},#{region})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertForm(FreeBoard board);
@@ -79,6 +81,7 @@ public interface FreeBoardMapper {
 	@Update("""
 			UPDATE Board
 			SET
+			 boardCategory = #{boardCategory},
 			 title = #{title},
 			 body = #{body},
 			 region = #{region}
@@ -102,6 +105,7 @@ public interface FreeBoardMapper {
 
 	@Select("""
 			SELECT 
+			b.boardCategory,
 			b.id,
 			b.title,
 			b.writer,
@@ -135,6 +139,64 @@ public interface FreeBoardMapper {
 			""")
 	@ResultMap("replyCount")
 	List<FreeBoard> replyCounting(Integer id);
+	
+//	paging
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'"/>
+			SELECT 
+			b.id,
+			b.title,
+			b.writer,
+			b.region,
+			b.inserted,
+			b.boardCategory,
+			COUNT(p.id) fileCount,
+			(SELECT COUNT (*)
+			FROM Comment
+			WHERE boardId = b.id) commentCount
+			FROM
+			Board b LEFT JOIN PhotoName p ON b.id = p.boardId
+			<where>
+			<if test ="(type eq 'all') or (type eq 'title')">
+				title LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'body')">
+				OR body LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'writer')">
+				OR writer LIKE #{pattern}
+			</if>
+			</where>
+			GROUP BY
+				b.id, b.title, b.writer, b.region, b.inserted ,b.boardCategory
+			ORDER BY id DESC
+			</script>
+			""")
+	List<FreeBoard> selectPaging(String boardCategory, String search, String type);
+
+	//검색 구조 기본설정
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT COUNT(*)
+			FROM Board
+			
+			<where>
+			<if test="(type eq 'all') or (type eq 'title')">
+				title LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'body')">
+				OR body LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'writer')">
+				OR writer LIKE #{pattern}
+			</if>
+			</where>
+		
+			</script>
+			""")
+	Integer countRecord(String search, String type);
 
 	
 }

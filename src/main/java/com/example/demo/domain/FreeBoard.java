@@ -14,6 +14,7 @@ public class FreeBoard {
 	private String writer;
 	private String region;
 	private LocalDateTime inserted;
+	private String boardCategory;
 	
 	private List<String> photoName;
 	
