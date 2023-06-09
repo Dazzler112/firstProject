@@ -49,7 +49,7 @@ public class CategoryController {
         
         model.addAttribute("CategoryList", categoryList);
         
-        return "CategoryList";
+        return "categoryList";
     }
 
     private String getCategoryTitle(String category) {
@@ -81,7 +81,7 @@ public class CategoryController {
         
         model.addAttribute("CategoryList", CategoryList);
         
-        return "CategoryList";
+        return "categoryList";
     }
 
 }

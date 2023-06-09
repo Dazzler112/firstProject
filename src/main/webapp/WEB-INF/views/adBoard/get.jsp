@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,20 @@
 </head>
 <body>
 
+	<my:navBar></my:navBar>
+
+	<my:alert></my:alert>
+	<!-- toast -->
+	<div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body"></div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
@@ -21,13 +36,21 @@
 						번 광고게시물
 					</h1>
 				</div>
+				<div>
+					<h1>
+						<span id="likeIcon">
+							<i class="fa-regular fa-thumbs-up"></i>
+						</span>
+						<span id="likeNumber"> ${board.like } </span> 
+					</h1>
+				</div>
 
 				<div>
 					<div class="mb-3">
 						<label for="" class="form-label">제목</label>
 						<input type="text" class="form-control" value="${board.title }" readonly />
 					</div>
-					
+
 					<!-- 그림 파일 출력 -->
 					<div class="mb-3">
 						<c:forEach items="${board.fileName }" var="fileName">
@@ -36,7 +59,7 @@
 							</div>
 						</c:forEach>
 					</div>
-					
+
 					<div class="mb-3">
 						<label for="" class="form-label">본문</label>
 						<textarea class="form-control" readonly rows="10">${board.body }</textarea>
@@ -56,10 +79,24 @@
 
 				<hr />
 				<div class="commentContainer">
-					<div>댓글 입력창 : 전송</div>
-					<div>댓글1 내용 : 누가 : 언제</div>
-					<div>댓글2 내용 : 누가 : 언제2</div>
-					<div>댓글3 내용 : 누가 : 언제3</div>
+					<div id="addCommentContainer">
+						<h6>입력</h6>
+						<textarea id="commentTextArea"></textarea>
+						<button id="sendCommentBtn">전송</button>
+					</div>
+					<div id="updateCommentContainer">
+						<h6>수정</h6>
+						<input type="hidden" id="commentUpdateIdInput" />
+						<textarea id="commentUpdateTextArea"></textarea>
+						<button id="updateCommentBtn">수정</button>
+					</div>
+
+
+					<div id="commentListContainer">
+						<div>댓글1 내용 : 누가 : 언제</div>
+						<div>댓글2 내용 : 누가 : 언제2</div>
+						<div>댓글3 내용 : 누가 : 언제3</div>
+					</div>
 				</div>
 
 			</div>
@@ -68,7 +105,7 @@
 
 	<div class="d-none">
 		<form action="/adBoard/remove" method="post" id="removeForm">
-			<input type="text" name="id" value="${board.id }" />
+			<input id="inputId" type="text" name="id" value="${board.id }" />
 		</form>
 	</div>
 
@@ -91,7 +128,8 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	
+
+	<script src="/js/adBoard/like.js"></script>
 	<script src="/js/adBoard/comment.js"></script>
 </body>
 </html>

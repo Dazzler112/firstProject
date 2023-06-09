@@ -127,4 +127,5 @@ $.ajax("/comment/list?board=" + boardId, {
 			
 		}
 	});
+
 }

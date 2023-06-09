@@ -256,6 +256,7 @@
 			</input>
 
 
+
 			<a class="iconsearch" href="#">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</a>
@@ -289,3 +290,34 @@
 		</nav>
 	</header>
 </body>
+=======
+ <body class="pt-5">
+    <!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
+    <header class="header">
+      <div class="header__wrapper">
+        <!-- 로고 -->
+        <div class="header__start">
+          <button class="header__menu">&#9776;</button>
+          <span class="header__title">NavBar</span>
+        </div>
+
+        <!-- 검색창 -->
+        <div class="header__center">
+          <form class="header__searchForm" onsubmit="return false;">
+            <input
+              class="header__input--text"
+              type="text"
+              
+            /><button class="header__input--btn">검색</button>
+          </form>
+        </div>
+
+        <!-- 프로필 -->
+        <div class="header__end">
+          <button class="header__search">&#128269;</button>
+          <div class="header__profile"></div>
+        </div>
+      </div>
+    </header>
+    </body>
+

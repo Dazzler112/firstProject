@@ -55,5 +55,10 @@ public class FreeCommentService {
 		mapper.insertReply(comment);
 	}
 
+	public void updateCommentShape(Integer boardId, Integer depth) {
+		mapper.updateCommentShape(boardId,depth);
+		
+	}
+
 	
 }
