@@ -27,6 +27,7 @@ public class BoardController {
 		return null;
 	}
 	
+	
 	@GetMapping("categorypage")
 	public String CategoryMenu(Model model) {
 		return null;
@@ -39,6 +40,10 @@ public class BoardController {
 	
 	@GetMapping("header")
 	public String headerMenu(Model model) {
+		return null;
+	}
+	@GetMapping("mainAdd")
+	public String mainAdd(Model model) {
 		return null;
 	}
 

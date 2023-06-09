@@ -19,19 +19,81 @@
 <link href="/resources/productpage.css" rel="stylesheet">
 
 </head>
+<style>
+	
+</style>
 <body>
-</head>
+
 <my:navBar></my:navBar>
 <my:menubar></my:menubar>
+
 <div class="container">
-  <h1>사진</h1>
-  <img src="‪bbubba.jpg" alt="제품 이미지">
-  <div>
-    <span >집에 남는 가구 팝니다</span> <span>|</span> <span>유영훈</span> <span>|</span> <span>2023.06.02 금요일</span> <span>|</span>
-    <h4>집에 쓰다가 이사를 하게되어 가구를 넣을 자리가 없어 나눔합니다</h4>
+  <div class="img">
+  <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+  
+  </div>
+  <div class="productname">
+    <div class="product001">
+    <h4>집에 남는 눈사람 팝니다.</h4>
+    </div>
+    <div class="product002">
+    <span >10분전</span> <span>|</span> <span>2023.06.02금요일</span>
+    <div class="product003">
+    <span>유영훈</span> 
+    </div>  
+    </div>
+    <div class="product004">
+    <h4>1000원</h4>
+    </div>
+    <p>상품내용</p>
+    <p>집 이사를 준비하는데 눈사람이 남아 나눔합니다.</p>	
   </div>
 </div>
-<p>제품 정보 적기 (글쓰기 내용 보여주기)</p>
+<div class="pagenation">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>

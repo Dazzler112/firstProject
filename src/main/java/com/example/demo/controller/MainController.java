@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.*;
+
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -19,7 +20,18 @@ public class MainController {
 
     @Autowired
     private ProductService service;
-
+    
+//    @Autowired
+//    private NoticeService noticeService;
+    
+    @GetMapping("noticeListInMain")
+    public String noticeList(Model model) {
+    	
+    	List<Notice> result = service.listNotice1();
+    	model.addAttribute("noticeList", result);
+    	return "mainList1";
+    }
+    
     @GetMapping("list1")
     public String list1(Model model,
             @RequestParam(value = "title", defaultValue = "") String title,

@@ -17,22 +17,51 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <link href="/resources/menubar.css" rel="stylesheet">
 
-</head>
-<body>
 
-	<my:navBar></my:navBar>
-	<my:menubar></my:menubar>
+
+</head>
+<header>
+<my:navBar></my:navBar>
+</header>
+
+
+
+<body class=mainbody style="margin-top:105px;">
+
+
+
 
 
 	
-	<br />
+	
+
+
+	
+	
 	<h1 style="text-align: center">공지사항</h1>
 	
 	<h1 style="text-align: center">최신상품</h1>
 	
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
+	<h1 style="text-align: center">위시리스트 순</h1>
 	<h1 style="text-align: center">위시리스트 순</h1>
 	
 

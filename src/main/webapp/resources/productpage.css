@@ -4,6 +4,37 @@
 
   text-align: center;
   margin-top: 40px; 
+  display:flex;
+  justify-content: space-between;
+}
+.img{
+	flex:47% 0 0;
+	max-width:47%;
+}
+.productname{
+	flex: 0 0 47%;
+    max-width: 47%;
+	
+}
+.product001{
+	align-items: center;
+    margin: 12px 0px;
+    display: flex;
+}
+.product002{
+	align-items: center;
+     margin: 12px 0px;
+    display: flex;
+}
+.product003{
+	align-items: center;
+    
+    margin:0px 0px 12px 40px;
+}
+.product004{
+	align-items: center;
+     margin: auto;
+    display: flex;
 }
 
 .container span {
@@ -14,6 +45,3 @@
   white-space: nowrap;
 }
 
-.container h4 {
-  margin-top: 20px;
-}

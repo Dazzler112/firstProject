@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
+<link href="/resources/categorymenubar.css" rel="stylesheet">
+<link href="/resources/menubar.css" rel="stylesheet">
+<script type="text/javascript" src="링크주소"></script>
 <style>
 .header {
 	/*헤더 고정*/
@@ -9,8 +12,7 @@
 	top: 10px;
 	left: 20px;
 	right: 20px;
-	margin: auto;
-	/**/
+	margin-bottom: 30px;
 	width: 90%;
 	background-color: #fff;
 	z-index: 2;
@@ -126,23 +128,51 @@
 .sidebar {
 	width: 250px;
 	height: 100%;
-	background: gray;
+	background: white;
 	position: fixed;
 	top: 0px;
 	left: -300px;
+	border: 0.3px solid gray;
 	transition: all .35s;
-}
-
-.sidebar ul {
-	
 }
 
 #iconemenu:checked+label+.sidebar {
 	left: 0px;
 }
 
-#iconemenu:checked+label+.sidebar+ul {
-	margin left: 0px;
+.menu__item {
+	margin: 40px 0px 0px 0px;
+}
+
+.ulstyle {
+	list-style-type: "-";
+}
+
+.linkcolor {
+	color: black;
+	text-decoration: none;
+}
+
+.listyle {
+	margin: 10px 5px;
+}
+
+#xmark {
+	display: block;
+}
+
+#xmark+label {
+	position: absolute;
+	bottom: 875px;
+	left: 208px;
+	top: 53px;
+	z-index: 2;
+	font-size: 24px;
+	cursor: pointer;
+}
+#xmark:checked + #iconemenu:checked+label+.sidebar{
+	left:0px;
+
 }
 
 /*450px 정도로 화면 줄어들면 로고 타이틀 없애기*/
@@ -188,7 +218,6 @@
 </style>
 <body>
 	<!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
-
 	<header class="header">
 		<div class="header__wrapper">
 			<!-- 로고 -->
@@ -210,56 +239,76 @@
 				</button>
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
-					<sec:authorize access="isAnonymous()">
-						<li><button class="dropdown-item" type="button">
-								<a href="/member/login">로그인</a>
-							</button></li>
-					</sec:authorize>
-					<sec:authorize access="isAnonymous()">
-						<li><button class="dropdown-item" type="button">회원가입</button></li>
-					</sec:authorize>
+					<li><button class="dropdown-item" type="button">
+							<a href="http://localhost:8084/mainAdd">로그인</a>
+						</button></li>
+					<li><button class="dropdown-item" type="button">회원가입</button></li>
 					<li><button class="dropdown-item" type="button">마이페이지</button></li>
 					<li><button class="dropdown-item" type="button">
 							<a href="http://localhost:8084/mainAdd">상품등록</a>
 						</button></li>
 				</ul>
 			</div>
-
-			<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i class="fa-solid fa-bars"></i></label>
-			<div class="sidebar">
-				<ul>
-					<li class="current-menu-item"><a href="http://localhost:8084/list">홈</a></li>
-					<li><a href="http://localhost:8084/category">카테고리</a>
-						<ul>
-							<li><a href="#">패션 의류</a></li>
-							<li><a href="#">수입 명품</a></li>
-							<li><a href="#">전자기기</a></li>
-							<li><a href="#">가구</a>
-							<li><a href="#">게임</a>
-								<ul>
-									<li><a href="http://localhost:8084/category">콘솔게임</a>
-										<ul>
-											<li><a href="#">Sub Deep 1</a></li>
-											<li><a href="#">Sub Deep 2</a></li>
-											<li><a href="#">Sub Deep 3</a></li>
-											<li><a href="#">Sub Deep 4</a></li>
-										</ul></li>
-									<li><a href="#">Deep Menu 2</a></li>
-								</ul></li>
-							<li><a href="#">Sub Menu 5</a></li>
-						</ul></li>
-					<li><a href="#">게시판</a>
-					<li><a href="#">조회</a>
-					<li><a href="#">공지사항</a></li>
-				</ul>
-			</div>
-			</input>
-
-
-
-			<a class="iconsearch" href="#">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</a>
+			
+				<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
+					class="fa-solid fa-bars"></i></label>
+				<div class="sidebar">
+					<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">navbar</h1>
+					<!--  -->
+					<input type="checkbox" id="xmark"> <label for="xmark"> <i
+						class="fa-solid fa-xmark"></i>
+					</label> </input>
+					<!--  -->
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									패션</button>
+							</h2>
+							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									게임</button>
+							</h2>
+							<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+								<div class="accordion-body">
+									<ul class="ulstyle">
+										<div>
+											<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+											<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									Accordion Item #3</button>
+							</h2>
+							<div id="collapseThree" class="accordion-collapse collapse"
+								data-bs-parent="#accordionExample">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</input>
+			
+			<a class="iconsearch" href="#"><i class="fa-solid fa-magnifying-glass"></i> </a>
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
@@ -290,34 +339,3 @@
 		</nav>
 	</header>
 </body>
-=======
- <body class="pt-5">
-    <!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
-    <header class="header">
-      <div class="header__wrapper">
-        <!-- 로고 -->
-        <div class="header__start">
-          <button class="header__menu">&#9776;</button>
-          <span class="header__title">NavBar</span>
-        </div>
-
-        <!-- 검색창 -->
-        <div class="header__center">
-          <form class="header__searchForm" onsubmit="return false;">
-            <input
-              class="header__input--text"
-              type="text"
-              
-            /><button class="header__input--btn">검색</button>
-          </form>
-        </div>
-
-        <!-- 프로필 -->
-        <div class="header__end">
-          <button class="header__search">&#128269;</button>
-          <div class="header__profile"></div>
-        </div>
-      </div>
-    </header>
-    </body>
-
