@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<my:navBar current="add" />
+	
 
 	<div class="container-lg">
 

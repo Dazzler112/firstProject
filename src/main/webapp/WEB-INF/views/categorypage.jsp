@@ -17,15 +17,14 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="/resources/menubar.css" rel="stylesheet">
-<link href="/resources/categorymenubar.css" rel="stylesheet">
+
 </head>
 <body>
 	<my:navBar></my:navBar>
-	<my:menubar></my:menubar>
+	
 
     <style>
-    
+  
     /* content css */
 .thumbs__wrapper {
   display: flex;
@@ -110,6 +109,13 @@
   }
 }
     
+    .nav__submenu {
+  display: none;
+}
+
+.nav__wrapper li:hover .nav__submenu {
+  display: block;
+}
     
    
     </style>
@@ -172,25 +178,43 @@
         
         <!--thumbs__item 12번 반복-->
       </div>
+      
+      
+      
+      
     </section>
       
     
-    <nav class="nav">
+ <nav class="nav">
   <ul class="nav__wrapper">
+    <h4>카테고리</h4>
     <li>
-      <button class="nav__icon">홈</button>
-      
+      <div class="nav__icon">게임</div>
+      <ul class="nav__submenu">
+        <li>게임 항목 1</li>
+        <li>게임 항목 2</li>
+        <li>게임 항목 3</li>
+      </ul>
     </li>
     <li>
-      <button class="nav__icon">음악</button>
-      
+      <div class="nav__icon">패션</div>
+      <ul class="nav__submenu">
+        <li>패션 항목 1</li>
+        <li>패션 항목 2</li>
+        <li>패션 항목 3</li>
+      </ul>
     </li>
     <li>
-      <button class="nav__icon">비디오</button>
-      
+      <div class="nav__icon">가구</div>
+      <ul class="nav__submenu">
+        <li>가구 항목 1</li>
+        <li>가구 항목 2</li>
+        <li>가구 항목 3</li>
+      </ul>
     </li>
   </ul>
-</nav> 
+</nav>
+
       
     </div>
 
@@ -203,5 +227,6 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
 		integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
 </body>
 </html>

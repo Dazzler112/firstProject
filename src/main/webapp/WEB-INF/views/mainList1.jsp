@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,26 +11,40 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="/resources/menubar.css" rel="stylesheet">
 </head>
-<body>
+<style>
+	.table{
+	
+	}
+</style>
+<my:navBar></my:navBar>
+<body style="margin:110px">
 	<div class="container-lg">
 		<h1>게시물 목록</h1>
+		<h4>게시글1</h4>
+		<h4>게시글1</h4>
+		<h4>게시글1</h4>
+		<h4>게시글1</h4>
 		<br>
-		<h2>공지사항</h2>
+		<h1>공지 목록</h1>
+
 		<table class="table">
 			<thead>
 				<tr>
+<!-- 					<th>#</th> -->
 					<th>제목</th>
-					<th>올린 시간</th>
-					<th>내용</th>
+					<th>작성자</th>
+					<th>작성일시</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${notices}" var="notice">
+				<c:forEach items="${noticeList }" var="notice">
 					<tr>
-						<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
-						<td>${notice.inserted}</td>
-						<td>${notice.content}</td>
+<%-- 						<td>${notice.id }</td> --%>
+						<td><a href="/notice/noticeId/${notice.id }"> ${notice.title }</a></td>
+						<td>${notice.writer }</td>
+						<td>${notice.inserted }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

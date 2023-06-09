@@ -4,6 +4,7 @@ import java.time.*;
 import java.util.*;
 import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
+import com.example.demo.service.*;
 
 @Mapper
 public interface ProductMapper {
@@ -36,4 +37,10 @@ public interface ProductMapper {
         """)
     
 	int updateProduct(Product product);
+
+    @Select("""
+    		SELECT * 
+    		FROM Notice
+    		""")
+	List<Notice> selectAllNotice();
 }

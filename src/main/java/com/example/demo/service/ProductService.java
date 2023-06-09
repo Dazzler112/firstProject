@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.controller.*;
-import com.example.demo.domain.Product;
+import com.example.demo.domain.*;
 import com.example.demo.mapper.ProductMapper;
 
 @Service
@@ -57,5 +57,10 @@ public class ProductService {
 	public boolean updateProduct(Product product) {
         return mapper.updateProduct(product) > 0;
     }
+
+	public List<Notice> listNotice1() {
+		return mapper.selectAllNotice();
+		
+	}
 	
 }
