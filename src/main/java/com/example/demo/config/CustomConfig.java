@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.s3.*;
 @EnableMethodSecurity
 
 public class CustomConfig {
-
+	
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
 	@Value("${aws.secretAccessKey}")
@@ -47,7 +47,8 @@ public class CustomConfig {
 		
 		http.formLogin().loginPage("/member/login")
 						.defaultSuccessUrl("/teamProject/list2", true);
-		http.logout().logoutUrl("/member/logout");
+		http.logout().logoutUrl("/member/logout")
+		  			 .logoutSuccessUrl("/teamProject/list1");
 		return http.build();
 		
 	}

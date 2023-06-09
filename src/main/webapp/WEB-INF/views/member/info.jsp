@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,16 +52,17 @@
 					<input class="form-control" type="text" value="${member.address }" readonly />
 				</div>
 
-<!-- 				<sec:authorize access="authentication.name eq #member.id"> -->
+				<sec:authorize access="isAuthenticated()">
+<%-- 				<sec:authorize access="authentication.name eq #member.id"> --%>
 					<a class="btn btn-secondary" href="/member/modify?id=${member.id }">수정</a>
 					<button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#confirmModal">탈퇴</button>
-<!-- 				</sec:authorize> -->
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
 
-<!-- 	<sec:authorize access="authentication.name eq #member.id"> -->
-
+	<sec:authorize access="isAuthenticated()">
+<%-- 	<sec:authorize access="authentication.name eq #member.id"> --%>
 		<!-- 탈퇴 확인 Modal -->
 		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -83,7 +85,7 @@
 				</div>
 			</div>
 		</div>
-<!-- 	</sec:authorize> -->
+	</sec:authorize>
 	
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

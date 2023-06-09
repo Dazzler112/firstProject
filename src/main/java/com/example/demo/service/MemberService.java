@@ -17,6 +17,9 @@ public class MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
+//	@Autowired
+//	private FreeBoardService freeBoardService;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -59,6 +62,11 @@ public class MemberService {
 		int cnt = 0;
 		if(passwordEncoder.matches(member.getPassword(), oldMember.getPassword())) {
 			// 암호가 같다면
+			
+			// 이 회원이 작성한 게시물 row 삭제
+//			freeBoardService.removeByWriter(member.getId());
+			
+			// 회원 테이블 삭제
 			
 			cnt = mapper.deleteById(member.getId());		
 		}

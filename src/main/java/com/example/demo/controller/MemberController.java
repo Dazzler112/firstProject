@@ -33,6 +33,7 @@ public class MemberController {
 	}
 
 	@PostMapping("signup")
+	@PreAuthorize("isAnonymous()")
 	public String signupProcess(Member member, RedirectAttributes rttr) {
 
 		try {
@@ -49,6 +50,7 @@ public class MemberController {
 
 //	운영자 권한이 있는 계정만 볼 수 있음
 	@GetMapping("list")
+	@PreAuthorize("isAuthenticated()")
 	public void userList(Model model) {
 		List<Member> userList = service.userList();
 		model.addAttribute("userList", userList);
@@ -82,6 +84,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
+	@PreAuthorize("isAuthenticated() and authentication.name eq #id")
 	public void getInfo(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
@@ -105,14 +108,15 @@ public class MemberController {
 	}
 		
 	@PostMapping("remove")
-	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) {
+	@PreAuthorize("isAuthenticated() and authentication.name eq #member.id")
+	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
 		if(ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
-			
-			// 로그아웃
-//			request.logout();
 
+			//로그아웃
+			request.logout();
+			
 			return "redirect:/member/signup";
 		}else {
 			rttr.addFlashAttribute("message", "회원 탈퇴 중 문제가 발생하였습니다.");
