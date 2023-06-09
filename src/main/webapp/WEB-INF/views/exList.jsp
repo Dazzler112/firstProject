@@ -17,7 +17,9 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th>현재 상태</th>
 					<th>제목</th>
+					<th>글쓴이</th>
 					<th>올린 시간</th>
 					<th>조회</th>
 					<th>찜</th>
@@ -27,7 +29,9 @@
 			<tbody>
 				<c:forEach items="${productList4}" var="product">
 					<tr>
+						<td>${product.status}</td>
 						<td>${product.title}</td>
+						<td><a href="${product.id }"> ${product.writer} </a></td>
 						<td>${product.inserted}</td>
 						<td>${product.views}</td>
 						<td>${product.likes}</td>

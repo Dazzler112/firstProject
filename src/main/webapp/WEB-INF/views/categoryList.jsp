@@ -39,6 +39,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th>현재 상태</th>
 				<th>이름</th>
 				<th>가격</th>
 				<th>지역</th>
@@ -48,6 +49,7 @@
 		<tbody>
 			<c:forEach items="${CategoryList}" var="product">
 				<tr>
+					<td>${product.status}</td>
 					<td>${product.title }</td>
 					<td>${product.price}</td>
 					<td>${product.address}</td>
