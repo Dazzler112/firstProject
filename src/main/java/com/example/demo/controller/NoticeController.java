@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -20,7 +21,7 @@ public class NoticeController {
 	NoticeService service;
 
 	@GetMapping("/noticeList")
-	public String list(Model model, 
+	public void list(Model model, 
 					   @RequestParam(value = "page", defaultValue = "1") Integer page,
 					   @RequestParam(value = "search", defaultValue = "") String search,
 					   @RequestParam(value = "type", required = false) String type) {
@@ -28,7 +29,7 @@ public class NoticeController {
 		Map<String, Object> result = service.listNotice(page, search, type); 
 		model.addAllAttributes(result);
 
-		return "noticeList";
+//		return "noticeList";
 	}
 	
 	@GetMapping("/noticeId/{id}")
@@ -39,18 +40,22 @@ public class NoticeController {
 
 		Notice notice = service.getNotice(id);
 		model.addAttribute("notice", notice);
-		return "getNotice";
+		return "notice/getNotice";
 	}
 	
 	@GetMapping("/addNotice")
-	public String noticeAddForm() {
+	@PreAuthorize("isAuthenticated()")
+	public void noticeAddForm() {
 		
-		return "addNotice";
+//		return "addNotice";
 	}
 	
 	@PostMapping("/addNotice")
-	public String addNoticeProcess(Notice notice) throws Exception {
+	@PreAuthorize("isAuthenticated()")
+	public String addNoticeProcess(Notice notice, Authentication authentication) throws Exception {
 
+		notice.setWriter(authentication.getName());
+		
 		boolean ok = service.addNotice(notice);
 		if (ok) {
 			return "redirect:/notice/noticeId/" + notice.getId();
@@ -61,6 +66,7 @@ public class NoticeController {
 	
 	
 	@PostMapping("removeNotice")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
 	public String noticeRemoceProcess(Integer id) {
 		
 		boolean ok = service.removeNotice(id);
@@ -73,13 +79,15 @@ public class NoticeController {
 	}
 	
 	@GetMapping("update/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
 	public String noticeUpdateFrom(@PathVariable ("id") Integer id, Model model) {
 		Notice notice = service.getNotice(id);
 		model.addAttribute("notice", notice);
-		return "updateNotice";
+		return "notice/updateNotice";
 	}
 	
 	@PostMapping("update/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #notice.id)")
 	public String noticeUpdateProcess(Notice notice) {
 	
 		boolean ok = service.update(notice);

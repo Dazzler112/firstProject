@@ -1,30 +1,32 @@
 package com.example.demo.security;
 
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 
-@Component
-public class CustomUserDetailService {
+import com.example.demo.domain.*;
+import com.example.demo.mapper.*;
 
-	/*
-	 * @Autowired private MemberMapper mapper;
-	 * 
-	 * @Override public UserDetails loadUserByUsername(String username) throws
-	 * UsernameNotFoundException {
-	 * 
-	 * Member member = mapper.selectById(username);
-	 * 
-	 * if(member == null) { throw new UsernameNotFoundException(username +
-	 * "회원이 없습니다."); }
-	 * 
-	 * // 1-1 = 1-2를 풀어 쓴것 List<SimpleGrantedAuthority> authorityList = new
-	 * ArrayList<>();
-	 * 
-	 * for (String auth : member.getAuthority()) { authorityList.add(new
-	 * SimpleGrantedAuthority(auth)); }
-	 * 
-	 * UserDetails user = User.builder() .username(member.getId())
-	 * .password(member.getPassword()) .authorities(authorityList) .build();
-	 * 
-	 * return user; }
-	 */
+@Component
+public class CustomUserDetailService implements UserDetailsService {
+
+	@Autowired
+	private MemberMapper mapper;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Member member = mapper.selectById(username);
+
+		if (member == null) {
+			throw new UsernameNotFoundException(username + " 회원이 없습니다.");
+		}
+
+		UserDetails user = User.builder().username(member.getId()).password(member.getPassword()).authorities(List.of())
+				.build();
+
+		return user;
+	}
+
 }
