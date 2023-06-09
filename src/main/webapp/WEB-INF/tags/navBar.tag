@@ -216,14 +216,14 @@
 	}
 }
 </style>
-<body>
+<body style="margin-top : 100px;">
 	<!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
 	<header class="header">
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
 				<!-- <button class="header__menu">&#9776;</button> -->
-				<span class="header__title">NavBar</span>
+				<span class="header__title"><a href="/teamProject/list1">HOME</a></span>
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
@@ -240,12 +240,17 @@
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/mainAdd">로그인</a>
+							<a href="http://localhost:8084/member/login">로그인</a>
 						</button></li>
-					<li><button class="dropdown-item" type="button">회원가입</button></li>
-					<li><button class="dropdown-item" type="button">마이페이지</button></li>
+					<li><button class="dropdown-item" type="button">
+							<a href="http://localhost:8084/member/signup">회원가입</a></button></li>
+					<li><button class="dropdown-item" type="button">
+							<a href="http://localhost:8084/member/info">마이페이지</a></button></li>
 					<li><button class="dropdown-item" type="button">
 							<a href="http://localhost:8084/mainAdd">상품등록</a>
+						</button></li>
+					<li><button class="dropdown-item" type="button">
+							<a href="http://localhost:8084/member/logout">로그아웃</a>
 						</button></li>
 				</ul>
 			</div>
@@ -333,8 +338,13 @@
 						<li><a href="#">Sub Menu 5</a></li>
 					</ul></li>
 				<li><a href="#">게시판</a>
+					<ul>
+						<li><a href="/freeboard/freelist">자유게시판</a></li>
+						<li></li>
+						<li></li>
+					</ul>
 				<li><a href="#">조회</a>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="/notice/noticeList">공지사항</a></li>
 			</ul>
 		</nav>
 	</header>

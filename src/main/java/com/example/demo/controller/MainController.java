@@ -23,26 +23,19 @@ public class MainController {
     
 //    @Autowired
 //    private NoticeService noticeService;
-    
-    @GetMapping("noticeListInMain")
-    public String noticeList(Model model) {
-    	
-    	List<Notice> result = service.listNotice1();
-    	model.addAttribute("noticeList", result);
-    	return "mainList1";
-    }
-    
+ 
     @GetMapping("list1")
     public String list1(Model model,
             @RequestParam(value = "title", defaultValue = "") String title,
             @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
-            @RequestParam(value = "content", defaultValue = "") String content,
+            @RequestParam(value = "body", defaultValue = "") String body,
+            @RequestParam(value = "writer", defaultValue = "") String writer,
             @RequestParam(value = "price", defaultValue = "") Integer price,
             @RequestParam(value = "address", defaultValue = "") String address,
             @RequestParam(value = "likes", defaultValue = "") Integer likes
     ) {
 
-        List<Product> noticeList = service.listBoard1(title, inserted, content);
+        List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
         List<Product> productList1 = service.listBoard2(price, title, inserted, address);
         List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
         
@@ -58,13 +51,14 @@ public class MainController {
     public String list2(Model model,
             @RequestParam(value = "title", defaultValue = "") String title,
             @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
-            @RequestParam(value = "content", defaultValue = "") String content,
+            @RequestParam(value = "body", defaultValue = "") String body,
+            @RequestParam(value = "writer", defaultValue = "") String writer,
             @RequestParam(value = "price", defaultValue = "") Integer price,
             @RequestParam(value = "address", defaultValue = "") String address,
             @RequestParam(value = "likes", defaultValue = "") Integer likes
     ) {
 
-        List<Product> noticeList = service.listBoard1(title, inserted, content);
+        List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
         List<Product> productList3 = service.listBoard4(price, title, inserted, address, likes);
         List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
         
