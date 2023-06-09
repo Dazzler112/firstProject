@@ -26,10 +26,7 @@ public class BoardController {
 	public String QuickMenu(Model model) {
 		return null;
 	}
-	@GetMapping("mainList1")
-	public String mainlist1(Model model) {
-		return null;
-	}
+	
 	
 	@GetMapping("categorypage")
 	public String CategoryMenu(Model model) {
