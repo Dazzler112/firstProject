@@ -66,7 +66,7 @@
 </style>
 </head>
 <body>
-	<my:search></my:search>
+	
 	<div class="container-lg">
 	<a href="/freeboard/freelist">홈</a>
 	</div>

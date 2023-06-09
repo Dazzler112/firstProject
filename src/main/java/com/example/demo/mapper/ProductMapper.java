@@ -10,7 +10,7 @@ import com.example.demo.domain.*;
 @Mapper
 public interface ProductMapper {
 
-    List<Product> selectAll1(String title, LocalDateTime inserted, String content);
+    
 
     List<Product> selectAll2(Integer price, String title, LocalDateTime inserted, String address);
 
@@ -86,4 +86,10 @@ public interface ProductMapper {
 	List<Product> getCountReply(Integer id);
 
 	Product getProcess(Integer id, Authentication authentication);
+
+	@Select("""
+			SELECT * FROM
+			Notice
+			""")
+	List<Notice> selectAll1(String title, LocalDateTime inserted, String body, String writer);
 }

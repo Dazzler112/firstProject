@@ -30,8 +30,8 @@ public class ProductService {
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
-	public List<Product> listBoard1(String title, LocalDateTime inserted, String content) {
-		return mapper.selectAll1(title, inserted, content);
+	public List<Notice> listBoard1(String title, LocalDateTime inserted, String body, String writer) {
+		return mapper.selectAll1(title, inserted, body, writer);
 	}
 
 	public List<Product> listBoard2(Integer price, String title, LocalDateTime inserted, String address) {

@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-<my:search></my:search>
+
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
