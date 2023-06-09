@@ -13,12 +13,28 @@
 </head>
 <body>
 
+			<my:search></my:search>
 <div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
 				<h1>${board.id }번 게시글 수정</h1>
-				<form method="post" enctype="multipart/form-data">
+				<form action="" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${board.id }" />
+				
+				<div id="category_div-div">
+					<span class="category_title">카테고리</span><select name="boardCategory">
+					<option value="동네질문"> 동네질문
+					<option value="동네사건사고"> 동네사건사고
+					<option value="동네맛집"> 동네맛집
+					<option value="동네소식"> 동네소식
+					<option value="생활정보"> 생활정보
+					<option value="취미생활"> 취미생활
+					<option value="일상"> 일상
+					<option value="분실"> 분실
+					<option value="해주세요"> 해주세요
+					</select>
+					</div>
+				
 					<div class="mb-3">
 						<label for="update-title" class="form-label"></label>제목 
 						<input id="update-title" type="text" class="form-control" name="title" value="${board.title}" />

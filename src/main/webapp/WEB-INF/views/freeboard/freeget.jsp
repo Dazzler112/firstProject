@@ -66,6 +66,7 @@
 </style>
 </head>
 <body>
+	<my:search></my:search>
 	<div class="container-lg">
 	<a href="/freeboard/freelist">홈</a>
 	</div>
@@ -76,10 +77,9 @@
 					<span id="boardIdText">${getBoard.id }</span>
 				</div>
 				<div style="display: flex; justify-content: space-between; align-items: center;">
-					<div>
-						<select style="margin: 20px 0px;">
-							<option>
-						</select>
+					<div class="mb-3" style="display: flex; align-items: center;">
+						<label for="category-text" class="form-label"></label>카테고리
+						<input id="category-text" type="text"  class="form-control" name="boardCategory" value="${getBoard.boardCategory}" style="width: 330px; margin: 0px 0px px 5px; text-align:center; " readonly/>
 					</div>
 
 					<div>
@@ -95,10 +95,14 @@
 
 				</div>
 				<div class="mb-3" style="display: flex; justify-content: space-between;">
-					<label for="get-writer" class="form-label"></label>작성자 <input id="get-writer" type="text" class="form-control" name="writer" value="${getBoard.writer}" readonly /> <label for="get-inserted" class="form-label"></label>작성일 <input id="get-inserted" type="text" class="form-control" name="inserted" value="${getBoard.inserted}" readonly />
+					<label for="get-writer" class="form-label"></label>작성자 
+					<input id="get-writer" type="text" class="form-control" name="writer" value="${getBoard.writer}" readonly /> 
+					<label for="get-inserted" class="form-label"></label>작성일 
+					<input id="get-inserted" type="text" class="form-control" name="inserted" value="${getBoard.inserted}" readonly />
 				</div>
 				<div class="mb-3">
-					<label for="get-title" class="form-label"></label>제목 <input id="get-title" type="text" class="form-control" name="title" value="${getBoard.title}" readonly />
+					<label for="get-title" class="form-label"></label>제목 
+					<input id="get-title" type="text" class="form-control" name="title" value="${getBoard.title}" readonly />
 				</div>
 
 				<!-- 파일 출력 -->
@@ -163,7 +167,7 @@
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="/js/board/like.js"></script>
-	<script src="/js/board/comment.js"></script>
+	<script src="/js/freeboard/like.js"></script>
+	<script src="/js/freeboard/comment.js"></script>
 </body>
 </html>
