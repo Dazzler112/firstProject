@@ -26,6 +26,7 @@ public interface MemberMapper {
 			FROM Member
 			WHERE id = #{id}
 			""")
+	
 	Member selectById(String id);
 
 	@Select("""
