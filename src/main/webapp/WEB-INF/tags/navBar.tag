@@ -117,7 +117,7 @@
 
 
 
- <body>
+ <body class="pt-5">
     <!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
     <header class="header">
       <div class="header__wrapper">
