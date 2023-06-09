@@ -14,44 +14,19 @@
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12">
-				<h1>회원 목록</h1>			
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>PASSWORD</th>
-							<th>별명</th>
-							<th>이메일</th>
-							<th>이름</th>
-							<th>성별</th>
-							<th>핸드폰 번호</th>
-							<th>주소</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${userList }" var="user">
-							<tr>
-
-								<td>
-									<c:url value="/member/info" var="memberInfoLink">
-										<c:param name="id" value="${user.id }"></c:param>
-									</c:url>
-									<a href="${memberInfoLink }">
-										${user.id }
-									</a>
-								</td>
-								<td>${user.password }</td>
-								<td>${user.nickName }</td>
-								<td>${user.email }</td>
-								<td>${user.name }</td>
-								<td>${user.gender }</td>
-								<td>${user.phoneNum }</td>
-								<td>${user.address }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+			<div class="col-12 col-md-8 col-lg-6">
+			<h2>로그인</h2>
+				<form method="post">
+				<div class="mb-3">
+					<label for="inputUsername" class="form-label">아이디</label>
+					<input id="inputUsername" type="text" name="username" /> <br /> 
+				</div>
+				<div class="mb-3">
+					<label for="inputPassword" class="form-label">암호</label>
+					<input id="inputPassword" type="password" name="password" /> <br /> 
+				</div>
+					<input class="btn btn-primary" type="submit" value="로그인" />
+				</form>
 			</div>
 		</div>
 	</div>

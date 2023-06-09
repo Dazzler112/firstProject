@@ -13,6 +13,10 @@
 </head>
 <body>
 
+	<my:navBar></my:navBar>
+	
+	<my:alert></my:alert>
+
 	<div class="container-lg">
 		<h1>광고게시판</h1>
 		<a class="btn btn-secondary" href="/adBoard/add">글쓰기</a>

@@ -54,7 +54,7 @@ public class FreeBoardService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addProcess(FreeBoard board, MultipartFile[] files) throws Exception{
+	public boolean addProcess(FreeBoard board, MultipartFile[] files, String category) throws Exception{
 		int cnt = mapper.insertForm(board);
 		System.out.println(files.length);
 		for(MultipartFile file : files) {
@@ -167,5 +167,12 @@ public class FreeBoardService {
 	public List<FreeBoard> getCountReply(Integer id) {
 		List<FreeBoard> list = mapper.replyCounting(id);
 		return list;
+	}
+
+	public Map<String, Object> getCountList(String boardCategory, String search, String type) {
+		Integer allRecords = mapper.countRecord(search,type); 
+		
+		List<FreeBoard> list = mapper.selectPaging(boardCategory,search,type);
+		return Map.of("boardList",list);
 	}
 }

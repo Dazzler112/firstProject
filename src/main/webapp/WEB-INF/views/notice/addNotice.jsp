@@ -18,10 +18,10 @@
 			<input id="titleInput" type="form-control" name="title" value="${notice.title }" />
 		</div>
 
-		<div class="mb-3">
-			<label for="writerInput" class="form-label">작성자 : </label> 
-			<input id="writerInput" type="form-control" name="writer" value="${notice.writer }" />
-		</div>
+<!-- 		<div class="mb-3"> -->
+<!-- 			<label for="writerInput" class="form-label">작성자 : </label>  -->
+<%-- 			<input id="writerInput" type="form-control" name="writer" value="${notice.writer }" /> --%>
+<!-- 		</div> -->
 
 		<div class="mb-3">
 			<label for="bodyInput" class="from-label">본문</label> <br />

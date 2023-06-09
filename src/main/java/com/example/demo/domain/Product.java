@@ -13,4 +13,6 @@ public class Product {
     private String address;
     private Integer likes;
     private String content;
+    private String status;
+    private String writer;
 }
