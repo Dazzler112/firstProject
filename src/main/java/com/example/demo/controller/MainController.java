@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
@@ -68,4 +70,40 @@ public class MainController {
     	return "get";
     }
     
+    @PostMapping("remove")
+    public String removeForm(Integer id, RedirectAttributes rttr) {
+    	boolean ok = service.removeProcess(id);
+    	
+    	if(ok) {
+    		rttr.addFlashAttribute("message", id +"번 게시물이 삭제되었습니다.");
+    		return "redirect:/product/productlist";
+    	} else {
+    		System.out.println("실패함");
+    		rttr.addFlashAttribute("message", "게시물 삭제에 실패하였습니다.");
+    		return "redirect:/product/id" + id;
+    	}
+    }
+    
+    @GetMapping("/productUpdate/{id}")
+    public String updateView(@PathVariable("id")Integer id, Model model) {
+    	
+    	model.addAttribute("product", service.getProduct(id));
+    	return "product/productUpdate";
+    }
+    
+    @PostMapping("ProductUpdate/{id}")
+    public String update(Product product,
+    		@RequestParam(value ="removeFiles", required = false) List<String> removeProductPhoto,
+    		@RequestParam(value = "listFiles", required = false) MultipartFile[] addFile,
+    		RedirectAttributes rttr) throws Exception {
+    	boolean ok = service.updateProcess(product, removeProductPhoto, addFile);
+    	
+    	if(ok) {
+    		rttr.addFlashAttribute("message", product.getId() + "번 게시물이 수정되었습니다.");
+    		return "redirect:/product/id/" + product.getId();
+    	} else {
+    		rttr.addFlashAttribute("message", product.getId() + "게시물이 수정에 실패하였습니다.");
+    		return "redirect:/product/id/" + product.getId();
+    	}
+    }
 }
