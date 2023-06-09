@@ -16,6 +16,20 @@
 			<div class="col-12 col-md-8 col-lg-6">
 				<h1>광고게시물 작성</h1>
 				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
+
+				<form>
+					<select id="category">
+						<option value="">동네질문</option>
+						<option value="">동네사건사고</option>
+						<option value="">동네맛집</option>
+						<option value="">동네소식</option>
+						<option value="">생활정보</option>
+						<option value="">취미생활</option>
+						<option value="">일상</option>
+						<option value="">분실</option>
+						<option value="">해주세요</option>
+					</select>
+				</form>
 				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
@@ -35,7 +49,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="fileInput" class="form-label">그림 파일</label>
-						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>						
+						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 					</div>
 
 					<div class="mb-3">
