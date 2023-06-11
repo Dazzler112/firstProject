@@ -28,7 +28,7 @@ public class MemberController {
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
 	public void signUpForm() {
-//		mailService.sendMail();
+		mailService.sendMail();
 
 	}
 
