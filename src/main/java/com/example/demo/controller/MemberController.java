@@ -84,14 +84,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void getInfo(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
 	}
 	
 	@GetMapping("modify")
-	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void modifyForm(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);
