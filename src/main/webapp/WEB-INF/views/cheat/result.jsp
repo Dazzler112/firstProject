@@ -21,6 +21,14 @@
 .button-group a {
 	margin-left: 10px;
 }
+
+
+  .modal-content {
+    background-color: #FFFFFF; /* 원하는 배경색으로 변경 */
+    border-color: #73FBFD; /* 원하는 테두리 색으로 변경 */
+  }
+</style>
+
 </style>
 </head>
 <body>
@@ -58,25 +66,25 @@
 		<div class="button-group">
 			<a href="./check" class="btn btn-info">다시 조회하기</a>
 			<!-- <a href="./" class="btn btn-danger">신고하기</a> -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">신고하기</button>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="modal">신고하기</button>
 
-			<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">신고 신청 안내</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<p>신고 신청은 jhzzang97@gmail.com으로 접수 부탁드립니다.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 			
 		</div>				
 	</div>

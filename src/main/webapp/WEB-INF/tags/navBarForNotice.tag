@@ -153,7 +153,7 @@
 						<li></li>
 						<li></li>
 					</ul>
-				<li><a href="#">조회</a>
+				<li><a href="/cheat/check">조회</a>
 				<li><a href="/notice/noticeList">공지사항</a></li>
 			</ul>
 		</nav>

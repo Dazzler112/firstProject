@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,27 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+	.col-sm-10 {
+		margin-top: 100px;
+		margin-bottom: 100px;
+	}
+	.input-group{
+		margin: 50px;
+	}
+</style>
+
 <body>
 
+	<my:navBar></my:navBar>
 
 	<div class="container">
 		<div class="d-flex justify-content-center">
-			<div class="col-sm-8">
+			<div class="col-sm-10">
 				<h3>사기 조회</h3>
 				<hr />
+				
+				<h5>판매자의 핸드폰 번호, 계좌번호, 닉네임, 이메일로 피해 사례 조회를 이용해 보세요!</h5>
 
 				<!-- 				권한이 있는 사람만 볼 수 있는 리스트 : 운영자 아이디에 권한 부여 후 다시 생성 -->
 				<!-- 				<form action="/cheat/list" class="d-flex" role="search"> -->
@@ -49,6 +63,7 @@
 						</button>
 					</div>
 				</form>
+				<hr />
 			</div>
 		</div>
 		<div class="d-flex justify-content-center mt-3">

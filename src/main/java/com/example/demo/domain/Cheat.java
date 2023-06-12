@@ -8,6 +8,6 @@ public class Cheat {
 	private Integer checkId;
 	private Integer phoneNum;
 	private String account;
-	private String userId;
+	private String nickName;
 	private String email;
 }
