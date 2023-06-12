@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,26 +124,32 @@
 					<label for="get-region" class="form-label"></label>지역 <input id="get-region" type="text" class="form-control" name="region" value="${getBoard.region}" readonly />
 				</div>
 
-
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="name" var="userId"/>
+					<c:if test="${userId eq getBoard.writer }">
 				<div class="mb-3">
 					<a class="btn btn-secondary" href="/freeboard/freeupdate/${getBoard.id}">수정</a>
 					<button class="btn btn-danger" form="removeForm" type="submit">삭제</button>
 				</div>
+				</c:if>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
 
 	<hr />
 	<div class="form-control"  id="commentContainer">
+	<sec:authorize access="isAuthenticated()">
 		<div id="addCommentContainer" style="display: flex; justify-content: center;align-items: center;">
 			<textarea rows="" id="commentTextArea" class="comment_input"></textarea>
 			<button id="sendCommentBtn" class="comment-commit">올리기</button>
 		</div>
 		<div id="updateCommentContainer">
 			<input type="hidden" id="commentUpdateIdInput"/>
-			<textarea id="commentUpdateTextArea" class="update_comment-text"></textarea>
+			<textarea id="commentUpdateTextArea" class="update_comment-text" placeholder="내용을 입력해주세요"></textarea>
 			<button id="updateCommentBtn" class="update-commit">수정</button>
 		</div>
+		</sec:authorize>
 		<hr />
 			<c:if test="${commentCnt.get(0).commentCount > 0}">
 			<div class="comment_container-div">
@@ -155,16 +162,24 @@
     		 </span>
     		 </div>
 			</c:if>
-		<div id="commentListContainer" class="comment-line">
+		<ul id="commentListContainer" class="comment-line">
 			<div id="comment_reply">댓글1</div>
-		</div>
+		</ul>
 	</div>
+
+<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="name" var="userId" />
+		<c:if test="${userId eq getBoard.writer }">
 
 	<div style="display: none; ">
 		<form action="/freeboard/remove" method="post" id="removeForm">
 			<input id="inputId" type="text" name="id" value="${getBoard.id }" />
 		</form>
 	</div>
+	
+	</c:if>
+	</sec:authorize>
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/freeboard/like.js"></script>

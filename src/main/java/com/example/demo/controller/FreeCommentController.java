@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,36 +21,47 @@ public class FreeCommentController {
 	
 	@GetMapping("list")
 	@ResponseBody
-	public List<FreeComment> list(@RequestParam("board") Integer boardId) {
+	public List<FreeComment> list(@RequestParam("board") Integer boardId,Authentication authentication) {
 		
 		
-		return service.list(boardId);
+		return service.list(boardId,authentication);
 	}
 	
 	@PostMapping("add")
-	@ResponseBody
-	public String add(@RequestBody FreeComment comment) {
+	public ResponseEntity<Map<String,Object>> add(@RequestBody FreeComment comment,
+					  							  Authentication authentication) {
 		
-		service.add(comment);
+		if(authentication == null) {
+			Map<String, Object> list = Map.of("message","로그인 후 댓글을 달아주세요.");
+			return ResponseEntity.status(401).body(list);
+		}else {
+			Map<String, Object> list = service.add(comment,authentication);
+			return ResponseEntity.ok().body(list);
+		}
 		
-		return "ok";
 	}
 	
 	@PostMapping("addReply")
 	@ResponseBody
-	public String addReply(@RequestBody FreeComment comment) {
+	public ResponseEntity<Map<String, Object>> addReply(@RequestBody FreeComment comment,Authentication authentication) {
 		
-		service.addReply(comment);
 		
-		return "ok";
+		if(authentication == null) {
+			Map<String, Object> list = Map.of("message","로그인 후 댓글을 달아주세요.");
+			return ResponseEntity.status(401).body(list);
+		}else {
+			Map<String, Object> list = service.addReply(comment,authentication);
+			return ResponseEntity.ok().body(list);
+		}
 	}
 	
 	@DeleteMapping("id/{id}")
 	@ResponseBody
-	public String remove(@PathVariable("id")Integer id) {
-		service.remove(id);
+	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #id)")
+	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id")Integer id) {
+		Map<String, Object> list =  service.remove(id);
 		
-		return "ok";
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping("id/{id}")
@@ -58,10 +72,11 @@ public class FreeCommentController {
 	
 	@PutMapping("update")
 	@ResponseBody
-	public String update(@RequestBody FreeComment comment) {
-		service.update(comment);
+	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #comment.id)")
+	public ResponseEntity<Map<String, Object>> update(@RequestBody FreeComment comment) {
+		Map<String, Object> list = service.update(comment);
 		
-		return "ok";
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping("updateShape")

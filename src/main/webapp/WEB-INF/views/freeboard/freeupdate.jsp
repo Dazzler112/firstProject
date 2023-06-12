@@ -55,10 +55,6 @@
 						<textarea rows="10" id="update-body" class="form-control" name="body" >${board.body }</textarea>
 					</div>
 					<div class="mb-3">
-						<label for="update-writer" class="form-label"></label>작성자
-						 <input id="update-writer" type="text" class="form-control" name="writer" value="${board.writer}"  />
-					</div>
-					<div class="mb-3">
 						<label for="update-region" class="form-label"></label>지역 
 						<input id="update-region" type="text" class="form-control" name="region" value="${board.region}"  />
 					</div>

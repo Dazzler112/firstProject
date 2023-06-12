@@ -128,6 +128,7 @@
 			</div>
 		</div>
 	</div>
+		<my:search></my:search>
 	</form>
 	<div class="div_writer">
 		<a href="/freeboard/freeadd" class="btn btn-primary">글쓰기</a>

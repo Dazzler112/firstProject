@@ -14,4 +14,6 @@ public class FreeComment {
 	private LocalDateTime inserted;
 	private Integer depth;
 	private Integer parentId;
+	
+	private Boolean editable;
 }

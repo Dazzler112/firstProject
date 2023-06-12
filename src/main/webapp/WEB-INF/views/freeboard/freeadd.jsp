@@ -47,10 +47,6 @@
 					<textarea rows="10" id="add-body" class="form-control" name="body" >${getBoard.body }</textarea>
 					</div>
 					<div class="mb-3">
-					<label for="add-writer" class="form-label"></label>작성자
-					<input id="add-writer" type="text"  class="form-control" name="writer" value="${getBoard.writer}" />
-					</div>
-					<div class="mb-3">
 					<label for="add-region" class="form-label"></label>지역
 					<input id="add-region" type="text"  class="form-control" name="region" value="${getBoard.region}" />
 					</div>
