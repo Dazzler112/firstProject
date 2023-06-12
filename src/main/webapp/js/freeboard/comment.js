@@ -33,7 +33,6 @@ $.ajax("/comment/list?board=" + boardId, {
 		$("#commentListContainer").empty();
 		for(const comment of comments){
 			$("#commentListContainer").append(`
-					
 					<div style="margin:5px 0px; padding:3px 7px;">
 						${comment.memberId}
 						: ${comment.content}

@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -50,6 +51,7 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("freeadd")
+	@PreAuthorize("isAuthenticated()")
 	public void getAddView() {
 		// TODO Auto-generated method stub
 	}
@@ -59,8 +61,10 @@ public class FreeBoardController {
 						  @RequestParam("boardCategory") String category
 						,FreeBoard board 
 						,RedirectAttributes rttr
-						,Model model) 
+						,Model model,
+						Authentication authentication) 
 								throws Exception{
+		board.setWriter(authentication.getName());
 		boolean ok = service.addProcess(board,files,category);
 		
 		model.addAttribute("category",category);
@@ -74,6 +78,7 @@ public class FreeBoardController {
 	}
 	
 	@PostMapping("remove")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkBoardWriter(authentication,#id)")
 	public String removeForm(Integer id ,RedirectAttributes rttr) {
 		boolean ok = service.removeProcess(id);
 		
@@ -88,6 +93,7 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("/freeupdate/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkBoardWriter(authentication, #id)")
 	public String updateView(@PathVariable("id")Integer id,Model model) {
 		
 		model.addAttribute("board",service.getBoard(id));
@@ -95,6 +101,7 @@ public class FreeBoardController {
 	}
 	
 	@PostMapping("freeupdate/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkBoardWriter(authentication,#board.id)")
 	public String update(FreeBoard board,
 			@RequestParam(value="removeFiles", required = false) List<String> removePhotoNames,
 			@RequestParam(value = "listFiles" ,required = false) MultipartFile[] addFile,

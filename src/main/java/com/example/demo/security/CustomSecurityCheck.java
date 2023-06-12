@@ -27,6 +27,12 @@ public class CustomSecurityCheck {
 		
 		return username.equals(writer);
 	}
+	public boolean checkCommentWriter(Authentication authentication,
+								      Integer commentId) {
+		FreeComment comment = commentMapper.selectById(commentId);
+		
+		return comment.getMemberId().equals(authentication.getName());
+	}
 
 	public boolean checkNoticeWriter(Authentication authentication, Integer id) {
 		Notice notice = noticeMapper.selectById(id);
