@@ -48,8 +48,8 @@ public interface AdBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO AdBoard (title, body, writer, region)
-			VALUES ( #{title}, #{body}, #{writer}, #{region} )
+			INSERT INTO AdBoard (title, body, writer, region, category)
+			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(AdBoard board);
@@ -109,6 +109,7 @@ public interface AdBoardMapper {
 				b.title,
 				b.writer,
 				b.inserted,
+				b.category,
 				COUNT(f.id) fileCount,
 			    (SELECT COUNT(*) 
 			     FROM BoardLike 

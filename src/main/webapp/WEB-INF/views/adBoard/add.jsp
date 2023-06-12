@@ -17,20 +17,19 @@
 				<h1>광고게시물 작성</h1>
 				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
 
-				<form>
-					<select id="category">
-						<option value="">동네질문</option>
-						<option value="">동네사건사고</option>
-						<option value="">동네맛집</option>
-						<option value="">동네소식</option>
-						<option value="">생활정보</option>
-						<option value="">취미생활</option>
-						<option value="">일상</option>
-						<option value="">분실</option>
-						<option value="">해주세요</option>
-					</select>
-				</form>
 				<form method="post" enctype="multipart/form-data">
+					<select name="category">
+						<option value="동네질문">동네질문</option>
+						<option value="동네사건사고">동네사건사고</option>
+						<option value="동네맛집">동네맛집</option>
+						<option value="동네소식">동네소식</option>
+						<option value="생활정보">생활정보</option>
+						<option value="취미생활">취미생활</option>
+						<option value="일상">일상</option>
+						<option value="분실">분실</option>
+						<option value="해주세요">해주세요</option>
+					</select>
+				
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
 						<input id="titleInput" class="form-control" type="text" name="title" value="${board.title }" />
