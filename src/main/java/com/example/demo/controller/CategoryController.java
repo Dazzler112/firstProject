@@ -18,8 +18,8 @@ public class CategoryController {
     @Autowired
     private ProductService service;
 
-    @GetMapping("list4")
-    public String list4(Model model,
+    @GetMapping("list3")
+    public String list3(Model model,
             @RequestParam(value = "title", defaultValue = "") String title,
             @RequestParam(value = "price", defaultValue = "") Integer price,
             @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
@@ -35,8 +35,8 @@ public class CategoryController {
         return "categoryList";
     }
     
-    @GetMapping("list5")
-    public String list5(Model model,
+    @GetMapping("list4")
+    public String list4(Model model,
             @RequestParam(value = "title", defaultValue = "") String title,
             @RequestParam(value = "price", defaultValue = "") Integer price,
             @RequestParam(value = "address", defaultValue = "") String address,
@@ -51,7 +51,22 @@ public class CategoryController {
         
         return "categoryList";
     }
+    
+    @GetMapping("list5")
+    public String list5(Model model,
+            @RequestParam(value = "title", defaultValue = "") String title,
+            @RequestParam(value = "price", defaultValue = "") Integer price,
+            @RequestParam(value = "address", defaultValue = "") String address,
+            @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted
+    ) {
+        List<Product> CategoryList = service.listBoard7(title, price, address, inserted);
+        
+        model.addAttribute("CategoryList", CategoryList);
+        
+        return "categoryList";
+    }
 
+    @GetMapping("list6")
     private String getCategoryTitle(String category) {
         String title = "";
         if (category.equals("fashion")) {
@@ -66,22 +81,6 @@ public class CategoryController {
             title = "전자기기";
         }
 
-        return title;
-    }
-    
-    @GetMapping("list6")
-    public String list6(Model model,
-            @RequestParam(value = "title", defaultValue = "") String title,
-            @RequestParam(value = "price", defaultValue = "") Integer price,
-            @RequestParam(value = "address", defaultValue = "") String address,
-            @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted
-    ) {
-
-        List<Product> CategoryList = service.listBoard7(title, price, address, inserted);
-        
-        model.addAttribute("CategoryList", CategoryList);
-        
         return "categoryList";
     }
-
 }

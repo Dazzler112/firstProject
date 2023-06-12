@@ -59,7 +59,7 @@
 					<tr>
 						<td>${product.price}</td>
 						<td>
-							<a href="/board/id/${product.id }"> ${product.title} </a>
+							<a href="/exList/id/${product.id }"> ${product.title} </a>
 						</td>
 						<td>${product.inserted}</td>
 						<td>${product.address}</td>

@@ -10,8 +10,6 @@ import com.example.demo.domain.*;
 @Mapper
 public interface ProductMapper {
 
-    
-
     List<Product> selectAll2(Integer price, String title, LocalDateTime inserted, String address);
 
     List<Product> selectAll3(Integer price, String title, LocalDateTime inserted, String address, Integer likes);
