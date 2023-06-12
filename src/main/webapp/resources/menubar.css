@@ -6,6 +6,8 @@
 	display: inline-block();
   justify-content: center;
   align-items: center;
+  z-index: -1;
+  
 }
 
 #primary_nav_wrap ul
@@ -14,7 +16,8 @@
 	position:relative;
 	float:left;
 	margin:0;
-	padding:0
+	padding:0;
+	z-index: -1;
 }
 
 #primary_nav_wrap ul a
