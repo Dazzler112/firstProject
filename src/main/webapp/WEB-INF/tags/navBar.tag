@@ -4,217 +4,10 @@
 <head>
 <link href="/resources/categorymenubar.css" rel="stylesheet">
 <link href="/resources/menubar.css" rel="stylesheet">
+<link href="/resources/navbar.css" rel="stylesheet">
 <script type="text/javascript" src="링크주소"></script>
 <style>
-.header {
-	/*헤더 고정*/
-	position: fixed;
-	top: 10px;
-	left: 20px;
-	right: 20px;
-	margin-bottom: 30px;
-	width: 90%;
-	background-color: #fff;
-	z-index: 2;
-}
 
-.header__wrapper {
-	/*고정된 높이*/
-	height: 60px;
-	/*좌우정렬 flex*/
-	display: flex;
-	flex-direction: row;
-	/*세로축 모든 아이템 센터 정렬*/
-	align-items: center;
-	/*가로축 아이템 정렬: 양 끝으로 펼치기*/
-	justify-content: space-between;
-	padding: 0 16px;
-}
-
-.header__start {
-	display: flex;
-	align-items: center;
-}
-
-.header__menu {
-	border: none;
-	background-color: transparent;
-	font-size: 1.5rem;
-}
-
-.header__logo {
-	margin-left: 20px;
-	width: 25px;
-	height: 25px;
-}
-
-.header__title {
-	font-size: 3rem;
-	margin-left: 6px;
-	margin-right: 30px;
-}
-
-.header__center {
-	/*검색창 너비가 헤더 너비의 50%로 따라가도록 작성*/
-	width: 50%;
-}
-
-.header__searchForm {
-	max-width: 100%;
-}
-
-.header__input--text {
-	/*버튼 크기 제외한 나머지 전체 너비 차지하도록*/
-	width: calc(90% - 60px);
-	/*예쁘게 꾸미기*/
-	height: 40px;
-	padding: 0 6px;
-	border: 1px solid #8f8f8f;
-	border-radius: 2px 0 0 2px;
-}
-
-.header__input--btn {
-	width: 60px;
-	height: 40px;
-	border: 1px solid #8f8f8f;
-	border-radius: 0 0px 0px 0;
-}
-
-.header__search {
-	border: none;
-	background-color: transparent;
-	font-size: 1.5rem;
-	display: none;
-	margin-right: 5px;
-}
-
-.header__profile {
-	width: 40px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	background-color: rgb(158, 221, 255);
-	/* 이미지 불러오기 */
-	background-image: url(../imgs/profile.png);
-	background-size: 40px 40px;
-}
-
-#dropdown {
-	margin-right: 30px;
-}
-
-#iconemenu {
-	display: none;
-	position: absolute;
-}
-
-#iconemenu+label {
-	display: none;
-	position: absolute;
-	font-size: 24px;
-	color: black;
-}
-
-.iconsearch {
-	display: none;
-	position: absolute;
-	right: 0px;
-	font-size: 24px;
-	color: black;
-}
-
-.sidebar {
-	width: 250px;
-	height: 100%;
-	background: white;
-	position: fixed;
-	top: 0px;
-	left: -300px;
-	border: 0.3px solid gray;
-	transition: all .35s;
-}
-
-#iconemenu:checked+label+.sidebar {
-	left: 0px;
-}
-
-.menu__item {
-	margin: 40px 0px 0px 0px;
-}
-
-.ulstyle {
-	list-style-type: "-";
-}
-
-.linkcolor {
-	color: black;
-	text-decoration: none;
-}
-
-.listyle {
-	margin: 10px 5px;
-}
-
-#xmark {
-	display: block;
-}
-
-#xmark+label {
-	position: absolute;
-	bottom: 875px;
-	left: 208px;
-	top: 53px;
-	z-index: 2;
-	font-size: 24px;
-	cursor: pointer;
-}
-#xmark:checked + #iconemenu:checked+label+.sidebar{
-	left:0px;
-
-}
-
-/*450px 정도로 화면 줄어들면 로고 타이틀 없애기*/
-@media screen and (max-width: 900px) {
-	.header__center {
-		display: none;
-	}
-	.header__search {
-		display: block;
-	}
-	.header__title {
-		position: absolute;
-		width: 100%;
-		text-align: center;
-	}
-	#iconemenu+label {
-		display: block;
-		position: absolute;
-		width: 30px;
-		height: 40px;
-		left: 0px;
-		font-size: 24px;
-		z-index: 1;
-		color: black;
-		cursor: pointer;
-	}
-	#iconemenu+label:checked+label i {
-		display: block;
-		position: absolute;
-		font-size: 24px;
-		color: black;
-	}
-	.iconsearch {
-		display: block;
-		position: absolute;
-		font-size: 24px;
-		color: black;
-	}
-	#primary_nav_wrap {
-		display: none;
-	}
-}
 </style>
 <body style="margin-top : 100px;">
 	<!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
@@ -223,7 +16,7 @@
 			<!-- 로고 -->
 			<div class="header__start">
 				<!-- <button class="header__menu">&#9776;</button> -->
-				<span class="header__title"><a href="/teamProject/list1">HOME</a></span>
+				<span class="header__title"><a class="linkcolor" href="/teamProject/list1">HOME</a></span>
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
@@ -257,10 +50,10 @@
 			
 				<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
 					class="fa-solid fa-bars"></i></label>
-				<div class="sidebar">
-					<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">navbar</h1>
+				<div class="sidebar" id="closedsidebar">
+					<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
 					<!--  -->
-					<input type="checkbox" id="xmark"> <label for="xmark"> <i
+					<input onclick="myFunction()" type="checkbox" id="xmark"> <label for="xmark"> <i
 						class="fa-solid fa-xmark"></i>
 					</label> </input>
 					<!--  -->
@@ -348,4 +141,7 @@
 			</ul>
 		</nav>
 	</header>
+	<script>
+
+</script>
 </body>
