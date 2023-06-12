@@ -71,10 +71,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
-		<div style="text-align: right;">
-			<a href="./addNotice" class="btn btn-primary">공지사항 작성</a>
-		</div>
+		
+		<sec:authorize access="hasAuthority('admin')">
+			<div style="text-align: right;">
+				<a href="./addNotice" class="btn btn-primary">공지사항 작성</a>
+			</div>
+		</sec:authorize>
 		
 		<!-- 검색 결과 화면에서만 보임 -->
 		 <c:if test="${not empty param.search }">

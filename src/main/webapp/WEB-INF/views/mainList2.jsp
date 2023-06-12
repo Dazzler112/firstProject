@@ -85,7 +85,7 @@
 							<a href="/notice/noticeId/${notice.id }"> ${notice.title} </a>
 						</td>
 						<td>${notice.inserted}</td>
-						<td>${notice.content}</td>
+						<td>${notice.body}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

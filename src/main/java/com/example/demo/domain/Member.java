@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.util.*;
+
 import lombok.*;
 
 @Data
@@ -13,5 +15,6 @@ public class Member {
 	private String gender;
 	private String phoneNum;
 	private String email;
+	private List<String> authority;
 	
 }
