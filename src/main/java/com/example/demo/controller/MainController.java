@@ -62,7 +62,7 @@ public class MainController {
         List<Product> productList3 = service.listBoard4(price, title, inserted, address, likes);
         List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
         
-        model.addAttribute("notices", noticeList);
+        model.addAttribute("notice", noticeList);
         model.addAttribute("productList3", productList3);
         model.addAttribute("productList2", productList2);
        
