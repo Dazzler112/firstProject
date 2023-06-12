@@ -23,12 +23,6 @@
 }
 
 
-  .modal-content {
-    background-color: #FFFFFF; /* 원하는 배경색으로 변경 */
-    border-color: #73FBFD; /* 원하는 테두리 색으로 변경 */
-  }
-</style>
-
 </style>
 </head>
 <body>
@@ -41,19 +35,20 @@
 
 		<table class="table">
 			<c:if test="${cheatList != null}">
-				<thead>
-					<tr>
-						<th>${param.search }<br /> 피해사례 조회 결과
-						</th>
-						<th></th>
-					</tr>
-				</thead>
+				
+					<thead >
+						<tr>
+							<th>${param.search }<br /> 피해사례 조회 결과
+							</th>
+						</tr>
+					</thead>
+				
 			</c:if>
 			<tbody>
 				<c:if test="${cheatCount != 0}">
 					<tr>
 						<td>Second Stop DB</td>
-						<td>${cheatCount }회 신고됨</td>
+						<td>${cheatCount }회신고됨</td>
 					</tr>
 				</c:if>
 			</tbody>
@@ -66,27 +61,24 @@
 		<div class="button-group">
 			<a href="./check" class="btn btn-info">다시 조회하기</a>
 			<!-- <a href="./" class="btn btn-danger">신고하기</a> -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="modal">신고하기</button>
+			<button id=reportButton " class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">신고하기</button>
+		</div>
 
-			<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-			
-		</div>				
+		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">신고 안내</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">신고 신청은 jhzzang97@gmail.com으로 접수 부탁드립니다!</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

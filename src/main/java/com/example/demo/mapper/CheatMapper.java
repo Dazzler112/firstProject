@@ -1,9 +1,7 @@
 package com.example.demo.mapper;
 
 import java.util.*;
-
 import org.apache.ibatis.annotations.*;
-
 import com.example.demo.domain.*;
 
 @Mapper
