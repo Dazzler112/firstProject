@@ -14,6 +14,7 @@ public class AdBoard {
 	private LocalDateTime inserted;
 	private String writer;
 	private String region;
+	private String category;
 
 	private List<String> fileName;
 

@@ -15,7 +15,6 @@
 			<result column="fileName"/>
 		</collection>
 	</resultMap>
-
 </mapper>
 
 
