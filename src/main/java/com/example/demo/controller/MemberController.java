@@ -50,7 +50,7 @@ public class MemberController {
 
 //	운영자 권한이 있는 계정만 볼 수 있음
 	@GetMapping("list")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public void userList(Model model) {
 		List<Member> userList = service.userList();
 		model.addAttribute("userList", userList);
@@ -84,13 +84,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	@PreAuthorize("isAuthenticated() and authentication.name eq #id")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
 	public void getInfo(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
 	}
 	
 	@GetMapping("modify")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
 	public void modifyForm(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);
@@ -108,9 +109,9 @@ public class MemberController {
 	}
 		
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated() and authentication.name eq #member.id")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
+		System.out.println(member.getPassword());
 		if(ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
 

@@ -21,6 +21,7 @@ public class NoticeController {
 	NoticeService service;
 
 	@GetMapping("/noticeList")
+
 	public void list(Model model, 
 					   @RequestParam(value = "page", defaultValue = "1") Integer page,
 					   @RequestParam(value = "search", defaultValue = "") String search,
@@ -44,14 +45,14 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/addNotice")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public void noticeAddForm() {
 		
 //		return "addNotice";
 	}
 	
 	@PostMapping("/addNotice")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public String addNoticeProcess(Notice notice, Authentication authentication) throws Exception {
 
 		notice.setWriter(authentication.getName());
@@ -66,7 +67,8 @@ public class NoticeController {
 	
 	
 	@PostMapping("removeNotice")
-	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
+//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
+	@PreAuthorize("hasAuthority('admin')")
 	public String noticeRemoceProcess(Integer id) {
 		
 		boolean ok = service.removeNotice(id);
@@ -79,7 +81,8 @@ public class NoticeController {
 	}
 	
 	@GetMapping("update/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
+//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
+	@PreAuthorize("hasAuthority('admin')")
 	public String noticeUpdateFrom(@PathVariable ("id") Integer id, Model model) {
 		Notice notice = service.getNotice(id);
 		model.addAttribute("notice", notice);
@@ -87,7 +90,8 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #notice.id)")
+//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #notice.id)")
+	@PreAuthorize("hasAuthority('admin')")
 	public String noticeUpdateProcess(Notice notice) {
 	
 		boolean ok = service.update(notice);
