@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface AdBoardMapper {
+public interface PtBoardMapper {
 
 	@Select("""
 			SELECT * FROM
-			AdBoard
+			PtBoard
 			ORDER BY id DESC
 			""")
-	List<AdBoard> selectAll();
+	List<PtBoard> selectAll();
 
 	@Select("""
 			SELECT 
@@ -25,14 +25,14 @@ public interface AdBoardMapper {
 				b.writer,
 				b.region,
 				f.fileName
-			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
+			FROM PtBoard b LEFT JOIN PtFileName f ON b.id = f.boardId
 			WHERE b.id = #{id}
 			""")
 	@ResultMap("boardResultMap")
-	AdBoard selectById(Integer id);
+	PtBoard selectById(Integer id);
 
 	@Update("""
-			UPDATE AdBoard
+			UPDATE PtBoard
 			SET
 				title = #{title},
 				body = #{body},
@@ -40,42 +40,42 @@ public interface AdBoardMapper {
 			WHERE
 				id = #{id}
 			""")
-	int update(AdBoard board);
+	int update(PtBoard board);
 
 	@Delete("""
-			DELETE FROM AdBoard
+			DELETE FROM PtBoard
 			WHERE id = #{id}
 			""")
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO AdBoard (title, body, writer, region, category)
+			INSERT INTO PtBoard (title, body, writer, region, category)
 			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	int insert(AdBoard board);
+	int insert(PtBoard board);
 
 	@Insert("""
-			INSERT INTO AdFileName (boardId, fileName)
+			INSERT INTO PtFileName (boardId, fileName)
 			VALUES ( #{boardId}, #{fileName} )
 			""")
 	void insertFileName(Integer boardId, String fileName);
 
 	@Delete("""
-			DELETE FROM AdFileName
+			DELETE FROM PtFileName
 			WHERE boardId = #{boardId}
 				AND fileName = #{fileName}
 			""")
 	void deleteFileNameByBoardIdAndFileName(Integer boardId, String fileName);
 
 	@Select("""
-			SELECT fileName FROM AdFileName
+			SELECT fileName FROM PtFileName
 			WHERE boardId = #{boardId}
 			""")
 	List<String> selectFileNamesByBoardId(Integer boardId);
 
 	@Delete("""
-			DELETE FROM AdFileName
+			DELETE FROM PtFileName
 			WHERE boardId = #{boardId}
 			""")
 	void deleteFileNameByBoardId(Integer boardId);
@@ -84,7 +84,7 @@ public interface AdBoardMapper {
 			<script>
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT COUNT(*) 
-			FROM AdBoard
+			FROM PtBoard
 			
 			<where>
 				<if test="(type eq 'all') or (type eq 'title')">
@@ -114,13 +114,13 @@ public interface AdBoardMapper {
 				b.region,
 				COUNT(f.id) fileCount,
 			    (SELECT COUNT(*) 
-			     FROM BoardLike 
+			     FROM PtBoardLike 
 			     WHERE boardId = b.id) likeCount,
 			    (SELECT COUNT(*)
-			     FROM Comment
+			     FROM PtComment
 			     WHERE boardId = b.id) commentCount
 			     
-			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
+			FROM PtBoard b LEFT JOIN PtFileName f ON b.id = f.boardId
 			
 			<where>
 				<if test="(type eq 'all') or (type eq 'title')">
@@ -139,7 +139,7 @@ public interface AdBoardMapper {
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
-	List<AdBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+	List<PtBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
 
 }
 

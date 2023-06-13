@@ -11,7 +11,7 @@ public class AdBoard {
 	private Integer id;
 	private String title;
 	private String body;
-	private LocalDateTime inserted;
+	private LocalDate inserted;
 	private String writer;
 	private String region;
 	private String category;

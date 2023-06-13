@@ -40,7 +40,7 @@ table > tbody > tr > td{
 	border-bottom: 1px solid #ccc;
 	
 }
-h1{	
+h1{
 	font-family: 'Noto Sans KR', sans-serif;
 	text-align: center;
 }
@@ -79,7 +79,7 @@ h1{
 	font-weight: 600;
 }
 .cat{
-	width: 125px;
+	width: 95px;
 }
 .reg{
 	width: 80px;
@@ -99,7 +99,7 @@ h1{
 	background-color: greenyellow;
 	border-color: white;
 	position: relative;
-	right: -180px;
+	right: -420px;
 	font-weight: bold;
 }
 
@@ -108,21 +108,13 @@ h1{
 <body>
 	<my:navBar></my:navBar>	
 	<my:alert></my:alert>
-	<h1>광고게시판</h1>	
+	<h1>알바게시판</h1>	
 	<form action="" method="get">
 		<div id="category_div">
-			<input type="button" class="category_button" name="boardCategory" value="이사/용달"/>
-			<input type="button" class="category_button" name="boardCategory" value="인테리어/간판"/>
-			<input type="button" class="category_button" name="boardCategory" value="청소"/>
-			<input type="button" class="category_button" name="boardCategory" value="학원"/>
-			<input type="button" class="category_button" name="boardCategory" value="미용"/>
-			<input type="button" class="category_button" name="boardCategory" value="운동"/>
-			<input type="button" class="category_button" name="boardCategory" value="병원"/>
-			<input type="button" class="category_button" name="boardCategory" value="금융"/>
-			<input type="button" class="category_button" name="boardCategory" value="기타"/>
-			<div class="bt"><a href="/adBoard/add">글쓰기</a></div>
+			<input type="button" class="category_button" name="boardCategory" value="구인해요"/>
+			<input type="button" class="category_button" name="boardCategory" value="구직해요"/>
+			<div class="bt"><a href="/ptBoard/add">글쓰기</a></div>			
 		</div>
-	
 		<table>
 			<thead>
 				<tr>
@@ -134,11 +126,11 @@ h1{
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${adBoardList}" var="board">
+				<c:forEach items="${ptBoardList}" var="board">
 					<tr>
 						<td>${board.category}</td>
 						<td>${board.region}</td>
-						<td><a href="/adBoard/id/${board.id}">${board.title}</a></td>
+						<td><a href="/ptBoard/id/${board.id}">${board.title}</a></td>
 						<td>${board.writer}</td>
 						<td>${board.inserted}</td>
 					</tr>
@@ -149,7 +141,6 @@ h1{
 
 		<my:search></my:search>
 	</form>
-
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
