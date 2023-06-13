@@ -38,7 +38,7 @@
 					<li><button class="dropdown-item" type="button">
 							<a href="/member/signup">회원가입</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="/member/info">마이페이지</a></button></li>
+							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a></button></li>
 					<li><button class="dropdown-item" type="button">
 							<a href="/mainAdd">상품등록</a>
 						</button></li>

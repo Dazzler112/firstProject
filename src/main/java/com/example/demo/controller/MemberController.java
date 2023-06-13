@@ -28,7 +28,7 @@ public class MemberController {
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
 	public void signUpForm() {
-		mailService.sendMail();
+//		mailService.sendMail();
 
 	}
 
@@ -54,7 +54,6 @@ public class MemberController {
 	public void userList(Model model) {
 		List<Member> userList = service.userList();
 		model.addAttribute("userList", userList);
-//		System.out.println(userList);
 	}
 
 	@GetMapping("checkId/{id}")
@@ -111,7 +110,7 @@ public class MemberController {
 	@PostMapping("remove")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
-		System.out.println(member.getPassword());
+//		System.out.println(member.getPassword());
 		if(ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
 

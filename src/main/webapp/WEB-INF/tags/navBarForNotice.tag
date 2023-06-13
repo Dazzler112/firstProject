@@ -53,21 +53,25 @@
 						</button>
 					</sec:authorize>
 					</li>
+					<sec:authorize access="isAuthenticated()">
 					<li>
 						<button class="dropdown-item" type="button">
 							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
 						</button>
 					</li>
+					</sec:authorize>
 					<li>
 						<button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/mainAdd">상품등록</a>
+							<a href="/mainAdd">상품등록</a>
 						</button>
 					</li>
-					<li>
-					<button class="dropdown-item" type="button">
-							<a href="/member/logout">로그아웃</a>
-						</button>
-					</li>
+					<sec:authorize access="isAuthenticated()">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/logout">로그아웃</a>
+							</button>
+						</li>
+					</sec:authorize>
 				</ul>
 			</div>
 
