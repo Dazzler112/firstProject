@@ -28,8 +28,13 @@ public class MemberController {
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
 	public void signUpForm() {
-//		mailService.sendMail();
 
+	}
+	
+	@PostMapping("mail")
+	public void mailSend(String email) {
+
+		mailService.sendMail(email);		
 	}
 
 	@PostMapping("signup")
