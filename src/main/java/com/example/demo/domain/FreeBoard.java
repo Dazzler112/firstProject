@@ -23,4 +23,6 @@ public class FreeBoard {
 	
 	private Integer fileCount;
 	private Integer commentCount;
+	
+	private List<String> categoryList;
 }

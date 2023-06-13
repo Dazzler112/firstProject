@@ -1,8 +1,8 @@
 $("#likeIcon").click(function(){
 	 
-	 const boardId = $("#inputId").val();
+	 const boardId = $("#boardIdText").text().trim();
 	 const data ={boardId};
-	$.ajax("/like",{
+	$.ajax("/freeboard/like",{
 		method:"post",
 		contentType: "application/json",
 		data: JSON.stringify(data),

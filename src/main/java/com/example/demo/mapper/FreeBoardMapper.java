@@ -16,7 +16,7 @@ public interface FreeBoardMapper {
 			writer,
 			region,
 			inserted,
-			boardCategory
+			boardCategory,
 			FROM
 			Board
 			ORDER BY id DESC
@@ -35,7 +35,10 @@ public interface FreeBoardMapper {
 				p.photoName,
 				(SELECT COUNT (*)
 				FROM Comment
-				WHERE boardId = b.id) commentCount
+				WHERE boardId = b.id) commentCount,
+				(SELECT COUNT(*) 
+			     FROM BoardLike 
+			     WHERE boardId = b.id) likeCount
 			FROM Board b LEFT JOIN 
 			PhotoName p ON b.id = p.boardId
 			WHERE b.id = #{id}
@@ -154,7 +157,10 @@ public interface FreeBoardMapper {
 			COUNT(p.id) fileCount,
 			(SELECT COUNT (*)
 			FROM Comment
-			WHERE boardId = b.id) commentCount
+			WHERE boardId = b.id) commentCount,
+			(SELECT COUNT(*) 
+			     FROM BoardLike 
+			     WHERE boardId = b.id) likeCount
 			FROM
 			Board b LEFT JOIN PhotoName p ON b.id = p.boardId
 			<where>
@@ -173,7 +179,7 @@ public interface FreeBoardMapper {
 			ORDER BY id DESC
 			</script>
 			""")
-	List<FreeBoard> selectPaging(String boardCategory, String search, String type);
+	List<FreeBoard> selectPaging( String search, String type);
 
 	//검색 구조 기본설정
 	@Select("""
@@ -195,8 +201,22 @@ public interface FreeBoardMapper {
 			</where>
 		
 			</script>
-			""")
+			""") 
 	Integer countRecord(String search, String type);
+	
+	@Select("""
+			SELECT 
+			id,
+			title,
+			writer,
+			region,
+			inserted,
+			boardCategory
+			FROM
+			Board
+			WHERE boardCategory = #{boardCategory}
+			""")
+	List<FreeBoard> categoryListForm(String boardCategory);
 
 	
 }

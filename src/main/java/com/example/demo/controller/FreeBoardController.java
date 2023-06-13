@@ -24,13 +24,20 @@ public class FreeBoardController {
 	
 	@GetMapping("freelist")
 	public String list (Model model,
-						@RequestParam(value ="boardCategory",required = false )String boardCategory,
 						@RequestParam(value = "search" ,defaultValue = "")String search,
 						@RequestParam(value="type", required = false)String type){
 //		List<FreeBoard> list = service.listProcess();
 		
 //		List<FreeBoard> list = service.getCountList();
-		Map<String, Object> list = service.getCountList(boardCategory,search,type);
+		Map<String, Object> list = service.getCountList(search,type);
+		
+		model.addAllAttributes(list); 
+		return "freeboard/freelist";
+	}
+	
+	@GetMapping(value = "freelist", params = "boardCategory")
+	public String boardCategoryList(@RequestParam(value ="boardCategory")String boardCategory, Model model) {
+		Map<String, Object> list = service.getBoardList(boardCategory);
 		
 		model.addAllAttributes(list);
 		return "freeboard/freelist";
