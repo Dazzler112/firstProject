@@ -67,7 +67,6 @@ public class NoticeController {
 	
 	
 	@PostMapping("removeNotice")
-//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
 	@PreAuthorize("hasAuthority('admin')")
 	public String noticeRemoceProcess(Integer id) {
 		
@@ -81,7 +80,6 @@ public class NoticeController {
 	}
 	
 	@GetMapping("update/{id}")
-//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #id)")
 	@PreAuthorize("hasAuthority('admin')")
 	public String noticeUpdateFrom(@PathVariable ("id") Integer id, Model model) {
 		Notice notice = service.getNotice(id);
@@ -90,7 +88,6 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update/{id}")
-//	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkNoticeWriter(authentication, #notice.id)")
 	@PreAuthorize("hasAuthority('admin')")
 	public String noticeUpdateProcess(Notice notice) {
 	

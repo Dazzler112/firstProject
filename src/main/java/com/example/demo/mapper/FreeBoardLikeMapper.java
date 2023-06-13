@@ -35,4 +35,11 @@ public interface FreeBoardLikeMapper {
 			AND memberId = #{memberId}
 			""")
 	FreeBoardLike select(Integer boardId, String memberId);
+	
+	//탈퇴시 좋아요 테이블 삭제
+	@Delete("""
+			DELETE FROM BoardLike
+			WHERE boardId= #{boardId}
+			""")
+	void deleteLikeTable(Integer boardId);
 }

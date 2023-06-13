@@ -13,7 +13,7 @@ public class FreeBoard {
 	private String body;
 	private String writer;
 	private String region;
-	private LocalDateTime inserted;
+	private LocalDate inserted;
 	private String boardCategory;
 	
 	private List<String> photoName;
@@ -23,4 +23,6 @@ public class FreeBoard {
 	
 	private Integer fileCount;
 	private Integer commentCount;
+	
+	private List<String> categoryList;
 }

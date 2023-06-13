@@ -87,10 +87,12 @@
 						<h1 style="font-size: 26px; font-weight: 550;">
 							공감하기 <span id="likeIcon"> <c:if test="${getBoard.liked }">
 									<i class="fa-solid fa-heart"></i>
-								</c:if> <c:if test="${not board.liked }">
+								</c:if> 
+								<c:if test="${not getBoard.liked }">
 									<i class="fa-regular fa-heart"></i>
 								</c:if>
-							</span> <span id="likeNumber">${getBoard.likeCount }</span>
+							</span> 
+							<span id="likeNumber">${getBoard.likeCount }</span>
 						</h1>
 					</div>
 

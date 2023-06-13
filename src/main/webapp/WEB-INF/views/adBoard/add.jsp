@@ -19,15 +19,15 @@
 
 				<form method="post" enctype="multipart/form-data">
 					<select name="category">
-						<option value="동네질문">동네질문</option>
-						<option value="동네사건사고">동네사건사고</option>
-						<option value="동네맛집">동네맛집</option>
-						<option value="동네소식">동네소식</option>
-						<option value="생활정보">생활정보</option>
-						<option value="취미생활">취미생활</option>
-						<option value="일상">일상</option>
-						<option value="분실">분실</option>
-						<option value="해주세요">해주세요</option>
+						<option value="이사/용달">이사/용달</option>
+						<option value="인테리어/간판">인테리어/간판</option>
+						<option value="청소">청소</option>
+						<option value="학원">학원</option>
+						<option value="미용">미용</option>
+						<option value="운동">운동</option>
+						<option value="병원">병원</option>
+						<option value="금융">금융</option>
+						<option value="기타">기타</option>
 					</select>
 				
 					<div class="mb-3">

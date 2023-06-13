@@ -23,6 +23,7 @@ public interface AdBoardMapper {
 				b.body,
 				b.inserted,
 				b.writer,
+				b.region,
 				f.fileName
 			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
 			WHERE b.id = #{id}
@@ -110,6 +111,7 @@ public interface AdBoardMapper {
 				b.writer,
 				b.inserted,
 				b.category,
+				b.region,
 				COUNT(f.id) fileCount,
 			    (SELECT COUNT(*) 
 			     FROM BoardLike 

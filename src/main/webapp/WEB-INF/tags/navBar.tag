@@ -34,17 +34,17 @@
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/login">로그인</a>
+							<a href="/member/login">로그인</a>
 						</button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/signup">회원가입</a></button></li>
+							<a href="/member/signup">회원가입</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/info">마이페이지</a></button></li>
+							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/mainAdd">상품등록</a>
+							<a href="/mainAdd">상품등록</a>
 						</button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/logout">로그아웃</a>
+							<a href="/member/logout">로그아웃</a>
 						</button></li>
 				</ul>
 			</div>
@@ -131,9 +131,9 @@
 					</ul></li>
 				<li><a href="#">게시판</a>
 					<ul>
-						<li><a href="/freeboard/freelist">자유게시판</a></li>
-						<li></li>
-						<li></li>
+						<li><a href="/freeboard/freelist">지역게시판</a></li>
+						<li><a href="/adBoard/list">광고게시판</a></li>
+						<li><a href="/ptBoard/list">알바게시판</a></li>
 					</ul>
 				<li><a href="#">조회</a>
 				<li><a href="/notice/noticeList">공지사항</a></li>

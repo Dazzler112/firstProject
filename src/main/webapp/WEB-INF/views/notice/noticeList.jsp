@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,41 +13,11 @@
 </head>
 <body>
 
-	<div>
-		<nav class="navbar bg-body-tertiary">
-			<div class="container-fluid ms-auto">
-				<a class="navbar-brand" href="#">Second Stop</a>
-				<form action="./noticeList" class="d-flex" role="search">
-				
-				<div class="input-group">
-					<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
-						<option value="all">전체</option>
-						<option value="title" ${param.type eq 'title' ? 'selected' : '' } >제목</option>
-						<option value="body" ${param.type eq 'body' ? 'selected' : '' }>본문</option>
-						<option value="writer" ${param.type eq 'writer' ? 'selected' : '' }>작성자</option>
-					</select>
-					
-					<input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</button>
-				</div>
-			</form>
-				<div class="btn-group dropstart">
-					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">마이페이지</button>
-					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-						<li><a class="dropdown-item" href="#">로그인</a></li>
-						<li><a class="dropdown-item" href="#">회원가입</a></li>
-						<li><a class="dropdown-item" href="#">Menu item</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+		<my:navBarForNotice></my:navBarForNotice>		
 	
-	<div>
-		<sec:authentication property="principal"/>
-	</div>
+<!-- 	<div> -->
+<%-- 		<sec:authentication property="principal"/> --%>
+<!-- 	</div> -->
 
 	<div class="container-lg">
 		<h1>공지 목록</h1>

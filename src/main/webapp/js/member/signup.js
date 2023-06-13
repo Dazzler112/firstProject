@@ -38,17 +38,17 @@ $("#checkIdBtn").click(function() {
 });
 
 // 패스워드 입력칸의 값과 패스워드 확인칸 값
-$("#inputPassword, #inputPasswordCheck").keyup(function(){
+$("#inputPassword, #inputPasswordCheck").keyup(function() {
 	const pw1 = $("#inputPassword").val();
 	const pw2 = $("#inputPasswordCheck").val();
-	
-//  pw1과 pw2의 값이 같다면
-	if(pw1 == pw2){
+
+	//  pw1과 pw2의 값이 같다면
+	if (pw1 == pw2) {
 		$("#passwordSuccessText").removeClass("d-none");
 		$("#passwordFailText").addClass("d-none");
 		checkPassword = true;
 	}
-	else{
+	else {
 		$("#passwordSuccessText").addClass("d-none");
 		$("#passwordFailText").removeClass("d-none");
 		checkPassword = false;
@@ -56,29 +56,29 @@ $("#inputPassword, #inputPasswordCheck").keyup(function(){
 	complete: enableSubmit
 })
 
-$("#checkNameBtn").click(function(){
+$("#checkNameBtn").click(function() {
 	checkName = true;
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputGenderM").change(function(){
+$("#inputGenderM").change(function() {
 	checkGender = true;
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputGenderW").change(function(){
+$("#inputGenderW").change(function() {
 	checkGender = true;
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputGenderX").change(function(){
+$("#inputGenderX").change(function() {
 	checkGender = true;
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#checkEmailBtn").click(function(){
+$("#checkEmailBtn").click(function() {
 	checkEmail = true;
-	enableSubmit(); 
+	enableSubmit();
 })
 
 // 핸드폰 번호 중복확인 버튼이 클릭되면
@@ -127,23 +127,23 @@ $("#checkNicknameBtn").click(function() {
 	})
 });
 
-$("#inputId").keyup(function(){
+$("#inputId").keyup(function() {
 	checkId = false;
 	$("#availableIdMessage").addClass("d-none");
 	$("#notAvailableIdMessage").addClass("d-none");
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputPassword").keyup(function(){
+$("#inputPassword").keyup(function() {
 	checkPassword = false;
 	$("#passwordSuccessText").addClass("d-none");
 	$("#passwordFailText").addClass("d-none");
-	enableSubmit(); 
+	enableSubmit();
 })
 
-$("#inputName").keyup(function(){
+$("#inputName").keyup(function() {
 	checkName = false;
-	enableSubmit(); 
+	enableSubmit();
 })
 
 // email 인풋에 키보드 입력 발생시
@@ -174,4 +174,60 @@ $("#inputNickName").keyup(function() {
 	enableSubmit();
 })
 
+//$(document).ready(function() {
+// 인증하기 버튼 클릭 시 동작
+$("#checkEmailBtn").click(function() {
+	// 인증하기 버튼을 클릭하면 인증번호 입력 칸과 확인 버튼을 나타내고, 인증하기 버튼은 숨깁니다.
+	$("#inputVerificationCode").removeClass("d-none");
+	$("#verifyEmailBtn").show();
+	$("#checkEmailBtn").hide();
+});
+
+// 확인 버튼 클릭 시 동작
+$("#verifyEmailBtn").click(function() {
+	// 인증 확인 버튼을 클릭하면 인증번호 입력 칸과 확인 버튼을 숨기고, 인증 완료 메시지를 나타냅니다.
+	//    $("#inputVerificationCode").hide();
+	//    $("#verifyEmailBtn").hide();
+	$("#verificationSuccessText").show();
+});
+//});
+
+//$(document).ready(function() {
+	// 이메일 인증 버튼 클릭 이벤트 처리
+	$("#checkEmailBtn").click(function() {
+		var email = $("#inputEmail").val();
+		if (email) {
+			// 이메일 전송 요청
+			$.ajax({
+				url: "/member/mail",
+				method: "POST",
+				data: {
+					email: email
+				},
+				success: function(response) {
+					// 이메일 전송 성공 시 처리
+					$("#inputEmail").prop("disabled", true);
+					$("#verifyEmailBtn").hide();
+					$("#inputVerificationCode").removeClass("d-none");
+					$("#verifyCodeBtn").show();
+				},
+				error: function() {
+					// 에러 처리 로직 추가
+				}
+			});
+		}
+	});
+//});
+
+//// 인증번호 확인 버튼 클릭 이벤트 처리
+//  $("#verifyCodeBtn").click(function() {
+//    var enteredCode = $("#inputVerificationCode").val();
+//    if (enteredCode === verificationCode) {
+//      // 인증번호 일치 시 회원 가입 진행
+//      // 회원 가입 로직 추가
+//      alert("인증이 완료되었습니다. 회원 가입을 진행합니다.");
+//    } else {
+//      alert("인증번호가 일치하지 않습니다. 다시 확인해 주세요.");
+//    }
+//  });
 
