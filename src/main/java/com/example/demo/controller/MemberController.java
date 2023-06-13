@@ -32,9 +32,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("mail")
-	public void mailSend(String email) {
+	public void mailSend(Model model, String email) {
 
 		mailService.sendMail(email);		
+		List<AuthenticatedNum> checkId = mailService.checkAuthenticId();
+		model.addAttribute("checkNum", checkId);
 	}
 
 	@PostMapping("signup")

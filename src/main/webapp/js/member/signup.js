@@ -219,9 +219,9 @@ $("#verifyEmailBtn").click(function() {
 	});
 //});
 
-//// 인증번호 확인 버튼 클릭 이벤트 처리
-//  $("#verifyCodeBtn").click(function() {
-//    var enteredCode = $("#inputVerificationCode").val();
+////// 인증번호 확버튼 클릭 이벤트 처리
+//  $("#verifyCodeBtn").clicfunction() {
+//    var enteredCode = $("#inputVerificatioode").val();
 //    if (enteredCode === verificationCode) {
 //      // 인증번호 일치 시 회원 가입 진행
 //      // 회원 가입 로직 추가
@@ -229,5 +229,5 @@ $("#verifyEmailBtn").click(function() {
 //    } else {
 //      alert("인증번호가 일치하지 않습니다. 다시 확인해 주세요.");
 //    }
-//  });
+//  }
 
