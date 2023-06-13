@@ -68,8 +68,9 @@
 			</div>
 		</div>
 	</div>
-	<form action="" method="get">
-		<div id="category_div">
+	<form id="categoryForm" action="" method="get">
+	</form>
+ 		<div id="category_div">
 			<input type="button" class="category_button" name="boardCategory" value="동네질문"/>
 			<input type="button" class="category_button" name="boardCategory" value="동네사건사고"/>
 			<input type="button" class="category_button" name="boardCategory" value="동네맛집"/>
@@ -84,13 +85,14 @@
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
 				<h1>지역 게시판</h1>
-				<table class="table">
+				<table id="boardTable" class="table">
 					<thead>
 						<tr>
 							<th style="display:none;">게시번호</th>
 							<th>카테고리</th>
 							<th>지역</th>
 							<th>제목</th>
+							<th>공감</th>
 							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
@@ -119,6 +121,7 @@
 								</c:if>
 								
 								</td>
+								<td><i style="color:#DEBFD1;opacity: 0.5; " class="fa-solid fa-heart"></i>${board.likeCount }</td>
 								<td>${board.writer }</td>
 								<td>${board.inserted }</td>
 							</tr>
@@ -129,7 +132,7 @@
 		</div>
 	</div>
 		<my:search></my:search>
-	</form>
+	
 	<div class="div_writer">
 		<a href="/freeboard/freeadd" class="btn btn-primary">글쓰기</a>
 	</div>

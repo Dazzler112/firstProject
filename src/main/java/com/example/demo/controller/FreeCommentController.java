@@ -28,6 +28,7 @@ public class FreeCommentController {
 	}
 	
 	@PostMapping("add")
+	@ResponseBody
 	public ResponseEntity<Map<String,Object>> add(@RequestBody FreeComment comment,
 					  							  Authentication authentication) {
 		
@@ -57,7 +58,7 @@ public class FreeCommentController {
 	
 	@DeleteMapping("id/{id}")
 	@ResponseBody
-	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #id)")
+	@PreAuthorize("authenticated and @customSecurityCheck.checkCommentWriter(authentication, #id)")
 	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id")Integer id) {
 		Map<String, Object> list =  service.remove(id);
 		
@@ -72,7 +73,7 @@ public class FreeCommentController {
 	
 	@PutMapping("update")
 	@ResponseBody
-	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #comment.id)")
+	@PreAuthorize("authenticated and @customSecurityCheck.checkCommentWriter(authentication, #comment.id)")
 	public ResponseEntity<Map<String, Object>> update(@RequestBody FreeComment comment) {
 		Map<String, Object> list = service.update(comment);
 		

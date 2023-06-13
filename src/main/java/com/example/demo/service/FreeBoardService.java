@@ -80,6 +80,9 @@ public class FreeBoardService {
 		
 		commentMapper.deleteComment(id);
 		
+		//좋아요 테이블 지우기
+		likeMapper.deleteLikeTable(id);
+		
 		List<String> photoNames = mapper.selectFilebyBoardId(id);
 		
 		mapper.removeFilebyBoardId(id);
@@ -169,10 +172,15 @@ public class FreeBoardService {
 		return list;
 	}
 
-	public Map<String, Object> getCountList(String boardCategory, String search, String type) {
+	public Map<String, Object> getCountList(String search, String type) {
 		Integer allRecords = mapper.countRecord(search,type); 
 		
-		List<FreeBoard> list = mapper.selectPaging(boardCategory,search,type);
-		return Map.of("boardList",list);
+		List<FreeBoard> list = mapper.selectPaging(search,type);
+		return Map.of("boardList",list); 
+	}
+
+	public Map<String, Object> getBoardList(String boardCategory) {
+		
+		return Map.of("boardList", mapper.categoryListForm(boardCategory));
 	}
 }
