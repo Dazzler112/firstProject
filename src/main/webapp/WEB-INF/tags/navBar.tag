@@ -132,9 +132,9 @@
 					</ul></li>
 				<li><a href="#">게시판</a>
 					<ul>
-						<li><a href="/freeboard/freelist">자유게시판</a></li>
-						<li></li>
-						<li></li>
+						<li><a href="/freeboard/freelist">지역게시판</a></li>
+						<li><a href="/adBoard/list">광고게시판</a></li>
+						<li><a href="/ptBoard/list">알바게시판</a></li>
 					</ul>
 				<li><a href="#">조회</a>
 				<li><a href="/notice/noticeList">공지사항</a></li>

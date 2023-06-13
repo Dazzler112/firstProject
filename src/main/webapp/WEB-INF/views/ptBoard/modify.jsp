@@ -14,45 +14,28 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>광고게시물 작성</h1>
-				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
-
+				<a class="btn btn-secondary" href="/ptBoard/list">HOME</a>
+				<h1>${board.id }번 알바게시물 수정</h1>
 				<form method="post" enctype="multipart/form-data">
-					<select name="category">
-						<option value="이사/용달">이사/용달</option>
-						<option value="인테리어/간판">인테리어/간판</option>
-						<option value="청소">청소</option>
-						<option value="학원">학원</option>
-						<option value="미용">미용</option>
-						<option value="운동">운동</option>
-						<option value="병원">병원</option>
-						<option value="금융">금융</option>
-						<option value="기타">기타</option>
-					</select>
-				
+					<input type="hidden" name="id" value="${board.id }" />
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label>
-						<input id="titleInput" class="form-control" type="text" name="title" value="${board.title }" />
+						<input class="form-control" id="titleInput" type="text" name="title" value="${board.title }" />
 					</div>
 					<div class="mb-3">
 						<label for="bodyTextarea" class="form-label">본문</label>
-						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
+						<textarea class="form-control" id="bodyTextarea" rows="10" name="body">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
-						<label for="regionInput" class="form-label">지역</label>
-						<input id="regionInput" class="form-control" type="text" name="region" value="${board.region }" />
-					</div>
-					<div class="mb-3">
-						<label for="writerInput" class="form-label">작성자</label>
-						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
+						<label for="" class="form-label">작성일시</label>
+						<input class="form-control" type="text" value="${board.inserted }" readonly />
 					</div>
 					<div class="mb-3">
 						<label for="fileInput" class="form-label">그림 파일</label>
 						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 					</div>
-
 					<div class="mb-3">
-						<input class="btn btn-primary" type="submit" value="등록" />
+						<input class="btn btn-secondary" type="submit" value="수정" />
 					</div>
 				</form>
 			</div>

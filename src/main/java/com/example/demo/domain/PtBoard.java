@@ -6,21 +6,20 @@ import java.util.*;
 import lombok.*;
 
 @Data
-public class FreeBoard {
-
+public class PtBoard {
 	private Integer id;
 	private String title;
 	private String body;
+	private LocalDate inserted;
 	private String writer;
 	private String region;
-	private LocalDate inserted;
-	private String boardCategory;
-	
-	private List<String> photoName;
-	
-	private Boolean liked;
-	private Integer likeCount;
-	
+	private String category;
+
+	private List<String> fileName;
+
+	private Boolean like;
+
 	private Integer fileCount;
+	private Integer likeCount;
 	private Integer commentCount;
 }

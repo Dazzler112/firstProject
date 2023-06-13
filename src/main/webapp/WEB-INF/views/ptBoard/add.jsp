@@ -14,20 +14,13 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>광고게시물 작성</h1>
-				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
+				<h1>알바게시물 작성</h1>
+				<a class="btn btn-secondary" href="/ptBoard/list">HOME</a>
 
 				<form method="post" enctype="multipart/form-data">
 					<select name="category">
-						<option value="이사/용달">이사/용달</option>
-						<option value="인테리어/간판">인테리어/간판</option>
-						<option value="청소">청소</option>
-						<option value="학원">학원</option>
-						<option value="미용">미용</option>
-						<option value="운동">운동</option>
-						<option value="병원">병원</option>
-						<option value="금융">금융</option>
-						<option value="기타">기타</option>
+						<option value="구인해요">구인해요</option>
+						<option value="구직해요">구직해요</option>						
 					</select>
 				
 					<div class="mb-3">
