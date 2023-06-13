@@ -28,8 +28,13 @@ public class MemberController {
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
 	public void signUpForm() {
-		mailService.sendMail();
 
+	}
+	
+	@PostMapping("mail")
+	public void mailSend(String email) {
+
+		mailService.sendMail(email);		
 	}
 
 	@PostMapping("signup")
@@ -54,7 +59,6 @@ public class MemberController {
 	public void userList(Model model) {
 		List<Member> userList = service.userList();
 		model.addAttribute("userList", userList);
-//		System.out.println(userList);
 	}
 
 	@GetMapping("checkId/{id}")
@@ -84,14 +88,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void getInfo(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
 	}
 	
 	@GetMapping("modify")
-	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and authentication.name eq #id)")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void modifyForm(String id, Model model) {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);
@@ -111,7 +115,7 @@ public class MemberController {
 	@PostMapping("remove")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
-		System.out.println(member.getPassword());
+//		System.out.println(member.getPassword());
 		if(ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
 

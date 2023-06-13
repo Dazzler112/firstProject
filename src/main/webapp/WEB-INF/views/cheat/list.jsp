@@ -33,7 +33,7 @@
 				<c:if test="${cheatList != null}">
 					<c:forEach items="${cheatList}" var="cheat">
 						<tr>
-							<td>${cheat.userId }</td>
+							<td>${cheat.nickName }</td>
 							<td>0${cheat.phoneNum }</td> <%-- db에서 varchar타입이지만 jsp에서 출력한 화면에는 0이 빠짐 --%>
 							<td>${cheat.account }</td>
 						</tr>

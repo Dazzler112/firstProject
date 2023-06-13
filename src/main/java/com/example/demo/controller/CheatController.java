@@ -29,7 +29,7 @@ public class CheatController {
 						     Model model) {
 		List<Cheat> list = service.cheatCheck(search, type);
 		model.addAttribute("cheatList", list);
-//		System.out.println(list);
+		System.out.println(list);
 		
 //		return "list";
 	}
