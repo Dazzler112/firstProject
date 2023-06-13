@@ -6,17 +6,18 @@
 <link href="/resources/menubar.css" rel="stylesheet">
 <link href="/resources/navbar.css" rel="stylesheet">
 <script type="text/javascript" src="링크주소"></script>
+
 <style>
 
 </style>
-<body style="margin-top : 100px;">
+<body style="margin-top : 150px;">
 	<!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
 	<header class="header">
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-				<!-- <button class="header__menu">&#9776;</button> -->
-				<span class="header__title"><a class="linkcolor" href="/teamProject/list1">HOME</a></span>
+				 <img style=:width:100px;height:70px; class="navbarimage" src="/img/navbarimage.png" alt="My Image">
+				<span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
@@ -49,13 +50,11 @@
 			</div>
 			
 				<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
-					class="fa-solid fa-bars"></i></label>
-				<div class="sidebar" id="closedsidebar">
+               class="fa-solid fa-bars"></i></label>
+				<div class="closedsidebar" >
 					<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
 					<!--  -->
-					<input onclick="myFunction()" type="checkbox" id="xmark"> <label for="xmark"> <i
-						class="fa-solid fa-xmark"></i>
-					</label> </input>
+					
 					<!--  -->
 					<div class="accordion" id="accordionExample">
 						<div class="accordion-item">
@@ -141,7 +140,5 @@
 			</ul>
 		</nav>
 	</header>
-	<script>
 
-</script>
 </body>

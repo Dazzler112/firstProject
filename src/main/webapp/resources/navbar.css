@@ -1,14 +1,15 @@
 @charset "UTF-8";
 
+
 .header {
 	/*헤더 고정*/
 	position: fixed;
 	top: 0px;
-	left: 20px;
-	right: 20px;
+	left: 0px;
+	right: 0px;
 	margin-bottom: 30px;
-	width: 90%;
-	background-color: #fff;
+	width: 100%;
+	background-color:#55A44E;
 	z-index: 2;
 }
 
@@ -23,6 +24,8 @@
 	/*가로축 아이템 정렬: 양 끝으로 펼치기*/
 	justify-content: space-between;
 	padding: 0 16px;
+	background-color:#55A44E;
+	height: 70px;
 }
 
 .header__start {
@@ -101,7 +104,14 @@
 
 #iconemenu {
 	display: none;
+	
 	position: absolute;
+}
+.navbarimage{
+	width:100px;
+	height: 100px;
+	margin-top: 20px;
+	
 }
 
 #iconemenu+label {
@@ -109,17 +119,18 @@
 	position: absolute;
 	font-size: 24px;
 	color: black;
+	margin-left:20px;
 }
 
 .iconsearch {
 	display: none;
 	position: absolute;
-	right: 0px;
+	right: 20px;
 	font-size: 24px;
 	color: black;
 }
 
-.sidebar {
+.closedsidebar {
 	width: 250px;
 	height: 100%;
 	background: white;
@@ -130,8 +141,8 @@
 	transition: all .35s;
 }
 
-#iconemenu:checked+label+.sidebar {
-	left: 0px;
+#iconemenu:checked+label+.closedsidebar {
+   left: 0px;
 }
 
 
@@ -167,12 +178,20 @@
 	cursor: pointer;
 }
 
-
-/*450px 정도로 화면 줄어들면 로고 타이틀 없애기*/
+@media screen and (min-width: 900px) {
+.closedsidebar {
+	display: none;
+}
+	
+	}
+/*900px 정도로 화면 줄어들면 로고 타이틀 없애기*/
 @media screen and (max-width: 900px) {
 	.header__center {
 		display: none;
 	}
+	.navbarimage{
+	display:none;
+}
 	.header__search {
 		display: block;
 	}
@@ -207,5 +226,6 @@
 	#primary_nav_wrap {
 		display: none;
 	}
+	
 	
 }
