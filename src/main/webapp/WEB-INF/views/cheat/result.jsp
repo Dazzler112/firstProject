@@ -34,15 +34,13 @@
 		<hr />
 
 		<table class="table">
-			<c:if test="${cheatList != null}">
-				
+			<c:if test="${cheatList != null}">				
 					<thead >
 						<tr>
 							<th>${param.search }<br /> 피해사례 조회 결과
 							</th>
 						</tr>
-					</thead>
-				
+					</thead>				
 			</c:if>
 			<tbody>
 				<c:if test="${cheatCount != 0}">

@@ -33,17 +33,17 @@
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/login">로그인</a>
+							<a href="/member/login">로그인</a>
 						</button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/signup">회원가입</a></button></li>
+							<a href="/member/signup">회원가입</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/info">마이페이지</a></button></li>
+							<a href="/member/info">마이페이지</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/mainAdd">상품등록</a>
+							<a href="/mainAdd">상품등록</a>
 						</button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/logout">로그아웃</a>
+							<a href="/member/logout">로그아웃</a>
 						</button></li>
 				</ul>
 			</div>

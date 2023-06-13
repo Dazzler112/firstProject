@@ -20,7 +20,6 @@
 			<!-- 검색창 -->
 			<div class="container-fluid ms-auto">
 				<form action="./noticeList" class="d-flex" role="search">
-
 					<div class="input-group">
 						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
 							<option value="all">전체</option>
@@ -45,12 +44,12 @@
 					<sec:authorize access="isAnonymous">
 						<li>
 							<button class="dropdown-item" type="button">
-								<a href="http://localhost:8084/member/login">로그인</a>
+								<a href="/member/login">로그인</a>
 							</button>
 					</li>
 					<li>
 						<button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/signup">회원가입</a>
+							<a href="/member/signup">회원가입</a>
 						</button>
 					</sec:authorize>
 					</li>
@@ -66,7 +65,7 @@
 					</li>
 					<li>
 					<button class="dropdown-item" type="button">
-							<a href="http://localhost:8084/member/logout">로그아웃</a>
+							<a href="/member/logout">로그아웃</a>
 						</button>
 					</li>
 				</ul>
