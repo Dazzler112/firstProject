@@ -23,10 +23,17 @@ public class ProductService {
 
 	@Autowired
 	private ProductMapper mapper;
-	
+
 	@Autowired
 	private S3Client s3;
+
+	private ProductMapper productMapper;
 	
+	@Autowired
+    public ProductService(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
+
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
@@ -75,6 +82,17 @@ public class ProductService {
 		return mapper.updateProduct(product) > 0;
 	}
 
+	@Transactional
+	public boolean addProcess(Product product, MultipartFile[] files, String category) throws Exception {
+	    // TODO: Implement the logic to add a product with its photos
+	    
+	    // 상품을 데이터베이스에 추가하고 추가된 상품의 ID 값을 반환한다.
+	    Integer productId = productMapper.insertForm(product);
+	    
+	    // 추가된 상품의 ID 값이 null이 아닌 경우, 상품 추가 성공으로 간주한다.
+	    return productId != null;
+	}
+	
 	@Transactional()
 	public boolean updateProcess(Product product, List<String> removeProductPhoto, MultipartFile[] addFile)
 			throws Exception {
@@ -92,18 +110,18 @@ public class ProductService {
 				mapper.deleteFileNameUpdate(product.getId(), fileName);
 			}
 		}
-		
-		for(MultipartFile file : addFile) {
-			if(file.getSize() > 0) {
-				mapper.updateFileName(product.getId(),file.getOriginalFilename());
-				
-				String objectKey = "teamPrj/" + product.getId() + "/" +file.getOriginalFilename();
+
+		for (MultipartFile file : addFile) {
+			if (file.getSize() > 0) {
+				mapper.updateFileName(product.getId(), file.getOriginalFilename());
+
+				String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
 				PutObjectRequest bb = PutObjectRequest.builder()
 						.acl(ObjectCannedACL.PUBLIC_READ)
 						.bucket(bucketName)
 						.key(objectKey)
 						.build();
-				
+
 				RequestBody pb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
 				s3.putObject(bb, pb);
 			}
@@ -113,36 +131,34 @@ public class ProductService {
 	}
 
 	public boolean removeProcess(Integer id) {
-		
+
 		List<String> productPhoto = mapper.selectFileByProductId(id);
-		
+
 		mapper.removeFilebyProductId(id);
-		
-		for(String productPhotos : productPhoto) {
+
+		for (String productPhotos : productPhoto) {
 			String objectKey = "teamPrj/" + id + "/" + productPhotos;
 			DeleteObjectRequest pp = DeleteObjectRequest.builder()
 					.bucket(bucketName)
 					.key(objectKey)
 					.build();
-			
+
 			s3.deleteObject(pp);
 		}
-		
+
 		int cnt = mapper.removeForm(id);
 		return cnt == 1;
 	}
-	
+
 	@GetMapping("/id/{id}")
-	public String get(@PathVariable("id") Integer id, Model model
-								,Authentication authentication) {
-		
+	public String get(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+
 		List<Product> list = mapper.getCountReply(id);
 		Product product = mapper.getProcess(id, authentication);
-		
+
 		model.addAttribute("getProduct", product);
-		
+
 		return "product/productget";
 	}
 
-	
 }
