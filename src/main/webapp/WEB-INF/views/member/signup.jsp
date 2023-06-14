@@ -140,7 +140,7 @@
 							<button type="button" class="btn btn-info" onClick="goPopup();">주소 검색</button>
 						</div>
 						<div class="input-group">
-							<input id="inputAddress" type="text" class="form-control" name="address" placeholder="Enter Address" required readonly />
+							<input name="address" id="inputAddress" type="text" class="form-control" placeholder="Enter Address" required readonly />
 						</div>
 					</div>
 
