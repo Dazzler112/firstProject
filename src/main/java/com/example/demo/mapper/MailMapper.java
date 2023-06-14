@@ -10,17 +10,21 @@ import com.example.demo.domain.*;
 public interface MailMapper {
 
 	@Insert("""
-			INSERT INTO AuthenticNum (AuthenticationNum)
+			INSERT INTO AuthenticNum (authenticNUM)
 			VALUES (#{randomNumber})
 			""")
 	Integer saveRandomNum(int randomNumber);
 
 	@Select("""
-			SELECT *
+			SELECT authenticNUM
 			FROM AuthenticNum
-			WHERE AuthenticationNum = #{randomNumber}
 			""")
-	List<AuthenticatedNum> checkAuthenticId(int randomNumber);
+	Integer getAuthenticatedNum();
+
+	@Delete("""
+			DELETE FROM AuthenticNum
+			""")
+	void deleteAuthenticatedNum();
 
 	
 }

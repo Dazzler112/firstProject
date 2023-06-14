@@ -32,12 +32,22 @@ public class MemberController {
 	}
 	
 	@PostMapping("mail")
-	public void mailSend(Model model, String email) {
+	public void mailSend(Model model, String email, HttpSession session) {
 
-		mailService.sendMail(email);		
-		List<AuthenticatedNum> checkId = mailService.checkAuthenticId();
-		model.addAttribute("checkNum", checkId);
+		mailService.sendMail(email, session);		
+
 	}
+	
+	@PostMapping("mailCheck")
+	@ResponseBody
+	public Map<String, Object> mailCheck(Model model, Integer enteredCode, HttpSession session) {
+
+		Boolean ok = mailService.compareNum(enteredCode, session);
+		model.addAttribute("authentication", ok);
+		return Map.of("authentication", ok);
+		
+	}
+	
 
 	@PostMapping("signup")
 	@PreAuthorize("isAnonymous()")
