@@ -39,7 +39,7 @@ body {
 
 .login-wrapper>h1 {
 	font-size: 50px;
-	color: #40A798;
+	color: #55A44E;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
@@ -61,14 +61,14 @@ body {
 #login-form>input[type="submit"] {
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 	margin-top: 20px;
 }
 
 #login-form>input[type="button"] {
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 	/* 	margin-top: 20px; */
 }
 
@@ -83,7 +83,7 @@ body {
 	width: calc(50% - 5px); /* 버튼 사이의 간격을 조정 */
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 }
 
 </style>
