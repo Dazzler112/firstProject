@@ -21,10 +21,34 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+	font-size: 60px;
+	color: #55A44E;
+	margin-bottom: 20px;
+/* 	font-weight: bold; */
+}
 
+#checkIdBtn, #checkNameBtn, #checkEmailBtn, #verifyEmailBtn, #checkPhoneNumBtn, #checkNicknameBtn{
+	color: #fff;
+	font-size: 16px;
+	background-color: #55A44E;
+}
+
+.btn-group label.btn {
+  color: #000000;
+  background-color: transparent;
+  border-color: #55A44E;
+}
+
+.btn-group input:checked + label.btn {
+  background-color: #55A44E;
+}
+
+.container-lg {
+	margin-top: 50px;
+}
 </style>
 <body>
-
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
@@ -72,13 +96,13 @@ body {
 					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 					
 					  <input type="radio" class="btn-check" name="gender" id="inputGenderM" autocomplete="off" value="남">
-					  <label class="btn btn-outline-primary" for="inputGenderM">남</label>
+					  <label class="btn btn-outline-success" for="inputGenderM">남</label>
 					
 					  <input type="radio" class="btn-check" name="gender" id="inputGenderW" autocomplete="off" value="여">
-					  <label class="btn btn-outline-primary" for="inputGenderW">여</label>
+					  <label class="btn btn-outline-success" for="inputGenderW">여</label>
 					
 					  <input type="radio" class="btn-check" name="gender" id="inputGenderX" autocomplete="off" value="선택 안함">
-					  <label class="btn btn-outline-primary" for="inputGenderX">선택 안함</label>
+					  <label class="btn btn-outline-success" for="inputGenderX">선택 안함</label>
 					</div>					
 				</div>
 

@@ -52,6 +52,11 @@ public class MemberController {
 	public void jusoPopup() {
 		
 	}
+	
+	@PostMapping("jusoPopup")
+	public void jusoPopup2() {
+		
+	}
 
 	@PostMapping("signup")
 	@PreAuthorize("isAnonymous()")
