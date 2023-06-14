@@ -252,5 +252,14 @@ $("#verifyEmailBtn").click(function() {
 		});
 	}
 });
+///teamProject/src/main/webapp/WEB-INF/views/member/jusoPopup.jsp
+	function goPopup() {
+		var pop = window.open("/member/jusoPopup", "pop",
+				"width=570,height=420, scrollbars=yes, resizable=yes");
+	}
 
+	function jusoCallBack(roadFullAddr) {
+		var addressEI = document.querySelector("#inputAddress");
+		addressEI.value=roadFullAddr;
+	}
 
