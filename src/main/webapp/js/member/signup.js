@@ -240,7 +240,6 @@ $("#verifyEmailBtn").click(function() {
 
 				if (authentication) {
 					// 인증번호 일치 시 회원 가입 진행
-					// 회원 가입 로직 추가
 					checkEmail = true;
 					enableSubmit();
 

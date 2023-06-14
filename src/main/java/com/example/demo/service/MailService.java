@@ -39,7 +39,7 @@ public class MailService {
 		int randomNumber = random.nextInt(900000) + 100000;
 
 		simpleMessage.setSubject("중고거래 플랫폼 인증메일입니다.");
-		simpleMessage.setText("안녕하세요! Second STOP입니다! 회원 가입 인증 관련 번호를 보내드립니다.\n" + "\n" + "인증 번호\n" + "++++++++++\n"
+		simpleMessage.setText("안녕하세요! Second Stop입니다! 회원 가입 인증 관련 번호를 보내드립니다.\n" + "\n" + "인증 번호\n" + "++++++++++\n"
 				+ randomNumber + "\n++++++++++");
 
 		javaMailSender.send(simpleMessage);
