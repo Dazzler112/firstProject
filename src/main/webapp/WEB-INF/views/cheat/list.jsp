@@ -23,6 +23,7 @@ body {
 
 .container-lg {
 	text-align: center;
+	margin-top: 65px;
 }
 
 .container-lg>h1 {

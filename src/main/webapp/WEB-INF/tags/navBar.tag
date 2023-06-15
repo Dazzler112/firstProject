@@ -18,7 +18,6 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
- 
 				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image">
 				<sec:authorize access="isAnonymous()">
 					<!-- 로그인 안되어 있을때 -->

@@ -13,23 +13,23 @@
 </head>
 <style>
 .col-sm-10 {
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .input-group {
-	margin: 50px;
+	margin: 30px;
 }
 
 .col-sm-10>h3 {
-	font-size: 50px;
+	font-size: 30px;
 	color: #55A44E;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
 
 .col-sm-10>h5 {
-	font-size: 20px;
+	font-size: 17px;
 	color: #55A44E;
 	margin-bottom: 20px;
 }
