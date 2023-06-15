@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>SecondStop</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
@@ -63,6 +63,73 @@
 	margin: 10px 0px ;
 	padding-bottom: 20px;
 	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+/* 모달 */
+#deleteConfirmModal{
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.37);
+	display: none;
+}
+.modal_content{
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 2px solid #888;
+	border-radius: 5px;
+	width: 40%;
+	font-weight: 600;
+}
+.modal-f-header{
+	display:flex;
+	justify-content: center;
+	margin: 5px 0px 20px 0px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	
+}
+.modal-title-f{
+	font-weight: 600;
+	font-size: 27px;
+}
+.modal-text-f{
+	margin-bottom:10px;
+}
+#close-modal-s{
+	border: none;
+	padding: 8px 13px;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 10px;
+	color: white;
+	font-weight: 600;
+	margin-right: 10px;
+}
+#delete-modal{
+	border: none;
+	padding: 8px 13px;
+	background-color: red;
+	border-radius: 10px;
+	color: white;
+	font-weight: 600;
+	margin-right: 10px;
+}
+/* 댓글삭제 모달 */
+#deleteCommentModal{
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.37);
+	display: none;
+	
 }
 </style>
 </head>
@@ -131,7 +198,7 @@
 					<c:if test="${userId eq getBoard.writer }">
 				<div class="mb-3">
 					<a class="btn btn-secondary" href="/freeboard/freeupdate/${getBoard.id}">수정</a>
-					<button class="btn btn-danger" form="removeForm" type="submit">삭제</button>
+					<button  id="delete_modal-btn" class="btn btn-danger" type="submit" >삭제</button>
 				</div>
 				</c:if>
 				</sec:authorize>
@@ -146,11 +213,11 @@
 			<textarea rows="" id="commentTextArea" class="comment_input"></textarea>
 			<button id="sendCommentBtn" class="comment-commit">올리기</button>
 		</div>
-		<div id="updateCommentContainer">
+		<!-- <div id="updateCommentContainer">
 			<input type="hidden" id="commentUpdateIdInput"/>
 			<textarea id="commentUpdateTextArea" class="update_comment-text" placeholder="내용을 입력해주세요"></textarea>
 			<button id="updateCommentBtn" class="update-commit">수정</button>
-		</div>
+		</div> -->
 		</sec:authorize>
 		<hr />
 			<c:if test="${commentCnt.get(0).commentCount > 0}">
@@ -179,12 +246,70 @@
 		</form>
 	</div>
 	
+	<!-- 모달 -->
+	<!-- 게시글 삭제시  -->
+	<div style="" class="delete_modal-f" id="deleteConfirmModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal_content">
+			<div class="modal-f-header">
+			<h1 class="modal-title-f" id="exampleModalLabel">게시글 삭제</h1>
+			</div>
+			<div class="modal-text-f">
+				<span>정말로 게시글을 삭제하시겠습니까?</span>
+			</div>
+			<div class="modal-f-footer">
+			<button type="button" id="close-modal-s" >닫기</button>
+			<button type="submit" id="delete-modal" form="removeForm">삭제</button>
+			</div>
+		</div>
+	</div>
+	<!-- 댓글 삭제시 -->
+	<div style="" class="delete_modal-f" id="deleteCommentModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal_content">
+			<div class="modal-f-header">
+			<h1 class="modal-title-f" id="exampleModalLabel">댓글 삭제</h1>
+			</div>
+			<div class="modal-text-f">
+				<span>정말로 댓글을 삭제하시겠습니까?</span>
+			</div>
+			<div class="modal-f-footer">
+			<button type="button" id="close_comment-modal-s" >닫기</button>
+			<button type="submit" id="delete_comment-modal" form="removeForm">삭제</button>
+			</div>
+		</div>
+	</div>
 	</c:if>
 	</sec:authorize>
-	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/freeboard/like.js"></script>
 	<script src="/js/freeboard/comment.js"></script>
+	<script>
+	//게시글삭제
+	$(function() {
+		  // 삭제 버튼 클릭 시 모달 열기
+		  $("#delete_modal-btn").click(function() {
+		    $("#deleteConfirmModal").fadeIn();
+		  });
+
+		  // 닫기 버튼 클릭 시 모달 닫기
+		  $("#close-modal, #close-modal-s").click(function() {
+		    $("#deleteConfirmModal").fadeOut();
+		  });
+		});
+	// 댓글삭제
+	</script>
+<!-- 	<script src="/js/freeboard/comment.js">
+	$(function() {
+		  // 삭제 버튼 클릭 시 모달 열기
+		  $(".commentDeleteButton").click(function() {
+		    $("#deleteCommentModal").fadeIn();
+		  });
+
+		  // 닫기 버튼 클릭 시 모달 닫기
+		  $("#close_comment-modal, #close_comment-modal-s").click(function() {
+		    $("#deleteCommentModal").fadeOut();
+		  });
+		});
+	</script> -->
 </body>
 </html>
