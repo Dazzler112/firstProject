@@ -11,26 +11,73 @@ $("#sendCommentBtn").click(function() {
 		data:JSON.stringify(data),
 		complete: function(){
 			listComment();
+			
+			$("#commentTextArea").val("");
 		}
 	})
 });
 
+		//수정 get후 전송
+		$("#updateCommentBtn").click(function(){
+		const commentId = $("#commentUpdateIdInput").val();
+		const content = $("#commentUpdateTextArea").val();
+		const data = {
+			id:commentId,
+			content : content
+		}
+		$.ajax("/comment/update", {
+			method: "put",
+			contentType:"application/json",
+			data:JSON.stringify(data),
+			complete: function(){
+				listComment();
+			}
+			});
+		})
 
 
 function listComment(){
 
 const boardId = $("#boardIdText").text().trim();
+const depth = $("#depthText").val();
+const data = { boardId, depth };
+$.ajax("/comment/updateShape",{
+	method:"post",
+	contentType:"application/json",
+	data:JSON.stringify(data),
+	complete: function(){
 $.ajax("/comment/list?board=" + boardId, {
 	method:"get", 
 	success: function(comments){
 		$("#commentListContainer").empty();
 		for(const comment of comments){
+			const editBtn = `
+				<button 
+						id="commentDeleteBtn${comment.id}" 
+						class="commentDeleteButton"
+						style="background-color: red; border:none; border-radius:5px; color:rgba(0,0,0,0.3); background-color:rgba(0,0,0,0);"
+						data-comment-id="${comment.id}">
+							<i class="fa-regular fa-trash-can"></i>
+						</button>
+					<button
+						id="commentUpdateBtn${comment.id}"
+						class="commentUpdateButton"
+						style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);"
+						data-comment-id="${comment.id}">
+							<i class="fa-solid fa-repeat"></i>
+						</button>
+			`;
+			
 			$("#commentListContainer").append(`
-					
-					<div style="margin:5px 0px; padding:3px 7px;">
-						${comment.memberId}
-						: ${comment.content}
+					<li style="margin:5px 0px; padding:3px 7px;">
+					<div>
+						<div class="user_name">${comment.memberId}</div>
+						<div class="user_text">${comment.content}</div>
 						<div style="font-size:14px; color:rgba(0,0,0,0.3);">${comment.inserted}</div>
+					</div>
+						<div>
+						${comment.editable ? editBtn : ''}
+						</div>
 						<button id="commentReplyBtn${comment.id}"
 						 class="commentReplyButton"
 						 data-comment-id="${comment.id}"
@@ -38,20 +85,7 @@ $.ajax("/comment/list?board=" + boardId, {
 						 <i class="fa-solid fa-reply">!대댓글!</i>
 						 </button>
 						
-						<button id="commentDeleteBtn${comment.id}" 
-						class="commentDelteButton"
-						data-comment-id="${comment.id}"
-						style="background-color: red; border:none; border-radius:5px; color:rgba(0,0,0,0.3); background-color:rgba(0,0,0,0);">
-						<i class="fa-solid fa-trash"></i>
-						</button>
-						
-							<button id="commentUpdateBtn${comment.id}"
-								class="commentUpdateButton"
-								data-comment-id="${comment.id}"
-								style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);">
-							<i class="fa-solid fa-repeat"></i>
-							</button>
-					</div>
+					</li>
 					<div id="commentReplyFormContainer${comment.id}" style="display: none; margin:0px 0px 0px 15px;">
        			 	<textarea id="commentReplyContent${comment.id}" rows="3" cols="50"></textarea>
         			<button class="commentReplySubmitBtn" data-comment-id="${comment.id}">댓글 등록</button>
@@ -88,7 +122,7 @@ $.ajax("/comment/list?board=" + boardId, {
      	 $("#comment_counting-cnt").text("댓글수 " + commentCount);
 			
 			//삭제버튼 상호작용
-			$(".commentDelteButton").click(function(){
+			$(".commentDeleteButton").click(function(){
 				const commentId = $(this).attr("data-comment-id");
 				$.ajax("/comment/id/" + commentId, {
 					method:"delete",
@@ -107,25 +141,9 @@ $.ajax("/comment/list?board=" + boardId, {
 					}
 				})
 			});
-		//수정 get후 전송
-		$("#updateCommentBtn").click(function(){
-		const commentId = $("#commentUpdateIdInput").val();
-		const content = $("#commentUpdateTextArea").val();
-		const data = {
-			id:commentId,
-			content : content
-		}
-		$.ajax("/comment/update", {
-			method: "put",
-			contentType:"application/json",
-			data:JSON.stringify(data),
-			complete: function(){
-				listComment();
-			}
-			});
-		})
 			
 		}
 	});
-
+	}
+	});
 }

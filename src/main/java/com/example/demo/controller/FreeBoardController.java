@@ -93,7 +93,6 @@ public class FreeBoardController {
 		rttr.addFlashAttribute("message",id +"번 게시물이 삭제되었습니다.");
 		return "redirect:/freeboard/freelist";
 		}else {
-		System.out.println("실패");
 		rttr.addFlashAttribute("message","게시물 삭제에 실패하였습니다.");
 		return "redirect:/freeboard/id/" + id;
 		}
