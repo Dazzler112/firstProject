@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,22 +11,56 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-.button-group {
-	position: fixed;
-	right: 20px;
-	bottom: 20px;
-	display: flex;
-	flex-direction: row;
+
+html, body {
+  height: 80%;
 }
 
-.button-group a {
-	margin-left: 10px;
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.container-lg>h1{
+	font-size: 40px;
+	color: #55A44E;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.container-lg>h3{
+	font-size: 31px;
+	color: #55A44E;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.checkBtn{
+  justify-content: center;
+  text-align: center;
+  margin: 45px;
+}
+
+#reCheck{
+	width: 900px;
+	margin: 5px;
+	color: white;
+	background-color: #55A44E;
+}
+
+#reportButton {
+	width: 900px;
+	margin: 5px;
+	color: white;
+	background-color: #55A44E;
+}
 
 </style>
 </head>
 <body>
+
+	<my:navBar></my:navBar>
 
 	<div class="container-lg">
 		<h1>Second Stop 사기 통합 조회 목록</h1>
@@ -34,32 +69,37 @@
 		<hr />
 
 		<table class="table">
-			<c:if test="${cheatList != null}">				
-					<thead >
-						<tr>
-							<th>${param.search }<br /> 피해사례 조회 결과
-							</th>
-						</tr>
-					</thead>				
+			<c:if test="${cheatList != null}">
+				<thead>
+					<tr>
+						<th style="font-size: 25px">${param.search }<br /> 피해사례 조회 결과
+						</th>
+						<th></th>
+					</tr>
+				</thead>
 			</c:if>
 			<tbody>
 				<c:if test="${cheatCount != 0}">
 					<tr>
-						<td>Second Stop DB</td>
-						<td>${cheatCount }회신고됨</td>
+						<td style="font-size: 25px;">Second Stop DB</td>
+						<td style="font-size: 19px; color: #55A44E; font-weight: bold">${cheatCount }회 신고됨</td>
 					</tr>
 				</c:if>
 			</tbody>
 		</table>
 
+
 		<c:if test="${cheatCount == 0}">
 			<h3>신고된 피해 사례가 없습니다.</h3>
 		</c:if>
 
-		<div class="button-group">
-			<a href="./check" class="btn btn-info">다시 조회하기</a>
-			<!-- <a href="./" class="btn btn-danger">신고하기</a> -->
-			<button id=reportButton " class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">신고하기</button>
+		<div class="checkBtn">
+			<div>
+				<a id="reCheck" href="./check" class="btn btn-light">다시 조회하기</a>
+			</div>
+			<div>
+				<button id="reportButton" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#reportModal">신고하기</button>
+			</div>
 		</div>
 
 		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -92,9 +92,7 @@ body {
 	<div class="login-wrapper">
 		<h1>Login</h1>
 		<form method="post" id="login-form">
-			<!-- 			<label for="inputUsername" class="form-label">아이디</label>  -->
 			<input id="inputUsername" type="text" name="username" placeholder="ID">
-			<!-- 			<label for="inputPassword" class="form-label">암호</label>  -->
 			<input id="inputPassword" type="password" name="password" placeholder="Password"> 
 			<input type="submit" value="Login"> 
 			<input type="button" value="Sign Up" onclick="location.href='/member/signup'" />

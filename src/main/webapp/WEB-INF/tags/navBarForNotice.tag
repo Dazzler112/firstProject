@@ -14,11 +14,10 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-				<!-- <button class="header__menu">&#9776;</button> -->
-				<span class="header__title"><a class="linkcolor" href="/teamProject/list1">HOME</a></span>
+				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image"> <span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
 			</div>
 			<!-- 검색창 -->
-			<div class="container-fluid ms-auto">
+			<div class="header__center">
 				<form action="./noticeList" class="d-flex" role="search">
 					<div class="input-group">
 						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
@@ -27,7 +26,7 @@
 							<option value="body" ${param.type eq 'body' ? 'selected' : '' }>본문</option>
 							<option value="writer" ${param.type eq 'writer' ? 'selected' : '' }>작성자</option>
 						</select> <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">
+						<button class="btn btn-outline-light" type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>
 					</div>
@@ -36,8 +35,8 @@
 
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-group dropstart">
-				<button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="header__profile"></i>
+				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
+				    <i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
 				</button>
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
@@ -60,11 +59,13 @@
 						</button>
 					</li>
 					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
 					<li>
 						<button class="dropdown-item" type="button">
 							<a href="/mainAdd">상품등록</a>
 						</button>
 					</li>
+					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li>
 							<button class="dropdown-item" type="button">

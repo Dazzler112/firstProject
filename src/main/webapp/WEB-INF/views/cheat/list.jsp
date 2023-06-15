@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,40 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+html, body {
+	height: 65%;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container-lg {
+	text-align: center;
+}
+
+.container-lg>h1 {
+	font-size: 40px;
+	color: #55A44E;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+#reCheck {
+	width: 900px;
+	margin: 5px;
+	color: white;
+	background-color: #55A44E;
+	text-align: center;
+	margin: 45px;
+}
+</style>
 <body>
 
-
+	<my:navBar></my:navBar>
 
 	<div class="container-lg">
 		<h1>조회 목록</h1>
@@ -34,7 +66,8 @@
 					<c:forEach items="${cheatList}" var="cheat">
 						<tr>
 							<td>${cheat.nickName }</td>
-							<td>0${cheat.phoneNum }</td> <%-- db에서 varchar타입이지만 jsp에서 출력한 화면에는 0이 빠짐 --%>
+							<td>0${cheat.phoneNum }</td>
+							<%-- db에서 varchar타입이지만 jsp에서 출력한 화면에는 0이 빠짐 --%>
 							<td>${cheat.account }</td>
 						</tr>
 					</c:forEach>
@@ -42,16 +75,18 @@
 			</tbody>
 		</table>
 
-			<c:if test="${cheatList == null}">
-				<h3>신고된 피해 사례가 없습니다.</h3>
-			</c:if>
+		<c:if test="${cheatList == null}">
+			<h3>신고된 피해 사례가 없습니다.</h3>
+		</c:if>
 
-		<a href="./check" class="btn btn-info">다시 조회하기</a>
+		<div>
+			<a id="reCheck" href="./check" class="btn btn-light">다시 조회하기</a>
+		</div>
 
 	</div>
 
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

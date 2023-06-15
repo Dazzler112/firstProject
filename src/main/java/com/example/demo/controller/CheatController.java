@@ -29,7 +29,6 @@ public class CheatController {
 						     Model model) {
 		List<Cheat> list = service.cheatCheck(search, type);
 		model.addAttribute("cheatList", list);
-		System.out.println(list);
 		
 //		return "list";
 	}
@@ -44,8 +43,6 @@ public class CheatController {
 		
 		Integer cheatcount = service.cheatCount(search, type);
 		model.addAttribute("cheatCount", cheatcount);
-
-//		System.out.println(cheatcount);
 		
 //		return "result";
 	}
