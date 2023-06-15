@@ -10,7 +10,7 @@
 
 	<select id="selectAll3"
 		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product
+		SELECT * FROM Product ORDER BY Likes DESC
 	</select>
 
 	<select id="selectAll4"

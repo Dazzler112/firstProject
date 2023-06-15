@@ -30,8 +30,12 @@ public class CategoryController {
 			title = "명품";
 		} else if (category.equals("electronics")) {
 			title = "전자기기";
+		} else if (category.equals("hobby")) {
+			title = "취미";
+		} else if (category.equals("share")) {
+			title = "나눔";
 		}
-
+		
 		return title;
 	}
 

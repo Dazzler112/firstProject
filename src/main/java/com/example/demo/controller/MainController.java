@@ -51,10 +51,11 @@ public class MainController {
 			@RequestParam(value = "writer", defaultValue = "") String writer,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes) {
+			@RequestParam(value = "likes", defaultValue = "") Integer likes,
+			@RequestParam(value = "memberId", defaultValue = "") String memberId) {
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
-		List<Product> productList3 = service.listBoard4(price, title, inserted, address, likes);
+		List<Product> productList3 = service.listBoard4(memberId, price, title, inserted, address, likes);
 		List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
 
 		model.addAttribute("notice", noticeList);
@@ -62,6 +63,14 @@ public class MainController {
 		model.addAttribute("productList2", productList2);
 
 		return "mainList2";
+	}
+
+	@GetMapping("exList")
+	public String productList(Model model) {
+		List<Product> list = service.productListService();
+
+		model.addAttribute("list", list);
+		return "exList";
 	}
 
 	@GetMapping("/id/{id}")
@@ -82,8 +91,8 @@ public class MainController {
 			System.out.println("실패함");
 			rttr.addFlashAttribute("message", "게시물 삭제에 실패하였습니다.");
 			return "redirect:/product/id" + id;
-			}
 		}
+	}
 
 	@GetMapping("/productUpdate/{id}")
 	public String updateView(@PathVariable("id") Integer id, Model model) {
@@ -92,48 +101,44 @@ public class MainController {
 		return "product/productUpdate";
 	}
 
-	@GetMapping("productAdd")
+	@GetMapping("mainAdd")
 	@PreAuthorize("isAuthenticated()")
-	public void getAddView() {
-		
+	public String getAddView() {
+		return "mainAdd";
 	}
-	
-	@PostMapping("productAdd")
-	public String addForm(@RequestParam("fileList") MultipartFile[] files,
-						  @RequestParam("productCategory") String category
-						,Product product 
-						,RedirectAttributes rttr
-						,Model model,
-						Authentication authentication) 
-								throws Exception{
+
+	@PostMapping("mainAdd")
+	public String addForm(@RequestParam("files") MultipartFile[] files,
+			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
+			Authentication authentication)
+			throws Exception {
 		product.setWriter(authentication.getName());
-		boolean ok = service.addProcess(product,files,category);
-		
-		model.addAttribute("category",category);
-		if(ok) {
-			rttr.addFlashAttribute("message","게시글이 생성되었습니다.");
-			return "redirect:/freeboard/id/" + product.getId();
-		}else {
+		boolean ok = service.addProduct(product, files, category);
+
+		model.addAttribute("product", product);
+		if (ok) {
+			rttr.addFlashAttribute("message", "게시글이 생성되었습니다.");
+			return "redirect:/teamProject/exList/id/" + product.getId();
+		} else {
 			rttr.addFlashAttribute("message", product.getId() + "게시글 생성에 실패하였습니다.");
 			return "redirect:mainList2";
 		}
 	}
-	
+
 	@PostMapping("/productUpdate/{id}")
 	public String update(@PathVariable("id") Integer id,
-	                     Product product,
-	                     @RequestParam(value = "removeFiles", required = false) List<String> removeProductPhoto,
-	                     @RequestParam(value = "listFiles", required = false) MultipartFile[] addFile,
-	                     RedirectAttributes rttr) throws Exception {
-	    boolean ok = service.updateProcess(product, removeProductPhoto, addFile);
+			Product product,
+			@RequestParam(value = "removeFiles", required = false) List<String> removeProductPhoto,
+			@RequestParam(value = "listFiles", required = false) MultipartFile[] addFile,
+			RedirectAttributes rttr) throws Exception {
+		boolean ok = service.updateProcess(product, removeProductPhoto, addFile);
 
-	    if (ok) {
-	        rttr.addFlashAttribute("message", product.getId() + "번 게시물이 수정되었습니다.");
-	        return "redirect:/product/id/" + product.getId();
-	    } else {
-	        rttr.addFlashAttribute("message", product.getId() + "번 게시물 수정에 실패하였습니다.");
-	        return "redirect:/product/id/" + product.getId();
-	    }
+		if (ok) {
+			rttr.addFlashAttribute("message", product.getId() + "번 게시물이 수정되었습니다.");
+			return "redirect:/product/id/" + product.getId();
+		} else {
+			rttr.addFlashAttribute("message", product.getId() + "번 게시물 수정에 실패하였습니다.");
+			return "redirect:/product/id/" + product.getId();
+		}
 	}
 }
-

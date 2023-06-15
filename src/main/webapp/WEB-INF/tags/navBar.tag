@@ -41,7 +41,7 @@
 					<li><button class="dropdown-item" type="button">
 							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a></button></li>
 					<li><button class="dropdown-item" type="button">
-							<a href="/mainAdd">상품등록</a>
+							<a href="/teamProject/mainAdd">상품등록</a>
 						</button></li>
 					<li><button class="dropdown-item" type="button">
 							<a href="/member/logout">로그아웃</a>

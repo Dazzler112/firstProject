@@ -28,11 +28,11 @@ public class ProductService {
 	private S3Client s3;
 
 	private ProductMapper productMapper;
-	
+
 	@Autowired
-    public ProductService(ProductMapper productMapper) {
-        this.productMapper = productMapper;
-    }
+	public ProductService(ProductMapper productMapper) {
+		this.productMapper = productMapper;
+	}
 
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
@@ -50,10 +50,11 @@ public class ProductService {
 		return mapper.selectAll3(price, title, inserted, address, likes);
 	}
 
-	public List<Product> listBoard4(Integer price, String title, LocalDateTime inserted, String address,
+	public List<Product> listBoard4(String memberId, Integer price, String title, LocalDateTime inserted,
+			String address,
 			Integer likes) {
 
-		return mapper.selectAll4(price, title, inserted, address, likes);
+		return mapper.selectAll4(memberId, price, title, inserted, address, likes);
 	}
 
 	public List<Product> listBoard5(String status, String writer, String title, LocalDateTime inserted, Integer views,
@@ -82,17 +83,45 @@ public class ProductService {
 		return mapper.updateProduct(product) > 0;
 	}
 
-	@Transactional
-	public boolean addProcess(Product product, MultipartFile[] files, String category) throws Exception {
-	    // TODO: Implement the logic to add a product with its photos
-	    
-	    // 상품을 데이터베이스에 추가하고 추가된 상품의 ID 값을 반환한다.
-	    Integer productId = productMapper.insertForm(product);
-	    
-	    // 추가된 상품의 ID 값이 null이 아닌 경우, 상품 추가 성공으로 간주한다.
-	    return productId != null;
+//   @Transactional(rollbackFor = Exception.class)
+//   public boolean addProcess(Product product, MultipartFile[] files, String category) throws Exception {
+//       // TODO: Implement the logic to add a product with its photos
+//       
+//       // 상품을 데이터베이스에 추가하고 추가된 상품의 ID 값을 반환한다.
+//       Integer productId = productMapper.insertForm(product);
+//       
+//       // 추가된 상품의 ID 값이 null이 아닌 경우, 상품 추가 성공으로 간주한다.
+//       return productId != null;
+//   }
+
+	@Transactional(rollbackFor = Exception.class)
+	public boolean addProduct(Product product, MultipartFile[] files, String category) throws Exception {
+		Integer productId = productMapper.insertForm(product);
+
+		if (productId != null) {
+			for (MultipartFile file : files) {
+				if (file.getSize() > 0) {
+					productMapper.insertFileName(productId, file.getOriginalFilename());
+					String objectKey = "teamPrj/" + productId + "/" + file.getOriginalFilename();
+
+					PutObjectRequest por = PutObjectRequest.builder()
+							.bucket(bucketName)
+							.key(objectKey)
+							.acl(ObjectCannedACL.PUBLIC_READ)
+							.build();
+
+					RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+
+					s3.putObject(por, rb);
+				}
+			}
+
+			return true;
+		}
+
+		return false;
 	}
-	
+
 	@Transactional()
 	public boolean updateProcess(Product product, List<String> removeProductPhoto, MultipartFile[] addFile)
 			throws Exception {
@@ -159,6 +188,11 @@ public class ProductService {
 		model.addAttribute("getProduct", product);
 
 		return "product/productget";
+	}
+
+	public List<Product> productListService() {
+		List<Product> list = mapper.allProduct();
+		return list;
 	}
 
 }

@@ -1,12 +1,19 @@
 package com.example.demo.mapper;
 
-import java.time.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import org.apache.ibatis.annotations.*;
-import org.springframework.security.core.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.security.core.Authentication;
 
-import com.example.demo.domain.*;
+import com.example.demo.domain.Notice;
+import com.example.demo.domain.Product;
 
 @Mapper
 public interface ProductMapper {
@@ -15,7 +22,8 @@ public interface ProductMapper {
 
 	List<Product> selectAll3(Integer price, String title, LocalDateTime inserted, String address, Integer likes);
 
-	List<Product> selectAll4(Integer price, String title, LocalDateTime inserted, String address, Integer likes);
+	List<Product> selectAll4(String memberId, Integer price, String title, LocalDateTime inserted, String address,
+			Integer likes);
 
 	List<Product> selectAll5(String status, String writer, String title, LocalDateTime inserted, Integer views,
 			Integer likes, Integer price, String content);
@@ -25,72 +33,58 @@ public interface ProductMapper {
 
 	List<Product> selectAll7(String title, Integer price, String address, LocalDateTime inserted);
 
-	@Select("""
-            SELECT *
-            FROM Product
-            WHERE id = #{id}
-            """)
-    Product selectById(Integer id);
+	@Select("SELECT * FROM Product WHERE id = #{id}")
+	Product selectById(Integer id);
 
-    @Insert("""
-            INSERT INTO Product(CategoryId, title, body, price, address)
-            VALUES(#{categoryId}, #{title}, #{body}, #{price}, #{address})
-            """)
-    @Options(useGeneratedKeys = true, keyProperty = "id")
-    Integer insertForm(Product product);
+	@Insert("INSERT INTO Product(CategoryId, MemberID, title, body, price, address, Qty) " +
+			"VALUES(#{categoryId}, #{memberId}, #{title}, #{body}, #{price}, #{address}, #{qty})")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	Integer insertForm(Product product);
 
-    @Insert("""
-            INSERT INTO ProductPhoto(ProductId, ProductTitle)
-            VALUES(#{productId}, #{photoTitle})
-            """)
-    Integer insertFileName(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
+	@Insert("INSERT INTO ProductPhoto(ProductId, ProductTitle) VALUES(#{productId}, #{photoTitle})")
+	Integer insertFileName(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
 
-    @Update("""
-            UPDATE Product
-            SET CategoryId = #{categoryId}, title = #{title}, body = #{body}, price = #{price}, address = #{address}
-            WHERE id = #{id}
-            """)
-    int updateProduct(Product product);
+	@Update("UPDATE Product SET CategoryId = #{categoryId}, title = #{title}, body = #{body}, " +
+			"price = #{price}, address = #{address} WHERE id = #{id}")
+	int updateProduct(Product product);
 
-    @Delete("""
-            DELETE FROM ProductPhoto
-            WHERE ProductId = #{productId} AND ProductTitle = #{photoTitle}
-            """)
-    int deleteFileNameUpdate(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
+	@Delete("DELETE FROM ProductPhoto WHERE ProductId = #{productId} AND ProductTitle = #{photoTitle}")
+	int deleteFileNameUpdate(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
 
 	Product getProductList(Integer id);
 
 	void updateFileName(Integer id, String originalFilename);
 
-	// 게시글 삭제
-	@Delete("""
-			DELETE FROM Product
-			WHERE id = #{id}
-			""")
+	@Delete("DELETE FROM Product WHERE id = #{id}")
 	int removeForm(Integer id);
 
-	// 파일 있는 버전의 게시글 삭제전 조회
-	@Select("""
-			SELECT ProductPhoto FROM ProductPhoto
-			WHERE prouctId = #{productId}
-			""")
+	@Select("SELECT ProductPhoto FROM ProductPhoto WHERE prouctId = #{productId}")
 	List<String> selectFileByProductId(Integer ProductId);
 
-	// 파일 버켓에서 삭제
-	@Delete("""
-			DELECT FROM ProductPhoto
-			WHERE productId = #{productId}
-			""")
+	@Delete("DELETE FROM ProductPhoto WHERE productId = #{productId}")
 	Integer removeFilebyProductId(Integer productId);
 
 	List<Product> getCountReply(Integer id);
 
 	Product getProcess(Integer id, Authentication authentication);
 
-	@Select("""
-			SELECT * FROM
-			Notice
-			""")
+	@Select("SELECT * FROM Notice")
 	List<Notice> selectAll1(String title, LocalDateTime inserted, String body, String writer);
+
+	@Select("""
+			SELECT
+			id,
+			StatusCode,
+			title,
+			memberId,
+			inserted,
+			views,
+			likes,
+			price
+			FROM
+			Product
+			ORDER BY id DESC
+			""")
+	List<Product> allProduct();
 
 }
