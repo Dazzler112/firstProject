@@ -19,6 +19,9 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
+
+				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image"> <span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
+
 				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png"
 					alt="My Image">
 				<sec:authorize access="isAnonymous()"> <!-- 로그인 안되어 있을때 -->
@@ -27,6 +30,7 @@
 				<sec:authorize access="isAuthenticated()"> <!-- 로그인 하였을때 -->
 					<span class="header__title"><a class="linkcolor" href="/teamProject/list2">SecondStop</a></span>
 				</sec:authorize>
+
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
@@ -43,16 +47,34 @@
 				</button>
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
+
+					<sec:authorize access="isAnonymous">
+						<li><button class="dropdown-item" type="button">
+								<a href="/member/login">로그인</a>
+							</button></li>
+
 					<sec:authorize access="isAnonymous()">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
 							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
+
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/signup">회원가입</a>
 							</button></li>
 					</sec:authorize>
+
+					<li><button class="dropdown-item" type="button">
+							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
+						</button></li>
+					<li><button class="dropdown-item" type="button">
+							<a href="/mainAdd">상품등록</a>
+						</button></li>
+					<sec:authorize access="hasAuthority('admin')">
+						<li><button class="dropdown-item" type="button">
+								<a href="/member/list">회원목록</a>
+
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
@@ -61,6 +83,7 @@
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a href="/mainAdd">상품등록</a>
+
 							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
@@ -70,6 +93,19 @@
 					</sec:authorize>
 				</ul>
 			</div>
+
+
+			<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i class="fa-solid fa-bars"></i></label>
+			<div class="closedsidebar">
+				<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
+				<!--  -->
+
+				<!--  -->
+				<div class="accordion" id="accordionExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">패션</button>
+
 			<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
 				class="fa-solid fa-bars"></i></label>
 			<div class="closedsidebar">
@@ -80,6 +116,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 								패션</button>
+
 						</h2>
 						<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 							<div class="accordion-body"></div>
@@ -87,9 +124,13 @@
 					</div>
 					<div class="accordion-item">
 						<h2 class="accordion-header">
+
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">게임</button>
+
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 								게임</button>
+
 						</h2>
 						<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 							<div class="accordion-body">
@@ -110,18 +151,30 @@
 					</div>
 					<div class="accordion-item">
 						<h2 class="accordion-header">
+
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion Item #3</button>
+						</h2>
+						<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 								Accordion Item #3</button>
 						</h2>
 						<div id="collapseThree" class="accordion-collapse collapse"
 							data-bs-parent="#accordionExample">
+
 							<div class="accordion-body"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			</input>
+
+
+			<a class="iconsearch" href="#">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</a>
+
 			<!-- <a class="iconsearch" href="#"><i class="fa-solid fa-magnifying-glass"></i> </a> -->
 			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch"
 				type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -146,6 +199,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>

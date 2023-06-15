@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,30 @@ public class MemberController {
 	}
 	
 	@PostMapping("mail")
-	public void mailSend(String email) {
+	public void mailSend(Model model, String email, HttpSession session) {
 
-		mailService.sendMail(email);		
+		mailService.sendMail(email, session);		
+
+	}
+	
+	@PostMapping("mailCheck")
+	@ResponseBody
+	public Map<String, Object> mailCheck(Model model, Integer enteredCode, HttpSession session) {
+
+		Boolean ok = mailService.compareNum(enteredCode, session);
+		model.addAttribute("authentication", ok);
+		return Map.of("authentication", ok);
+		
+	}
+	
+	@GetMapping("jusoPopup")
+	public void jusoPopup() {
+		
+	}
+	
+	@PostMapping("jusoPopup")
+	public void jusoPopup2() {
+		
 	}
 
 	@PostMapping("signup")
@@ -70,16 +92,16 @@ public class MemberController {
 
 	@GetMapping("checkPhoneNum/{PhoneNum}")
 	@ResponseBody
-	public Map<String, Object> checkPhoneNum(@PathVariable("PhoneNum") String phoneNum) {
+	public Map<String, Object> checkPhoneNum(@PathVariable("PhoneNum") String phoneNum, Authentication authentication) {
 		
-		return service.checkPhoneNum(phoneNum);
+		return service.checkPhoneNum(phoneNum, authentication);
 	}
 
 	@GetMapping("checkNickName/{NickName}")
 	@ResponseBody
-	public Map<String, Object> checkNickName(@PathVariable("NickName") String nickName) {
+	public Map<String, Object> checkNickName(@PathVariable("NickName") String nickName, Authentication authentication) {
 		
-		return service.checkNickName(nickName);
+		return service.checkNickName(nickName, authentication);
 	}
 	
 	@GetMapping("login")

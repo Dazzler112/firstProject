@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>로그인</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -39,7 +39,7 @@ body {
 
 .login-wrapper>h1 {
 	font-size: 50px;
-	color: #40A798;
+	color: #55A44E;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
@@ -61,14 +61,14 @@ body {
 #login-form>input[type="submit"] {
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 	margin-top: 20px;
 }
 
 #login-form>input[type="button"] {
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 	/* 	margin-top: 20px; */
 }
 
@@ -83,7 +83,7 @@ body {
 	width: calc(50% - 5px); /* 버튼 사이의 간격을 조정 */
 	color: #fff;
 	font-size: 16px;
-	background-color: #40A798;
+	background-color: #55A44E;
 }
 
 </style>
@@ -92,9 +92,7 @@ body {
 	<div class="login-wrapper">
 		<h1>Login</h1>
 		<form method="post" id="login-form">
-			<!-- 			<label for="inputUsername" class="form-label">아이디</label>  -->
 			<input id="inputUsername" type="text" name="username" placeholder="ID">
-			<!-- 			<label for="inputPassword" class="form-label">암호</label>  -->
 			<input id="inputPassword" type="password" name="password" placeholder="Password"> 
 			<input type="submit" value="Login"> 
 			<input type="button" value="Sign Up" onclick="location.href='/member/signup'" />
