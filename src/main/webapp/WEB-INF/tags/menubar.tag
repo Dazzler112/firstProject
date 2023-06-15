@@ -14,15 +14,24 @@
 					<li><a href="#">가구</a>
 					<li><a href="#">게임</a>
 						<ul>
+							<li><a href="http://localhost:8084/category">콘솔게임1</a>
+								<ul>
+									<li><a href="#">Sub Deep 1</a></li>
+									<li><a href="#">Sub Deep 2</a></li>
+									<li><a href="#">Sub Deep 3</a></li>
+									<li><a href="#">Sub Deep 4</a></li>
+								</ul>
+							</li>
 							<li><a href="http://localhost:8084/category">콘솔게임</a>
 								<ul>
 									<li><a href="#">Sub Deep 1</a></li>
 									<li><a href="#">Sub Deep 2</a></li>
 									<li><a href="#">Sub Deep 3</a></li>
 									<li><a href="#">Sub Deep 4</a></li>
-								</ul></li>
-							<li><a href="#">Deep Menu 2</a></li>
-						</ul></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
 					<li><a href="#">Sub Menu 5</a></li>
 				</ul></li>
 			<li><a href="#">게시판</a>
