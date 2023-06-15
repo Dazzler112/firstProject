@@ -4,13 +4,15 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-@Controller
+@RestController
 @RequestMapping("adComment")
 public class AdCommentController {
 	
@@ -19,10 +21,11 @@ public class AdCommentController {
 	
 	@PutMapping("update")
 	@ResponseBody
-	public String update(@RequestBody AdComment comment) {
-		service.update(comment);
+	@PreAuthorize("authenticated and @customSecurityCheck.checkAdCommentWriter(authentication, #comment.id)")
+	public ResponseEntity<Map<String, Object>> update(@RequestBody AdComment comment) {
+		Map<String, Object> res = service.update(comment);
 		
-		return "ok";
+		return ResponseEntity.ok().body(res);
 	}
 	
 	@GetMapping("id/{id}")
@@ -32,24 +35,29 @@ public class AdCommentController {
 	}
 	
 	@DeleteMapping("id/{id}")
-	@ResponseBody
-	public String remove(@PathVariable("id") Integer id) {
-		service.remove(id);
-		
-		return "ok";
-	}
-	
-	@PostMapping("add")
-	public ResponseEntity<Map<String, Object>> add(@RequestBody AdComment comment) {
-		Map<String, Object> res = service.add(comment);
+	@PreAuthorize("authenticated and @customSecurityCheck.checkAdCommentWriter(authentication, #id)")
+	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id") Integer id) {
+		Map<String, Object> res = service.remove(id);
 		
 		return ResponseEntity.ok().body(res);
 	}
 	
+	@PostMapping("add")
+	public ResponseEntity<Map<String, Object>> add(@RequestBody AdComment comment, Authentication authentication) {
+		
+		if(authentication == null) {
+			Map<String, Object> res = Map.of("message", "로그인 후 댓글을 작성해주세요.");
+			return ResponseEntity.status(401).body(res);
+		} else {
+			Map<String, Object> res = service.add(comment, authentication);
+			return ResponseEntity.ok().body(res);
+		}			
+	}
+	
 	@GetMapping("list")
 	@ResponseBody
-	public List<AdComment> list(@RequestParam("board") Integer boardId) {
-		return service.list(boardId);
+	public List<AdComment> list(@RequestParam("board") Integer boardId, Authentication authentication) {
+		return service.list(boardId, authentication);
 	}
 
 }
