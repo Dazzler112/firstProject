@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -91,16 +92,16 @@ public class MemberController {
 
 	@GetMapping("checkPhoneNum/{PhoneNum}")
 	@ResponseBody
-	public Map<String, Object> checkPhoneNum(@PathVariable("PhoneNum") String phoneNum) {
+	public Map<String, Object> checkPhoneNum(@PathVariable("PhoneNum") String phoneNum, Authentication authentication) {
 		
-		return service.checkPhoneNum(phoneNum);
+		return service.checkPhoneNum(phoneNum, authentication);
 	}
 
 	@GetMapping("checkNickName/{NickName}")
 	@ResponseBody
-	public Map<String, Object> checkNickName(@PathVariable("NickName") String nickName) {
+	public Map<String, Object> checkNickName(@PathVariable("NickName") String nickName, Authentication authentication) {
 		
-		return service.checkNickName(nickName);
+		return service.checkNickName(nickName, authentication);
 	}
 	
 	@GetMapping("login")
