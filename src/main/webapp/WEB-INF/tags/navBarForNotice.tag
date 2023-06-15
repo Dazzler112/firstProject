@@ -36,7 +36,7 @@
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-group dropstart">
 				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
-				    <i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
+					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
 				</button>
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
@@ -45,26 +45,31 @@
 							<button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
 							</button>
-					</li>
-					<li>
-						<button class="dropdown-item" type="button">
-							<a href="/member/signup">회원가입</a>
-						</button>
+						</li>
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/signup">회원가입</a>
+							</button>
 					</sec:authorize>
 					</li>
 					<sec:authorize access="isAuthenticated()">
-					<li>
-						<button class="dropdown-item" type="button">
-							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
-						</button>
-					</li>
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
+							</button>
+						</li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-					<li>
-						<button class="dropdown-item" type="button">
-							<a href="/mainAdd">상품등록</a>
-						</button>
-					</li>
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/mainAdd">상품등록</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAuthority('admin')">
+						<li><button class="dropdown-item" type="button">
+								<a href="/member/list">회원목록</a>
+							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li>

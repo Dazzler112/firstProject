@@ -17,20 +17,20 @@ html, body {
 }
 
 body {
-  display: flex;
+/*   display: flex; */
   align-items: center;
   justify-content: center;
 }
 
 .container-lg>h1{
-	font-size: 40px;
+	font-size: 30px;
 	color: #55A44E;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
 
 .container-lg>h3{
-	font-size: 31px;
+	font-size: 20px;
 	color: #55A44E;
 	margin-bottom: 20px;
 	font-weight: bold;
@@ -72,7 +72,7 @@ body {
 			<c:if test="${cheatList != null}">
 				<thead>
 					<tr>
-						<th style="font-size: 25px">${param.search }<br /> 피해사례 조회 결과
+						<th style="font-size: 15px">${param.search }<br /> 피해사례 조회 결과
 						</th>
 						<th></th>
 					</tr>
@@ -81,8 +81,8 @@ body {
 			<tbody>
 				<c:if test="${cheatCount != 0}">
 					<tr>
-						<td style="font-size: 25px;">Second Stop DB</td>
-						<td style="font-size: 19px; color: #55A44E; font-weight: bold">${cheatCount }회 신고됨</td>
+						<td style="font-size: 13px; font-weight: bold">Second Stop DB</td>
+						<td style="font-size: 15px; color: #55A44E; font-weight: bold">${cheatCount }회 신고됨</td>
 					</tr>
 				</c:if>
 			</tbody>
@@ -119,6 +119,7 @@ body {
 
 	</div>
 
+<%-- 	<my:footer></my:footer> --%>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
