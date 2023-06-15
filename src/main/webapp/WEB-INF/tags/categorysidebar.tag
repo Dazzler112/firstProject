@@ -16,7 +16,36 @@
 					data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">패션</button>
 			</h2>
 			<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body"></div>
+				<div class="accordion-body">
+				<ul class="ulstyle">
+						<div>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+						</div>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="accordion-item">
@@ -28,6 +57,22 @@
 				<div class="accordion-body">
 					<ul class="ulstyle">
 						<div>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
 							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
 							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
 							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
@@ -48,7 +93,36 @@
 					Accordion Item #3</button>
 			</h2>
 			<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body"></div>
+				<div class="accordion-body">
+				<ul class="ulstyle">
+						<div>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
+							<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
+						</div>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
