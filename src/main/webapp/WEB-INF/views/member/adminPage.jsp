@@ -19,38 +19,38 @@
 			<div class="col-12 col-md-8 col-lg-6">
 				<h1>운영자 페이지</h1>
 				<!-- .mb-3*4>label+input -->
-				<div class="mb-3">
-					<label class="form-label" for="">아이디</label>
-					<input class="form-control" type="text" value="${member.id }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">패스워드</label>
-					<input class="form-control" type="text" value="${member.password }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">이름</label>
-					<input class="form-control" type="text" value="${member.name }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">성별</label>
-					<input class="form-control" type="text" value="${member.gender }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">이메일</label>
-					<input class="form-control" type="text" value="${member.email }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">핸드폰 번호</label>
-					<input class="form-control" type="text" value="${member.phoneNum }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">별명</label>
-					<input class="form-control" type="text" value="${member.nickName }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">주소</label>
-					<input class="form-control" type="text" value="${member.address }" readonly />
-				</div>
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">아이디</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.id }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">패스워드</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.password }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">이름</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.name }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">성별</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.gender }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">이메일</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.email }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">핸드폰 번호</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.phoneNum }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">별명</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.nickName }" readonly /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="mb-3"> -->
+<!-- 					<label class="form-label" for="">주소</label> -->
+<%-- 					<input class="form-control" type="text" value="${member.address }" readonly /> --%>
+<!-- 				</div> -->
 
 <%-- 				<sec:authorize access="isAuthenticated() or hasAuthority('admin')"> --%>
 				<sec:authorize access="authentication.name eq #member.id">

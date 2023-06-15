@@ -43,23 +43,19 @@
 				</button>
 				<ul class="dropdown-menu">
 					<!-- Dropdown menu links -->
-
-					<sec:authorize access="isAnonymous()">
+					<sec:authorize access="isAnonymous">
 						<li>
 							<button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
 							</button>
 						</li>
-					</sec:authorize>
-
-					<sec:authorize access="isAnonymous()">
 						<li>
 							<button class="dropdown-item" type="button">
 								<a href="/member/signup">회원가입</a>
 							</button>
-						</li>
 					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
+					</li>
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li>
 							<button class="dropdown-item" type="button">
 								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
@@ -67,15 +63,23 @@
 						</li>
 					</sec:authorize>
 					<sec:authorize access="hasAuthority('admin')">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/mainAdd">상품등록</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/list">회원목록</a>
-					</sec:authorize>					
-					<sec:authorize access="isAuthenticated()">
-					<li>
-						<button class="dropdown-item" type="button">
-							<a href="/teamProject/mainAdd">상품등록</a>
-						</button>
-					</li>
+							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li>
