@@ -115,6 +115,13 @@ public class MemberController {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
 	}
+
+	@GetMapping("adminPage")
+	@PreAuthorize("hasAuthority('admin')")
+	public void getAdminPage(String id, Model model) {
+		Member member = service.getUser(id);
+		model.addAttribute("member", member);		
+	}
 	
 	@GetMapping("modify")
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")

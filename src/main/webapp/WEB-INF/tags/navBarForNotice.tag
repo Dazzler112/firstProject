@@ -52,10 +52,17 @@
 							</button>
 					</sec:authorize>
 					</li>
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li>
 							<button class="dropdown-item" type="button">
 								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAuthority('admin')">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
 							</button>
 						</li>
 					</sec:authorize>
