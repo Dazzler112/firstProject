@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +36,8 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("id/{id}")
-	public String board(@PathVariable("id") Integer id, Model model) {
-		AdBoard board = service.getBoard(id);
+	public String board(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+		AdBoard board = service.getBoard(id, authentication); 
 		
 		model.addAttribute("board", board);
 		
@@ -42,6 +45,7 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("/modify/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkAdBoardWriter(authentication, #id)")
 	public String modifyForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("board", service.getBoard(id));
 		
@@ -49,6 +53,7 @@ public class AdBoardController {
 	}
 	
 	@PostMapping("/modify/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkAdBoardWriter(authentication, #board.id)")
 	public String modifyProcess(AdBoard board,
 			@RequestParam(value = "files", required = false) MultipartFile[] addFiles,
 			@RequestParam(value = "removeFiles", required = false) List<String> removeFileNames,
@@ -66,6 +71,7 @@ public class AdBoardController {
 	}
 	
 	@PostMapping("remove")
+	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkAdBoardWriter(authentication, #id)")
 	public String remove(Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		
@@ -78,14 +84,18 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("add")
+	@PreAuthorize("isAuthenticated()")
 	public void addForm() {
 		
 	}
 	
 	@PostMapping("add")
+	@PreAuthorize("isAuthenticated()")
 	public String addProcess(AdBoard board,
 			@RequestParam("files") MultipartFile[] files,
-			RedirectAttributes rttr) throws Exception {
+			RedirectAttributes rttr,
+			Authentication authentication) throws Exception {
+		board.setWriter(authentication.getName());
 		boolean ok = service.addBoard(board, files);
 		
 		if(ok) {
@@ -100,11 +110,20 @@ public class AdBoardController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public Map<String, Object> like(@RequestBody Like like) {
-		System.out.println(like);
+	public ResponseEntity<Map<String, Object>> like(@RequestBody AdLike like, Authentication authentication) {
 		
-		return null;
+		if (authentication == null) {
+			return ResponseEntity.status(403).body(Map.of("message", "로그인 해주세요"));
+		} else {
+			return ResponseEntity
+					.ok()
+					.body(service.like(like, authentication));
+			
+		}
+		
 	}
+	
+	
 }
 
 

@@ -15,9 +15,10 @@
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
 				<h1>광고게시물 작성</h1>
-				<a class="btn btn-secondary" href="/adBoard/list">HOME</a>
+				<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
 
 				<form method="post" enctype="multipart/form-data">
+					<span>카테고리</span>
 					<select name="category">
 						<option value="이사/용달">이사/용달</option>
 						<option value="인테리어/간판">인테리어/간판</option>
@@ -41,11 +42,7 @@
 					<div class="mb-3">
 						<label for="regionInput" class="form-label">지역</label>
 						<input id="regionInput" class="form-control" type="text" name="region" value="${board.region }" />
-					</div>
-					<div class="mb-3">
-						<label for="writerInput" class="form-label">작성자</label>
-						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
-					</div>
+					</div>					
 					<div class="mb-3">
 						<label for="fileInput" class="form-label">그림 파일</label>
 						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>

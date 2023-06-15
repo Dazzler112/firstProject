@@ -24,10 +24,18 @@ public interface AdBoardMapper {
 				b.inserted,
 				b.writer,
 				b.region,
-				f.fileName
-			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
-			WHERE b.id = #{id}
+				f.fileName,
+				(SELECT COUNT(*)
+					FROM AdBoardLike
+					WHERE boardId = b.id) likeCount,
+				(SELECT COUNT(*)
+			     	FROM AdComment
+			     	WHERE boardId = b.id) commentCount
+				FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId			
+				WHERE b.id = #{id}
 			""")
+	
+	
 	@ResultMap("boardResultMap")
 	AdBoard selectById(Integer id);
 
@@ -35,8 +43,7 @@ public interface AdBoardMapper {
 			UPDATE AdBoard
 			SET
 				title = #{title},
-				body = #{body},
-				writer = #{writer}
+				body = #{body}
 			WHERE
 				id = #{id}
 			""")
@@ -114,10 +121,10 @@ public interface AdBoardMapper {
 				b.region,
 				COUNT(f.id) fileCount,
 			    (SELECT COUNT(*) 
-			     FROM BoardLike 
+			     FROM AdBoardLike 
 			     WHERE boardId = b.id) likeCount,
 			    (SELECT COUNT(*)
-			     FROM Comment
+			     FROM AdComment
 			     WHERE boardId = b.id) commentCount
 			     
 			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
@@ -140,6 +147,8 @@ public interface AdBoardMapper {
 			</script>
 			""")
 	List<AdBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+
+	
 
 }
 

@@ -14,6 +14,12 @@ public class CustomSecurityCheck {
 	private FreeBoardMapper boardMapper;
 	
 	@Autowired
+	private AdBoardMapper adBoardMapper;
+	
+	@Autowired
+	private AdCommentMapper adCommentMapper;
+	
+	@Autowired
 	private FreeCommentMapper commentMapper;
 	
 	@Autowired
@@ -27,12 +33,31 @@ public class CustomSecurityCheck {
 		
 		return username.equals(writer);
 	}
+	
+	public boolean checkAdBoardWriter(Authentication authentication, Integer id) {
+		AdBoard board = adBoardMapper.selectById(id);
+		
+		String username = authentication.getName();
+		String writer = board.getWriter();
+		
+		return username.equals(writer);
+	}
+	
+	
 	public boolean checkCommentWriter(Authentication authentication,
 								      Integer commentId) {
 		FreeComment comment = commentMapper.selectById(commentId);
 		
 		return comment.getMemberId().equals(authentication.getName());
 	}
+	
+	public boolean checkAdCommentWriter(Authentication authentication,
+			Integer commentId) {
+		AdComment comment = adCommentMapper.selectById(commentId);
+		
+		return comment.getMemberId().equals(authentication.getName());
+	}
+	
 
 	public boolean checkNoticeWriter(Authentication authentication, Integer id) {
 		Notice notice = noticeMapper.selectById(id);
