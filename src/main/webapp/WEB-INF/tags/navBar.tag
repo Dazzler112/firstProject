@@ -18,8 +18,8 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-
-				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image"> <span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span> <img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image">
+ 
+				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image">
 				<sec:authorize access="isAnonymous()">
 					<!-- 로그인 안되어 있을때 -->
 					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
@@ -46,56 +46,44 @@
 					<!-- Dropdown menu links -->
 
 					<sec:authorize access="isAnonymous()">
-						<li><button class="dropdown-item" type="button">
+						<li>
+							<button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
-							</button></li>
+							</button>
+						</li>
 					</sec:authorize>
 
 					<sec:authorize access="isAnonymous()">
-						<li><button class="dropdown-item" type="button">
-								<a href="/member/login">로그인</a>
-							</button></li>
-					</sec:authorize>
-					<sec:authorize access="isAnonymous()">
-
-						<li><button class="dropdown-item" type="button">
+						<li>
+							<button class="dropdown-item" type="button">
 								<a href="/member/signup">회원가입</a>
-							</button></li>
+							</button>
+						</li>
 					</sec:authorize>
-
-					<li><button class="dropdown-item" type="button">
-							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
-						</button></li>
-					<li><button class="dropdown-item" type="button">
-
-							<a href="/member/signup">회원가입</a>
-						</button></li>
-					<li><button class="dropdown-item" type="button">
-							<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
-						</button></li>
-					<li><button class="dropdown-item" type="button">
-							<a href="/teamProject/mainAdd">상품등록</a>
-
-						</button></li>
+					<sec:authorize access="isAuthenticated()">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
+							</button>
+						</li>
+					</sec:authorize>
 					<sec:authorize access="hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/list">회원목록</a>
+					</sec:authorize>					
+					<sec:authorize access="isAuthenticated()">
+					<li>
+						<button class="dropdown-item" type="button">
+							<a href="/teamProject/mainAdd">상품등록</a>
+						</button>
+					</li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
-								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
-							</button></li>
-					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
-								<a href="/mainAdd">상품등록</a>
-
-							</button></li>
-					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
+						<li>
+							<button class="dropdown-item" type="button">
 								<a href="/member/logout">로그아웃</a>
-							</button></li>
+							</button>
+						</li>
 					</sec:authorize>
 				</ul>
 			</div>
