@@ -11,5 +11,7 @@ public class AdComment {
 	private Integer boardId;
 	private String content;
 	private String memberId;
-	private LocalDateTime inserted;
+	private LocalDate inserted;
+	
+	private boolean editable;
 }

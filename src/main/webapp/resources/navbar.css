@@ -10,7 +10,7 @@
 	margin-bottom: 30px;
 	width: 100%;
 	background-color:#55A44E;
-	z-index: 2;
+	z-index: 3;
 }
 
 .header__wrapper {
@@ -122,13 +122,16 @@
 	margin-left:20px;
 }
 
-.iconsearch {
+#iconsearch {
 	display: none;
+	
 	position: absolute;
-	right: 20px;
-	font-size: 24px;
+	right: 10px;
+	font-size: 15px;
 	color: black;
 }
+
+.btn:active, .btn:focus { border: none !important; box-shadow: none !important; }
 
 .closedsidebar {
 	width: 250px;
@@ -164,19 +167,7 @@
 	margin: 10px 5px;
 }
 
-#xmark {
-	display: block;
-}
 
-#xmark+label {
-	position: absolute;
-	bottom: 875px;
-	left: 208px;
-	top: 53px;
-	z-index: 2;
-	font-size: 24px;
-	cursor: pointer;
-}
 
 @media screen and (min-width: 900px) {
 .closedsidebar {
@@ -217,10 +208,10 @@
 		font-size: 24px;
 		color: black;
 	}
-	.iconsearch {
+	#iconsearch {
 		display: block;
 		position: absolute;
-		font-size: 24px;
+		font-size: 15px;
 		color: black;
 	}
 	#primary_nav_wrap {

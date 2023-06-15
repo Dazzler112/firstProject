@@ -18,7 +18,7 @@ public class AdBoard {
 
 	private List<String> fileName;
 
-	private Boolean like;
+	private Boolean liked;
 
 	private Integer fileCount;
 	private Integer likeCount;

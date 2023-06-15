@@ -98,13 +98,7 @@ public class PtBoardController {
 		}
 	}
 	
-	@PostMapping("/like")
-	@ResponseBody
-	public Map<String, Object> like(@RequestBody Like like) {
-		System.out.println(like);
-		
-		return null;
-	}
+	
 }
 
 
