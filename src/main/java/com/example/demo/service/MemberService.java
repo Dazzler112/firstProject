@@ -34,9 +34,44 @@ public class MemberService {
 		return cnt == 1;
 	}
 
-	public List<Member> userList() {
-		List<Member> userList = mapper.getAllUserList();
-		return userList;
+	public Map<String, Object> userList(Integer page, String search, String type) {
+//		List<Member> userList = mapper.getAllUserList();
+//		return userList;
+		// 페이지 당 행의 수
+		Integer rowPerPage = 5;
+		// 쿼리 LIMIT 절에 사용할 시작 인덱스
+		Integer startIndex = (page - 1) * rowPerPage;
+
+		// 페이지네이션이 필요한 정보
+		// 전체 레코드 수
+		Integer numOfRecords = mapper.countAll(search, type);		
+		// 맨처음 페이지
+		Integer firstPageNum = 1;
+		// 마지막 페이지 번호
+		Integer lastPageNum = (numOfRecords - 1) / rowPerPage + 1;
+		// 페이지네이션 왼쪽번호
+		Integer leftPageNum = page - 5;
+		// 1보다 작을 수 없음
+		leftPageNum = Math.max(leftPageNum, 1);
+
+		// 페이지네이션 오른쪽번호
+		Integer rightPageNum = leftPageNum + 9;
+		// 마지막페이지보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNum);
+
+		// 현재 페이지
+		Integer currentPageNum = page;
+
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("currentPageNum", page);
+		pageInfo.put("firstPageNum", firstPageNum);
+		pageInfo.put("lastPageNum", lastPageNum);
+		
+		List<Member> userList = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
+		return Map.of("pageInfo", pageInfo, "userList", userList);
+		
 	}
 
 	public Map<String, Object> checkId(String id) {

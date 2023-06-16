@@ -159,15 +159,10 @@
 			</div>
 			</input>
 
-
-			<a class="iconsearch" href="#">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</a>
-
 			<!-- <a class="iconsearch" href="#"><i class="fa-solid fa-magnifying-glass"></i> </a> -->
-			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</button>
+<!-- 			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+<!-- 				<i class="fa-solid fa-magnifying-glass"></i> -->
+<!-- 			</button> -->
 		</div>
 		<div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -192,7 +187,7 @@
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
-				<li class="current-menu-item"><a href="http://localhost:8084/list">홈</a></li>
+				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
 				<li><a href="http://localhost:8084/teamProject/list4">카테고리</a>
 					<ul>
 						<li><a href="#">패션 의류</a></li>
