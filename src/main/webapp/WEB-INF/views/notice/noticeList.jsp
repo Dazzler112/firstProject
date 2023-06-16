@@ -44,7 +44,6 @@
 			<tbody>
 				<c:forEach items="${noticeList }" var="notice">
 					<tr>
-						<%-- 						<td>${notice.id }</td> --%>
 						<td><a href="/notice/noticeId/${notice.id }"> ${notice.title }</a></td>
 						<td>${notice.writer }</td>
 						<td>${notice.inserted }</td>

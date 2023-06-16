@@ -64,4 +64,80 @@ public interface MemberMapper {
 			""")
 	Integer modify(Member member);
 
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT COUNT(*)
+			FROM Member
+			<where>
+			
+			<if test="type == 'all'">
+				id LIKE #{pattern}	
+			 OR nickName LIKE #{pattern}
+		   	 OR name LIKE #{pattern}
+		   	 OR phoneNum LIKE #{pattern}
+		   	 OR email LIKE #{pattern}
+			</if>
+			
+			<if test="type == 'id'">
+				id LIKE #{pattern}	
+			</if>						
+			
+			<if test="type == 'nickName'">
+			 OR nickName LIKE #{pattern}
+			</if>
+			
+			<if test="type == 'name'">
+		   	 OR name LIKE #{pattern}			
+			</if>
+
+			<if test="type == 'phoneNum'">
+		   	 OR phoneNum LIKE #{pattern}			
+			</if>
+
+			<if test="type == 'email'">
+		   	 OR email LIKE #{pattern}			
+			</if>
+						
+		   	</where> 
+		   	 </script>
+			""")
+	Integer countAll(String search, String type);
+
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT 
+				id,
+				password, 
+				nickName, 
+				address,
+				name, 
+				gender,
+				phoneNum,
+				email
+			FROM Member
+			<where>
+				<if test="(type eq 'all') or (type eq 'id')">
+				   id  LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'nickName')">
+				OR nickName   LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'name')">
+				OR name LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'phoneNum')">
+				OR phoneNum LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'email')">
+				OR email LIKE #{pattern}
+				</if>
+			</where>
+			ORDER BY id DESC
+			LIMIT #{startIndex}, #{rowPerPage}
+			</script>
+			""")
+	List<Member> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+
 }
