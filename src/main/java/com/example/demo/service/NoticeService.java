@@ -21,7 +21,7 @@ public class NoticeService {
 				Integer rowPerPage = 10;
 				// 쿼리 LIMIT 절에 사용할 시작 인덱스
 				Integer startIndex = (page - 1) * rowPerPage;
-
+				
 				// 페이지네이션이 필요한 정보
 				// 전체 레코드 수
 				Integer numOfRecords = mapper.countAll(search, type);
