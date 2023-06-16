@@ -196,6 +196,11 @@ $("#commentListContainer").on("click", ".commentUpdateButton", function() {
 		$.ajax("/comment/id/" + commentId, {
 			success: function(data) {
 				commentUpdateTextArea.val(data.content);
+				// 수정 폼을 가운데 정렬하기
+				commentUpdateFormContainer.css({
+					"display": "flex",
+					"justify-content": "center"
+				});
 			}
 		});
 	}

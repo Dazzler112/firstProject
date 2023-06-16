@@ -106,6 +106,7 @@
 		<tbody>
 			<c:forEach items="${notices}" var="notice">
 				<tr>
+
 					<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
 					<td>${notice.inserted}</td>
 					<td>${notice.writer}</td>
@@ -113,6 +114,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
 	</div>
 	<my:footer></my:footer>
 	

@@ -25,6 +25,9 @@ public class MemberController {
 
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	CheatService cheatService;
 
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
@@ -66,7 +69,7 @@ public class MemberController {
 		try {
 			service.signup(member);
 			rttr.addFlashAttribute("message", "회원가입이 완료되었습니다");
-			return "redirect:/member/list";
+			return "redirect:/member/login";
 		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("member", member);
@@ -78,9 +81,12 @@ public class MemberController {
 //	운영자 권한이 있는 계정만 볼 수 있음
 	@GetMapping("list")
 	@PreAuthorize("hasAuthority('admin')")
-	public void userList(Model model) {
-		List<Member> userList = service.userList();
-		model.addAttribute("userList", userList);
+	public void userList(Model model, 
+			   @RequestParam(value = "page", defaultValue = "1") Integer page,
+			   @RequestParam(value = "search", defaultValue = "") String search,
+			   @RequestParam(value = "type", required = false) String type) {
+		Map<String, Object> userList = service.userList(page, search, type);
+		model.addAttribute("userList1", userList);
 	}
 
 	@GetMapping("checkId/{id}")
@@ -115,6 +121,19 @@ public class MemberController {
 		Member member = service.getUser(id);
 		model.addAttribute("member", member);		
 	}
+
+	@GetMapping("adminPage")
+	@PreAuthorize("hasAuthority('admin')")
+	public void userListAdmin(Model model, 
+			   @RequestParam(value = "page", defaultValue = "1") Integer page,
+			   @RequestParam(value = "search", defaultValue = "") String search,
+			   @RequestParam(value = "type", required = false) String type) {
+		Map<String, Object> userList = service.userList(page, search, type);
+		model.addAttribute("userList1", userList);
+		List<Cheat> list = cheatService.cheatCheck(search, type);
+		model.addAttribute("cheatList", list);
+		
+	}
 	
 	@GetMapping("modify")
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
@@ -144,7 +163,7 @@ public class MemberController {
 			//로그아웃
 			request.logout();
 			
-			return "redirect:/member/signup";
+			return "redirect:/member/login";
 		}else {
 			rttr.addFlashAttribute("message", "회원 탈퇴 중 문제가 발생하였습니다.");
 			return "redirect:/member/info?id=" + member.getId();
