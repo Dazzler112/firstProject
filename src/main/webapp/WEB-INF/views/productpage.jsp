@@ -25,7 +25,7 @@
 <body>
 
 <my:navBar></my:navBar>
-<my:menubar></my:menubar>
+
 
 <div class="container">
   <div class="img">
