@@ -70,8 +70,8 @@
 			<thead>
 				<tr>
 					<th>제목</th>
+					<th>작성자</th>
 					<th>올린 시간</th>
-					<th>내용</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -80,8 +80,8 @@
 						<td>
 							<a href="/board/id/${notice.id }"> ${notice.title} </a>
 						</td>
-						<td>${notice.inserted}</td>
 						<td>${notice.writer}</td>
+						<td>${notice.inserted}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

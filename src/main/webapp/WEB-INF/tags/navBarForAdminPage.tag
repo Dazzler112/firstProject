@@ -18,13 +18,15 @@
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
-				<form action="./noticeList" class="d-flex" role="search">
+				<form action="./adminPage" class="d-flex" role="search">
 					<div class="input-group">
 						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
 							<option value="all">전체</option>
-							<option value="title" ${param.type eq 'title' ? 'selected' : '' }>제목</option>
-							<option value="body" ${param.type eq 'body' ? 'selected' : '' }>본문</option>
-							<option value="writer" ${param.type eq 'writer' ? 'selected' : '' }>작성자</option>
+							<option value="id" ${param.type eq 'id' ? 'selected' : '' }>ID</option>
+							<option value="nickName" ${param.type eq 'nickName' ? 'selected' : '' }>별명</option>
+							<option value="name" ${param.type eq 'name' ? 'selected' : '' }>이름</option>
+							<option value="phoneNum" ${param.type eq 'phoneNum' ? 'selected' : '' }>전화번호</option>
+							<option value="email" ${param.type eq 'email' ? 'selected' : '' }>E-mail</option>
 						</select> <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-light" type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
@@ -88,40 +90,17 @@
 				</ul>
 			</div>
 
-			<a class="iconsearch" href="#">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</a>
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
-				<li class="current-menu-item"><a href="http://localhost:8084/list">홈</a></li>
-				<li><a href="http://localhost:8084/category">카테고리</a>
-					<ul>
-						<li><a href="#">패션 의류</a></li>
-						<li><a href="#">수입 명품</a></li>
-						<li><a href="#">전자기기</a></li>
-						<li><a href="#">가구</a>
-						<li><a href="#">게임</a>
-							<ul>
-								<li><a href="http://localhost:8084/category">콘솔게임</a>
-									<ul>
-										<li><a href="#">Sub Deep 1</a></li>
-										<li><a href="#">Sub Deep 2</a></li>
-										<li><a href="#">Sub Deep 3</a></li>
-										<li><a href="#">Sub Deep 4</a></li>
-									</ul></li>
-								<li><a href="#">Deep Menu 2</a></li>
-							</ul></li>
-						<li><a href="#">Sub Menu 5</a></li>
-					</ul></li>
-				<li><a href="#">게시판</a>
-					<ul>
-						<li><a href="/freeboard/freelist">자유게시판</a></li>
-						<li></li>
-						<li></li>
-					</ul>
-				<li><a href="/cheat/check">조회</a>
-				<li><a href="/notice/noticeList">공지사항</a></li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="current-menu-item"><a href="/teamProject/list2">홈</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
+			</sec:authorize>
+				<li><a href="/member/list">회원 목록</a>					
+				<li><a href="/cheat/list">블랙리스트</a>														
 			</ul>
 		</nav>
 	</header>
