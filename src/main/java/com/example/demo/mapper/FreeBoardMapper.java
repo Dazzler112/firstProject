@@ -134,11 +134,12 @@ public interface FreeBoardMapper {
 			b.writer,
 			b.region,
 			b.inserted,
+			b.boardCategory,
 			COUNT(c.id) commentCount
 			FROM Board b LEFT JOIN Comment c ON b.id = c.boardId
 			WHERE b.id = #{id}
 			GROUP BY
-			b.id, b.title, b.writer, b.region, b.inserted
+			b.id, b.title, b.writer, b.region, b.inserted, b.boardCategory
 			""")
 	@ResultMap("replyCount")
 	List<FreeBoard> replyCounting(Integer id);
@@ -177,9 +178,10 @@ public interface FreeBoardMapper {
 			GROUP BY
 				b.id, b.title, b.writer, b.region, b.inserted ,b.boardCategory
 			ORDER BY id DESC
+			LIMIT #{startIndex}, #{rowPage}
 			</script>
 			""")
-	List<FreeBoard> selectPaging( String search, String type);
+	List<FreeBoard> selectPaging( Integer startIndex, Integer rowPage, String search, String type);
 
 	//검색 구조 기본설정
 	@Select("""
@@ -206,17 +208,26 @@ public interface FreeBoardMapper {
 	
 	@Select("""
 			SELECT 
-			id,
-			title,
-			writer,
-			region,
-			inserted,
-			boardCategory
+			b.id,
+			b.title,
+			b.writer,
+			b.region,
+			b.inserted,
+			b.boardCategory,
+			(SELECT COUNT(p.id)
+			FROM PhotoName p 
+			WHERE boardId = b.id)fileCount,
+			(SELECT COUNT(*)
+			FROM Comment
+			WHERE boardId = b.id) commentCount,
+			(SELECT COUNT(*) 
+			 FROM BoardLike
+			 WHERE boardId = b.id) likeCount
 			FROM
-			Board
+			Board b
 			WHERE boardCategory = #{boardCategory}
+			ORDER BY b.id DESC
 			""")
+	@ResultMap("boardCategoryMap")
 	List<FreeBoard> categoryListForm(String boardCategory);
-
-	
 }
