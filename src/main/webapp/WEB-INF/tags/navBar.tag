@@ -52,7 +52,7 @@
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
 							</button></li>
-
+					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/login">로그인</a>
@@ -80,7 +80,7 @@
 					<sec:authorize access="hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/list">회원목록</a>
-
+					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
