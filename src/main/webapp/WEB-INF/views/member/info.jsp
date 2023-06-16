@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<my:navBar></my:navBar>
+	<my:navBarForMyPage></my:navBarForMyPage>
 
 	<div class="container-lg">
 		<div class="row justify-content-center">

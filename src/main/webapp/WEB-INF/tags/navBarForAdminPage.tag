@@ -90,40 +90,17 @@
 				</ul>
 			</div>
 
-			<a class="iconsearch" href="#">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</a>
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
-				<li class="current-menu-item"><a href="http://localhost:8084/list">홈</a></li>
-				<li><a href="http://localhost:8084/category">카테고리</a>
-					<ul>
-						<li><a href="#">패션 의류</a></li>
-						<li><a href="#">수입 명품</a></li>
-						<li><a href="#">전자기기</a></li>
-						<li><a href="#">가구</a>
-						<li><a href="#">게임</a>
-							<ul>
-								<li><a href="http://localhost:8084/category">콘솔게임</a>
-									<ul>
-										<li><a href="#">Sub Deep 1</a></li>
-										<li><a href="#">Sub Deep 2</a></li>
-										<li><a href="#">Sub Deep 3</a></li>
-										<li><a href="#">Sub Deep 4</a></li>
-									</ul></li>
-								<li><a href="#">Deep Menu 2</a></li>
-							</ul></li>
-						<li><a href="#">Sub Menu 5</a></li>
-					</ul></li>
-				<li><a href="#">게시판</a>
-					<ul>
-						<li><a href="/freeboard/freelist">자유게시판</a></li>
-						<li></li>
-						<li></li>
-					</ul>
-				<li><a href="/cheat/check">조회</a>
-				<li><a href="/notice/noticeList">공지사항</a></li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="current-menu-item"><a href="/teamProject/list2">홈</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
+			</sec:authorize>
+				<li><a href="/member/list">회원 목록</a>					
+				<li><a href="/cheat/list">블랙리스트</a>														
 			</ul>
 		</nav>
 	</header>

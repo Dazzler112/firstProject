@@ -44,7 +44,7 @@ body {
 </style>
 <body>
 
-	<my:navBar></my:navBar>
+	<my:navBarForAdminPage></my:navBarForAdminPage>
 
 	<div class="container-lg">
 		<h1>조회 목록</h1>

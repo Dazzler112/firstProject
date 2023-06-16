@@ -79,12 +79,15 @@ public class MemberController {
 	}
 
 //	운영자 권한이 있는 계정만 볼 수 있음
-//	@GetMapping("list")
-//	@PreAuthorize("hasAuthority('admin')")
-//	public void userList(Model model) {
-//		List<Member> userList = service.userList();
-//		model.addAttribute("userList", userList);
-//	}
+	@GetMapping("list")
+	@PreAuthorize("hasAuthority('admin')")
+	public void userList(Model model, 
+			   @RequestParam(value = "page", defaultValue = "1") Integer page,
+			   @RequestParam(value = "search", defaultValue = "") String search,
+			   @RequestParam(value = "type", required = false) String type) {
+		Map<String, Object> userList = service.userList(page, search, type);
+		model.addAttribute("userList1", userList);
+	}
 
 	@GetMapping("checkId/{id}")
 	@ResponseBody
@@ -121,7 +124,7 @@ public class MemberController {
 
 	@GetMapping("adminPage")
 	@PreAuthorize("hasAuthority('admin')")
-	public void userList(Model model, 
+	public void userListAdmin(Model model, 
 			   @RequestParam(value = "page", defaultValue = "1") Integer page,
 			   @RequestParam(value = "search", defaultValue = "") String search,
 			   @RequestParam(value = "type", required = false) String type) {

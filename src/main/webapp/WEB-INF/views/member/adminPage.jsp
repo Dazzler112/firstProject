@@ -18,10 +18,17 @@ container-lg {
 	position: relative;
 }
 
-#checkTable{
-	margin-bottom: 100px;
+.col-12>h1{
+	font-size: 40px;
+	color: #55A44E;
+	margin-bottom: 20px;
+	font-weight: bold;
+	text-align: center;
 }
 
+.table>thead>tr>th{
+	font-size: 15px;
+}
 </style>
 <body>
 
@@ -30,7 +37,7 @@ container-lg {
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12">
-				<h1>운영자 페이지</h1>
+				<h1>회원 목록</h1>
 				<table class="table">
 					<thead>
 						<tr>
@@ -114,35 +121,35 @@ container-lg {
 		</div>
 	</div>
 
-	<div class="container-lg" id="checkTable">
-		<h1>조회 목록</h1>
+<!-- 	<div class="container-lg" id="checkTable"> -->
+<!-- 		<h1>조회 목록</h1> -->
 
-		<!-- 권한이 있는 사람만 볼 수 있는 리스트 : 운영자 아이디에 권한 부여 후 다시 생성-->
-		<table class="table">
-			<c:if test="${cheatList != null}">
-				<thead>
-					<tr>
-						<!-- <th>#</th> -->
-						<th>닉네임</th>
-						<th>전화번호</th>
-						<th>계좌번호</th>
-					</tr>
-				</thead>
-			</c:if>
-			<tbody>
+<!-- 		<!-- 권한이 있는 사람만 볼 수 있는 리스트 : 운영자 아이디에 권한 부여 후 다시 생성--> -->
+<!-- 		<table class="table"> -->
+<%-- 			<c:if test="${cheatList != null}"> --%>
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>#</th> -->
+<!-- 						<th>닉네임</th> -->
+<!-- 						<th>전화번호</th> -->
+<!-- 						<th>계좌번호</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<%-- 			</c:if> --%>
+<!-- 			<tbody> -->
 
-				<c:if test="${cheatList != null}">
-					<c:forEach items="${cheatList}" var="cheat">
-						<tr>
-							<td>${cheat.nickName }</td>
-							<td>0${cheat.phoneNum }</td>
-							<td>${cheat.account }</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-		</table>
-	</div>
+<%-- 				<c:if test="${cheatList != null}"> --%>
+<%-- 					<c:forEach items="${cheatList}" var="cheat"> --%>
+<!-- 						<tr> -->
+<%-- 							<td>${cheat.nickName }</td> --%>
+<%-- 							<td>0${cheat.phoneNum }</td> --%>
+<%-- 							<td>${cheat.account }</td> --%>
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
+<%-- 				</c:if> --%>
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
