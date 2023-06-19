@@ -10,7 +10,9 @@
 	<c:if test="${not empty param.type }">
 		<c:param name="type" value="${param.type }" />
 	</c:if>
-
+	<c:if test="${not empty param.boardCategory }">
+		<c:param name="boardCategory" value="${param.boardCategory }" />
+	</c:if>
 </c:url>
 	<li class="page-item">
 		<a class="page-link ${freePageNum eq pageInfo.thisPage ? 'active' : '' }" href="${freepageLink }">

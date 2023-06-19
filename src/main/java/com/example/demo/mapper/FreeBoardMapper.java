@@ -146,42 +146,48 @@ public interface FreeBoardMapper {
 	
 //	paging
 	@Select("""
-			<script>
-			<bind name="pattern" value="'%' + search + '%'"/>
-			SELECT 
-			b.id,
-			b.title,
-			b.writer,
-			b.region,
-			b.inserted,
-			b.boardCategory,
-			COUNT(p.id) fileCount,
-			(SELECT COUNT (*)
-			FROM Comment
-			WHERE boardId = b.id) commentCount,
-			(SELECT COUNT(*) 
-			     FROM BoardLike 
-			     WHERE boardId = b.id) likeCount
-			FROM
-			Board b LEFT JOIN PhotoName p ON b.id = p.boardId
-			<where>
-			<if test ="(type eq 'all') or (type eq 'title')">
-				title LIKE #{pattern}
-			</if>
-			<if test="(type eq 'all') or (type eq 'body')">
-				OR body LIKE #{pattern}
-			</if>
-			<if test="(type eq 'all') or (type eq 'writer')">
-				OR writer LIKE #{pattern}
-			</if>
-			</where>
-			GROUP BY
-				b.id, b.title, b.writer, b.region, b.inserted ,b.boardCategory
-			ORDER BY id DESC
-			LIMIT #{startIndex}, #{rowPage}
-			</script>
+			  <script>
+    <bind name="pattern" value="'%' + search + '%'" />
+    SELECT b.id
+           , b.title
+           , b.writer
+           , b.region
+           , b.inserted
+           , COUNT(p.id) fileCount
+           , b.boardCategory,
+           (
+            SELECT COUNT (*)
+            FROM Comment
+            WHERE boardId = b.id
+           ) commentCount,
+           (
+            SELECT COUNT(*) 
+            FROM BoardLike 
+            WHERE boardId = b.id
+           ) likeCount 
+    FROM   Board b LEFT JOIN PhotoName p ON b.id = p.boardId
+    WHERE  (b.boardCategory = #{boardCategory} OR #{boardCategory} IS NULL)
+     <if test="search != null">
+        <if test="type eq 'title'">
+            AND title LIKE #{pattern}
+        </if>
+        <if test="type eq 'body'">
+            AND body LIKE #{pattern}
+        </if>
+        <if test="type eq 'writer'">
+            AND writer LIKE #{pattern}
+        </if>
+    </if>
+    GROUP BY b.id
+             , b.title
+             , b.writer
+             , b.region
+             , b.inserted 
+             , b.boardCategory
+    ORDER BY id DESC LIMIT #{startIndex}, #{rowPage}
+    </script>
 			""")
-	List<FreeBoard> selectPaging( Integer startIndex, Integer rowPage, String search, String type);
+	List<FreeBoard> selectPaging( Integer startIndex, Integer rowPage, String search, String type, String boardCategory);
 
 	//검색 구조 기본설정
 	@Select("""
@@ -206,28 +212,28 @@ public interface FreeBoardMapper {
 			""") 
 	Integer countRecord(String search, String type);
 	
-	@Select("""
-			SELECT 
-			b.id,
-			b.title,
-			b.writer,
-			b.region,
-			b.inserted,
-			b.boardCategory,
-			(SELECT COUNT(p.id)
-			FROM PhotoName p 
-			WHERE boardId = b.id)fileCount,
-			(SELECT COUNT(*)
-			FROM Comment
-			WHERE boardId = b.id) commentCount,
-			(SELECT COUNT(*) 
-			 FROM BoardLike
-			 WHERE boardId = b.id) likeCount
-			FROM
-			Board b
-			WHERE boardCategory = #{boardCategory}
-			ORDER BY b.id DESC
-			""")
-	@ResultMap("boardCategoryMap")
-	List<FreeBoard> categoryListForm(String boardCategory);
+//	@Select("""
+//			SELECT 
+//			b.id,
+//			b.title,
+//			b.writer,
+//			b.region,
+//			b.inserted,
+//			b.boardCategory,
+//			(SELECT COUNT(p.id)
+//			FROM PhotoName p 
+//			WHERE boardId = b.id)fileCount,
+//			(SELECT COUNT(*)
+//			FROM Comment
+//			WHERE boardId = b.id) commentCount,
+//			(SELECT COUNT(*) 
+//			 FROM BoardLike
+//			 WHERE boardId = b.id) likeCount
+//			FROM
+//			Board b
+//			WHERE boardCategory = #{boardCategory}
+//			ORDER BY b.id DESC
+//			""")
+//	@ResultMap("boardCategoryMap")
+//	List<FreeBoard> categoryListForm(String boardCategory);
 }

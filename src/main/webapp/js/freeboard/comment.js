@@ -93,12 +93,7 @@ function listComment() {
 						data-comment-id="${comment.id}">
 							<i class="fa-solid fa-repeat"></i>
 						</button>
-						<button id="commentReplyBtn${comment.id}"
-						 class="commentReplyButton"
-						 data-comment-id="${comment.id}"
-						 style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);">
-						 <i class="fa-solid fa-reply">!대댓글!</i>
-						</button>
+					
 			`;
 
 						$("#commentListContainer").append(`
@@ -110,6 +105,12 @@ function listComment() {
 					</div>
 						<div>
 						${comment.editable ? editBtn : ''}
+						<button id="commentReplyBtn${comment.id}"
+						 class="commentReplyButton"
+						 data-comment-id="${comment.id}"
+						 style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);">
+						 <i class="fa-solid fa-reply">!대댓글!</i>
+						</button>
 						</div>
 						
 					</li>
