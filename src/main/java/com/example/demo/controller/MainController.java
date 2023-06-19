@@ -24,6 +24,7 @@ import com.example.demo.service.ProductService;
 @RequestMapping("teamProject")
 public class MainController {
 
+
 	@Autowired
 	private ProductService service;
 
@@ -168,4 +169,5 @@ public class MainController {
 	        return "redirect:/product/id/" + id;
 	    }
 	}
+
 }
