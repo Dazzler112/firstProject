@@ -86,5 +86,38 @@ public interface ProductMapper {
 			ORDER BY id DESC
 			""")
 	List<Product> allProduct();
+	
+	
+
+	@Select("""
+			SELECT
+			id,
+			StatusCode,
+			title,
+			memberId,
+			inserted,
+			views,
+			likes,
+			price
+			FROM
+			Product
+			WHERE id=#{id}
+			""")
+	List<Product> allProduct1(Integer id);
+
+	@Select("""
+			SELECT
+			CategoryID
+			CategoryName
+			FROM
+			Category
+			WHERE CategoryName=#{productCategory}
+			""")
+	List<Product> productCategoryList(String productCategory);
+	
+	
+	
+	
+	
 
 }

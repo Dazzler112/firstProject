@@ -195,4 +195,18 @@ public class ProductService {
 		return list;
 	}
 
+	public List<Product> productListService(Integer id) {
+		List<Product> list = mapper.allProduct1(id);
+		return list;
+	}
+
+	public  List<Product> productCategory(String productCategory) {
+		List<Product> list = mapper.productCategoryList(productCategory);
+		return list;
+	}
+
+	
+
+	
+
 }

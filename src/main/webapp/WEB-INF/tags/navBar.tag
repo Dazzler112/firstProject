@@ -9,8 +9,7 @@
 <!-- 글골 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>
 </style>
 <body style="margin-top: 150px;">
@@ -19,8 +18,16 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-				<a class="linkcolor" href="/teamProject/list1"> <img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png"
-					alt="My Image">	 </a>
+
+
+
+
+				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png"
+					alt="My Image"> <span class="header__title"><a class="linkcolor"
+					href="/teamProject/list1"></a></span> 
+
+
+
 				<sec:authorize access="isAnonymous()">
 					<!-- 로그인 안되어 있을때 -->
 					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
@@ -34,11 +41,14 @@
 			<div class="header__center">
 				<form class="header__searchForm" onsubmit="return false;">
 					<input class="header__input--text" type="text" />
+					
 					<button class="header__input--btn">검색</button>
+					<!-- http://localhost:8080?search=검색할 내용  -->
 				</form>
 			</div>
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-group dropstart">
+
 				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false"
 					style="font-size: 3em;">
 					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
@@ -60,14 +70,22 @@
 								<a class="linkcolor" href="/member/list">회원목록</a>
 							</button></li>
 					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="hasAuthority('admin')">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
 							</button></li>
 					</sec:authorize>
+					
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/mainAdd">상품등록</a>
+								<a class="linkcolor" href="/exList">상품등록</a>
 							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
@@ -77,35 +95,43 @@
 					</sec:authorize>
 				</ul>
 			</div>
+
 			<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
 				class="fa-solid fa-bars"></i></label>
 			<div class="closedsidebar">
 				<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
 				<!--  -->
+
 				<!--  -->
 				<div class="accordion" id="accordionExample">
 					<div class="accordion-item">
 						<h2 class="accordion-header">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">패션</button>
+
+
 							<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
 								class="fa-solid fa-bars"></i></label>
+
 							<div class="closedsidebar">
 								<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
 								<div class="accordion" id="accordionExample">
 									<div class="accordion-item">
 										<h2 class="accordion-header">
+
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 												data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 												패션</button>
 										</h2>
 										<div id="collapseOne" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
+
 											<div class="accordion-body"></div>
 										</div>
 									</div>
 									<div class="accordion-item">
 										<h2 class="accordion-header">
+
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 												data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">게임</button>
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -114,6 +140,7 @@
 										</h2>
 										<div id="collapseTwo" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
+
 											<div class="accordion-body">
 												<ul class="ulstyle">
 													<div>
@@ -132,40 +159,45 @@
 									</div>
 									<div class="accordion-item">
 										<h2 class="accordion-header">
+
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion
 												Item #3</button>
 										</h2>
 										<div id="collapseThree" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
+
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 												Accordion Item #3</button>
 						</h2>
 						<div id="collapseThree" class="accordion-collapse collapse"
 							data-bs-parent="#accordionExample">
+
 							<div class="accordion-body"></div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 			</input> 
-			<a class="iconsearch" href="#"> <i class="fa-solid fa-magnifying-glass"></i></a>
-			
+						
 			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch"
 				type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
+
 		</div>
-		<div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel"
-			aria-hidden="true">
+		<div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
+
 						<input class="header__input--text" type="text"><i
 							class="fa-solid fa-magnifying-glass"></i></input>
 						<button type="button" data-bs-dismiss="modal" aria-label="Close"
 							style="border: 0 solid black;">
+
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>
 					</div>
@@ -179,7 +211,7 @@
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
-				<li class="current-menu-item"><a href="http://localhost:8084/list">홈</a></li>
+				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
 				<li><a href="http://localhost:8084/teamProject/list4">카테고리</a>
 					<ul>
 						<li><a href="#">패션 의류</a></li>
