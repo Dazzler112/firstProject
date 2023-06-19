@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -47,7 +48,19 @@ public class BoardController {
 		return null;
 	}
 
-	
+	@GetMapping("productId/{id}")
+	public String productId(@PathVariable("id") Integer id, Model model,
+			@RequestParam(value = "title", defaultValue = "") String title,
+			@RequestParam(value = "price", defaultValue = "") Integer price,
+			@RequestParam(value = "address", defaultValue = "") String address,
+			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
+			@RequestParam(value = "category", defaultValue = "") String category) {
+
+		List<Product> Product_Id = service.listBoard(id);
+		model.addAttribute("product", Product_Id);
+		
+		return "productpage";
+	}
 
 	
 }

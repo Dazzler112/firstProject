@@ -121,12 +121,11 @@
 				  </label>
 				</div>
 				<div class="mb-3">
-				
-					<img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
+					<img src="${bucketUrl }/${board.id }/${fileName}" width="600px" height="450px />
 				</div>
 			</c:forEach>
 		</div>
-
+	
 		<div>
 			<div class="mb-5">
 				<label for="fileInput" class="form-label">사진 첨부</label>

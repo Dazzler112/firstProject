@@ -29,8 +29,8 @@
 					<th>삭제</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="product">
+			<tbody><%-- ${product[0].title} --%>
+				<c:forEach items="${list}" var="product" >
 					<tr>
 						<td style="display: none;">${product.id}</td>
 						<td>${product.status}</td>

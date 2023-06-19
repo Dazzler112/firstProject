@@ -12,32 +12,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-	.all{
+.all{
 		display: flex;
-	}
+		margin: 200px 100px;
+}
 #boardIdText {
 	font-size: small;
 }
 
 #text {
 	font-size: small;
-}
-
-.form-control {
-	font-weight: bold;
-}
-
-.head {
-	margin-bottom: 20px;
-	margin-top: -25px;
-}
-
-.body {
-	margin-top: -35px;
-}
-
-#good {
-	margin-left: 200px;
 }
 
 .input-group {
@@ -49,6 +33,39 @@
 	font-size: 12px;
 	margin-left: 10px;
 }
+.textbox{
+	margin-top: 10px;
+	width: 700px;
+	height: 330px;
+	border-radius: 10px;
+	border-color: #c2c0c0;
+}
+#likeIcon{
+	font-size: 30px;
+	margin-left: 20px;
+}
+.tit{
+	width: 700px;
+	border-color: #c2c0c0;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+}
+.tit2{
+	width: 700px;
+	border-color: #c2c0c0;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+}
+.com{
+	margin: 0px 100px;
+	margin-top: -150px;
+}
+.mod{
+	margin-left: 85%;
+}
+
 </style>
 <body>
 
@@ -70,72 +87,67 @@
 		<div class="pic">
 			<c:forEach items="${board.fileName }" var="fileName">
 				<div class="mb-3">
-					<img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
+					<img src="${bucketUrl }/${board.id }/${fileName}" width="600px" height="450px"/>
 				</div>
 			</c:forEach>
 		</div>
 
 		<div class="container-lg">
 			<div class="row justify-content-left">
-				<div class="col-12 col-md-8 col-lg-6">
-					<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
+				<div>
 					<div class="me-auto">
 						<h2>
 							Community > 광고게시판
 							<span id="text">No.</span>
-							<span id="boardIdText">${board.id}</span>
-						</h2>
-					</div>
-
-					<div>
-						<div>
-							<label for="" class="form-label"></label>
-							<input type="text" class="form-control" value="${board.title }" readonly />
-						</div>
-						<div class="head">
-							<label for="" class="form-label"></label>
-							<input type="text" class="form-control" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
-						</div>
-
-
-
-						<div class="body">
-							<label for="" class="form-label"></label>
-							<textarea class="form-control" readonly rows="10">${board.body }</textarea>
-						</div>
-						<div>
-							<h1>
+							<span id="boardIdText">${board.id}
 								<span id="likeIcon">
 									<c:if test="${board.liked }">
 										<i class="fa-solid fa-thumbs-up"></i>
 									</c:if>
-
+	
 									<c:if test="${not board.liked }">
 										<span id="good">
 											<i class="fa-regular fa-thumbs-up"></i>
 										</span>
 									</c:if>
 								</span>
-								<span id="likeNumber"> </span>
-							</h1>
+							</span>
+							<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
+						</h2>
+						
+					</div>
+
+					<div>
+						<div>
+							<input class="tit" type="text" value="${board.title }" readonly />
+						</div>
+						<div class="head">
+							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
 						</div>
 
-						<sec:authorize access="isAuthenticated()">
-							<sec:authentication property="name" var="userId" />
-							<c:if test="${userId eq board.writer }">
-								<div>
-									<a class="btn btn-secondary" href="/adBoard/modify/${board.id }">수정</a>
-									<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
-								</div>
-							</c:if>
-						</sec:authorize>
-					</div>
+						<div class="body">
+							<textarea class="textbox" readonly rows="10">${board.body }</textarea>
+						</div>
+						
+							
+						</div>
 				</div>
+			</div>
+		</div>
+	</div>
 
-				<hr />
-
+		<div class="com">
 				<div id="commentContainer">
 					<span> 댓글 ${board.commentCount}개 </span>
+					<sec:authorize access="isAuthenticated()">
+								<sec:authentication property="name" var="userId" />
+								<c:if test="${userId eq board.writer }">
+									<span class="mod">
+										<a class="btn btn-secondary" href="/adBoard/modify/${board.id }">수정</a>
+										<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+									</span>
+								</c:if>
+							</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<div class="mb-3" id="addCommentContainer">
 
@@ -159,10 +171,7 @@
 
 					</ul>
 				</div>
-
 			</div>
-		</div>
-	</div>
 
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="name" var="userId" />
