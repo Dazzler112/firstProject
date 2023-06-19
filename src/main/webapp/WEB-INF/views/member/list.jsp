@@ -32,13 +32,13 @@ container-lg {
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12">
+			<div class="col-12 col-md-10 col-lg-10">
 				<h1>회원 목록</h1>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>PASSWORD</th>
+<!-- 							<th>PASSWORD</th> -->
 							<th>별명</th>
 							<th>이메일</th>
 							<th>이름</th>
@@ -51,7 +51,7 @@ container-lg {
 						<c:forEach items="${userList1.userList }" var="user">
 							<tr>
 								<td><a href="/member/info?id=${user.id }"> ${user.id } </a></td>
-								<td>${user.password }</td>
+<%-- 								<td>${user.password }</td> --%>
 								<td>${user.nickName }</td>
 								<td>${user.email }</td>
 								<td>${user.name }</td>

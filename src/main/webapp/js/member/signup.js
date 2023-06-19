@@ -56,6 +56,13 @@ $("#inputPassword, #inputPasswordCheck").keyup(function() {
 	complete: enableSubmit
 })
 
+// 이름 확인 버튼 클릭 시
+$("#checkNameBtn").click(function() {
+	$("#availableNameMessage").removeClass("d-none");
+	checkName = true;
+	enableSubmit();
+}); 	
+
 $("#checkNameBtn").click(function() {
 	checkName = true;
 	enableSubmit();
@@ -173,15 +180,6 @@ $("#inputNickName").keyup(function() {
 	// submit 버튼 비활성화
 	enableSubmit();
 })
-
-
-//// 인증하기 버튼 클릭 시 동작
-//$("#checkEmailBtn").click(function() {
-//	// 인증하기 버튼을 클릭하면 인증번호 입력 칸과 확인 버튼을 나타내고, 인증하기 버튼은 숨김
-//	$("#inputVerificationCode").removeClass("d-none");
-//	$("#verifyEmailBtn").show();
-//	$("#checkEmailBtn").hide();
-//});
 
 // 이메일 인증 버튼 클릭 이벤트 처리
 $("#checkEmailBtn").click(function() {

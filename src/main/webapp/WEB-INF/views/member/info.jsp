@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
@@ -10,53 +9,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+
+
+.table-no-border {
+	border: none;
+}
+
+.table-no-border thead th {
+		border-top: 2px solid #55A44E; /* 제일 상단 선 색상 설정 */
+	}
+
+.table-no-border th, .table-no-border td {
+	border: none;
+	border-top: 1px solid #dee2e6; /* 상단 선 색상 설정 */
+	border-bottom: 1px solid #dee2e6; /* 하단 선 색상 설정 */
+	padding-right: 40px; /* 아이디와 아이디 값 사이의 간격 조정 */
+}
+
+.table-no-border th:first-child, .table-no-border td:first-child {
+	border-left: none; /* 좌측 선 제거 */
+}
+
+.table-no-border th:last-child, .table-no-border td:last-child {
+	border-right: none; /* 우측 선 제거 */
+}
+
+</style>
 <body>
 
 	<my:navBarForMyPage></my:navBarForMyPage>
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
+			<div class="col-12 col-md-10 col-lg-10">
 				<h1>마이페이지</h1>
 				<!-- .mb-3*4>label+input -->
-				<div class="mb-3">
-					<label class="form-label" for="">아이디</label>
-					<input class="form-control" type="text" value="${member.id }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">패스워드</label>
-					<input class="form-control" type="text" value="${member.password }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">이름</label>
-					<input class="form-control" type="text" value="${member.name }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">성별</label>
-					<input class="form-control" type="text" value="${member.gender }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">이메일</label>
-					<input class="form-control" type="text" value="${member.email }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">핸드폰 번호</label>
-					<input class="form-control" type="text" value="${member.phoneNum }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">별명</label>
-					<input class="form-control" type="text" value="${member.nickName }" readonly />
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="">주소</label>
-					<input class="form-control" type="text" value="${member.address }" readonly />
-				</div>
+				<table class="table table-no-border">
+					<tbody>
+						<tr>
+							<th>아이디</th>
+							<td>${member.id}</td>
+						</tr>
+						<tr>
+							<th>패스워드</th>
+							<td>${member.password}</td>
+						</tr>
+						<tr>
+							<th>이름</th>
+							<td>${member.name}</td>
+						</tr>
+						<tr>
+							<th>성별</th>
+							<td>${member.gender}</td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>${member.email}</td>
+						</tr>
+						<tr>
+							<th>핸드폰 번호</th>
+							<td>${member.phoneNum}</td>
+						</tr>
+						<tr>
+							<th>별명</th>
+							<td>${member.nickName}</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td>${member.address}</td>
+						</tr>
+					</tbody>
+				</table>
 
-<%-- 				<sec:authorize access="isAuthenticated() or hasAuthority('admin')"> --%>
 				<sec:authorize access="authentication.name eq #member.id">
-					<a class="btn btn-secondary" href="/member/modify?id=${member.id }">수정</a>
+					<a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
 					<button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#confirmModal">탈퇴</button>
 				</sec:authorize>
 			</div>
@@ -64,7 +93,7 @@
 	</div>
 
 	<sec:authorize access="isAuthenticated()">
-<%-- 	<sec:authorize access="authentication.name eq #member.id or hasAuthority('admin')"> --%>
+		<%-- 	<sec:authorize access="authentication.name eq #member.id or hasAuthority('admin')"> --%>
 		<!-- 탈퇴 확인 Modal -->
 		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -75,9 +104,7 @@
 					</div>
 					<div class="modal-body">
 						<form id="removeForm" action="/member/remove" method="post">
-							<input type="hidden" name="id" value="${member.id }" />
-							<label for="passwordInput1" class="form-label">암호</label>
-							<input id="passwordInput1" type="password" name="password" class="form-control" />
+							<input type="hidden" name="id" value="${member.id }" /> <label for="passwordInput1" class="form-label">암호</label> <input id="passwordInput1" type="password" name="password" class="form-control" />
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -88,8 +115,8 @@
 			</div>
 		</div>
 	</sec:authorize>
-	
-	
+
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>

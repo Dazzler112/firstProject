@@ -66,18 +66,13 @@
 							</button>
 						</li>
 					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
-						<li>
-							<button class="dropdown-item" type="button">
-								<a href="/mainAdd">상품등록</a>
-							</button>
-						</li>
-					</sec:authorize>
-					<sec:authorize access="hasAuthority('admin')">
-						<li><button class="dropdown-item" type="button">
-								<a href="/member/list">회원목록</a>
-							</button></li>
-					</sec:authorize>
+<%-- 					<sec:authorize access="isAuthenticated()"> --%>
+<!-- 						<li> -->
+<!-- 							<button class="dropdown-item" type="button"> -->
+<!-- 								<a href="/mainAdd">상품등록</a> -->
+<!-- 							</button> -->
+<!-- 						</li> -->
+<%-- 					</sec:authorize> --%>
 					<sec:authorize access="isAuthenticated()">
 						<li>
 							<button class="dropdown-item" type="button">
@@ -88,9 +83,6 @@
 				</ul>
 			</div>
 
-			<a class="iconsearch" href="#">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</a>
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>

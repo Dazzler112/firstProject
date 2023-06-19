@@ -131,7 +131,7 @@ public class MemberService {
 			String plain = member.getPassword();
 			member.setPassword(passwordEncoder.encode(plain));
 		}
-		Member oldMember = mapper.selectById(member.getId());
+		Member oldMember = mapper.selectById(member.getId());		
 		int cnt = 0;
 
 		if (passwordEncoder.matches(oldPassword, oldMember.getPassword())) {
@@ -139,6 +139,21 @@ public class MemberService {
 			cnt = mapper.modify(member);
 		}
 		return cnt == 1;
+	}
+
+	public String findId(String name, String email) {
+		
+		String result = "";
+		
+		try {
+		 result= mapper.findId(name, email);
+		 
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return result ;
 	}
 
 }
