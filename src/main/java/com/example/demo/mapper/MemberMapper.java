@@ -14,7 +14,7 @@ public interface MemberMapper {
 	Integer signUpInsert(Member member);
 
 	@Select("""
-			SELECT * 
+			SELECT *
 			FROM Member
 			""")
 	List<Member> getAllUserList();
@@ -28,7 +28,7 @@ public interface MemberMapper {
 	Member selectById(String id);
 
 	@Select("""
-			SELECT * 
+			SELECT *
 			FROM Member
 			WHERE PhoneNum = #{phoneNum}
 			""")
@@ -54,7 +54,7 @@ public interface MemberMapper {
 			 	<if test="password neq null and password neq ''">
 			 		password = #{password},
 			 	</if>
-			 	
+
 			 	name = #{name},
 				phoneNum = #{phoneNum},
 				nickName = #{nickName},
@@ -70,49 +70,49 @@ public interface MemberMapper {
 			SELECT COUNT(*)
 			FROM Member
 			<where>
-			
+
 			<if test="type == 'all'">
-				id LIKE #{pattern}	
+				id LIKE #{pattern}
 			 OR nickName LIKE #{pattern}
-		   	 OR name LIKE #{pattern}
-		   	 OR phoneNum LIKE #{pattern}
-		   	 OR email LIKE #{pattern}
+			  	 OR name LIKE #{pattern}
+			  	 OR phoneNum LIKE #{pattern}
+			  	 OR email LIKE #{pattern}
 			</if>
-			
+
 			<if test="type == 'id'">
-				id LIKE #{pattern}	
-			</if>						
-			
+				id LIKE #{pattern}
+			</if>
+
 			<if test="type == 'nickName'">
 			 OR nickName LIKE #{pattern}
 			</if>
-			
+
 			<if test="type == 'name'">
-		   	 OR name LIKE #{pattern}			
+			  	 OR name LIKE #{pattern}
 			</if>
 
 			<if test="type == 'phoneNum'">
-		   	 OR phoneNum LIKE #{pattern}			
+			  	 OR phoneNum LIKE #{pattern}
 			</if>
 
 			<if test="type == 'email'">
-		   	 OR email LIKE #{pattern}			
+			  	 OR email LIKE #{pattern}
 			</if>
-						
-		   	</where> 
-		   	 </script>
+
+			  	</where>
+			  	 </script>
 			""")
 	Integer countAll(String search, String type);
 
 	@Select("""
 			<script>
 			<bind name="pattern" value="'%' + search + '%'" />
-			SELECT 
+			SELECT
 				id,
-				password, 
-				nickName, 
+				password,
+				nickName,
 				address,
-				name, 
+				name,
 				gender,
 				phoneNum,
 				email
@@ -139,5 +139,28 @@ public interface MemberMapper {
 			</script>
 			""")
 	List<Member> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+
+	@Select("""
+			SELECT
+				id
+			FROM Member
+			WHERE name = #{name}
+			and email = #{email}
+			""")
+	String findId(String name, String email);
+
+	@Select("""
+			SELECT id
+			FROM Member
+			WHERE name = #{name} and email = #{email}
+			""")
+	String checkUser(String name, String email);
+
+	@Update("""
+			UPDATE Member
+			SET password = #{encodePw}
+			WHERE name = #{name} and email=#{email};
+						""")
+	void updatePw(String name, String email, String encodePw);
 
 }
