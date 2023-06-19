@@ -41,7 +41,9 @@
 			<div class="header__center">
 				<form class="header__searchForm" onsubmit="return false;">
 					<input class="header__input--text" type="text" />
+					
 					<button class="header__input--btn">검색</button>
+					<!-- http://localhost:8080?search=검색할 내용  -->
 				</form>
 			</div>
 			<!-- 프로필 -->
@@ -68,14 +70,22 @@
 								<a class="linkcolor" href="/member/list">회원목록</a>
 							</button></li>
 					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="hasAuthority('admin')">
+						<li>
+							<button class="dropdown-item" type="button">
+								<a href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
+							</button>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
 							</button></li>
 					</sec:authorize>
+					
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/mainAdd">상품등록</a>
+								<a class="linkcolor" href="/exList">상품등록</a>
 							</button></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
@@ -171,8 +181,7 @@
 			</div>
 
 			</input> 
-			<a class="iconsearch" href="#"> <i class="fa-solid fa-magnifying-glass"></i></a>
-			
+						
 			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch"
 				type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				<i class="fa-solid fa-magnifying-glass"></i>

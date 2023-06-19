@@ -37,13 +37,13 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+      <img src="/productimg/sample1.jpg" class="img-fluid" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+      <img src="/productimg/sample2.jpg" class="img-fluid" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/img/bbubba.jpg" class="img-fluid" alt="...">
+      <img src="/productimg/sample3.jpg" class="img-fluid" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -55,10 +55,14 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
   
   </div>
   <div class="productname">
     <div class="product001">
+    
+    <div>${product[0].title}</div>
+    
     <h4>집에 남는 눈사람 팝니다.</h4>
     </div>
     <div class="product002">
@@ -72,6 +76,8 @@
     </div>
     <p>상품내용</p>
     <p>집 이사를 준비하는데 눈사람이 남아 나눔합니다.</p>	
+    <div>Title : </div>
+    
   </div>
 </div>
 <div class="pagenation">
