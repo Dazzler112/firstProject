@@ -24,10 +24,18 @@ public interface PtBoardMapper {
 				b.inserted,
 				b.writer,
 				b.region,
-				f.fileName
-			FROM PtBoard b LEFT JOIN PtFileName f ON b.id = f.boardId
-			WHERE b.id = #{id}
+				f.fileName,
+				(SELECT COUNT(*)
+					FROM PtBoardLike
+					WHERE boardId = b.id) likeCount,
+				(SELECT COUNT(*)
+			     	FROM PtComment
+			     	WHERE boardId = b.id) commentCount
+				FROM PtBoard b LEFT JOIN PtFileName f ON b.id = f.boardId			
+				WHERE b.id = #{id}
 			""")
+	
+	
 	@ResultMap("boardResultMap")
 	PtBoard selectById(Integer id);
 
@@ -35,8 +43,7 @@ public interface PtBoardMapper {
 			UPDATE PtBoard
 			SET
 				title = #{title},
-				body = #{body},
-				writer = #{writer}
+				body = #{body}
 			WHERE
 				id = #{id}
 			""")
@@ -140,6 +147,8 @@ public interface PtBoardMapper {
 			</script>
 			""")
 	List<PtBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+
+	
 
 }
 
