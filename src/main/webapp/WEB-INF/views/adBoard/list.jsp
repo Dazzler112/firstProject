@@ -205,7 +205,7 @@ h1 {
 			</div>
 		</div>
 
-		<my:search></my:search>
+		<my:freesearch></my:freesearch>
 	</form>
 
 

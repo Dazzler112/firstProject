@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.multipart.*;
@@ -26,14 +27,24 @@ public class PtBoardService {
 
 	@Autowired
 	private PtBoardMapper mapper;
+	
+	@Autowired
+	private PtBoardLikeMapper likeMapper;
 
 	public List<PtBoard> listBoard() {
 		List<PtBoard> list = mapper.selectAll();
 		return list;
 	}
 
-	public PtBoard getBoard(Integer id) {
+	public PtBoard getBoard(Integer id, Authentication authentication) {
 		PtBoard board = mapper.selectById(id);
+		
+		if (authentication != null) {
+			PtLike like = likeMapper.select(id, authentication.getName());
+			if(like != null) {
+				board.setLiked(true); 
+			}
+		}
 
 		return board;
 	}
@@ -81,6 +92,8 @@ public class PtBoardService {
 	}
 
 	public boolean remove(Integer id) {
+		
+		likeMapper.deleteByBoardId(id);
 		
 		List<String> fileNames = mapper.selectFileNamesByBoardId(id);
 		
@@ -162,4 +175,38 @@ public class PtBoardService {
 						"ptBoardList", list);
 	}
 
+	public Map<String, Object> like(PtLike like, Authentication authentication) {
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("like", false);
+		
+		like.setMemberId(authentication.getName());
+		Integer deleteCnt = likeMapper.delete(like);
+		
+		if (deleteCnt != 1) {
+			Integer insertCnt = likeMapper.insert(like);
+			result.put("like", true);
+		}
+		
+		Integer count = likeMapper.countByBoardId(like.getBoardId());
+		result.put("count", count);
+		
+		return result;
+	}
+
+	public Object getBoard(Integer id) {
+		// TODO Auto-generated method stub
+		return getBoard(id, null);
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
