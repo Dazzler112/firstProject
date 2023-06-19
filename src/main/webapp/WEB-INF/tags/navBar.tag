@@ -5,7 +5,6 @@
 <link href="/resources/categorymenubar.css" rel="stylesheet">
 <link href="/resources/menubar.css" rel="stylesheet">
 <link href="/resources/navbar.css" rel="stylesheet">
-<script type="text/javascript" src="링크주소"></script>
 <!-- 글골 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

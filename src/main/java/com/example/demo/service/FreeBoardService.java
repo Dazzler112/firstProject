@@ -172,7 +172,7 @@ public class FreeBoardService {
 		return list;
 	}
 
-	public Map<String, Object> getCountList(Integer page, String search, String type) {
+	public Map<String, Object> getCountList(Integer page, String search, String type, String boardCategory) {
 		 
 		//페이지 행의수
 		Integer rowPage = 10;
@@ -207,13 +207,13 @@ public class FreeBoardService {
 		pageInfo.put("endPageNumber", endPageNumber);
 		
 		//게시물목록
-		List<FreeBoard> list = mapper.selectPaging(startIndex,rowPage,search,type);
+		List<FreeBoard> list = mapper.selectPaging(startIndex,rowPage,search,type,boardCategory);
 		return Map.of("pageInfo", pageInfo,
 					"boardList",list); 
 	}
 
-	public Map<String, Object> getBoardList(String boardCategory) {
-		
-		return Map.of("boardList", mapper.categoryListForm(boardCategory));
-	}
+//	public Map<String, Object> getBoardList(String boardCategory) {
+//		
+//		return Map.of("boardList", mapper.categoryListForm(boardCategory));
+//	}
 }
