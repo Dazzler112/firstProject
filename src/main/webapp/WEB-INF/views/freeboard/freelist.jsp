@@ -10,12 +10,34 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+
+a{
+	text-decoration: none;
+}
+/* 글쓰기버튼 css */
+.writer_link-color{
+	
+	color: rgba(0,0,0,0.5);
+	font-size: 28px;
+}
+.board_writer-icon{
+display:flex;
+	justify-content:center;
+	align-items:center;
+	background-color: #FFDAB9;
+	padding: 16px;
+	border-radius:50%;
+}
 .div_writer {
+	margin-bottom: 50px;
+	margin-right : 30px;
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	margin: 0px, 30px, 30px, 0px;
 }
+/*  */
+
 .image_column {
 	margin:0px 3.5px 0px 0px;
 	padding: 1px 2.5px 1px 2.5px;
@@ -43,31 +65,17 @@
 	border-radius: 5px;
 	border: none;
 	font-weight: 600;
+	background:#F0F0F0;
+	transition: 0.3s background-color ease-in;
+}
+.category_button:hover {
+	background-color: #DDDDDD;
 }
 </style>
 </head>
 <body>
 			<my:navBar></my:navBar>
-	<div class="container-lg">
-		<div class="row justify-content-center">
-			<div class="col-10 col-md-12 col-lg-14">
-			
-				<div style="display: flex; justify-content: center; margin: 10px 0px;">
-					<span style="margin: 0px 10px;"> <a href="/categoryList">카테고리</a> </span>
-					<span style="margin: 0px 10px;"> <a href="#">동네생활</a> </span>
-					<span style="margin: 0px 10px;"> <a href="#">신고</a> </span>
-				</div>
-			
-				<div style="display: flex; justify-content: center;margin: 10px 0px;">
-					<span style="margin: 0px 10px;"><a href="/freeboard/freelist">동네 자유게시판</a></span>
-					<span style="margin: 0px 10px;"><a href="/adBoard/list">광고</a></span>
-					<span style="margin: 0px 10px;"><a href="#">알바</a></span>
-				</div>
-			
-			
-			</div>
-		</div>
-	</div>
+
 	<form id="categoryForm" action="" method="get">
 	</form>
  		<div id="category_div">
@@ -131,10 +139,82 @@
 			</div>
 		</div>
 	</div>
-		<my:search></my:search>
+		<my:freesearch></my:freesearch>
+		
+		
+		<!-- pagenation -->
+	<div class="container-lg">
+		<div class="row">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+				<!-- 처음버튼 -->
+				<c:if test="${pageInfo.thisPage ne 1 }">
+					<c:url value="/freeboard/freelist" var="freepageLink">
+							<c:param name="page" value="${pageInfo.thisPage -1 }" />
+							<c:if test="${not empty param.search }">
+								<c:param name="search" value="${param.search }" />
+							</c:if>
+							<!-- 처음버튼 눌러도 검색값 변하지 않게 하기 -->
+							<c:if test="${not empty param.type }">
+							<c:param name="type" value="${param.type }"/>
+							</c:if>
+						</c:url>
+						<li class="page-item"><a class="page-link" href="${freepageLink }"> <i class="fa-solid fa-angles-left"></i>
+						</a></li>
+						</c:if>
+				
+					<!-- 이전버튼 -->
+					<c:if test="${pageInfo.thisPage gt 1 }">
+						<!--1보다 클때 라고 해도 됨  -->
+						<!-- 이전버튼 : {pageInfo.currentPageNum -1 } -->
+						<my:freepageitem freePageNum="${pageInfo.thisPage -1}">
+							<i class="fa-solid fa-angle-left"></i>
+						</my:freepageitem>
+					</c:if>
+
+					<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="freePageNum">
+						<my:freepageitem freePageNum="${freePageNum }">
+						${freePageNum }
+						</my:freepageitem>
+					</c:forEach>
+					
+					<!-- 다음 버튼 -->
+					<c:if test="${pageInfo.thisPage lt pageInfo.lastPageNumber }">
+						<!-- 페이지 번호 : ${pageInfo.currentPageNum + 1 } -->
+						<my:freepageitem freePageNum="${pageInfo.thisPage + 1}">
+							
+						<i class="fa-solid fa-angle-right"></i>
+						</my:freepageitem>
+					</c:if>
+					<!-- 마지막 버튼 -->
+					<c:if test="${pageInfo.thisPage lt pageInfo.lastPageNumber }">
+					<c:url value="/freeboard/freelist" var="freepageLink">
+							<c:param name="page" value="${pageInfo.lastPageNumber}" />
+							<c:if test="${not empty param.search }">
+								<c:param name="search" value="${param.search }" />
+							</c:if>
+							<c:if test="${not empty param.type }">
+								<c:param name="type" value="${param.type }" />
+							</c:if>
+						</c:url>
+						<li class="page-item"><a class="page-link" href="${freepageLink }"> <i class="fa-solid fa-angles-right"></i>
+						</a></li>
+						</c:if>
+					
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+		
+		
 	
 	<div class="div_writer">
-		<a href="/freeboard/freeadd" class="btn btn-primary">글쓰기</a>
+		<a href="/freeboard/freeadd" class="writer_link-color">
+		<div class="board_writer-icon">
+		<i class="fa-solid fa-pen-to-square"></i>
+		</div>
+		</a>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

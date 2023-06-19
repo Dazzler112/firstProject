@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+
 .comment_input{
 	margin:10px 0px;
 	width:900px;
@@ -47,16 +48,16 @@
 	border-radius: 8px;
 	height: 100px;
 	font-weight: 600;
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,0.5);
 	color:white;
 	}
 .comment_column-div{
-	border:0.5px solid rgba(0,0,0,0.1);
+	border:0.8px solid rgba(0,0,0,0.2);
 	margin:0px 3.5px 0px 20px;
 	padding: 1px 3px 1px 3px;
-	background-color: #F5F3E7;
+	background-color: #F191B9;
 	border-radius: 7px;
-	color: #A1959C;
+	color: white;
 	font-size: 23px;
 }	
 .comment_container-div {
@@ -134,10 +135,7 @@
 </style>
 </head>
 <body>
-	
-	<div class="container-lg">
-	<a href="/freeboard/freelist">홈</a>
-	</div>
+	<my:navBar></my:navBar>
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
@@ -213,7 +211,8 @@
 			<textarea rows="" id="commentTextArea" class="comment_input"></textarea>
 			<button id="sendCommentBtn" class="comment-commit">올리기</button>
 		</div>
-		<!-- <div id="updateCommentContainer">
+		<!-- ajax 토글식으로 변경 
+			<div id="updateCommentContainer">
 			<input type="hidden" id="commentUpdateIdInput"/>
 			<textarea id="commentUpdateTextArea" class="update_comment-text" placeholder="내용을 입력해주세요"></textarea>
 			<button id="updateCommentBtn" class="update-commit">수정</button>

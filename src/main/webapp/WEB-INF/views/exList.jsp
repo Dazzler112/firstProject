@@ -25,6 +25,8 @@
 					<th>조회</th>
 					<th>찜</th>
 					<th>가격</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody><%-- ${product[0].title} --%>
@@ -33,11 +35,22 @@
 						<td style="display: none;">${product.id}</td>
 						<td>${product.status}</td>
 						<td>${product.title}</td>
-						<td><a href="${product.id }"> ${product.memberId} </a></td>
+						<td><a href="${product.id}">${product.memberId}</a></td>
 						<td>${product.inserted}</td>
 						<td>${product.views}</td>
 						<td>${product.likes}</td>
 						<td>${product.price}</td>
+						<c:if test="${loggedIn}">
+							<c:if test="${product.memberId eq loggedInUser}">
+								<td><a href="/product/productUpdate/${product.id}">수정</a></td>
+								<td>
+									<form action="/product/remove" method="post">
+										<input type="hidden" name="id" value="${product.id}">
+										<button type="submit" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</button>
+									</form>
+								</td>
+							</c:if>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

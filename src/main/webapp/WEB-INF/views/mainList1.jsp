@@ -115,6 +115,7 @@
 		<%-- <table class="table">
 			<thead>
 				<tr>
+
 					<th>가격</th>
 					<th>제목</th>
 					<th>주소</th>
@@ -162,6 +163,17 @@
 
 
 	</section>
+
+
+					<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
+					<td>${notice.inserted}</td>
+					<td>${notice.writer}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+
 	</div>
 
 	

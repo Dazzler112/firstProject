@@ -12,35 +12,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+	.all{
+		display: flex;
+	}
+#boardIdText {
+	font-size: small;
+}
 
-	#boardIdText{
-		font-size: small;
-	}
-	#text{
-		font-size: small;
-	}
-	.form-control{
-		font-weight: bold;
-	}
-	.head{
-		margin-bottom: 20px;
-		margin-top: -25px;
-	}
-	.body{
-		margin-top: -35px;
-	}
-	#good{
-		margin-left: 200px;
-	}
-	.input-group{
-		margin-top: 10px;
-	}
-	.commentInserted{
-		color: #999;
-		font-size: 12px;
-		margin-left: 10px;
-	}
-	
+#text {
+	font-size: small;
+}
+
+.form-control {
+	font-weight: bold;
+}
+
+.head {
+	margin-bottom: 20px;
+	margin-top: -25px;
+}
+
+.body {
+	margin-top: -35px;
+}
+
+#good {
+	margin-left: 200px;
+}
+
+.input-group {
+	margin-top: 10px;
+}
+
+.commentInserted {
+	color: #999;
+	font-size: 12px;
+	margin-left: 10px;
+}
 </style>
 <body>
 
@@ -57,74 +65,77 @@
 		</div>
 	</div>
 
-
-	<div class="container-lg">
-		<div class="row justify-content-left">
-			<div class="col-12 col-md-8 col-lg-6">
-				<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
-				<div class="me-auto">
-					<h2>
-						Community > 광고게시판
-						<span id="text">No.</span>
-						<span id="boardIdText">${board.id}</span>	
-					</h2>
+	<div class="all">
+		<!-- 그림 파일 출력 -->
+		<div class="pic">
+			<c:forEach items="${board.fileName }" var="fileName">
+				<div class="mb-3">
+					<img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
 				</div>
-				
-				<div>
+			</c:forEach>
+		</div>
+
+		<div class="container-lg">
+			<div class="row justify-content-left">
+				<div class="col-12 col-md-8 col-lg-6">
+					<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
+					<div class="me-auto">
+						<h2>
+							Community > 광고게시판
+							<span id="text">No.</span>
+							<span id="boardIdText">${board.id}</span>
+						</h2>
+					</div>
+
 					<div>
-						<label for="" class="form-label"></label>
-						<input type="text" class="form-control" value="${board.title }" readonly />
-					</div>
-					<div class="head">
-						<label for="" class="form-label"></label>
-						<input type="text" class="form-control" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
-					</div>
+						<div>
+							<label for="" class="form-label"></label>
+							<input type="text" class="form-control" value="${board.title }" readonly />
+						</div>
+						<div class="head">
+							<label for="" class="form-label"></label>
+							<input type="text" class="form-control" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
+						</div>
 
-					<!-- 그림 파일 출력 -->
-					<div class="pic">
-						<c:forEach items="${board.fileName }" var="fileName">
-							<div class="mb-3">
-								<img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
-							</div>
-						</c:forEach>
-					</div>
 
-					<div class="body">
-						<label for="" class="form-label"></label>
-						<textarea class="form-control" readonly rows="10">${board.body }</textarea>
-					</div>
-					<div>
-						<h1>
-							<span id="likeIcon">
-								<c:if test="${board.liked }">
-									<i class="fa-solid fa-thumbs-up"></i>
-								</c:if>
-	
-								<c:if test="${not board.liked }">
-									<span id="good"><i class="fa-regular fa-thumbs-up"></i></span>
-								</c:if>
-							</span>
-							<span id="likeNumber">  </span>
-						</h1>
-					</div>			
 
-					<sec:authorize access="isAuthenticated()">
-						<sec:authentication property="name" var="userId" />
-						<c:if test="${userId eq board.writer }">
-							<div>
-								<a class="btn btn-secondary" href="/adBoard/modify/${board.id }">수정</a>
-								<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
-							</div>
-						</c:if>
-					</sec:authorize>
+						<div class="body">
+							<label for="" class="form-label"></label>
+							<textarea class="form-control" readonly rows="10">${board.body }</textarea>
+						</div>
+						<div>
+							<h1>
+								<span id="likeIcon">
+									<c:if test="${board.liked }">
+										<i class="fa-solid fa-thumbs-up"></i>
+									</c:if>
+
+									<c:if test="${not board.liked }">
+										<span id="good">
+											<i class="fa-regular fa-thumbs-up"></i>
+										</span>
+									</c:if>
+								</span>
+								<span id="likeNumber"> </span>
+							</h1>
+						</div>
+
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="name" var="userId" />
+							<c:if test="${userId eq board.writer }">
+								<div>
+									<a class="btn btn-secondary" href="/adBoard/modify/${board.id }">수정</a>
+									<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+								</div>
+							</c:if>
+						</sec:authorize>
+					</div>
 				</div>
 
 				<hr />
 
 				<div id="commentContainer">
-					<span>
-						댓글 ${board.commentCount}개
-					</span>
+					<span> 댓글 ${board.commentCount}개 </span>
 					<sec:authorize access="isAuthenticated()">
 						<div class="mb-3" id="addCommentContainer">
 
@@ -179,7 +190,7 @@
 				</div>
 			</div>
 		</c:if>
-		
+
 		<!-- 댓글 삭제 Modal -->
 		<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -196,7 +207,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<%-- 댓글 수정 모달 --%>
 		<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -217,10 +228,10 @@
 					</div>
 				</div>
 			</div>
-		</div>		
-		
+		</div>
+
 	</sec:authorize>
-	
+
 	<my:footer></my:footer>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

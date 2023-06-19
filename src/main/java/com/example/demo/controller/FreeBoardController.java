@@ -24,14 +24,16 @@ public class FreeBoardController {
 	
 	@GetMapping("freelist")
 	public String list (Model model,
+						@RequestParam(value = "page", defaultValue = "1")Integer page,
 						@RequestParam(value = "search" ,defaultValue = "")String search,
 						@RequestParam(value="type", required = false)String type){
 //		List<FreeBoard> list = service.listProcess();
 		
 //		List<FreeBoard> list = service.getCountList();
-		Map<String, Object> list = service.getCountList(search,type);
+		Map<String, Object> list = service.getCountList(page,search,type);
 		
 		model.addAllAttributes(list); 
+		
 		return "freeboard/freelist";
 	}
 	
