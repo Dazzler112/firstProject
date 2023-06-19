@@ -185,6 +185,7 @@ h1 {
 							</my:pageItem>
 						</c:if>
 
+
 						<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
 							<my:pageItem pageNum="${pageNum }">
 							${pageNum }

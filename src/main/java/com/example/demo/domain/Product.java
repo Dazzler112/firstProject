@@ -9,6 +9,7 @@ import lombok.Data;
 public class Product {
 	private Integer id;
 	private Integer categoryId;
+	private String categoryName;
 	private String memberId;
 	private Integer qty;
 	private String body;

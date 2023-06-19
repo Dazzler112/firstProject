@@ -8,7 +8,6 @@
 					<div >
 					<form action="/freeboard/freelist" role="search">
 						<select name="type" style="width: 120px;">
-							<option ="all">전체</option>
 							<option value="title"${param.type eq 'title' ? 'selected' : '' }>제목</option>
 							<option value="body"${param.type eq 'body' ? 'selected' : '' }>본문</option>
 							<option value="writer"${param.type eq 'writer' ? 'selected' : '' }>작성자</option>

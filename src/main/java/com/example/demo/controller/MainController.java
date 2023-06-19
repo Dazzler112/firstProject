@@ -35,18 +35,25 @@ public class MainController {
 			@RequestParam(value = "writer", defaultValue = "") String writer,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes) {
+			@RequestParam(value = "likes", defaultValue = "") Integer likes,
+			@RequestParam(value ="page", defaultValue="1") Integer page){
+		
+		Integer startIndex = (page -1) *10;
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(price, title, inserted, address);
 		List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
-
+		
+		
 		model.addAttribute("notices", noticeList);
 		model.addAttribute("productList1", productList1);
 		model.addAttribute("productList2", productList2);
+		
 
 		return "mainList1";
 	}
+	
+	
 
 	@GetMapping("list2")
 	public String list2(Model model,
@@ -70,6 +77,25 @@ public class MainController {
 		return "mainList2";
 	}
 
+
+	@GetMapping("/exList/{id}")
+	public String product1(@PathVariable("id") Integer id, Model model,
+			@RequestParam(value = "title", defaultValue = "") String title,
+			@RequestParam(value = "price", defaultValue = "") Integer price,
+			@RequestParam(value = "address", defaultValue = "") String address,
+			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
+			@RequestParam(value = "category", defaultValue = "") String category)  {
+		List<Product> list = service.productListService(id);
+		
+
+		model.addAttribute("list", list);
+		return "exList";
+	}
+
+	@GetMapping("/id/{id}")
+	public String product(@PathVariable("id") Integer id, Model model) {
+		Product product = service.getProduct(id);
+
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
@@ -78,6 +104,7 @@ public class MainController {
 		product.setWriter(authentication.getName());
 		boolean ok = service.addProduct(product, files, category);
 		
+
 		model.addAttribute("product", product);
 		if (ok) {
 			rttr.addFlashAttribute("message", "게시글이 생성되었습니다.");
@@ -100,6 +127,8 @@ public class MainController {
 	public String getAddView() {
 		return "mainAdd";
 	}
+	
+	
 
 	@PostMapping("/productUpdate/{id}")
 	public String update(@PathVariable("id") Integer id,
