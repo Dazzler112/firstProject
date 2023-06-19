@@ -1,24 +1,19 @@
 package com.example.demo.controller;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
+import org.springframework.web.servlet.mvc.support.*;
 
-import com.example.demo.domain.Notice;
-import com.example.demo.domain.Product;
-import com.example.demo.service.ProductService;
+import com.example.demo.domain.*;
+import com.example.demo.service.*;
 
 @Controller
 @RequestMapping("teamProject")
@@ -96,7 +91,9 @@ public class MainController {
 	@GetMapping("/id/{id}")
 	public String product(@PathVariable("id") Integer id, Model model) {
 		Product product = service.getProduct(id);
-
+		model.addAttribute("list",product);
+		return "exList";
+	}
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
