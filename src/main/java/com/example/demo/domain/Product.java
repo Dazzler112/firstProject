@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class Product {
+
    private Integer id;
    private Integer categoryId;
    private String memberId;
@@ -23,5 +24,7 @@ public class Product {
    private String writer;
    private String modi;
    private String keyword;
+  private String categoryName;
    private List<String> PhotoTitle;
+
 }

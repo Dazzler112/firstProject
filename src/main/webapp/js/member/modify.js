@@ -118,3 +118,14 @@ $("#checkAddressBtn").click(function() {
 	checkAddress = true;
 	enableSubmit();
 });
+
+
+function goPopup() {
+	var pop = window.open("/member/jusoPopup", "pop",
+		"width=570,height=420, scrollbars=yes, resizable=yes");
+}
+
+function jusoCallBack(roadFullAddr) {
+	var addressEI = document.querySelector("#inputAddress");
+	addressEI.value = roadFullAddr;
+}

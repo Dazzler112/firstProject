@@ -11,12 +11,17 @@ public interface BoardMapper {
 
 	@Select("""
 			SELECT
-				id,
-				title,
-				writer,
-				inserted
-			FROM QuickMenu
-			ORDER BY id DESC
+			id,
+			StatusCode,
+			title,
+			memberId,
+			inserted,
+			views,
+			likes,
+			price
+			FROM
+			Product
+			WHERE id=#{id}
 			""")
-	List<Board> selectAll();
+	List<Product> productId(Integer id);
 }

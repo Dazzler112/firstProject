@@ -39,12 +39,13 @@ body {
 .checkBtn{
   justify-content: center;
   text-align: center;
-  margin: 45px;
+  margin-top: 70px;
+  margin-bottom: 30px;
 }
 
 #reCheck{
 	width: 900px;
-	margin: 5px;
+	margin: 12px;
 	color: white;
 	background-color: #55A44E;
 }

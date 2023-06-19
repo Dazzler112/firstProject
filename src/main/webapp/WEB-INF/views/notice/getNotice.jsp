@@ -15,23 +15,23 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>${notice.title }</h1>
+				<h3>${notice.title }</h3>
 
 				<div>
-					<div class="mb-3">
-						<label for="" class="form-label">제목</label> <input type="text" class="form-control" value="${notice.title }" readonly />
-					</div>
-
-					<div class="mb-3">
-						<label for="" class="form-label">본문</label>
-						<textarea class="form-control" readonly rows="10">${notice.body }</textarea>
-					</div>
-					<div class="mb-3">
-						<label for="" class="form-label">작성자</label> <input type="text" class="form-control" value="${notice.writer }" readonly />
-					</div>
+<!-- 					<div class="mb-3"> -->
+<%-- 						<label for="" class="form-label">제목</label> <input type="text" class="form-control" value="${notice.title }" readonly /> --%>
+<!-- 					</div> -->
 					<div class="mb-3">
 						<label for="" class="form-label">작성일시</label> <input type="text" readonly class="form-control" value="${notice.inserted }" />
 					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">본문</label>
+						<textarea class="form-control" readonly rows="30">${notice.body }</textarea>
+					</div>
+					<!-- 					<div class="mb-3"> -->
+					<%-- 						<label for="" class="form-label">작성자</label> <input type="text" class="form-control" value="${notice.writer }" readonly /> --%>
+					<!-- 					</div> -->
+					<a href="/notice/noticeList" class="btn btn-primary">뒤로가기</a>
 				</div>
 
 				<sec:authorize access="isAuthenticated()">
@@ -39,17 +39,11 @@
 					<c:if test="${userId eq notice.writer }">
 						<div>
 							<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
-						</div>
-
-						<div>
 							<a href="/notice/update/${notice.id}" class="btn btn-secondary">수정</a>
-						</div>
-
-						<div>
 							<a href="/notice/noticeList" class="btn btn-primary">목록보기</a>
 						</div>
 
-
+							
 						<div class="d-none">
 							<form action="/notice/removeNotice" method="post" id="removeForm">
 								<input type="text" name="id" value="${notice.id }" />
@@ -57,16 +51,16 @@
 						</div>
 			</div>
 		</div>
-		<a href="/notice/noticeList" class="btn btn-primary">뒤로가기</a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -11,7 +11,10 @@ import com.example.demo.mapper.*;
 public class CustomSecurityCheck {
 	
 	@Autowired
-	private FreeBoardMapper boardMapper;
+	private FreeBoardMapper boardMapper;	
+		
+	@Autowired
+	private FreeCommentMapper commentMapper;
 	
 	@Autowired
 	private AdBoardMapper adBoardMapper;
@@ -20,7 +23,10 @@ public class CustomSecurityCheck {
 	private AdCommentMapper adCommentMapper;
 	
 	@Autowired
-	private FreeCommentMapper commentMapper;
+	private PtBoardMapper ptBoardMapper;
+	
+	@Autowired
+	private PtCommentMapper ptCommentMapper;
 	
 	@Autowired
 	private NoticeMapper noticeMapper;
@@ -43,6 +49,15 @@ public class CustomSecurityCheck {
 		return username.equals(writer);
 	}
 	
+	public boolean checkPtBoardWriter(Authentication authentication, Integer id) {
+		PtBoard board = ptBoardMapper.selectById(id);
+		
+		String username = authentication.getName();
+		String writer = board.getWriter();
+		
+		return username.equals(writer);
+	}
+	
 	
 	public boolean checkCommentWriter(Authentication authentication,
 								      Integer commentId) {
@@ -54,6 +69,13 @@ public class CustomSecurityCheck {
 	public boolean checkAdCommentWriter(Authentication authentication,
 			Integer commentId) {
 		AdComment comment = adCommentMapper.selectById(commentId);
+		
+		return comment.getMemberId().equals(authentication.getName());
+	}
+	
+	public boolean checkPdCommentWriter(Authentication authentication,
+			Integer commentId) {
+		PtComment comment = ptCommentMapper.selectById(commentId);
 		
 		return comment.getMemberId().equals(authentication.getName());
 	}

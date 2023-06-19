@@ -172,15 +172,48 @@ public class FreeBoardService {
 		return list;
 	}
 
-	public Map<String, Object> getCountList(String search, String type) {
+	public Map<String, Object> getCountList(Integer page, String search, String type, String boardCategory) {
+		 
+		//페이지 행의수
+		Integer rowPage = 10;
+		//쿼리 LIMIT절 사용할 시작 인덱스
+		Integer startIndex = (page -1) * rowPage;
+		//검색
 		Integer allRecords = mapper.countRecord(search,type); 
 		
-		List<FreeBoard> list = mapper.selectPaging(search,type);
-		return Map.of("boardList",list); 
+		//마지막 페이지 번호
+		Integer lastPageNumber = (allRecords -1) / rowPage +1;
+		//페이지 왼쪽 번호
+		Integer leftPageNumber = page - 5;
+		//1보다 작게 할 수 없게
+		leftPageNumber = Math.max(leftPageNumber, 1);
+		
+		//페이지 네이션 오른쪽번호
+		Integer rightPageNumber = leftPageNumber + 9;
+		//마지막 페이지 넘버보다 크게하지 못하게
+		rightPageNumber = Math.min(rightPageNumber, lastPageNumber);
+		
+		//처음 페이지
+		Integer firstPageNumber = 1;
+		//마지막 페이지
+		Integer endPageNumber = (allRecords / 5)+1;
+		
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("rightPageNumber", rightPageNumber);
+		pageInfo.put("leftPageNumber", leftPageNumber);
+		pageInfo.put("thisPage", page);
+		pageInfo.put("lastPageNumber", lastPageNumber);
+		pageInfo.put("firstPageNumber", firstPageNumber);
+		pageInfo.put("endPageNumber", endPageNumber);
+		
+		//게시물목록
+		List<FreeBoard> list = mapper.selectPaging(startIndex,rowPage,search,type,boardCategory);
+		return Map.of("pageInfo", pageInfo,
+					"boardList",list); 
 	}
 
-	public Map<String, Object> getBoardList(String boardCategory) {
-		
-		return Map.of("boardList", mapper.categoryListForm(boardCategory));
-	}
+//	public Map<String, Object> getBoardList(String boardCategory) {
+//		
+//		return Map.of("boardList", mapper.categoryListForm(boardCategory));
+//	}
 }

@@ -13,27 +13,50 @@
 </head>
 <body>
 
-   <div class="container-lg">
-      <table class="table">
-         <thead>
-            <tr>
-               <th style="display: none;">게시번호</th>
-               <th>현재 상태</th>
-               <th>제목</th>
-               <th>글쓴이</th>
-               <th>올린 시간</th>
-               <th>조회</th>
-               <th>찜</th>
-               <th>가격</th>
-               <th>modi</th>
-               <th>수정</th>
-               <th>삭제</th>
-            </tr>
-         </thead>
-         <tbody>
-            <c:forEach items="${exList}" var="product">
-               <tr>
-                  <td style="display: none;">${product.id}</td>
+
+	<div class="container-lg">
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="display: none;">게시번호</th>
+					<th>현재 상태</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>올린 시간</th>
+					<th>조회</th>
+					<th>찜</th>
+					<th>가격</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody><%-- ${product[0].title} --%>
+				<c:forEach items="${list}" var="product" >
+					<tr>
+						<td style="display: none;">${product.id}</td>
+						<td>${product.status}</td>
+						<td>${product.title}</td>
+						<td><a href="${product.id}">${product.memberId}</a></td>
+						<td>${product.inserted}</td>
+						<td>${product.views}</td>
+						<td>${product.likes}</td>
+						<td>${product.price}</td>
+						<c:if test="${loggedIn}">
+							<c:if test="${product.memberId eq loggedInUser}">
+								<td><a href="/product/productUpdate/${product.id}">수정</a></td>
+								<td>
+									<form action="/product/remove" method="post">
+										<input type="hidden" name="id" value="${product.id}">
+										<button type="submit" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</button>
+									</form>
+								</td>
+							</c:if>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
 
                   <td><div class="mb-3">
                   <c:forEach items="${productPhoto.id }" var="productPhotoId">

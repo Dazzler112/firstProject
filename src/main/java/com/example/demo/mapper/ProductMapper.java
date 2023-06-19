@@ -18,6 +18,7 @@ import com.example.demo.domain.Product;
 @Mapper
 public interface ProductMapper {
 
+
     List<Product> selectAll2(String title, Integer price, LocalDateTime inserted, String address);
 
     List<Product> selectAll3(String title, Integer price, LocalDateTime inserted, String address, Integer likes);
@@ -128,5 +129,4 @@ public interface ProductMapper {
            @Param("memberId") String memberId,
            @Param("productId") Integer productId
        );
-
 }

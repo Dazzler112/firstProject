@@ -25,23 +25,24 @@ h1 {
 	font-size: 60px;
 	color: #55A44E;
 	margin-bottom: 20px;
-/* 	font-weight: bold; */
+	/* 	font-weight: bold; */
 }
 
-#checkIdBtn, #checkNameBtn, #checkEmailBtn, #verifyEmailBtn, #checkPhoneNumBtn, #checkNicknameBtn{
+#checkIdBtn, #checkNameBtn, #checkEmailBtn, #verifyEmailBtn,
+	#checkPhoneNumBtn, #checkNicknameBtn {
 	color: #fff;
 	font-size: 16px;
 	background-color: #55A44E;
 }
 
 .btn-group label.btn {
-  color: #000000;
-  background-color: transparent;
-  border-color: #55A44E;
+	color: #000000;
+	background-color: transparent;
+	border-color: #55A44E;
 }
 
-.btn-group input:checked + label.btn {
-  background-color: #55A44E;
+.btn-group input:checked+label.btn {
+	background-color: #55A44E;
 }
 
 .container-lg {
@@ -55,9 +56,9 @@ h1 {
 			<div class="col-12 col-md-8 col-lg-8">
 				<h1>회원 가입</h1>
 				<form method="post" id="signup-form">
-					<div class="mb-3">						
+					<div class="mb-3">
 						<div class="input-group">
-							<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" placeholder="ID"/>
+							<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" placeholder="ID" />
 							<button class="btn btn-outline-success" type="button" id="checkIdBtn">중복확인</button>
 						</div>
 
@@ -68,13 +69,13 @@ h1 {
 							<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다.
 						</div>
 					</div>
-					
-					<div class="mb-3">						 
-						<input id="inputPassword" type="password" class="form-control" name="password" placeholder="Password"/>
+
+					<div class="mb-3">
+						<input id="inputPassword" type="password" class="form-control" name="password" placeholder="Password" />
 					</div>
 
 					<div class="mb-3">
-						<input id="inputPasswordCheck" type="password" class="form-control" placeholder="Password 확인"/>
+						<input id="inputPasswordCheck" type="password" class="form-control" placeholder="Password 확인" />
 
 						<div id="passwordSuccessText" class="d-none form-text text-primary">
 							<i class="fa-solid fa-check"></i> 패스워드가 일치 합니다.
@@ -87,28 +88,24 @@ h1 {
 
 					<div class="mb-3">
 						<div class="input-group">
-							<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" placeholder="이름"/>
+							<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" placeholder="이름" />
 							<button class="btn btn-outline-success" type="button" id="checkNameBtn">확인</button>
 						</div>
+						<div class="d-none form-text text-primary" id="availableNameMessage">
+							<i class="fa-solid fa-check"></i> 이름이 확인되었습니다.
+						</div>
 					</div>
-				
-				<div class="mb-3">
-					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-					
-					  <input type="radio" class="btn-check" name="gender" id="inputGenderM" autocomplete="off" value="남">
-					  <label class="btn btn-outline-success" for="inputGenderM">남</label>
-					
-					  <input type="radio" class="btn-check" name="gender" id="inputGenderW" autocomplete="off" value="여">
-					  <label class="btn btn-outline-success" for="inputGenderW">여</label>
-					
-					  <input type="radio" class="btn-check" name="gender" id="inputGenderX" autocomplete="off" value="선택 안함">
-					  <label class="btn btn-outline-success" for="inputGenderX">선택 안함</label>
-					</div>					
-				</div>
 
-					<div class="mb-3">						
+					<div class="mb-3">
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+
+							<input type="radio" class="btn-check" name="gender" id="inputGenderM" autocomplete="off" value="남"> <label class="btn btn-outline-success" for="inputGenderM">남</label> <input type="radio" class="btn-check" name="gender" id="inputGenderW" autocomplete="off" value="여"> <label class="btn btn-outline-success" for="inputGenderW">여</label> <input type="radio" class="btn-check" name="gender" id="inputGenderX" autocomplete="off" value="선택 안함"> <label class="btn btn-outline-success" for="inputGenderX">선택 안함</label>
+						</div>
+					</div>
+
+					<div class="mb-3">
 						<div class="input-group">
-							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" placeholder="E-mail"/>
+							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" placeholder="E-mail" />
 							<button class="btn btn-outline-success" type="button" id="checkEmailBtn">인증하기</button>
 						</div>
 						<div class="d-none form-text text-primary" id="availableEmailMessage">
@@ -136,8 +133,8 @@ h1 {
 
 					<div class="mb-3">
 						<div class="input-group">
-							<input id="inputPhoneNum" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" title="전화번호를 입력하세요." placeholder="핸드폰 번호"/>
-<%-- 							<input id="inputPhoneNum" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" title="전화번호를 입력하세요." placeholder="010-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" /> --%>
+							<input id="inputPhoneNum" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" title="전화번호를 입력하세요." placeholder="핸드폰 번호" />
+							<%-- 							<input id="inputPhoneNum" type="tell" class="form-control" name="phoneNum" value="${member.phoneNum }" title="전화번호를 입력하세요." placeholder="010-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" /> --%>
 							<button class="btn btn-outline-success" type="button" id="checkPhoneNumBtn">중복확인</button>
 						</div>
 						<div class="d-none form-text text-primary" id="availablePhoneNumMessage">
@@ -150,7 +147,7 @@ h1 {
 
 					<div class="mb-3">
 						<div class="input-group">
-							<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" placeholder="별명"/>
+							<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" placeholder="별명" />
 							<button class="btn btn-outline-success" type="button" id="checkNicknameBtn">중복확인</button>
 						</div>
 
@@ -165,7 +162,7 @@ h1 {
 
 					<!-- 도로명 주소 API 사용 -->
 					<div class="mb-3">
-							<button type="button" class="btn btn-success" onClick="goPopup();">주소 검색</button>
+						<button type="button" class="btn btn-success" onClick="goPopup();">주소 검색</button>
 						<div class="input-group">
 							<input name="address" id="inputAddress" type="text" class="form-control" placeholder="Enter Address" required readonly />
 						</div>

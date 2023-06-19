@@ -24,24 +24,27 @@ public class FreeBoardController {
 	
 	@GetMapping("freelist")
 	public String list (Model model,
+						@RequestParam(value = "page", defaultValue = "1")Integer page,
 						@RequestParam(value = "search" ,defaultValue = "")String search,
-						@RequestParam(value="type", required = false)String type){
+						@RequestParam(value="type", required = false)String type,
+						@RequestParam(value = "boardCategory", required = false)String boardCategory){
 //		List<FreeBoard> list = service.listProcess();
 		
 //		List<FreeBoard> list = service.getCountList();
-		Map<String, Object> list = service.getCountList(search,type);
+		Map<String, Object> list = service.getCountList(page,search,type,boardCategory);
 		
 		model.addAllAttributes(list); 
+		
 		return "freeboard/freelist";
 	}
 	
-	@GetMapping(value = "freelist", params = "boardCategory")
-	public String boardCategoryList(@RequestParam(value ="boardCategory")String boardCategory, Model model) {
-		Map<String, Object> list = service.getBoardList(boardCategory);
-		
-		model.addAllAttributes(list);
-		return "freeboard/freelist";
-	}
+//	@GetMapping(value = "freelist", params = "boardCategory")
+//	public String boardCategoryList(@RequestParam(value ="boardCategory")String boardCategory, Model model) {
+//		Map<String, Object> list = service.getBoardList(boardCategory);
+//		
+//		model.addAllAttributes(list);
+//		return "freeboard/freelist";
+//	}
 	
 	
 	@GetMapping("/id/{id}")
@@ -71,7 +74,7 @@ public class FreeBoardController {
 						,Model model,
 						Authentication authentication) 
 								throws Exception{
-		board.setWriter(authentication.getName());
+		board.setWriter(authentication.getName()); // 작성자
 		boolean ok = service.addProcess(board,files,category);
 		
 		model.addAttribute("category",category);
