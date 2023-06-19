@@ -165,7 +165,7 @@
 
 	</section>
 
-
+			<c:forEach items="${noticeList}" var="notice">
 					<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
 					<td>${notice.inserted}</td>
 					<td>${notice.writer}</td>

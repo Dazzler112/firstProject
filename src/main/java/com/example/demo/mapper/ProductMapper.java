@@ -1,19 +1,12 @@
 package com.example.demo.mapper;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.security.core.Authentication;
+import org.apache.ibatis.annotations.*;
+import org.springframework.security.core.*;
 
-import com.example.demo.domain.Notice;
-import com.example.demo.domain.Product;
+import com.example.demo.domain.*;
 
 @Mapper
 public interface ProductMapper {
@@ -85,7 +78,7 @@ public interface ProductMapper {
             Product
             ORDER BY id DESC
             """)
-    List<Product> allProduct();
+    List<Product> allProduct(Integer id);
 
     @Select("""
            SELECT

@@ -34,7 +34,7 @@
 				<c:forEach items="${list}" var="product" >
 					<tr>
 						<td style="display: none;">${product.id}</td>
-						<td>${product.status}</td>
+						<td>${product.statusCode}</td>
 						<td>${product.title}</td>
 						<td><a href="${product.id}">${product.memberId}</a></td>
 						<td>${product.inserted}</td>
@@ -80,7 +80,6 @@
                   </form>
                   </td>
                </tr>
-            </c:forEach>
          </tbody>
       </table>
 
