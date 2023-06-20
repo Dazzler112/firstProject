@@ -53,7 +53,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${notices}" var="notice">
+				<c:forEach items="${notice}" var="notice">
 					<tr>
 
 						<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
@@ -163,19 +163,13 @@
 		</div>
 
 
-	</section>
+	
 
-			<c:forEach items="${noticeList}" var="notice">
-					<td><a href="/board/id/${notice.id }"> ${notice.title} </a></td>
-					<td>${notice.inserted}</td>
-					<td>${notice.writer}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+		
+	
 
 
-	</div>
+	
 
 	
 	<my:footer></my:footer>

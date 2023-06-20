@@ -14,10 +14,10 @@
         SELECT * FROM Product
     </select>
    <select id="selectAll6" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product
+        SELECT * FROM Product 
     </select>
    <select id="selectAll7" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product
+        SELECT * FROM Product ORDER BY ID DESC
     </select>
    <select id="selectLikedProducts" resultType="com.example.demo.domain.Product">
         SELECT * FROM Product WHERE id IN (

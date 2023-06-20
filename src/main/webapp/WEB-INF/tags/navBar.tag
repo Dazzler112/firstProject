@@ -20,21 +20,20 @@
 
 
 
+			<sec:authorize access="isAnonymous()">
+				<span class="header__title"><a class="linkcolor"
+					href="/teamProject/list1"><img  class="navbarimage" src="/img/navbarimage.png"
+					alt="My Image"/></a> </span>
+			</sec:authorize>		
+			<sec:authorize access="isAuthenticated()">		
+					<a class="linkcolor"
+					href="/teamProject/list2"><img  class="navbarimage" src="/img/navbarimage.png"
+					alt="My Image"/></a> 
+			</sec:authorize>
 
-				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png"
-					alt="My Image"> <span class="header__title"><a class="linkcolor"
-					href="/teamProject/list1"></a></span> 
 
 
-
-				<sec:authorize access="isAnonymous()">
-					<!-- 로그인 안되어 있을때 -->
-					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
-				</sec:authorize>
-				<sec:authorize access="isAuthenticated()">
-					<!-- 로그인 하였을때 -->
-					<span class="header__title"><a class="linkcolor" href="/teamProject/list2">SecondStop</a></span>
-				</sec:authorize>
+			
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">

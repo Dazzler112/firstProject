@@ -69,9 +69,14 @@ public class ProductService {
 		return mapper.selectAll6(title, price, inserted, price, price, likes);
 	}
 
-	public List<Product> listBoard7(String title, Integer price, String address, LocalDateTime inserted) {
-
-		return mapper.selectAll7(title, price, address, inserted);
+//	카테고리 리스트로 에서 사용할 수 있는 서비스
+	public List<Product> listBoard7(Integer page,  String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
+		Integer startIndex = (page - 1) * 15;
+		//게시물 목록 
+		mapper.selectAllPaging(startIndex);
+		
+		
+		return mapper.selectAll7(categoryTitle,  title, price, address, inserted);
 	}
 
 	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
@@ -184,11 +189,32 @@ public class ProductService {
 
 		return "product/productget";
 	}
-
-	public List<Product> productListService(Integer id) {
+	
+	public List<Product> productListService(){
+		List<Product> list = mapper.allProduct();
+		return list;
+	}
+	
+//	상품을 들어갔을때 상품 id하나만 나오기
+	public List<Product> productListService1(Integer id) {
 		List<Product> list = mapper.allProduct1(id);
 		return list;
 	}
+	
+	
+	public List<Product> productCategory(String productCategory){
+		List<Product> list = mapper.productCategoryList(productCategory);
+		return list;
+		
+	}
+
+	public List<Product> listBoard10(Integer page) {
+		List<Product> list = mapper.listcategorypage(page);
+
+		return list;
+	}
+	
+	
 
 	public List<Product> productListService1(Integer id) {
 		List<Product> list = mapper.allProduct1(id);

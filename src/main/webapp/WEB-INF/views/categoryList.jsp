@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
@@ -6,11 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 목록</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<link rel="stylesheet" href="/resources/mainList1.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <style>
 #cotent_box {
@@ -71,9 +78,10 @@
 	align-items: center;
 	margin: 15px 0px;
 }
-.boxcategory{
-justify-content: space-between;
-margin-left: auto;
+
+.boxcategory {
+	justify-content: space-between;
+	margin-left: auto;
 	margin-right: auto;
 	padding-top: 10px;
 	display: flex;
@@ -169,41 +177,67 @@ margin-left: auto;
 
 	</div> --%>
 	<section id="content_box">
-	<form id="categoryForm" action="" method="get"></form>
+		<form id="categoryForm" action="" method="get"></form>
 		<div class="boxcategory">
-				<h1 class="compos">카테고리</h1>
+			<h1 class="compos">카테고리</h1>
 			<div id="category_div">
-				<input type="button" class="category_button" name="productCategory" value="패션" /> 
-				<input type="button" class="category_button" name="productCategory" value="가구" /> 
-				<input type="button" class="category_button" name="productCategory" value="게임" />
-				<input type="button" class="category_button" name="productCategory" value="명품" /> 
-				<input type="button" class="category_button" name="productCategory" value="전자기기" /> 
-				<input type="button" class="category_button" name="productCategory" value="취미" /> 
-				<input type="button" class="category_button" name="productCategory" value="무료나눔" />
+				<input type="button" class="category_button" name="productCategory"
+					value="패션" /> <input type="button" class="category_button"
+					name="productCategory" value="가구" /> <input type="button"
+					class="category_button" name="productCategory" value="게임" /> <input
+					type="button" class="category_button" name="productCategory"
+					value="명품" /> <input type="button" class="category_button"
+					name="productCategory" value="전자기기" /> <input type="button"
+					class="category_button" name="productCategory" value="취미" /> <input
+					type="button" class="category_button" name="productCategory"
+					value="무료나눔" />
 				<!-- http://localhost:8084/teamProject/list4?category=1025453  -->
 				<!-- http://localhost:8084/teamProject/list4/category/1025453 -->
 			</div>
 		</div>
-		
+
 		<%-- /${product.id } --%>
 		<div class="box">
 			<div class="clear"></div>
 			<c:forEach items="${CategoryList}" var="product">
 				<ul class="items">
-					<a href="/teamProject/exList/${product.id }"> <img class="productimg" src="/productimg/sample1.jpg">
+					<a href="/teamProject/exList/${product.id }"> <img
+						class="productimg" src="/productimg/sample1.jpg">
 					</a>
 					<li class="title">${product.title}</li>
 					<li class="price">${product.price}</li>
 					<li class="like">좋아요</li>
+					<li>${category.title}</li>
 				</ul>
 			</c:forEach>
 		</div>
 		<div class="clear"></div>
 	</section>
+
+	<my:categorylistsearch></my:categorylistsearch>
+
+	<div class="container-lg">
+		<div class="row">
+			<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  	<c:forEach begin="1" end="10" var="pageNum">
+  	<c:url value="/teamProject/list4" var="pageLink">
+  		<c:param name="page" value="${pageNum }"></c:param>
+  	</c:url>
+    <li class="page-item"><a class="page-link" href="${pageLink }">${pageNum }</a></li>
+  	
+  	</c:forEach>
+    
+  </ul>
+</nav>
+		</div>
+	</div>
 	<script src="/js/navbar/productcategory.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

@@ -32,10 +32,9 @@ public class MainController {
 			@RequestParam(value = "writer", defaultValue = "") String writer,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes,
-			@RequestParam(value ="page", defaultValue="1") Integer page){
+			@RequestParam(value = "likes", defaultValue = "") Integer likes){
 		
-		Integer startIndex = (page -1) *10;
+		
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(price, title, inserted, address);
@@ -80,22 +79,26 @@ public class MainController {
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category)  {
 		List<Product> list = service.productListService1(id);
+
 		
 		String productPhoto = service.getProductPhoto(id);
 		
 		list.forEach(p -> p.setPhotoTitle(productPhoto));
 		
 		model.addAttribute("list",list);
+
 		
 		return "exList";
 	}
 
-//	@GetMapping("/id/{id}")
-//	public String productPhoto(@PathVariable("id") Integer id, Model model) {
-//		Product productPhoto = service.getProductPhoto(id);
-//		model.addAttribute("list",productPhoto);
-//		return "exList";
-//	}
+
+	@GetMapping("/id/{id}")
+	public String product(@PathVariable("id") Integer id, Model model) {
+		Product product = service.getProduct(id);
+		model.addAttribute("product",product);
+		return "get";
+	}
+
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
