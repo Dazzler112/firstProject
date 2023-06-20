@@ -121,7 +121,7 @@
 				  </label>
 				</div>
 				<div class="mb-3">
-					<img src="${bucketUrl }/${board.id }/${fileName}" width="600px" height="450px />
+					<img src="${bucketUrl }/${board.id }/${fileName}" width="600px" height="450px "/>
 				</div>
 			</c:forEach>
 		</div>

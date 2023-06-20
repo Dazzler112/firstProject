@@ -23,8 +23,9 @@ public interface ProductMapper {
 
     List<Product> selectAll6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
                              Integer likes);
-
-    List<Product> selectAll7(String title, Integer price, String address, LocalDateTime inserted);
+    
+//    카테고리리스트 
+    List<Product> selectAll7( String categoryTitle, String title, Integer price, String address, LocalDateTime inserted);
 
     @Select("SELECT * FROM Product WHERE id = #{id}")
     Product selectById(Integer id);
@@ -65,20 +66,84 @@ public interface ProductMapper {
     List<Notice> selectAll1(String title, LocalDateTime inserted, String body, String writer);
 
     @Select("""
-            SELECT
-            id,
-            statusCode,
-            title,
-            memberId,
-            inserted,
-            views,
-            likes,
-            price
-            FROM
-            Product
-            ORDER BY id DESC
-            """)
-    List<Product> allProduct(Integer id);
+
+    		SELECT
+
+    		id,
+
+    		StatusCode,
+
+    		title,
+
+    		memberId,
+
+    		inserted,
+
+    		views,
+
+    		likes,
+
+    		price
+
+    		FROM
+
+    		Product
+
+    		ORDER BY id DESC
+
+    		""")
+
+    		List<Product> allProduct();
+
+
+
+    		@Select("""
+
+    		SELECT
+
+    		id,
+
+    		StatusCode,
+
+    		title,
+
+    		memberId,
+
+    		inserted,
+
+    		views,
+
+    		likes,
+
+    		price
+
+    		FROM
+
+    		Product
+
+    		WHERE id=#{id}
+
+    		""")
+
+    		List<Product> allProduct1(Integer id);
+
+    		@Select("""
+
+    		SELECT
+
+    		CategoryID
+
+    		CategoryName
+
+    		FROM
+
+    		Category
+
+    		WHERE CategoryName=#{productCategory}
+
+    		""")
+
+    		List<Product> productCategoryList(String productCategory);
 
     @Select("""
            SELECT
@@ -122,4 +187,59 @@ public interface ProductMapper {
            @Param("memberId") String memberId,
            @Param("productId") Integer productId
        );
+
+//    검색을 하기위함
+    @Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT COUNT(*)
+			FROM Board
+			
+			<where>
+			<if test="(type eq 'all') or (type eq 'title')">
+				title LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'body')">
+				OR body LIKE #{pattern}
+			</if>
+			<if test="(type eq 'all') or (type eq 'writer')">
+				OR writer LIKE #{pattern}
+			</if>
+			</where>
+		
+			</script>
+			""") 
+	Integer countRecord(String search, String type);
+    
+	/*
+	 * // 어디서 몇개를 보여줄지 정해주기
+	 * 
+	 * @Select(""" SELECT
+	 *
+	 * FROM Product
+	 * 
+	 * 
+	 * ORDER BY ID DESC LIMIT #{startIndex}, 2 """)
+	 * 
+	 * List<Product> listcategorypage(Integer startIndex);
+	 * 
+	 * //끝에서의 페이지 번호 정하기
+	 * 
+	 * @Select(""" SELECT COUNT(*) FROM Product ID """) Integer countAll();
+	 */
+   
+    @Select("""
+    		SELECT 
+    			*
+    		FROM Product 
+    		
+    		
+    		ORDER BY ID DESC 
+    		LIMIT #{startIndex},  15
+    		""")
+
+	List<Product> selectAllPaging(Integer startIndex);
+	
+    
+    
 }

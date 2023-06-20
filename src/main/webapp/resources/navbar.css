@@ -7,6 +7,7 @@
 	top: 0px;
 	left: 0px;
 	right: 0px;
+	height: auto;
 	margin-bottom: 30px;
 	width: 100%;
 	background-color:#55A44E;
@@ -15,7 +16,7 @@
 
 .header__wrapper {
 	/*고정된 높이*/
-	height: 60px;
+	
 	/*좌우정렬 flex*/
 	display: flex;
 	flex-direction: row;
@@ -23,13 +24,15 @@
 	align-items: center;
 	/*가로축 아이템 정렬: 양 끝으로 펼치기*/
 	justify-content: space-between;
-	padding: 0 16px;
+	padding: 0px 16px;
 	background-color:#55A44E;
-	height: 70px;
+	height: 90%;
+	
 }
 
 .header__start {
-	display: flex;
+	height: 100%;
+	margin-left: 10px;
 	align-items: center;
 }
 
@@ -48,7 +51,7 @@
 .header__title {
 	font-size: 3rem;
 	margin-left: 6px;
-	margin-right: 30px;
+	margin-right: 15px;
 }
 
 .header__center {
@@ -108,9 +111,9 @@
 	position: absolute;
 }
 .navbarimage{
-	width:100px;
-	height: 100px;
-	margin-top: 20px;
+	width: 200px;
+	height: 90px;
+	
 	
 }
 
@@ -214,6 +217,7 @@
 		color: black;
 	}
 	#primary_nav_wrap {
+		display: none;
 		display: none;
 	}
 	

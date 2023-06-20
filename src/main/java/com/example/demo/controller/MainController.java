@@ -31,10 +31,9 @@ public class MainController {
 			@RequestParam(value = "writer", defaultValue = "") String writer,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes,
-			@RequestParam(value ="page", defaultValue="1") Integer page){
+			@RequestParam(value = "likes", defaultValue = "") Integer likes){
 		
-		Integer startIndex = (page -1) *10;
+		
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(price, title, inserted, address);
@@ -81,7 +80,7 @@ public class MainController {
 			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category)  {
-		List<Product> list = service.productListService(id);
+		List<Product> list = service.productListService1(id);
 		
 
 		model.addAttribute("list", list);
@@ -91,8 +90,8 @@ public class MainController {
 	@GetMapping("/id/{id}")
 	public String product(@PathVariable("id") Integer id, Model model) {
 		Product product = service.getProduct(id);
-		model.addAttribute("list",product);
-		return "exList";
+		model.addAttribute("product",product);
+		return "get";
 	}
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
