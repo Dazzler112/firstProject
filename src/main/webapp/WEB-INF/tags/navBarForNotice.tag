@@ -14,7 +14,16 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image"> <span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
+				<sec:authorize access="isAnonymous()">
+					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">
+							<img class="navbarimage" src="/img/navbarimage.png" alt="My Image" />
+						</a> </span>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<a class="linkcolor" href="/teamProject/list2">
+						<img class="navbarimage" src="/img/navbarimage.png" alt="My Image" />
+					</a>
+				</sec:authorize>
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
@@ -66,13 +75,13 @@
 							</button>
 						</li>
 					</sec:authorize>
-<%-- 					<sec:authorize access="isAuthenticated()"> --%>
-<!-- 						<li> -->
-<!-- 							<button class="dropdown-item" type="button"> -->
-<!-- 								<a href="/mainAdd">상품등록</a> -->
-<!-- 							</button> -->
-<!-- 						</li> -->
-<%-- 					</sec:authorize> --%>
+					<%-- 					<sec:authorize access="isAuthenticated()"> --%>
+					<!-- 						<li> -->
+					<!-- 							<button class="dropdown-item" type="button"> -->
+					<!-- 								<a href="/mainAdd">상품등록</a> -->
+					<!-- 							</button> -->
+					<!-- 						</li> -->
+					<%-- 					</sec:authorize> --%>
 					<sec:authorize access="isAuthenticated()">
 						<li>
 							<button class="dropdown-item" type="button">

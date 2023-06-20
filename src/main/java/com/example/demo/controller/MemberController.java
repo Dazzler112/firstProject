@@ -152,6 +152,8 @@ public class MemberController {
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void readMyWriting(String id, Model model) {
 		List<myWrite> userWriting = service.getUserWriting(id);
+		Member member = service.getUser(id);
+		model.addAttribute("member", member);
 		model.addAttribute("userWriting", userWriting);
 	}
 	

@@ -8,8 +8,8 @@ import com.example.demo.domain.*;
 public interface MemberMapper {
 
 	@Insert("""
-			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email)
-			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email})
+			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email, addressSggNm)
+			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email}, #{addressSggNm})
 			""")
 	Integer signUpInsert(Member member);
 
