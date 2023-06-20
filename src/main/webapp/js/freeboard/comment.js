@@ -1,3 +1,8 @@
+//===================================================================
+let select = true
+//===================================================================
+
+
 listComment();
 
 $("#sendCommentBtn").click(function() {
@@ -204,5 +209,20 @@ $("#commentListContainer").on("click", ".commentUpdateButton", function() {
 				});
 			}
 		});
+	}
+});
+
+
+//==================================================================
+//삭제 수정 버튼
+$('#button-list').click(() => {
+	const hideDiv = document.querySelector('#button-hide');
+	
+	if (select == true) {
+		hideDiv.style.display = 'block';
+		select = false;
+	} else {
+		hideDiv.style.display = 'none';
+		select = true;
 	}
 });
