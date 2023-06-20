@@ -160,7 +160,16 @@ public interface MemberMapper {
 			UPDATE Member
 			SET password = #{encodePw}
 			WHERE name = #{name} and email=#{email};
-						""")
-	void updatePw(String name, String email, String encodePw);
+			""")
+	Integer updatePw(String name, String email, String encodePw);
+
+	@Select("""
+			SELECT sort, region, title, body, id, inserted FROM Board WHERE writer = #{id}
+			UNION
+			SELECT sort, region, title, body, id, inserted FROM AdBoard WHERE writer = #{id}
+			UNION
+			SELECT sort, region, title, body, id, inserted FROM PtBoard WHERE writer = #{id};
+			""")
+	List<myWrite> getUserWriting(String id);
 
 }

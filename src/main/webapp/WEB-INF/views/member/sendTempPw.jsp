@@ -202,8 +202,6 @@ h3 {
 
 						if (authentication) {
 							// 인증번호 일치 시 회원 가입 진행
-							checkEmail = true;
-							enableSubmit();
 
 							alert("인증이 완료되었습니다. 회원 가입을 진행합니다.");
 						} else {
@@ -224,7 +222,7 @@ h3 {
 				type:"POST",
 				data:{"name":name, "email":email} ,
 				success:function(data){
-					if(data == 0){
+					if(data){
 						$('#id_value').text("회원 정보를 확인해주세요!");
 						$('#name').val('');
 						$('#email').val('');
@@ -236,10 +234,31 @@ h3 {
 					}
 				},
 				 error:function(){
+					 
 		                alert("에러입니다");
 		            }
 			});
 		};
+		
+		const modal = document.getElementById("modal")
+		const btnModal = document.getElementById("find_id")
+
+		btnModal.addEventListener("click", e => {
+		    modal.style.display = "flex"
+		})
+
+		    
+		const closeBtn = modal.querySelector(".close-area")
+		closeBtn.addEventListener("click", e => {
+		    modal.style.display = "none"
+		})
+
+		modal.addEventListener("click", e => {
+		    const evTarget = e.target
+		    if(evTarget.classList.contains("modal-overlay")) {
+		        modal.style.display = "none"
+		    }
+		})
 	</script>
 </body>
 </html>
