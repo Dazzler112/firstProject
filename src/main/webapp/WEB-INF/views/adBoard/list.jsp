@@ -44,13 +44,6 @@ h1 {
 	text-align: center;
 }
 
-.div_writer {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	margin: 0px, 30px, 30px, 0px;
-}
-
 .image_column {
 	margin: 0px 3.5px 0px 0px;
 	padding: 1px 2.5px 1px 2.5px;
@@ -99,20 +92,30 @@ h1 {
 	width: 600px;
 }
 
-.bt {
-	width: 80px;
-	height: 40px;
-	text-align: center;
-	line-height: 40px;
-	border-radius: 10%;
-	background-color: greenyellow;
-	border-color: white;
-	position: relative;
-	right: -180px;
-	font-weight: bold;
-}
 .text{
 	text-align: left;
+}
+.writer_link-color {
+	color: rgba(0, 0, 0, 0.5);
+	font-size: 28px;
+}
+
+.board_writer-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FFDAB9;
+	padding: 16px;
+	border-radius: 50%;
+}
+
+.div_writer {
+	margin-bottom: 50px;
+	margin-right: 30px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin: 0px, 30px, 30px, 0px;
 }
 
 </style>
@@ -123,18 +126,15 @@ h1 {
 	<h1>광고게시판</h1>
 	<form action="" method="get">
 		<div id="category_div">
-			<input type="button" class="category_button" name="boardCategory" value="이사/용달" />
-			<input type="button" class="category_button" name="boardCategory" value="인테리어/간판" />
-			<input type="button" class="category_button" name="boardCategory" value="청소" />
-			<input type="button" class="category_button" name="boardCategory" value="학원" />
-			<input type="button" class="category_button" name="boardCategory" value="미용" />
-			<input type="button" class="category_button" name="boardCategory" value="운동" />
-			<input type="button" class="category_button" name="boardCategory" value="병원" />
-			<input type="button" class="category_button" name="boardCategory" value="금융" />
-			<input type="button" class="category_button" name="boardCategory" value="기타" />
-			<div class="bt">
-				<a href="/adBoard/add">글쓰기</a>
-			</div>
+			<input type="button" class="category_button" name="category" value="이사/용달" />
+			<input type="button" class="category_button" name="category" value="인테리어/간판" />
+			<input type="button" class="category_button" name="category" value="청소" />
+			<input type="button" class="category_button" name="category" value="학원" />
+			<input type="button" class="category_button" name="category" value="미용" />
+			<input type="button" class="category_button" name="category" value="운동" />
+			<input type="button" class="category_button" name="category" value="병원" />
+			<input type="button" class="category_button" name="category" value="금융" />
+			<input type="button" class="category_button" name="category" value="기타" />			
 		</div>
 
 		<table>
@@ -207,6 +207,13 @@ h1 {
 
 		<my:freesearch></my:freesearch>
 	</form>
+	<div class="div_writer">
+		<a href="/adBoard/add" class="writer_link-color">
+			<div class="board_writer-icon">
+				<i class="fa-solid fa-pen-to-square"></i>
+			</div>
+		</a>
+	</div>
 
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

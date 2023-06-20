@@ -15,6 +15,7 @@ public class AdBoard {
 	private String writer;
 	private String region;
 	private String category;
+	private String sort;
 
 	private List<String> fileName;
 
