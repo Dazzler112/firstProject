@@ -202,24 +202,16 @@ public class ProductService {
 	}
 	
 	
-	public List<Product> productCategory(String productCategory){
-		List<Product> list = mapper.productCategoryList(productCategory);
-		return list;
-		
-	}
+	/*
+	 * public List<Product> productCategory(String productCategory){ List<Product>
+	 * list = mapper.productCategoryList(productCategory); return list;
+	 * 
+	 * }
+	 */
 
-	public List<Product> listBoard10(Integer page) {
-		List<Product> list = mapper.listcategorypage(page);
-
-		return list;
-	}
 	
 	
-
-	public List<Product> productListService1(Integer id) {
-		List<Product> list = mapper.allProduct1(id);
-		return list;
-	}
+	
 
 	public String getProductPhoto(Integer id) {
 		String list = mapper.allProductPhoto(id);
