@@ -159,10 +159,6 @@
 			</div>
 			</input>
 
-			<!-- <a class="iconsearch" href="#"><i class="fa-solid fa-magnifying-glass"></i> </a> -->
-<!-- 			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
-<!-- 				<i class="fa-solid fa-magnifying-glass"></i> -->
-<!-- 			</button> -->
 		</div>
 		<div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -194,7 +190,7 @@
 				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
 			</sec:authorize>
 				<li><a href="/member/info?id=${member.id}">내 정보</a>					
-				<li><a href="#">내가 쓴 글</a>						
+				<li><a href="/member/writeByMe?id=${member.id }">내가 쓴 글</a>						
 				<li><a href="#">내가 올린 상품</a>						
 			</ul>
 		</nav>

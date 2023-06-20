@@ -212,6 +212,7 @@ public class FreeBoardService {
 					"boardList",list); 
 	}
 
+
 //	public Map<String, Object> getBoardList(String boardCategory) {
 //		
 //		return Map.of("boardList", mapper.categoryListForm(boardCategory));
