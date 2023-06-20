@@ -11,6 +11,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
+import com.example.demo.controller.*;
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
@@ -103,11 +104,12 @@ public class ProductService {
 	public boolean addProduct(Product product, MultipartFile[] files, String category) throws Exception {
 		Integer ProrductID = productMapper.insertForm(product);
 
+		System.out.println(product);
 		if (ProrductID != null) {
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
-					productMapper.insertFileName(ProrductID, file.getOriginalFilename());
-					String objectKey = "teamPrj/" + ProrductID + "/" + file.getOriginalFilename();
+					productMapper.insertFileName(product.getId(), file.getOriginalFilename());
+					String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
 
 					PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
 							.acl(ObjectCannedACL.PUBLIC_READ).build();
@@ -184,10 +186,37 @@ public class ProductService {
 	}
 
 	public List<Product> productListService(Integer id) {
-		List<Product> list = mapper.allProduct(id);
+		List<Product> list = mapper.allProduct1(id);
 		return list;
 	}
 
+	public List<Product> productListService1(Integer id) {
+		List<Product> list = mapper.allProduct1(id);
+		return list;
+	}
+
+	public String getProductPhoto(Integer id) {
+		String list = mapper.allProductPhoto(id);
+		return list;
+	}
+
+	public Map<String, Object> like(Like like, Authentication authentication){
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("like", false);
+		
+		like.setMemberId(authentication.getName());
+		Integer deleteCnt = mapper.delete(like);
+	
+		if (deleteCnt != 1) {
+			Integer insertCnt = mapper.insert(like);
+			result.put("like", true);
+		}
+		
+		Integer insertCnt = mapper.insert(like);		
+		
+		return result;
+}
 	/*
 	 * public List<String> getExlistProcess(Integer id, Authentication
 	 * authentication) { // 상품 정보를 가져와서 Product 객체로 생성 List<String> photoList =

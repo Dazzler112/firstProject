@@ -7,4 +7,5 @@ public class Like {
 
 	private Integer boardId;
 	private String memberId;
+	private Integer productId;
 }
