@@ -98,7 +98,7 @@ body {
 			<input type="button" value="Sign Up" onclick="location.href='/member/signup'" />
 			<div class="find-buttons">
 				<input type="button" value="아이디 찾기" onclick="location.href='/member/userSearch '" /> 
-				<input type="button" value="비밀번호 찾기" onclick="location.href='/member/sendTempPw'" />
+				<input type="button" value="임시 비밀번호 발급" onclick="location.href='/member/sendTempPw'" />
 			</div>
 		</form>
 	</div>

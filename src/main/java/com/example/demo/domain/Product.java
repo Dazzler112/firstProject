@@ -24,7 +24,7 @@ public class Product {
    private String writer;
    private String modi;
    private String keyword;
-  private String categoryName;
-   private List<String> PhotoTitle;
+   private String categoryName;
+   private String photoTitle;
 
 }

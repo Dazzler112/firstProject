@@ -18,8 +18,14 @@ public class MemberService {
 	@Autowired
 	private MemberMapper mapper;
 
-//	@Autowired
-//	private FreeBoardService freeBoardService;
+	@Autowired
+	private FreeBoardService freeBoardService;
+
+	@Autowired
+	private AdBoardService adBoardService;
+	
+	@Autowired
+	private PtBoardService ptBoardService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -155,5 +161,11 @@ public class MemberService {
 		
 		return result ;
 	}
+
+	public List<myWrite> getUserWriting(String id) {
+		List<myWrite> userWriting = mapper.getUserWriting(id);
+		return userWriting;
+	}
+
 
 }

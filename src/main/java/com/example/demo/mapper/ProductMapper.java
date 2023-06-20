@@ -9,7 +9,7 @@ import org.springframework.security.core.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface ProductMapper {
+public interface ProductMapper {	
 
 
     List<Product> selectAll2(String title, Integer price, LocalDateTime inserted, String address);
@@ -128,65 +128,32 @@ public interface ProductMapper {
     		List<Product> allProduct1(Integer id);
 
     		@Select("""
+			
+			SELECT
+            
+				ProductTitle
+			
+			FROM
+			
+				ProductPhoto
+			
+			WHERE ProductId=#{id}
+				
+			""")
+	String allProductPhoto(Integer id);
 
-    		SELECT
+	@Insert("""
+			INSERT INTO ProductLike
+			VALUES (#{productId}, #{memberId})
+			""")
+	Integer insert(Like like);
 
-    		CategoryID
-
-    		CategoryName
-
-    		FROM
-
-    		Category
-
-    		WHERE CategoryName=#{productCategory}
-
-    		""")
-
-    		List<Product> productCategoryList(String productCategory);
-
-    @Select("""
-           SELECT
-           statusCode,
-           productId,
-           title,
-           inserted,
-           body,
-           writer,
-           price,
-           views,
-           likes,
-           (select case when max(memberID) is not null then  'Y' else 'N' end From Product a where a.writer = b.memberId) as modi,
-           memberId
-           FROM
-           Product b
-           WHERE
-           statusCode = #{statusCode}
-           AND title = #{title}
-           AND inserted = #{inserted}
-           AND body = #{body}
-           AND writer = #{writer}
-           AND price = #{price}
-           AND views = #{views}
-           AND likes = #{likes}
-           AND modi = #{modi}
-           AND memberId = #{memberId}
-           AND productId = #{productId}
-           ORDER BY inserted DESC
-           """)
-       List<Product> selectExList(
-           @Param("statusCode") String statusCode,
-           @Param("title") String title,
-           @Param("inserted") LocalDateTime inserted,
-           @Param("body") String body,
-           @Param("writer") String writer,
-           @Param("price") Integer price,
-           @Param("views") Integer views,
-           @Param("likes") Integer likes,
-           @Param("modi") String modi,
-           @Param("memberId") String memberId,
-           @Param("productId") Integer productId
-       );
+	@Delete("""
+			DELETE FROM Product
+			WHERE productId = #{productId}
+				AND memberId = #{memberId}
+			""")
+	Integer delete(Like like);
 
 //    검색을 하기위함
     @Select("""
@@ -241,5 +208,5 @@ public interface ProductMapper {
 	List<Product> selectAllPaging(Integer startIndex);
 	
     
-    
+
 }

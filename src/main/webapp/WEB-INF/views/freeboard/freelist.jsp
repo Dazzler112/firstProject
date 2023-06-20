@@ -67,18 +67,19 @@ table>tbody>tr>td {
 /* 사진카운팅 css */
 .title-column{
 	display: flex;
-}
-.image_column {	
-	display:flex;
-	justify-content:center;
  	align-items:center;
 }
 .image-icon{
-	margin: 0px 3.5px 0px 0px;
-	padding: 3px;
-	background-color: #97B8FC;
+	display:flex;
+	justify-content:center;
+ 	align-items:center;
+	margin: 0px 7px 0px 0px;
+	padding: 4px;
+	background-color: #378D62;
 	border-radius: 50%;
-	color: rgba(0, 0, 0, 0.5);
+	color: white;
+	opacity: 0.75;
+	font-size: 14px;
 }
 /*===============================*/
 
@@ -153,20 +154,41 @@ table>tbody>tr>td {
 								<td>${board.boardCategory }</td>
 								<td>${board.region }</td>
 								<td>
-								<c:if test="${board.fileCount > 0 }">
+								<%-- <c:if test="${board.fileCount > 0 }">
 								<div class="title-column">
 									<div class="image_column">
 										<span class="image-icon"> 
 										<i class="fa-regular fa-image"></i>
 										</span>
 									</div>
-								</c:if> 
+								</c:if>  --%>
+								<div style="display: flex;">
+								<c:choose>
+								  <c:when test="${board.fileCount > 0 }">
+								    <div class="title-column">
+									  <div class="image_column">
+									    <span class="image-icon"> 
+								          <i class="fa-regular fa-image"></i>
+									    </span>
+									  </div>
+									 </div>
+								  </c:when>
+								  <c:when test="${board.fileCount eq 0 }">
+								  <div class="title-column">
+								  	 <span style="opacity: 0.4; margin-right: 7px;">
+									   <i class="fa-solid fa-comment-dots" style="font-size: 20px;"></i>
+									 </span>
+								  </div>
+								  </c:when>
+								 </c:choose>
+									
 								<a href="/freeboard/id/${board.id}">${board.title }</a> 
 									<c:if test="${board.commentCount > 0 }">
 										<span class="comment_column"> 
 										 <i class="fa-solid fa-comment-dots"></i> ${board.commentCount }
 										</span>
-									</c:if>
+									</c:if> 
+									</div>
 									</div>
 									</td>
 								<td><i style="color: #DEBFD1; opacity: 0.5;" class="fa-solid fa-heart"></i>${board.likeCount }</td>

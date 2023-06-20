@@ -77,12 +77,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("sendTempPw")
-	public boolean sendTempPw(String name, String email, HttpSession session) {
-		System.out.println(name);
-		System.out.println(email);
+	public void sendTempPw(String name, String email, HttpSession session) {
 		boolean result = mailService.createPw(name, email, session);
-		System.out.println(result);
-		return result;
+		
 	}
 
 	@PostMapping("mail")
@@ -97,7 +94,7 @@ public class MemberController {
 	public Map<String, Object> mailCheck(Model model, Integer enteredCode, HttpSession session) {
 
 		Boolean ok = mailService.compareNum(enteredCode, session);
-		System.out.println(ok);
+		
 		model.addAttribute("authentication", ok);
 		return Map.of("authentication", ok);
 
@@ -151,6 +148,13 @@ public class MemberController {
 		model.addAttribute("member", member);
 	}
 
+	@GetMapping("writeByMe")
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
+	public void readMyWriting(String id, Model model) {
+		List<myWrite> userWriting = service.getUserWriting(id);
+		model.addAttribute("userWriting", userWriting);
+	}
+	
 	@GetMapping("adminPage")
 	@PreAuthorize("hasAuthority('admin')")
 	public void userListAdmin(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page,

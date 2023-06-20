@@ -136,6 +136,23 @@ body{
 	display: none;
 	
 }
+/* bootstrap 사용 안하고 input border 설정 */
+.get-ipnut{
+	width: 330px; 
+	height:37px; 
+	display:flex;
+	text-align: center; 
+	border: 1px solid rgba(0,0,0,0.15); 
+	border-radius: 5px; 
+	outline:none;
+	box-shadow: none;
+	transition: box-shadow 0.1s ease-in;
+}
+
+.get-ipnut:active , .get-ipnut:focus{
+	box-shadow: 0px 0px 0px 5px rgb(194,219,254);
+}
+/*             */
 </style>
 </head>
 <body>
@@ -163,15 +180,33 @@ body{
 								</c:if>
 							</span> 
 							<span id="likeNumber">${getBoard.likeCount }</span>
+				 <sec:authorize access="isAuthenticated()">
+					<sec:authentication property="name" var="userId"/>
+					<button id="button-list" class="btn btn-light">
+					   <i class="fa-solid fa-bars"></i>
+					</button>
+					<div id="button-hide" style="position: relative; display: none; z-index: 2;">
+					<c:if test="${userId eq getBoard.writer }">
+							    <div style="position: absolute; border: 1px solid #dee2e6; border-radius: 5px; width: 100px; text-align: center; padding: 25px 0 25px 0; right: 0; top: 5px; background: #fff;">
+							        <button class="btn btn-secondary" onclick="location.href='/freeboard/freeupdate/${getBoard.id}'">수정</button><br>
+							        <button  id="delete_modal-btn" class="btn btn-danger" type="submit" >삭제</button>
+							    </div>
+						</c:if>
+							</div>
+				  </sec:authorize>
 						</h1>
 					</div>
 
 				</div>
 				<div class="mb-3" style="display: flex; justify-content: space-between;">
-					<label for="get-writer" class="form-label"></label>작성자 
-					<input id="get-writer" type="text" class="form-control" name="writer" value="${getBoard.writer}" readonly /> 
-					<label for="get-inserted" class="form-label"></label>작성일 
-					<input id="get-inserted" type="text" class="form-control" name="inserted" value="${getBoard.inserted}" readonly />
+					<div style="display: flex;">
+					<span style="margin-right: 17px; ">작성자</span>
+					<input id="get-writer" type="text" class="get-ipnut get-ipnut-acti" style="" name="writer" value="${getBoard.writer}" readonly /> 
+					</div>
+					<div style="display: flex;">
+					<span style="margin-right: 17px; ">작성일</span> 
+					<input id="get-inserted" type="text" class="get-ipnut get-ipnut-acti" style="z-index: 1;" name="inserted" value="${getBoard.inserted}" readonly />
+					</div>
 				</div>
 				<div class="mb-3">
 					<label for="get-title" class="form-label"></label>제목 
@@ -193,23 +228,15 @@ body{
 				</div>
 
 				<div class="mb-3">
-					<label for="get-region" class="form-label"></label>지역 <input id="get-region" type="text" class="form-control" name="region" value="${getBoard.region}" readonly />
+					<label for="get-region" class="form-label"></label>지역 
+					<input id="get-region" type="text" class="form-control" name="region" value="${getBoard.region}" readonly />
 				</div>
 
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="name" var="userId"/>
-					<c:if test="${userId eq getBoard.writer }">
-				<div class="mb-3">
-					<a class="btn btn-secondary" href="/freeboard/freeupdate/${getBoard.id}">수정</a>
-					<button  id="delete_modal-btn" class="btn btn-danger" type="submit" >삭제</button>
-				</div>
-				</c:if>
-				</sec:authorize>
+				 
 			</div>
 		</div>
 	</div>
 
-	<hr />
 	<div class="form-control"  id="commentContainer">
 	<sec:authorize access="isAuthenticated()">
 		<div id="addCommentContainer" style="display: flex; justify-content: center;align-items: center;">
@@ -242,7 +269,9 @@ body{
 
 <sec:authorize access="isAuthenticated()">
 		<sec:authentication property="name" var="userId" />
-		<c:if test="${userId eq getBoard.writer }">
+		<c:if test="${commentCnt.get(0).commentCount > 0}">
+	</c:if>
+	</sec:authorize>
 
 	<div style="display: none; ">
 		<form action="/freeboard/remove" method="post" id="removeForm">
@@ -282,8 +311,6 @@ body{
 			</div>
 		</div>
 	</div>
-	</c:if>
-	</sec:authorize>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/freeboard/like.js"></script>

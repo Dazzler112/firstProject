@@ -73,7 +73,7 @@ body{
 					
 					<div class="mb-3" >
 						<input class="btn btn-secondary" type="submit" value="수정">
-						<a class="btn btn-danger"href="/id/${board.id}">취소</a>
+						<a class="btn btn-danger"href="/freeboard/id/${board.id}">취소</a>
 					</div>
 					</form>
 			</div>

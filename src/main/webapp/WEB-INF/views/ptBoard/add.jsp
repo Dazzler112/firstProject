@@ -75,18 +75,11 @@
 			<div class="mid">
 				<span>카테고리</span>
 				<select class="cat" name="category">
-					<option value="이사/용달">이사/용달</option>
-					<option value="인테리어/간판">인테리어/간판</option>
-					<option value="청소">청소</option>
-					<option value="학원">학원</option>
-					<option value="미용">미용</option>
-					<option value="운동">운동</option>
-					<option value="병원">병원</option>
-					<option value="금융">금융</option>
-					<option value="기타">기타</option>
+					<option value="구인해요">구인해요</option>
+					<option value="구직해요">구직해요</option>
 				</select>
 				<span class="reg">지역</span>
-				<select class="reg_con" name="location">
+				<select class="reg_con" name="region">
 					<option value="서울">서울</option>
 					<option value="경기">경기</option>
 					<option value="강원">강원</option>
