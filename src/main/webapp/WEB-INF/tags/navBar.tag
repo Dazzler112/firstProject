@@ -48,8 +48,7 @@
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-group dropstart">
 
-				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false"
-					style="font-size: 3em;">
+				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
 					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
 				</button>
 				<ul class="dropdown-menu">
