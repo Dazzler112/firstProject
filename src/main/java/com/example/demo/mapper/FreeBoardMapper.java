@@ -177,7 +177,7 @@ public interface FreeBoardMapper {
         <if test="type eq 'writer'">
             AND writer LIKE #{pattern}
         </if>
-    </if>
+     </if>
     GROUP BY b.id
              , b.title
              , b.writer
