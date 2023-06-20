@@ -4,6 +4,7 @@ import java.time.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
 import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
@@ -48,8 +49,6 @@ public class MainController {
 
 		return "mainList1";
 	}
-	
-	
 
 	@GetMapping("list2")
 	public String list2(Model model,
@@ -73,7 +72,6 @@ public class MainController {
 		return "mainList2";
 	}
 
-
 	@GetMapping("/exList/{id}")
 	public String product1(@PathVariable("id") Integer id, Model model,
 			@RequestParam(value = "title", defaultValue = "") String title,
@@ -81,19 +79,23 @@ public class MainController {
 			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category)  {
-		List<Product> list = service.productListService(id);
+		List<Product> list = service.productListService1(id);
 		
-
-		model.addAttribute("list", list);
+		String productPhoto = service.getProductPhoto(id);
+		
+		list.forEach(p -> p.setPhotoTitle(productPhoto));
+		
+		model.addAttribute("list",list);
+		
 		return "exList";
 	}
 
-	@GetMapping("/id/{id}")
-	public String product(@PathVariable("id") Integer id, Model model) {
-		Product product = service.getProduct(id);
-		model.addAttribute("list",product);
-		return "exList";
-	}
+//	@GetMapping("/id/{id}")
+//	public String productPhoto(@PathVariable("id") Integer id, Model model) {
+//		Product productPhoto = service.getProductPhoto(id);
+//		model.addAttribute("list",productPhoto);
+//		return "exList";
+//	}
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
@@ -102,11 +104,10 @@ public class MainController {
 		product.setWriter(authentication.getName());
 		boolean ok = service.addProduct(product, files, category);
 		
-
 		model.addAttribute("product", product);
 		if (ok) {
 			rttr.addFlashAttribute("message", "게시글이 생성되었습니다.");
-			return "redirect:/teamProject/exList";
+			return "redirect:/teamProject/exList/" + product.getId();
 		} else {
 			rttr.addFlashAttribute("message", product.getId() + "게시글 생성에 실패하였습니다.");
 			return "redirect:mainList2";
@@ -125,8 +126,6 @@ public class MainController {
 	public String getAddView() {
 		return "mainAdd";
 	}
-	
-	
 
 	@PostMapping("/productUpdate/{id}")
 	public String update(@PathVariable("id") Integer id,
@@ -166,5 +165,24 @@ public class MainController {
 	        return "redirect:/product/id/" + id;
 	    }
 	}
-
+	
+	@PostMapping("/like")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> like(
+			@RequestBody Like like,
+			Authentication authentication) {
+		
+		System.out.println(authentication);
+		
+		if (authentication == null) {
+			return ResponseEntity
+					.status(403)
+					.body(Map.of("message", "로그인 후 좋아요 클릭 해주세요."));
+		} else {
+			
+			return ResponseEntity
+					.ok()
+					.body(service.like(like, authentication));
+		}
+	}
 }

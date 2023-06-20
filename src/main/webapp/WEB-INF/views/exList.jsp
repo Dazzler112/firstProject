@@ -13,12 +13,22 @@
 </head>
 <body>
 
-
-	<div class="container-lg">
+	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3">
 		<table class="table">
+					<h1>${product.id }게시물 번호</h1>
+			
+					<div>
+						<h1>
+						<span id="likeIcon">
+							<i class="fa-solid fa-heart"></i>
+						</span> 
+						<span id="likeNumber">
+							${product.likes }
+						</span>
+						</h1>
+					</div>
 			<thead>
 				<tr>
-					<th style="display: none;">게시번호</th>
 					<th>현재 상태</th>
 					<th>제목</th>
 					<th>글쓴이</th>
@@ -36,7 +46,7 @@
 						<td style="display: none;">${product.id}</td>
 						<td>${product.statusCode}</td>
 						<td>${product.title}</td>
-						<td><a href="${product.id}">${product.memberId}</a></td>
+						<td>${product.memberId}</a></td>
 						<td>${product.inserted}</td>
 						<td>${product.views}</td>
 						<td>${product.likes}</td>
@@ -57,14 +67,12 @@
 			</tbody>
 		</table>
 
-
                   <td><div class="mb-3">
-                  <c:forEach items="${productPhoto.id }" var="productPhotoId">
                      <div class="mb-3">
-                       <img class="img-thumbnail img-fluid" src="${bucketUrl }/${board.id }/${fileName}" alt="" />
+                       <img class="img-thumbnail img-fluid" src="${bucketUrl }/${list[0].id }/${list[0].photoTitle}" alt="" />
                      </div>
-                  </c:forEach>
                 </div>
+               	  <td>${product.statusCode }</td>
                   <td>${product.title}</td>
                   <td>${product.memberId}</td>
                   <td>${product.inserted}</td>
@@ -92,8 +100,8 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-      crossorigin="anonymous" referrerpolicy="no-referrer">
-   cosonle.log(exList);
-   </script>
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+   <script src="/js/product/like.js"></script>
+   
 </body>
 </html>
