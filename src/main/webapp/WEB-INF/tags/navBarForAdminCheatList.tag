@@ -27,16 +27,15 @@
 			</div>
 			<!-- 검색창 -->
 			<div class="header__center">
-				<form action="./adminPage" class="d-flex" role="search">
-					<div class="input-group">
-						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
-							<option value="all">전체</option>
-							<option value="id" ${param.type eq 'id' ? 'selected' : '' }>ID</option>
-							<option value="nickName" ${param.type eq 'nickName' ? 'selected' : '' }>별명</option>
-							<option value="name" ${param.type eq 'name' ? 'selected' : '' }>이름</option>
-							<option value="phoneNum" ${param.type eq 'phoneNum' ? 'selected' : '' }>전화번호</option>
-							<option value="email" ${param.type eq 'email' ? 'selected' : '' }>E-mail</option>
-						</select> <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+				<form action="/cheat/list" class="d-flex" role="search" id="searchForm">
+					<div class="input-group" style="border: 1px solid #55A44E;">
+						<select class="form-select flex-grow-0" style="width: 140px;" name="type" id="searchType">
+							<option value="basic">선택</option>
+							<option value="phoneNum">휴대폰 번호</option>
+							<option value="account">계좌번호</option>
+							<option value="nickName">닉네임</option>
+							<option value="email">이메일</option>
+						</select> <input value="" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-light" type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>

@@ -16,5 +16,6 @@ public class Member {
 	private String phoneNum;
 	private String email;
 	private List<String> authority;
+	private String addressSggNm;
 	
 }

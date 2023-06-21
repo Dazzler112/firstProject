@@ -166,6 +166,9 @@ h1 {
 						<div class="input-group">
 							<input name="address" id="inputAddress" type="text" class="form-control" placeholder="Enter Address" required readonly />
 						</div>
+						<div class="d-none">
+							<input name="addressSggNm" id="inputAddressSggNm" type="text" class="form-control" placeholder="Enter Address" required />
+						</div>
 					</div>
 
 					<div class="mb-3">
