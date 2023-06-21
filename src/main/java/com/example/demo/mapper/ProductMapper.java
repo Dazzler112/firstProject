@@ -39,7 +39,7 @@ public interface ProductMapper {
     Integer insertFileName(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
 
     @Update("UPDATE Product SET CategoryId = #{categoryId}, title = #{title}, body = #{body}, " +
-            "price = #{price}, address = #{address} WHERE id = #{id}")
+            "price = #{price}, qty = #{qty}, address = #{address} WHERE id = #{id}")
     int updateProduct(Product product);
 
     @Delete("DELETE FROM ProductPhoto WHERE ProductID = #{productId} AND ProductTitle = #{photoTitle}")

@@ -70,13 +70,13 @@ public class ProductService {
 	}
 
 //	카테고리 리스트로 에서 사용할 수 있는 서비스
-	public List<Product> listBoard7(Integer page,  String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
+	public List<Product> listBoard7(Integer page, String categoryTitle, String title, Integer price, String address,
+			LocalDateTime inserted) {
 		Integer startIndex = (page - 1) * 15;
-		//게시물 목록 
+		// 게시물 목록
 		mapper.selectAllPaging(startIndex);
-		
-		
-		return mapper.selectAll7(categoryTitle,  title, price, address, inserted);
+
+		return mapper.selectAll7(categoryTitle, title, price, address, inserted);
 	}
 
 	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
@@ -146,16 +146,19 @@ public class ProductService {
 			}
 		}
 
-		for (MultipartFile file : addFile) {
-			if (file.getSize() > 0) {
-				mapper.updateFileName(product.getId(), file.getOriginalFilename());
+		if (addFile != null) {
 
-				String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
-				PutObjectRequest bb = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ).bucket(bucketName)
-						.key(objectKey).build();
+			for (MultipartFile file : addFile) {
+				if (file.getSize() > 0) {
+					mapper.updateFileName(product.getId(), file.getOriginalFilename());
 
-				RequestBody pb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
-				s3.putObject(bb, pb);
+					String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+					PutObjectRequest bb = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ).bucket(bucketName)
+							.key(objectKey).build();
+
+					RequestBody pb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+					s3.putObject(bb, pb);
+				}
 			}
 		}
 		int cnt = mapper.updateProduct(product);
@@ -189,19 +192,18 @@ public class ProductService {
 
 		return "product/productget";
 	}
-	
-	public List<Product> productListService(){
+
+	public List<Product> productListService() {
 		List<Product> list = mapper.allProduct();
 		return list;
 	}
-	
+
 //	상품을 들어갔을때 상품 id하나만 나오기
 	public List<Product> productListService1(Integer id) {
 		List<Product> list = mapper.allProduct1(id);
 		return list;
 	}
-	
-	
+
 	/*
 	 * public List<Product> productCategory(String productCategory){ List<Product>
 	 * list = mapper.productCategoryList(productCategory); return list;
@@ -209,32 +211,28 @@ public class ProductService {
 	 * }
 	 */
 
-	
-	
-	
-
 	public String getProductPhoto(Integer id) {
 		String list = mapper.allProductPhoto(id);
 		return list;
 	}
 
-	public Map<String, Object> like(Like like, Authentication authentication){
+	public Map<String, Object> like(Like like, Authentication authentication) {
 		Map<String, Object> result = new HashMap<>();
-		
+
 		result.put("like", false);
-		
+
 		like.setMemberId(authentication.getName());
 		Integer deleteCnt = mapper.delete(like);
-	
+
 		if (deleteCnt != 1) {
 			Integer insertCnt = mapper.insert(like);
 			result.put("like", true);
 		}
-		
-		Integer insertCnt = mapper.insert(like);		
-		
+
+		Integer insertCnt = mapper.insert(like);
+
 		return result;
-}
+	}
 	/*
 	 * public List<String> getExlistProcess(Integer id, Authentication
 	 * authentication) { // 상품 정보를 가져와서 Product 객체로 생성 List<String> photoList =
