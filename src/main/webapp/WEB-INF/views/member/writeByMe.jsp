@@ -12,6 +12,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+
+h1 {
+	font-size: 45px;
+	color: #55A44E;
+	margin: 20px;
+	/* 	font-weight: bold; */
+}
+
 .table-no-border {
 	border: none;
 }
@@ -42,7 +50,7 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-10">
-				<h1>${param.id }의작성글</h1>
+				<h1>${param.id }의 작성글</h1>
 				<!-- .mb-3*4>label+input -->
 				<table class="table table-no-border">
 					<thead>
@@ -50,7 +58,7 @@
 							<th>분류</th>
 							<th>지역</th>
 							<th>제목</th>
-							<th>본문</th>
+<!-- 							<th>본문</th> -->
 							<th>올린 날짜</th>
 						</tr>
 					</thead>
@@ -60,7 +68,7 @@
 								<td>${writing.sort}</td>
 								<td>${writing.region}</td>
 								<td><a href="/${writing.sort }/id/${writing.id}">${writing.title}</a></td>
-								<td>${writing.body}</td>
+<%-- 								<td>${writing.body}</td> --%>
 								<td>${writing.inserted}</td>
 							</tr>
 						</c:forEach>

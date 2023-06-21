@@ -79,6 +79,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	color: #55A44E;
+	
 }
 
 h3 {
@@ -99,7 +100,7 @@ h3 {
 	<!--파일 불러오기-->
 	<%@ include file="./modal.jsp"%>
 
-	<div id="findId">
+	<div class="w3-content w3-container w3-margin-top" id="findId">
 		<div class="w3-container w3-card-4">
 
 			<div class="w3-center w3-large w3-margin-top">

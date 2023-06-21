@@ -174,11 +174,11 @@ public interface MemberMapper {
 	Integer countAllWriting(String id);
 
 	@Select("""
-			SELECT sort, region, title, body, id, inserted FROM Board WHERE writer = #{id}
+			SELECT writer, sort, region, title, body, id, inserted FROM Board WHERE writer = #{id}
 			UNION
-			SELECT sort, region, title, body, id, inserted FROM AdBoard WHERE writer = #{id}
+			SELECT writer, sort, region, title, body, id, inserted FROM AdBoard WHERE writer = #{id}
 			UNION
-			SELECT sort, region, title, body, id, inserted FROM PtBoard WHERE writer = #{id}
+			SELECT writer, sort, region, title, body, id, inserted FROM PtBoard WHERE writer = #{id}
 			ORDER BY id DESC
 			LIMIT #{startIndex}, #{rowPerPage};
 			""")
