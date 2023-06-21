@@ -70,10 +70,9 @@ public class ProductService {
 	}
 
 //	카테고리 리스트로 에서 사용할 수 있는 서비스
-	public List<Product> listBoard7(Integer page,  String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
-		Integer startIndex = (page - 1) * 15;
-		//게시물 목록 
-		mapper.selectAllPaging(startIndex);
+	public List<Product> listBoard7( String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
+		
+		
 		
 		
 		return mapper.selectAll7(categoryTitle,  title, price, address, inserted);

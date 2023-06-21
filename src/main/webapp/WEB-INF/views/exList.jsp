@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3">
+	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3"></div>
 		<table class="table">
 					<h1>${product.id }게시물 번호</h1>
 			

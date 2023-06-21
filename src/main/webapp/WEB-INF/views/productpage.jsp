@@ -21,6 +21,7 @@
 </head>
 <style>
 .all{
+		
 		display: flex;
 		margin: 200px 100px;
 }
@@ -73,6 +74,12 @@
 .mod{
 	margin-left: 85%;
 }
+.pic{
+	border:solid 1px;
+	font-family: Consolas, monospace;
+	width:600px;
+	height:450px;
+}
 
 </style>
 <body>
@@ -95,7 +102,7 @@
 		<div class="pic">
 			<c:forEach items="${board.fileName }" var="fileName">
 				<div class="mb-3">
-					<img src="${bucketUrl }/${board.id }/${fileName}" width="600px" height="450px"/>
+					<img src="/productimg/sample1.jpg" width="600px" height="450px"/>
 				</div>
 			</c:forEach>
 		</div>
@@ -120,25 +127,25 @@
 									</c:if>
 								</span>
 							</span>
-							<a class="btn btn-secondary" href="/ptBoard/list">목록으로</a>
+							<a class="btn btn-secondary" href="/teeamProject/list4">목록으로</a>
 						</h2>
 						
 					</div>
 
 					<div>
 						<div>
-							<input class="tit" type="text" value="${board.title }" readonly />
+							<input style="margin:0px;" class="tit" type="text" value="${board.title }" readonly />
 						</div>
 						<div class="head">
 							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
 						</div>
 
-						<div class="body">
+						<div class="body" >
 							<textarea class="textbox" readonly rows="10">${board.body }</textarea>
 						</div>
 						
 							
-						</div>
+					</div>
 				</div>
 			</div>
 		</div>

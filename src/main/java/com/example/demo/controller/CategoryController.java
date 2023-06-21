@@ -63,6 +63,7 @@ public class CategoryController {
 
 	@GetMapping("list4")
 	public String list4(Model model,	
+			
 			@RequestParam(value= "page", defaultValue ="1") Integer page,
 			@RequestParam(value = "title", defaultValue = "") String title,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
@@ -71,30 +72,58 @@ public class CategoryController {
 			@RequestParam(value = "category", defaultValue = "") String category) {
 		String categoryTitle = getCategoryTitle(category);
 		
+//		쿼리에서 사용하는 시작 인덱스
+		Integer startIndex =(page -1) * 12;
 		
-
-		List<Product> categoryList = service.listBoard7(page, title,categoryTitle, price, address, inserted);
-
+//		페이지네이션 가장 왼쪽번호
+		Integer leftPageNum = (page -1) / 10*10+1;
+		Integer rightPageNum = leftPageNum +9;
+		
+//		이전페이지 번호
+		Integer prevPageNum = leftPageNum -10;
+		Integer nextPageNum = rightPageNum +1;
+//		하나씩 이동 번호
+		Integer prevPageNum1 = page -1;
+		Integer nextPageNum1 =page + 1;	
+//		마지막 페이지 번호
+		Integer numOfRecord = mapper.countAll();
+		Integer lastPageNum =(numOfRecord -1) / 15 +1;
+		
+//		오른쪽 페이지 번호가 마지막 페이지 번호보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNum);
+		
+		
+		List<Product> pagenation = mapper.listcustomer(startIndex);
+		List<Product> categoryList = service.listBoard7( title,categoryTitle, price, address, inserted);
+		
+		
 		model.addAttribute("CategoryList", categoryList);
+		model.addAttribute("CategoryList", pagenation);
+		model.addAttribute("rightPageNum" , rightPageNum);
+		model.addAttribute("leftPageNum" , leftPageNum);
+		model.addAttribute("nextPageNum" , nextPageNum);
+		model.addAttribute("prevPageNum" , prevPageNum);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("currentPageNum", page);
+		model.addAttribute("prevPageNum1", prevPageNum1);
+		model.addAttribute("nextPageNum1", nextPageNum1);
 
 		return "categoryList";
 	}
 	
-	
-//	페이지당 15개씩 보여지기
 	/*
-	 * SELECT * FROM Product
-	 * ORDER BY CategoryID DESC
-	 * LIMIT {#startindex} * 15
+	 * @GetMapping("list5") public String mthod1(Model
+	 * model, @RequestParam(value="search" , defaultValue="") String keyword) {
 	 * 
+	 * model.addAttribute("customerList",mapper.sql1(keyword));
 	 * 
+	 * return "/teamProject/list4";
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	*/
+	 * }
+	 */
+	
+	
+
 	
 	
 	
