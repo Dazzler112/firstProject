@@ -11,20 +11,55 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.container{
+		width: 500px;
+		margin: 0 auto;
+		padding: 25px;
+	}
+	.container h1{
+		text-align: left;
+		padding: 5px 5px 5px 15px;
+		color: #FFBB00;
+		border-left: 3px solid #FFBB00;
+		margin-bottom: 20px;
+	}
 	.chating{
 		background-color: #000;
 		width: 500px;
 		height: 500px;
 		overflow: auto;
 	}
-	.chating p{
-		color: #fff;
+	.chating .me{
+		color: #f6f6f6;
+		text-align: right;
+	}
+	.chating .others{
+		color: #ffe400;
 		text-align: left;
+	}
+	.chating .start{
+		color: #aaaaaa;
+		text-align: center;
+	}
+	.chating .exit{
+		color: red;
+		text-align: center;
+	}
+	input{
+		width: 320px;
+		height: 25px;
 	}
 	#yourMsg{
 		display: none;
 	}
 </style>
+
+
+
 <body>
 
 	<div id="container" class="container">
