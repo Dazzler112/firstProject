@@ -29,7 +29,7 @@
 				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="categorySelect" class="form-label">카테고리 지정</label> <select id="categorySelect"
-							class="form-select" name="categoryId">
+							class="form-select" name="category">
 							<option value="1">패션</option>
 							<option value="2">가구</option>
 							<option value="3">게임</option>
