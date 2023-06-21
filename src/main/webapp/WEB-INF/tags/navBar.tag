@@ -92,11 +92,13 @@
 								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
 							</button></li>
 					</sec:authorize>
+					
 					<sec:authorize access="!isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
 							</button></li>
 					</sec:authorize>
+					
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor"  href="/member/logout">로그아웃</a>
