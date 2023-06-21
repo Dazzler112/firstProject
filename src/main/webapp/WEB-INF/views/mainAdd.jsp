@@ -29,7 +29,7 @@
 				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="categorySelect" class="form-label">카테고리 지정</label> <select id="categorySelect"
-							class="form-select" name="category">
+							class="form-select" name="categoryId">
 							<option value="1">패션</option>
 							<option value="2">가구</option>
 							<option value="3">게임</option>
@@ -38,10 +38,6 @@
 						</select>
 					</div>
 					<div class="mb-3">
-						<div class="mb-3">
-							<label for="memberIdInput" class="form-label">이름</label> <input id="memberIdInput"
-								class="form-control" type="text" name="memberId" value="${Product.memberId }" />
-						</div>
 						<div class="mb-3">
 							<label for="titleInput" class="form-label">제목</label> <input id="titleInput"
 								class="form-control" type="text" name="title" value="${Product.title }" />

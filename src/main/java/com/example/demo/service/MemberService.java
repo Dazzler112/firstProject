@@ -19,16 +19,34 @@ public class MemberService {
 	private MemberMapper mapper;
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	//보드 서비스
+	@Autowired
 	private FreeBoardService freeBoardService;
-
 	@Autowired
 	private AdBoardService adBoardService;
-	
 	@Autowired
 	private PtBoardService ptBoardService;
+//======================================================================
 
+	//comment Mapper
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private FreeCommentMapper freeCommentMapper;
+	@Autowired
+	private PtCommentMapper ptCommentMapper;
+	@Autowired
+	private AdCommentMapper adCommentMapper;
+//======================================================================
+	
+	//like Mapper
+	@Autowired
+	private FreeBoardLikeMapper freeLikeMapper;
+	@Autowired
+	private PtBoardLikeMapper ptLikeMapper;
+	@Autowired
+	private AdBoardLikeMapper adLikeMapper;
+//======================================================================
 
 	public boolean signup(Member member) {
 
@@ -119,8 +137,20 @@ public class MemberService {
 			// 암호가 같다면
 
 			// 이 회원이 작성한 게시물 row 삭제
-//			freeBoardService.removeByWriter(member.getId());
-
+			freeBoardService.removeByWriter(member.getId()); // 자유게시판
+			ptBoardService.removeByPtWriter(member.getId()); // pt보드
+			adBoardService.removeByAdWriter(member.getId()); // ad보드
+			
+			// 이 회원이 작성한 댓글 삭제
+			freeCommentMapper.deleteByMemberId(member.getId()); // 자유게시판
+			ptCommentMapper.deleteByPtMemberId(member.getId()); // pt게시판
+			adCommentMapper.deleteByAdMemberId(member.getId()); // ad게시판
+			
+			//이 회원이 좋아요한 레코드 삭제
+			freeLikeMapper.deleteByMemberId(member.getId()); // 자유게시판
+			ptLikeMapper.deleteByPtLikeMemberId(member.getId()); // pt게시판
+			adLikeMapper.deleteByAdLikeMemberId(member.getId()); // ad게시판
+			
 			// 회원 테이블 삭제
 
 			cnt = mapper.deleteById(member.getId());
@@ -162,9 +192,44 @@ public class MemberService {
 		return result ;
 	}
 
-	public List<myWrite> getUserWriting(String id) {
-		List<myWrite> userWriting = mapper.getUserWriting(id);
-		return userWriting;
+	public Map<String, Object> getUserWriting(Integer page, String id) {
+		// 페이지 당 행의 수
+		Integer rowPerPage = 10;
+		// 쿼리 LIMIT 절에 사용할 시작 인덱스
+		Integer startIndex = (page - 1) * rowPerPage;
+		
+		// 페이지네이션이 필요한 정보
+		// 전체 레코드 수
+		Integer numOfRecords = mapper.countAllWriting(id);
+		
+		// 맨처음 페이지
+		Integer firstPageNum = 1;
+		// 마지막 페이지 번호
+		Integer lastPageNum = (numOfRecords - 1) / rowPerPage + 1;
+
+		// 페이지네이션 왼쪽번호
+		Integer leftPageNum = page - 5;
+		// 1보다 작을 수 없음
+		leftPageNum = Math.max(leftPageNum, 1);
+
+		// 페이지네이션 오른쪽번호
+		Integer rightPageNum = leftPageNum + 9;
+		// 마지막페이지보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNum);
+
+		// 현재 페이지
+		Integer currentPageNum = page;
+
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("currentPageNum", page);
+		pageInfo.put("firstPageNum", firstPageNum);
+		pageInfo.put("lastPageNum", lastPageNum);
+		
+		// 게시물 목록
+		List<myWrite> userWriting = mapper.getUserWriting(id, startIndex, rowPerPage);
+		return Map.of("pageInfo", pageInfo, "myWriteList", userWriting);
 	}
 
 

@@ -56,9 +56,9 @@ public class FreeCommentService {
 		return list;
 	}
 
-	public FreeComment get(Integer id) {
+	public FreeComment get(Integer id, Integer params) {
 		// TODO Auto-generated method stub
-		return mapper.selectById(id);
+		return mapper.selectById(id ,params);
 	}
 
 	public Map<String, Object> update(FreeComment comment) {

@@ -104,7 +104,8 @@ public class MainController {
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
 			Authentication authentication)
 					throws Exception {
-		product.setWriter(authentication.getName());
+			System.out.println(authentication.getName());
+		product.setMemberId(authentication.getName());
 		boolean ok = service.addProduct(product, files, category);
 		
 		model.addAttribute("product", product);
@@ -117,39 +118,54 @@ public class MainController {
 		}
 	}
 
-	@GetMapping("/productUpdate/{id}")
-	public String updateView(@PathVariable("id") Integer id, Model model) {
-		
-		model.addAttribute("product", service.getProduct(id));
-		return "product/productUpdate";
-	}
-	
 	@GetMapping("mainAdd")
 	@PreAuthorize("isAuthenticated()")
 	public String getAddView() {
 		return "mainAdd";
 	}
 
-	@PostMapping("/productUpdate/{id}")
+	@GetMapping("/teamProject/update/{id}")
+	public String updateView(@PathVariable("id") Integer id, Model model) {
+	    model.addAttribute("product", service.getProduct(id));
+	    return "teamProject/update" + id;
+	}
+	
+	@PostMapping("update/{id}")
+	public String update(@PathVariable("id") Integer id, Product product) {
+		System.out.println(id);
+		System.out.println(product);
+		service.updateProduct(product);
+		
+		return "redirect:/teamProject/exList/" + id;
+	}
+
+	@GetMapping("update/{id}")
 	public String update(@PathVariable("id") Integer id,
 	        Product product,
 	        @RequestParam(value = "removeFiles", required = false) List<String> removeProductPhoto,
 	        @RequestParam(value = "listFiles", required = false) MultipartFile[] addFile,
-	        RedirectAttributes rttr, Authentication authentication) throws Exception {
+	        Model model, Authentication authentication) throws Exception {
 	    // 사용자 인증 정보 확인
 	    String username = authentication.getName(); // 현재 로그인한 사용자의 이름
+	    List<Product> list = service.productListService1(id);
 
 	    // 게시글 수정 처리
-	    boolean ok = service.updateProcess(product, removeProductPhoto, addFile);
-
-	    if (ok) {
-	        rttr.addFlashAttribute("message", product.getId() + "번 게시물이 수정되었습니다.");
-	        return "redirect:/product/id/" + product.getId();
-	    } else {
-	        rttr.addFlashAttribute("message", product.getId() + "번 게시물 수정에 실패하였습니다.");
-	        return "redirect:/product/id/" + product.getId();
-	    }
+//	    boolean ok = service.updateProcess(product, removeProductPhoto, addFile);
+	    model.addAttribute("product", service.getProduct(id));
+	    model.addAttribute("list", list);
+	    return "productUpdate";
+	    
+//	    boolean ok = service.updateProcess(product,removeProductPhoto,addFile);
+	    
+//	    if(ok) {
+//			rttr.addFlashAttribute("message" , product.getId() + "번 게시물이 수정되었습니다");
+//			return"redirect:/freeboard/id/" + product.getId();
+//		}else {
+//			rttr.addFlashAttribute("message", product.getId() + "게시물 수정에 실패하였습니다.");
+//			return"redirect:/freeboard/freeupdate/" + product.getId();
+//		}
 	}
+	
 
 	@PostMapping("remove")
 	public String removeForm(Integer id, RedirectAttributes rttr, Authentication authentication) {
@@ -161,11 +177,11 @@ public class MainController {
 
 	    if (ok) {
 	        rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
-	        return "redirect:/product/productlist";
+	        return "redirect:/teamProject/list4";
 	    } else {
 	        System.out.println("실패함");
 	        rttr.addFlashAttribute("message", "게시물 삭제에 실패하였습니다.");
-	        return "redirect:/product/id/" + id;
+	        return "redirect:/teamProject/exList/" + id;
 	    }
 	}
 	

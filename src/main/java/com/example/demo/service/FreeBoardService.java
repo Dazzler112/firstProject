@@ -77,7 +77,7 @@ public class FreeBoardService {
 	}
 
 	public boolean removeProcess(Integer id) {
-		
+		//댓글 테이블 지우기
 		commentMapper.deleteComment(id);
 		
 		//좋아요 테이블 지우기
@@ -210,6 +210,14 @@ public class FreeBoardService {
 		List<FreeBoard> list = mapper.selectPaging(startIndex,rowPage,search,type,boardCategory);
 		return Map.of("pageInfo", pageInfo,
 					"boardList",list); 
+	}
+
+	public void removeByWriter(String writer) {
+		List<Integer> idList = mapper.selectByWriter(writer);
+		
+		for(Integer id : idList) {
+			removeProcess(id);
+		}
 	}
 
 

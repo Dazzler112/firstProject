@@ -46,6 +46,18 @@ public interface AdCommentMapper {
 			""")
 	Integer update(AdComment comment);
 
+	@Delete("""
+			DELETE FROM AdComment
+			WHERE boardId = #{boardId}
+			""")
+	Integer deleteByBoardId(Integer boardId);
+
+	@Delete("""
+			DELETE FROM AdComment
+			WHERE memberId = #{memberId}
+			""")
+	void deleteByAdMemberId(String memberId);
+
 }
 
 

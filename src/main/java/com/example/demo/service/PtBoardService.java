@@ -31,6 +31,9 @@ public class PtBoardService {
 	@Autowired
 	private PtBoardLikeMapper likeMapper;
 
+	@Autowired
+	private PtCommentMapper ptCommentMapper;
+	
 	public List<PtBoard> listBoard() {
 		List<PtBoard> list = mapper.selectAll();
 		return list;
@@ -93,6 +96,8 @@ public class PtBoardService {
 
 	public boolean remove(Integer id) {
 		
+		ptCommentMapper.deleteByBoardId(id);
+		
 		likeMapper.deleteByBoardId(id);
 		
 		List<String> fileNames = mapper.selectFileNamesByBoardId(id);
@@ -141,7 +146,8 @@ public class PtBoardService {
 
 	public Map<String, Object> listBoard(Integer page, String search, String type) {
 		
-		// 페이지당 행의 수
+				
+				// 페이지당 행의 수
 				Integer rowPerPage = 10;
 
 				// 쿼리 LIMIT 절에 사용할 시작 인덱스
@@ -197,6 +203,15 @@ public class PtBoardService {
 	public Object getBoard(Integer id) {
 		// TODO Auto-generated method stub
 		return getBoard(id, null);
+	}
+
+	public void removeByPtWriter(String writer) {
+		List<Integer> idList = mapper.selectIdByWriter(writer);
+		
+		for(Integer id : idList) {
+			remove(id);
+		}
+		
 	}
 
 }

@@ -173,8 +173,7 @@
 												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion
 												Item #3</button>
 										</h2>
-										<div id="collapseThree" class="accordion-collapse collapse"
-											data-bs-parent="#accordionExample">
+										<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">

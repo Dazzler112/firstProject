@@ -29,7 +29,7 @@ body {
 .container-lg>h1 {
 	font-size: 40px;
 	color: #55A44E;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	font-weight: bold;
 }
 
@@ -41,10 +41,14 @@ body {
 	text-align: center;
 	margin: 45px;
 }
+
+h1{
+	margin-top: 40px;
+}
 </style>
 <body>
 
-	<my:navBarForAdminPage></my:navBarForAdminPage>
+	<my:navBarForAdminCheatList></my:navBarForAdminCheatList>
 
 	<div class="container-lg">
 		<h1>조회 목록</h1>
@@ -56,8 +60,9 @@ body {
 					<tr>
 						<!-- <th>#</th> -->
 						<th>닉네임</th>
-						<th>전화번호</th>
+						<th>핸드폰 번호</th>
 						<th>계좌번호</th>
+						<th>Email</th>
 					</tr>
 				</thead>
 			</c:if>
@@ -70,6 +75,7 @@ body {
 							<td>0${cheat.phoneNum }</td>
 							<%-- db에서 varchar타입이지만 jsp에서 출력한 화면에는 0이 빠짐 --%>
 							<td>${cheat.account }</td>
+							<td>${cheat.email }</td>
 						</tr>
 					</c:forEach>
 				</c:if>

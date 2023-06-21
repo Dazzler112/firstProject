@@ -35,7 +35,7 @@ public interface FreeCommentMapper {
 			Comment 
 			WHERE id = #{id}
 			""")
-	FreeComment selectById(Integer id);
+	FreeComment selectById(Integer id, Integer params);
 
 	@Update("""
 			UPDATE Comment
@@ -65,5 +65,11 @@ public interface FreeCommentMapper {
 			WHERE boardId = #{boardId} AND depth > #{newdepth}
 			""")
 	Integer updateCommentShape(Integer boardId, Integer newdepth);
+
+	@Delete("""
+			DELETE FROM Comment
+			WHERE memberId = #{memberId}
+			""")
+	Integer deleteByMemberId(String memberId);
 
 }
