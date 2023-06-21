@@ -5,7 +5,11 @@
 <link href="/resources/categorymenubar.css" rel="stylesheet">
 <link href="/resources/menubar.css" rel="stylesheet">
 <link href="/resources/navbar.css" rel="stylesheet">
-<script type="text/javascript" src="링크주소"></script>
+<script src="/js/navbar/navbar.js"></script>
+<!-- 글골 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>
 </style>
 <body style="margin-top: 150px;">
@@ -45,11 +49,15 @@
 			</div>
 
 			<!-- 프로필 -->
-			<div id="dropdown" class="btn-group dropstart">
-				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
+			<div id="dropdown" class="btn-toggle btn-secondary">
+				
+				<button class="dropdown-toggle" onclick="toggleDropdown()"><i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i></button>
+				
+				
+				<!-- <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
 					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
-				</button>
-				<ul class="dropdown-menu">
+				</button> -->
+				<ul class="dropdown-menu" id="dropdownMenu">
 					<!-- Dropdown menu links -->
 					<sec:authorize access="isAnonymous">
 						<li>

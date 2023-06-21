@@ -65,10 +65,9 @@ public class FreeCommentController {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@PostMapping("id/{id}")
-	public FreeComment get(@PathVariable("id")Integer id ,
-						  @RequestBody Integer params) {
-		return service.get(id , params);
+	@GetMapping("id/{id}")
+	public FreeComment get(@PathVariable("id")Integer id) {
+		return service.get(id);
 	}
 	
 	@PutMapping("update")
