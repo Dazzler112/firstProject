@@ -42,7 +42,7 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-10">
-				<h1>${param.id }의 작성글</h1>
+				<h1>${param.id }의작성글</h1>
 				<!-- .mb-3*4>label+input -->
 				<table class="table table-no-border">
 					<thead>
@@ -51,11 +51,11 @@
 							<th>지역</th>
 							<th>제목</th>
 							<th>본문</th>
-							<th>올린 날짜</th>							
+							<th>올린 날짜</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${userWriting}" var="writing">
+						<c:forEach items="${userWriting.myWriteList}" var="writing">
 							<tr>
 								<td>${writing.sort}</td>
 								<td>${writing.region}</td>
@@ -67,6 +67,55 @@
 					</tbody>
 				</table>
 
+				<div class="container-lg" id="pagination1">
+					<div class="row">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<!-- 	맨처음 이동 버튼 -->
+								<c:if test="${userWriting.pageInfo.currentPageNum > userWriting.pageInfo.firstPageNum + 1}">
+									<c:url value="./writeByMe?id=${member.id }" var="pageLink">
+										<c:param name="page" value="${userWriting.pageInfo.firstPageNum }" />
+									</c:url>
+									<li class="page-item"><a href="${pageLink }" class="page-link">
+											<i class="fa-solid fa-angles-left"></i>
+										</a></li>
+								</c:if>
+								<!-- 이전 버튼 -->
+								<c:if test="${userWriting.pageInfo.currentPageNum gt 1 }">
+									<c:url value="./writeByMe?id=${member.id }" var="pageLink">
+										<c:param name="page" value="${userWriting.pageInfo.currentPageNum - 1 }" />
+									</c:url>
+									<li class="page-item"><a class="page-link" href="${pageLink }">
+											<i class="fa-solid fa-angle-left"></i>
+										</a></li>
+								</c:if>
+								<c:forEach begin="${userWriting.pageInfo.leftPageNum }" end="${userWriting.pageInfo.rightPageNum }" var="pageNum">
+									<c:url value="./writeByMe?id=${member.id }" var="pageLink">
+										<c:param name="page" value="${pageNum }" />
+									</c:url>
+									<li class="page-item"><a class="page-link ${pageNum eq userWriting.pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink}">${pageNum }</a></li>
+								</c:forEach>
+								<!-- 다음 버튼 -->
+								<c:if test="${userWriting.pageInfo.currentPageNum lt userWriting.pageInfo.lastPageNum }">
+									<c:url value="./writeByMe?id=${member.id }" var="pageLink">
+										<c:param name="page" value="${userWriting.pageInfo.currentPageNum + 1 }" />
+									</c:url>
+									<li class="page-item"><a class="page-link" href="${pageLink }">
+											<i class="fa-solid fa-angle-right"></i>
+										</a></li>
+								</c:if>
+								<!-- 맨마지막 이동 버튼 -->
+								<c:if test="${userWriting.pageInfo.currentPageNum < userWriting.pageInfo.lastPageNum - 1 }">
+									<li class="page-item"><c:url value="./writeByMe?id=${member.id }" var="pageLink">
+											<c:param name="page" value="${userWriting.pageInfo.lastPageNum }"></c:param>
+										</c:url> <a href="${pageLink }" class="page-link">
+											<i class="fa-solid fa-angles-right"></i>
+										</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
 
 
 			</div>

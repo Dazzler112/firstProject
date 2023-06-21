@@ -16,7 +16,10 @@
 				<h2>아이디 조회 결과</h2>
 			</div>
 			<div class="close-area">X</div>
-			<div class="content" id="id_value"></div>			
+			<div>
+				<h3>본인의 아이디는 </h3>
+				<div class="content" id="id_value"></div>
+			</div>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

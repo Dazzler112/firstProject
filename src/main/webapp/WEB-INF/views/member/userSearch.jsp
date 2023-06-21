@@ -11,22 +11,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 #modal.modal-overlay {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: none;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 1);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-}
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        z-index: 9999;
+    }
 
 #modal .modal-window {
 	background: rgb(85, 164, 78);
@@ -98,7 +99,7 @@ h3 {
 	<!--파일 불러오기-->
 	<%@ include file="./modal.jsp"%>
 
-	<div class="w3-content w3-container w3-margin-top" id="findId">
+	<div id="findId">
 		<div class="w3-container w3-card-4">
 
 			<div class="w3-center w3-large w3-margin-top">
@@ -218,7 +219,7 @@ h3 {
 						checkEmail = true;
 						enableSubmit();
 
-						alert("인증이 완료되었습니다. 회원 가입을 진행합니다.");
+						alert("인증이 완료되었습니다.");
 					} else {
 						alert("인증번호가 일치하지 않습니다. 다시 확인해 주세요.");
 					}
