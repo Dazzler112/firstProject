@@ -15,6 +15,8 @@ function wsEvt(){
         if(msg != null && msg.trim() != ''){
             var d = JSON.parse(msg);
 
+            console.log(d);
+
             if(d.type == "getId"){
                 var si = d.sessionId != null ? d.sessionId : "";
                 if(si != ''){

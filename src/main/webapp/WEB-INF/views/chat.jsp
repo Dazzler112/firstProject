@@ -22,9 +22,8 @@
 	}
 	.container h1{
 		text-align: left;
-		padding: 5px 5px 5px 15px;
-		color: #FFBB00;
-		border-left: 3px solid #FFBB00;
+		padding: 5px 5px 5px 0px;
+		color: #1aeb0b;
 		margin-bottom: 20px;
 	}
 	.chating{
@@ -56,6 +55,9 @@
 	#yourMsg{
 		display: none;
 	}
+	#listBtn{
+		margin-top: 50px;
+	}
 </style>
 
 
@@ -63,28 +65,33 @@
 <body>
 
 	<div id="container" class="container">
-		<h1>채팅</h1>
+		<h1>Second Stop</h1>
+		<h2>채팅하기</h2>
+		<input type="hidden" id="sessionId">
 		<div id="chating" class="chating"></div>
 		
 		<div id="yourName">
-			<table>
+			<table class="inputTable">
 				<tr>
 					<th>닉네임</th>
 					<th><input type="text" class="form-control form-control-sm" name="userName" id="userName" /></th>
-					<th><button class="btn btn-sm btn-primary" onclick="chatName()" id="starBtn">등록</button></th>
+					<th><button class="btn btn-sm btn-primary" onclick="chatName()" id="starBtn">채팅 참가</button></th>
 				</tr>
 			</table>
 		</div>
 		<div id="yourMsg">
-			<table>
+			<table class="inputTable">
 				<tr>
 					<th>메시지</th>
 					<th><input type="text" class="form-control form-control-sm" id="chatting" placeholder="메시지를 입력하세요" /></th>
 					<th><button class="btn btn-sm btn-primary" onclick="send()" id="sendBtn">보내기</button></th>
 				</tr>
 			</table>
-		</div>			
+		</div>
+		
+		<a id="listBtn" class="btn btn-secondary" href="/adBoard/list">목록으로</a>	
 	</div>
+	
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
