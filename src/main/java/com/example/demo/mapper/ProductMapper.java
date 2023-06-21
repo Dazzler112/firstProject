@@ -163,18 +163,47 @@ public interface ProductMapper {
     * @Select(""" SELECT COUNT(*) FROM Product ID """) Integer countAll();
     */
    
+//    처음 시작페이지 에서 몇개까지 보여줄지 정하는 코드
     @Select("""
-          SELECT 
-             *
-          FROM Product 
-          
-          
-          ORDER BY ID DESC 
-          LIMIT #{startIndex},  15
-          """)
 
-   List<Product> selectAllPaging(Integer startIndex);
-   
+    		SELECT 
+    			*
+    		FROM Product 
+    		
+    		
+    		ORDER BY ID DESC 
+    		LIMIT #{startIndex},  12
+    		""")
+
+	List<Product> listcustomer(Integer startIndex);
+    
+    @Select("""
+    		SELECT COUNT(*)FROM Product
+    		""")
+
+	Integer countAll();
+    
+	/*
+	 * @Select(""" <script> <bind name="pattern" value="'%'+keyword+'%'"/> SELECT
+	 * id, name, contanctName address FROM Product where ORDER BY id DESC </script>
+	 * """) List<Product> sql1(String keyword);
+	 */
+
+    
+
+
+
+    
+	/*
+	 * @Select(""" SELECT memberId, address, title FROM Product WHERE Product LIKE
+	 * #{keyword} ORDER BY ID DESC """) List<Product> keyword(String keyword);
+	 */
+
+    
+    
+	
+	
+
     
 
 }

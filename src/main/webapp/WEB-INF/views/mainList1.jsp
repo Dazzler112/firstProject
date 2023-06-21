@@ -65,26 +65,6 @@
 		</table>
 		<br> <br>
 		
-		<h2 style="color:#55A44E; margin-bottom:40px; margin-top:40px;">최신상품</h2>
-			<div class="box">
-
-				
-				<c:forEach items="${pageList}"    var="product"  begin="0" end="4" step="1">
-					<ul class="items">
-						<a href="/productId/${product.id }">
-							<img class="productimg" src="/productimg/sample1.jpg">
-						</a>
-						<li class="title"><a href="/board/id/${product.id }"> ${product.title}
-						</a></li>
-						<li class="price">${product.price}</li>
-						<li>${product.inserted}</li>
-						<li>${product.address}</li>												
-					</ul>
-				</c:forEach>
-				
-
-			</div>
-		
 		
 			<h2 style="color:#55A44E; margin-bottom:40px; margin-top:40px;">최신상품</h2>
 			<div class="box">
@@ -92,14 +72,15 @@
 				
 				<c:forEach items="${productList1}"    var="product"  begin="0" end="4" step="1">
 					<ul class="items">
-						<a href="/productId/${product.id }">
-							<img class="productimg" src="/productimg/sample1.jpg">
-						</a>
+						<a href="/teamProject/exList/${product.id }">
+							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${list[0].id }/${list[0].photoTitle}" alt="" />
+                     	</a>
 						<li class="title"><a href="/board/id/${product.id }"> ${product.title}
 						</a></li>
 						<li class="price">${product.price}</li>
 						<li>${product.inserted}</li>
-						<li>${product.address}</li>												
+						<li>${product.address}</li>
+						<li><i class="fa-regular fa-heart"></i>${product.likes}</li>												
 					</ul>
 				</c:forEach>
 				
@@ -145,9 +126,9 @@
 				<div class="clear"></div>
 				<c:forEach items="${productList2}" var="product"  begin="0" end="9" step="1">
 					<ul class="items">
-						<a href="/productId/${product.id }">
-							<img class="productimg" src="/productimg/sample1.jpg">
-						</a>
+						<a href="/teamProject/exList/${product.id }">
+							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${list[0].id }/${list[0].photoTitle}" alt="" />
+                     	</a>
 						<li class="title"><a href="/board/id/${product.id }"> ${product.title}
 						</a></li>
 						<li class="price">${product.price}</li>

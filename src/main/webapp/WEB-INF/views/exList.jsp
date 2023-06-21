@@ -14,6 +14,7 @@
 <body>
 
 	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3"></div>
+
 	<table class="table">
 		<c:forEach items="${list}" var="product">
 			<h1>${product.id }번 게시물</h1>

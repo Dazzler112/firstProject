@@ -204,10 +204,12 @@
 					<a href="/teamProject/exList/${product.id }"> <img
 						class="productimg" src="/productimg/sample1.jpg">
 					</a>
+					<li class="title">${product.id}</li>
 					<li class="title">${product.title}</li>
 					<li class="price">${product.price}</li>
-					<li class="like">좋아요</li>
-					<li>${category.title}</li>
+					<li class="price">${product.address}</li>
+					
+					<li>${product.memberId}</li>
 				</ul>
 			</c:forEach>
 		</div>
@@ -215,21 +217,57 @@
 	</section>
 
 	<my:categorylistsearch></my:categorylistsearch>
-
+<!-- 페이지네이션 -->
 	<div class="container-lg">
 		<div class="row">
 			<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-  	<c:forEach begin="1" end="10" var="pageNum">
-  	<c:url value="/teamProject/list4" var="pageLink">
-  		<c:param name="page" value="${pageNum }"></c:param>
-  	</c:url>
-    <li class="page-item"><a class="page-link" href="${pageLink }">${pageNum }</a></li>
-  	
-  	</c:forEach>
-    
-  </ul>
-</nav>
+				<ul class="pagination justify-content-center">
+				<c:if test="${prevPageNum gt 1 }">
+				<li class="page-item">
+					<c:url value="/teamProject/list4" var="pageLink">
+						<c:param name="page" value="${prevPageNum }"></c:param>
+					</c:url>
+					<a class="page-link" href="${pageLink }"><i class="fa-solid fa-angles-left"></i></a>
+				</li>
+				</c:if>
+				<c:if test="${prevPageNum1 ge 1 }">
+				<li class="page-item">
+					<c:url value="/teamProject/list4" var="pageLink">
+						<c:param name="page" value="${prevPageNum1 }"></c:param>
+					</c:url>
+					<a class="page-link" href="${pageLink }"><i class="fa-solid fa-angle-left"></i></a>
+				</li>
+				</c:if>
+					<c:forEach begin="${leftPageNum}" end="${rightPageNum }" var="pageNum">
+						<c:url value="/teamProject/list4" var="pageLink">
+							<c:param name="page" value="${pageNum }"></c:param>
+						</c:url>
+						<li class="page-item"><a class="page-link ${pageNum eq currentPageNum ? 'active' : '' }"
+							href="${pageLink }">${pageNum }</a></li>
+
+					</c:forEach>
+					
+					<c:if test="${nextPageNum1 le lastPageNum }">
+				<li class="page-item">
+					<c:url value="/teamProject/list4" var="pageLink">
+						<c:param name="page" value="${nextPageNum1 }"></c:param>
+					</c:url>
+					<a class="page-link" href="${pageLink }"><i class="fa-solid fa-angle-right"></i></a>
+				</li>
+				</c:if>
+					
+				<c:if test="${nextPageNum le lastPageNum}">	
+				<li class="page-item">
+					<c:url value="/teamProject/list4" var="pageLink">
+						<c:param name="page" value="${nextPageNum }"></c:param>
+					</c:url>
+					<a class="page-link" href="${pageLink }"><i class="fa-solid fa-angles-right"></i></a>
+				</li>
+				</c:if>
+				
+				
+				</ul>
+			</nav>
 		</div>
 	</div>
 	<script src="/js/navbar/productcategory.js"></script>

@@ -69,15 +69,17 @@ public class ProductService {
       return mapper.selectAll6(title, price, inserted, price, price, likes);
    }
 
-//   카테고리 리스트로 에서 사용할 수 있는 서비스
-   public List<Product> listBoard7(Integer page,  String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
-      Integer startIndex = (page - 1) * 15;
-      //게시물 목록 
-      mapper.selectAllPaging(startIndex);
-      
-      
-      return mapper.selectAll7(categoryTitle,  title, price, address, inserted);
-   }
+
+//	카테고리 리스트로 에서 사용할 수 있는 서비스
+	public List<Product> listBoard7( String categoryTitle, String title, Integer price, String address, LocalDateTime inserted) {
+		
+		
+		
+		
+		return mapper.selectAll7(categoryTitle,  title, price, address, inserted);
+	}
+
+
 
    public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
          Integer price, Integer views, Integer likes, String modi, String memberId, Integer ProrductID) {

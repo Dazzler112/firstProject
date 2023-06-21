@@ -5,6 +5,7 @@
 <link href="/resources/categorymenubar.css" rel="stylesheet">
 <link href="/resources/menubar.css" rel="stylesheet">
 <link href="/resources/navbar.css" rel="stylesheet">
+<script src="/js/navbar/navbar.js"></script>
 <!-- 글골 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,13 +45,22 @@
 					<!-- http://localhost:8080?search=검색할 내용  -->
 				</form>
 			</div>
-			<!-- 프로필 -->
-			<div id="dropdown" class="btn-group dropstart">
+			
+			
+		
 
-				<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
+  
+
+			<!-- 프로필 -->
+			<div id="dropdown" class="btn-toggle btn-secondary">
+				
+				<button class="dropdown-toggle" onclick="toggleDropdown()"><i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i></button>
+				
+				
+				<!-- <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
 					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
-				</button>
-				<ul class="dropdown-menu">
+				</button> -->
+				<ul class="dropdown-menu" id="dropdownMenu">
 					<!-- Dropdown menu links -->
 					<sec:authorize access="isAnonymous">
 						<li><button class="dropdown-item" type="button">
@@ -62,15 +72,11 @@
 								<a class="linkcolor" href="/member/signup">회원가입</a>
 							</button></li>
 					</sec:authorize>
-					<sec:authorize access="hasAuthority('admin')">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/member/list">회원목록</a>
-							</button></li>
-					</sec:authorize>
+					
 					<sec:authorize access="hasAuthority('admin')">
 						<li>
 							<button class="dropdown-item" type="button">
-								<a href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
+								<a class="linkcolor" href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
 							</button>
 						</li>
 					</sec:authorize>
@@ -80,7 +86,13 @@
 							</button></li>
 					</sec:authorize>
 					
+					
 					<sec:authorize access="isAuthenticated()">
+						<li><button class="dropdown-item" type="button">
+								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
+							</button></li>
+					</sec:authorize>
+					<sec:authorize access="!isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
 							</button></li>

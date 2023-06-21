@@ -97,13 +97,13 @@
 	border-radius: 50%;
 	background-color: rgb(158, 221, 255);
 	/* 이미지 불러오기 */
-	background-image: url(../imgs/profile.png);
+		
 	background-size: 40px 40px;
 }
 
-#dropdown {
-	margin-right: 30px;
-}
+
+
+
 
 #iconemenu {
 	display: none;
@@ -134,6 +134,7 @@
 }
 
 .btn:active, .btn:focus { border: none !important; box-shadow: none !important; }
+
 
 .closedsidebar {
 	width: 250px;
@@ -170,56 +171,37 @@
 }
 
 
+.dropdown-menu {
+  display: none; /* 초기에는 메뉴를 보이지 않게 설정 */
+  
+}
+.dropdown-menu {
+  display: none; /* 초기에는 메뉴를 보이지 않게 설정 */
+  position: absolute; /* 메뉴의 위치를 절대 위치로 설정 */
+  top: 80px; /* 메뉴의 위쪽 여백을 조절하는 속성 */
+  right: 10px;
+}
 
-@media screen and (min-width: 900px) {
-.closedsidebar {
-	display: none;
+.show {
+  display: block; /* show 클래스가 추가되면 메뉴를 보이도록 설정 */
+  width:100px;
 }
-	
-	}
-/*900px 정도로 화면 줄어들면 로고 타이틀 없애기*/
-@media screen and (max-width: 900px) {
-	.header__center {
-		display: none;
-	}
-	.navbarimage{
-	display:none;
+.dropdown-toggle {
+  background-color: transparent; /* 버튼의 배경색을 투명하게 설정 */
+  border: none; /* 버튼의 주위 태두리를 없애는 속성 */
+  outline: none; /* 포커스 효과를 없애는 속성 (선택 사항) */
+   font-size: 50px;
+   margin-right:40px;
+   
 }
-	.header__search {
-		display: block;
-	}
-	.header__title {
-		position: absolute;
-		width: 100%;
-		text-align: center;
-	}
-	#iconemenu+label {
-		display: block;
-		position: absolute;
-		width: 30px;
-		height: 40px;
-		left: 0px;
-		font-size: 24px;
-		z-index: 1;
-		color: black;
-		cursor: pointer;
-	}
-	#iconemenu+label:checked+label i {
-		display: block;
-		position: absolute;
-		font-size: 24px;
-		color: black;
-	}
-	#iconsearch {
-		display: block;
-		position: absolute;
-		font-size: 15px;
-		color: black;
-	}
-	#primary_nav_wrap {
-		display: none;
-		display: none;
-	}
-	
-	
+
+.dropdown-toggle::after {
+  display: none; /* 화살표를 없애는 속성 */
 }
+
+
+
+
+
+
+	
