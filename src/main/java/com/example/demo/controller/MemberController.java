@@ -70,16 +70,16 @@ public class MemberController {
 		model.addAttribute("id", result);
 		return result;
 	}
-	
+
 	@GetMapping("sendTempPw")
 	public void sendPw() {
-		
+
 	}
-	
+
 	@PostMapping("sendTempPw")
 	public void sendTempPw(String name, String email, HttpSession session) {
 		boolean result = mailService.createPw(name, email, session);
-		
+
 	}
 
 	@PostMapping("mail")
@@ -94,7 +94,7 @@ public class MemberController {
 	public Map<String, Object> mailCheck(Model model, Integer enteredCode, HttpSession session) {
 
 		Boolean ok = mailService.compareNum(enteredCode, session);
-		
+
 		model.addAttribute("authentication", ok);
 		return Map.of("authentication", ok);
 
@@ -150,14 +150,22 @@ public class MemberController {
 
 	@GetMapping("writeByMe")
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
-	public void readMyWriting(String id, Model model) {
-		List<myWrite> userWriting = service.getUserWriting(id);
+	public void readMyWriting(String id, Model model, 
+			@RequestParam(value = "page", defaultValue = "1") Integer page) {
+		
+		Member member = service.getUser(id);
+		model.addAttribute("member", member);
+		
+		Map<String, Object> userWriting = service.getUserWriting(page, id);
 		model.addAttribute("userWriting", userWriting);
+		
+//		return "/writeByMe?id=#{id}";
 	}
-	
+
 	@GetMapping("adminPage")
 	@PreAuthorize("hasAuthority('admin')")
-	public void userListAdmin(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page,
+	public void userListAdmin(Model model, 
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "search", defaultValue = "") String search,
 			@RequestParam(value = "type", required = false) String type) {
 		Map<String, Object> userList = service.userList(page, search, type);

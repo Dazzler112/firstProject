@@ -12,15 +12,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-
+h1 {
+	font-size: 45px;
+	color: #55A44E;
+	margin: 20px;
+	/* 	font-weight: bold; */
+}
 
 .table-no-border {
 	border: none;
 }
 
 .table-no-border thead th {
-		border-top: 2px solid #55A44E; /* 제일 상단 선 색상 설정 */
-	}
+	border-top: 2px solid #55A44E; /* 제일 상단 선 색상 설정 */
+}
 
 .table-no-border th, .table-no-border td {
 	border: none;
@@ -36,7 +41,6 @@
 .table-no-border th:last-child, .table-no-border td:last-child {
 	border-right: none; /* 우측 선 제거 */
 }
-
 </style>
 <body>
 
@@ -44,7 +48,7 @@
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-10 col-lg-10">
+			<div class="col-12 col-md-10 col-lg-8">
 				<h1>${member.id }의 페이지</h1>
 				<!-- .mb-3*4>label+input -->
 				<table class="table table-no-border">
@@ -53,10 +57,10 @@
 							<th>아이디</th>
 							<td>${member.id}</td>
 						</tr>
-						<tr>
-							<th>패스워드</th>
-							<td>${member.password}</td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<th>패스워드</th> -->
+<%-- 							<td>${member.password}</td> --%>
+<!-- 						</tr> -->
 						<tr>
 							<th>이름</th>
 							<td>${member.name}</td>
@@ -86,6 +90,7 @@
 
 				<sec:authorize access="authentication.name eq #member.id">
 					<a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
+					<input class="btn btn-success" type="button" value="임시 비밀번호 발급" onclick="location.href='/member/sendTempPw'" />
 					<button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#confirmModal">탈퇴</button>
 				</sec:authorize>
 			</div>

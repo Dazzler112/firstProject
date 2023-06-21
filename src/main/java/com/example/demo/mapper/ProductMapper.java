@@ -9,7 +9,7 @@ import org.springframework.security.core.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface ProductMapper {	
+public interface ProductMapper {   
 
 
     List<Product> selectAll2(String title, Integer price, LocalDateTime inserted, String address);
@@ -67,186 +67,114 @@ public interface ProductMapper {
 
     @Select("""
 
-    		SELECT
+          SELECT
 
-    		id,
+          id,
 
-    		StatusCode,
+          StatusCode,
 
-    		title,
+          title,
 
-    		memberId,
+          memberId,
 
-    		inserted,
+          inserted,
 
-    		views,
+          views,
 
-    		likes,
+          likes,
 
-    		price
+          price
 
-    		FROM
+          FROM
 
-    		Product
+          Product
 
-    		ORDER BY id DESC
+          ORDER BY id DESC
 
-    		""")
+          """)
 
-    		List<Product> allProduct();
-
-    @Select("""
-			SELECT
-			statusCode,
-			productId,
-			title,
-			inserted,
-			body,
-			writer,
-			price,
-			views,
-			likes,
-			(select case when max(memberID) is not null then  'Y' else 'N' end From Product a where a.writer = b.memberId) as modi,
-			memberId
-			FROM
-			Product b
-			WHERE
-			statusCode = #{statusCode}
-			AND title = #{title}
-			AND inserted = #{inserted}
-			AND body = #{body}
-			AND writer = #{writer}
-			AND price = #{price}
-			AND views = #{views}
-			AND likes = #{likes}
-			AND modi = #{modi}
-			AND memberId = #{memberId}
-			AND productId = #{productId}
-			ORDER BY inserted DESC
-			""")
-	List<Product> selectExList(
-			@Param("statusCode") String statusCode,
-			@Param("title") String title,
-			@Param("inserted") LocalDateTime inserted,
-			@Param("body") String body,
-			@Param("writer") String writer,
-			@Param("price") Integer price,
-			@Param("views") Integer views,
-			@Param("likes") Integer likes,
-			@Param("modi") String modi,
-			@Param("memberId") String memberId,
-			@Param("productId") Integer productId);
-
-    		@Select("""
-
-    		SELECT
-
-    		id,
-
-    		StatusCode,
-
-    		title,
-
-    		memberId,
-
-    		inserted,
-
-    		views,
-
-    		likes,
-
-    		price
-
-    		FROM
-
-    		Product
-
-    		WHERE id=#{id}
-
-    		""")
-
-    		List<Product> allProduct1(Integer id);
+          List<Product> allProduct();
 
     		@Select("""
 			
 			SELECT
             
-				ProductTitle
-			
-			FROM
-			
-				ProductPhoto
-			
-			WHERE ProductId=#{id}
-				
-			""")
-	String allProductPhoto(Integer id);
+            ProductTitle
+         
+         FROM
+         
+            ProductPhoto
+         
+         WHERE ProductId=#{id}
+            
+         """)
+   String allProductPhoto(Integer id);
 
-	@Insert("""
-			INSERT INTO ProductLike
-			VALUES (#{productId}, #{memberId})
-			""")
-	Integer insert(Like like);
+   @Insert("""
+         INSERT INTO ProductLike
+         VALUES (#{productId}, #{memberId})
+         """)
+   Integer insert(Like like);
 
-	@Delete("""
-			DELETE FROM Product
-			WHERE productId = #{productId}
-				AND memberId = #{memberId}
-			""")
-	Integer delete(Like like);
+   @Delete("""
+         DELETE FROM Product
+         WHERE productId = #{productId}
+            AND memberId = #{memberId}
+         """)
+   Integer delete(Like like);
 
 //    검색을 하기위함
     @Select("""
-			<script>
-			<bind name="pattern" value="'%' + search + '%'" />
-			SELECT COUNT(*)
-			FROM Board
-			
-			<where>
-			<if test="(type eq 'all') or (type eq 'title')">
-				title LIKE #{pattern}
-			</if>
-			<if test="(type eq 'all') or (type eq 'body')">
-				OR body LIKE #{pattern}
-			</if>
-			<if test="(type eq 'all') or (type eq 'writer')">
-				OR writer LIKE #{pattern}
-			</if>
-			</where>
-		
-			</script>
-			""") 
-	Integer countRecord(String search, String type);
+         <script>
+         <bind name="pattern" value="'%' + search + '%'" />
+         SELECT COUNT(*)
+         FROM Board
+         
+         <where>
+         <if test="(type eq 'all') or (type eq 'title')">
+            title LIKE #{pattern}
+         </if>
+         <if test="(type eq 'all') or (type eq 'body')">
+            OR body LIKE #{pattern}
+         </if>
+         <if test="(type eq 'all') or (type eq 'writer')">
+            OR writer LIKE #{pattern}
+         </if>
+         </where>
+      
+         </script>
+         """) 
+   Integer countRecord(String search, String type);
     
-	/*
-	 * // 어디서 몇개를 보여줄지 정해주기
-	 * 
-	 * @Select(""" SELECT
-	 *
-	 * FROM Product
-	 * 
-	 * 
-	 * ORDER BY ID DESC LIMIT #{startIndex}, 2 """)
-	 * 
-	 * List<Product> listcategorypage(Integer startIndex);
-	 * 
-	 * //끝에서의 페이지 번호 정하기
-	 * 
-	 * @Select(""" SELECT COUNT(*) FROM Product ID """) Integer countAll();
-	 */
+   /*
+    * // 어디서 몇개를 보여줄지 정해주기
+    * 
+    * @Select(""" SELECT
+    *
+    * FROM Product
+    * 
+    * 
+    * ORDER BY ID DESC LIMIT #{startIndex}, 2 """)
+    * 
+    * List<Product> listcategorypage(Integer startIndex);
+    * 
+    * //끝에서의 페이지 번호 정하기
+    * 
+    * @Select(""" SELECT COUNT(*) FROM Product ID """) Integer countAll();
+    */
    
     @Select("""
-    		SELECT 
-    			*
-    		FROM Product 
-    		
-    		
-    		ORDER BY ID DESC 
-    		LIMIT #{startIndex},  15
-    		""")
+          SELECT 
+             *
+          FROM Product 
+          
+          
+          ORDER BY ID DESC 
+          LIMIT #{startIndex},  15
+          """)
 
-	List<Product> selectAllPaging(Integer startIndex);
-	
+   List<Product> selectAllPaging(Integer startIndex);
+   
     
 
 }

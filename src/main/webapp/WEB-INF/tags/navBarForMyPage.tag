@@ -18,14 +18,15 @@
 		<div class="header__wrapper">
 			<!-- 로고 -->
 			<div class="header__start">
-				<img style="width: 100px; height: 70px;" class="navbarimage" src="/img/navbarimage.png" alt="My Image">
 				<sec:authorize access="isAnonymous()">
-					<!-- 로그인 안되어 있을때 -->
-					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">SecondStop</a></span>
+					<span class="header__title"><a class="linkcolor" href="/teamProject/list1">
+							<img class="navbarimage" src="/img/navbarimage.png" alt="My Image" />
+						</a> </span>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<!-- 로그인 하였을때 -->
-					<span class="header__title"><a class="linkcolor" href="/teamProject/list2">SecondStop</a></span>
+					<a class="linkcolor" href="/teamProject/list2">
+						<img class="navbarimage" src="/img/navbarimage.png" alt="My Image" />
+					</a>
 				</sec:authorize>
 
 			</div>
@@ -183,15 +184,15 @@
 		</div>
 		<nav id="primary_nav_wrap">
 			<ul>
-			<sec:authorize access="isAuthenticated()">
-				<li class="current-menu-item"><a href="/teamProject/list2">홈</a></li>
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
-			</sec:authorize>
-				<li><a href="/member/info?id=${member.id}">내 정보</a>					
-				<li><a href="/member/writeByMe?id=${member.id }">내가 쓴 글</a>						
-				<li><a href="#">내가 올린 상품</a>						
+				<sec:authorize access="isAuthenticated()">
+					<li class="current-menu-item"><a href="/teamProject/list2">홈</a></li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
+				</sec:authorize>
+				<li><a href="/member/info?id=${member.id}">내 정보</a>
+				<li><a href="/member/writeByMe?id=${member.id }">내가 쓴 글</a>
+				<li><a href="#">내가 올린 상품</a>
 			</ul>
 		</nav>
 	</header>

@@ -65,6 +65,13 @@
 .mod{
 	margin-left: 85%;
 }
+.div_chat{
+	margin-left: 50px;
+}
+#chatBtn{
+	margin-left: 45px;
+}
+
 
 </style>
 <body>
@@ -112,7 +119,8 @@
 									</c:if>
 								</span>
 							</span>
-							<a class="btn btn-secondary" href="/adBoard/list">목록으로</a>
+							<a class="btn btn-secondary" href="/adBoard/list">목록</a>
+							<a id="chatBtn" class="btn btn-success" href="/chat">채팅하기</a>
 						</h2>
 						
 					</div>
@@ -239,7 +247,10 @@
 			</div>
 		</div>
 
+		
+
 	</sec:authorize>
+	
 
 	<my:footer></my:footer>
 

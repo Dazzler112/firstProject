@@ -8,8 +8,8 @@ import com.example.demo.domain.*;
 public interface MemberMapper {
 
 	@Insert("""
-			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email)
-			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email})
+			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email, addressSggNm)
+			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email}, #{addressSggNm})
 			""")
 	Integer signUpInsert(Member member);
 
@@ -164,12 +164,25 @@ public interface MemberMapper {
 	Integer updatePw(String name, String email, String encodePw);
 
 	@Select("""
-			SELECT sort, region, title, body, id, inserted FROM Board WHERE writer = #{id}
-			UNION
-			SELECT sort, region, title, body, id, inserted FROM AdBoard WHERE writer = #{id}
-			UNION
-			SELECT sort, region, title, body, id, inserted FROM PtBoard WHERE writer = #{id};
+			SELECT
+			(SELECT count(*) FROM Board WHERE writer = #{id})
+			+
+			(SELECT count(*) FROM AdBoard WHERE writer = #{id})
+			+
+			(SELECT count(*) FROM PtBoard WHERE writer = #{id});
 			""")
-	List<myWrite> getUserWriting(String id);
+	Integer countAllWriting(String id);
+
+	@Select("""
+			SELECT writer, sort, region, title, body, id, inserted FROM Board WHERE writer = #{id}
+			UNION
+			SELECT writer, sort, region, title, body, id, inserted FROM AdBoard WHERE writer = #{id}
+			UNION
+			SELECT writer, sort, region, title, body, id, inserted FROM PtBoard WHERE writer = #{id}
+			ORDER BY id DESC
+			LIMIT #{startIndex}, #{rowPerPage};
+			""")
+	List<myWrite> getUserWriting(String id, Integer startIndex, Integer rowPerPage);
+
 
 }
