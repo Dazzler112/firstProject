@@ -46,6 +46,18 @@ public interface PtCommentMapper {
 			""")
 	Integer update(PtComment comment);
 
+	@Delete("""
+			DELETE FROM Comment
+			WHERE memberId = #{memberId}
+			""")
+	Integer deleteByPtMemberId(String memberId);
+	
+	@Delete("""
+			DELETE FROM PtComment
+			WHERE boardId = #{boardId}
+			""")
+	void deleteByBoardId(Integer boardId);
+
 }
 
 

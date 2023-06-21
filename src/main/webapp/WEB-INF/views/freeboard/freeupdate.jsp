@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 body{
-	margin: 0em 1em;
+	margin: 2em 1em;
+	padding:2em 0em;
 	width: 1000px; /* 콘텐츠 영역의 폭을 고정 값으로 설정 */
   	margin: 0 auto; /* 가운데 정렬 */
 }
@@ -20,7 +21,8 @@ body{
 
 </head>
 <body>
-
+<my:navBar></my:navBar>
+<my:alert></my:alert>
 <div class="container-lg" style="padding: 0em 6em;">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
@@ -61,10 +63,6 @@ body{
 					<div class="mb-3">
 						<label for="update-body" class="form-label"></label>본문
 						<textarea rows="10" id="update-body" class="form-control" name="body" >${board.body }</textarea>
-					</div>
-					<div class="mb-3">
-						<label for="update-region" class="form-label"></label>지역 
-						<input id="update-region" type="text" class="form-control" name="region" value="${board.region}"  />
 					</div>
 					<div class="mb-3">
 						<label for="update-filein" class="form-label"></label>파일

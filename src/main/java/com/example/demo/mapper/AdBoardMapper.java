@@ -148,7 +148,13 @@ public interface AdBoardMapper {
 			""")
 	List<AdBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
 
-	
+	@Select("""
+			SELECT id
+			FROM AdBoard
+			WHERE writer = #{writer}
+			""")
+	List<Integer> selectIdByWriter(String writer);
+
 
 }
 

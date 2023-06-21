@@ -18,6 +18,10 @@ body{
 a {
 	text-decoration: none;
 }
+.list-title{
+	padding: 10px 0px;
+}
+
 .list-title > h1{
 	display:flex;
 	justify-content: center;
@@ -102,7 +106,7 @@ table>tbody>tr>td {
 .category_button {
 	margin: 0px 8px;
 	padding: 7px;
-	border-radius: 5px;
+	border-radius: 8px;
 	border: none;
 	font-weight: 600;
 	background: #F0F0F0;
@@ -152,7 +156,7 @@ table>tbody>tr>td {
 							<tr>
 								<td style="display: none;">${board.id }</td>
 								<td>${board.boardCategory }</td>
-								<td>${board.region }</td>
+								<td>${board.addressSggNm }</td>
 								<td>
 								<%-- <c:if test="${board.fileCount > 0 }">
 								<div class="title-column">
@@ -201,11 +205,10 @@ table>tbody>tr>td {
 			</div>
 		</div>
 	</div>
-	<my:freesearch></my:freesearch>
 
 
 	<!-- pagenation -->
-	<div class="container-lg">
+	<div class="container-lg" style="margin-top: 20px;">
 		<div class="row">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
@@ -275,6 +278,7 @@ table>tbody>tr>td {
 		</div>
 	</div>
 
+	<my:freesearch></my:freesearch>
 
 
 	<div class="div_writer">

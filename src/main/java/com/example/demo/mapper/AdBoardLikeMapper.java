@@ -39,6 +39,12 @@ public interface AdBoardLikeMapper {
 			WHERE boardId = #{boardId}
 			""")
 	void deleteByBoardId(Integer boardId);
+
+	@Delete("""
+			DELETE FROM AdBoardLike
+			WHERE memberId = #{memberId}
+			""")
+	void deleteByAdLikeMemberId(String memberId);
 }
 
 

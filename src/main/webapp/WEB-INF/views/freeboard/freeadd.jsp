@@ -25,7 +25,8 @@ body{
 </style>
 </head>
 <body>
-
+	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 	<div class="container-lg" style="padding: 0em 5em;">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-12 col-lg-14">
@@ -50,10 +51,6 @@ body{
 					<div class="mb-3">
 					<label for="add-body" class="form-label"></label>본문
 					<textarea rows="10" id="add-body" class="form-control" name="body" >${getBoard.body }</textarea>
-					</div>
-					<div class="mb-3">
-					<label for="add-region" class="form-label"></label>지역
-					<input id="add-region" type="text"  class="form-control" name="region" value="${getBoard.region}" />
 					</div>
 					<div class="mb-3">
 						<label for="add-file" class="form-label"></label>사진
