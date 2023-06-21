@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3">
+	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3"></div>
 		<table class="table">
 					<h1>${product.id }게시물 번호</h1>
 			
@@ -51,17 +51,13 @@
 						<td>${product.views}</td>
 						<td>${product.likes}</td>
 						<td>${product.price}</td>
-						<c:if test="${loggedIn}">
-							<c:if test="${product.memberId eq loggedInUser}">
 								<td><a href="/product/productUpdate/${product.id}">수정</a></td>
 								<td>
-									<form action="/product/remove" method="post">
+									<form action="/teamProject/remove" method="post">
 										<input type="hidden" name="id" value="${product.id}">
 										<button type="submit" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</button>
 									</form>
 								</td>
-							</c:if>
-						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -82,7 +78,7 @@
                   <td>${product.modi}</td>
                   <td><a href="/product/productUpdate/${product.id}">수정</a></td>
                   <td>
-                  <form action="/product/remove" method="post">
+                  <form action="/teamProject/remove" method="post">
                      <input type="hidden" name="id" value="${product.id}">
                      <button type="submit" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</button>
                   </form>
@@ -102,6 +98,5 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
    <script src="/js/product/like.js"></script>
-   
 </body>
 </html>

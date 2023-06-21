@@ -104,7 +104,8 @@ public class MainController {
 			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
 			Authentication authentication)
 					throws Exception {
-		product.setWriter(authentication.getName());
+			System.out.println(authentication.getName());
+		product.setMemberId(authentication.getName());
 		boolean ok = service.addProduct(product, files, category);
 		
 		model.addAttribute("product", product);
@@ -153,6 +154,8 @@ public class MainController {
 
 	@PostMapping("remove")
 	public String removeForm(Integer id, RedirectAttributes rttr, Authentication authentication) {
+		System.out.println("123");
+		System.out.println(id);
 	    // 사용자 인증 정보 확인
 	    String username = authentication.getName(); // 현재 로그인한 사용자의 이름
 
@@ -161,7 +164,7 @@ public class MainController {
 
 	    if (ok) {
 	        rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
-	        return "redirect:/product/productlist";
+	        return "redirect:/teamProject/list4";
 	    } else {
 	        System.out.println("실패함");
 	        rttr.addFlashAttribute("message", "게시물 삭제에 실패하였습니다.");

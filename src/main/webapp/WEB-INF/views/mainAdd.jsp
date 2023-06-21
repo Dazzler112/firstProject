@@ -39,10 +39,6 @@
 					</div>
 					<div class="mb-3">
 						<div class="mb-3">
-							<label for="memberIdInput" class="form-label">이름</label> <input id="memberIdInput"
-								class="form-control" type="text" name="memberId" value="${Product.memberId }" />
-						</div>
-						<div class="mb-3">
 							<label for="titleInput" class="form-label">제목</label> <input id="titleInput"
 								class="form-control" type="text" name="title" value="${Product.title }" />
 						</div>
