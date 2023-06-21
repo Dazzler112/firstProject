@@ -149,6 +149,14 @@ public interface PtBoardMapper {
 	List<PtBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
 
 	
+	@Select("""
+			SELECT id
+			FROM PtBoard
+			WHERE writer = #{writer}
+			""")
+	List<Integer> selectIdByWriter(String writer);
+
+	
 
 }
 

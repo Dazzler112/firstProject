@@ -30,6 +30,9 @@ public class AdBoardService {
 	
 	@Autowired
 	private AdBoardLikeMapper likeMapper;
+	
+	@Autowired
+	private AdCommentMapper commentMapper;
 
 	public List<AdBoard> listBoard() {
 		List<AdBoard> list = mapper.selectAll();
@@ -92,6 +95,8 @@ public class AdBoardService {
 	}
 
 	public boolean remove(Integer id) {
+		
+		commentMapper.deleteByBoardId(id);
 		
 		likeMapper.deleteByBoardId(id);
 		
@@ -199,6 +204,13 @@ public class AdBoardService {
 		return getBoard(id, null);
 	}
 
+	public void removeByAdWriter(String writer) {
+		List<Integer> idList = mapper.selectIdByWriter(writer);
+		
+		for(Integer id : idList) {
+			remove(id);
+		}
+	}
 }
 
 

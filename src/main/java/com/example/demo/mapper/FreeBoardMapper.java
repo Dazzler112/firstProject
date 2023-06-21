@@ -11,14 +11,17 @@ public interface FreeBoardMapper {
 
 	@Select("""
 			SELECT 
-			id,
-			title,
-			writer,
-			region,
-			inserted,
-			boardCategory,
+			b.id,
+			b.title,
+			b.writer,
+			b.inserted,
+			b.boardCategory,
+			(SELECT addressSggNm 
+            FROM Member 
+            WHERE id = b.writer)  
+            addressSggNm
 			FROM
-			Board
+			Board b
 			ORDER BY id DESC
 			""")
 	List<FreeBoard> listForm();
@@ -30,9 +33,12 @@ public interface FreeBoardMapper {
 				b.title,
 				b.body,
 				b.writer,
-				b.region,
 				b.inserted,
 				p.photoName,
+				(SELECT addressSggNm 
+			     FROM Member 
+                 WHERE id = b.writer)  
+                 addressSggNm,
 				(SELECT COUNT (*)
 				FROM Comment
 				WHERE boardId = b.id) commentCount,
@@ -47,8 +53,8 @@ public interface FreeBoardMapper {
 	FreeBoard getBoardList(Integer id);
 	
 	@Insert("""
-			INSERT INTO Board(boardCategory,title,body,writer,region)
-			VALUES(#{boardCategory} ,#{title}, #{body}, #{writer},#{region})
+			INSERT INTO Board(boardCategory,title,body,writer)
+			VALUES(#{boardCategory} ,#{title}, #{body}, #{writer})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertForm(FreeBoard board);
@@ -86,8 +92,7 @@ public interface FreeBoardMapper {
 			SET
 			 boardCategory = #{boardCategory},
 			 title = #{title},
-			 body = #{body},
-			 region = #{region}
+			 body = #{body}
 			WHERE id = #{id}
 			""")
 	int updateBoard(FreeBoard board);
@@ -112,16 +117,18 @@ public interface FreeBoardMapper {
 			b.id,
 			b.title,
 			b.writer,
-			b.region,
 			b.inserted,
 			COUNT(p.id) fileCount,
+			(SELECT addressSggNm FROM
+			Member 
+			WHERE memberId = id) addressSggNm
 			(SELECT COUNT (*)
 			FROM Comment
 			WHERE boardId = b.id) commentCount
 			FROM
 			Board b LEFT JOIN PhotoName p ON b.id = p.boardId
 			GROUP BY
-				b.id, b.title, b.writer, b.region, b.inserted
+				b.id, b.title, b.writer, b.inserted
 			ORDER BY id DESC
 			""")
 //	@ResultMap("getListCount")
@@ -129,17 +136,22 @@ public interface FreeBoardMapper {
 
 	@Select("""
 			SELECT 
-			b.id,
-			b.title,
-			b.writer,
-			b.region,
-			b.inserted,
-			b.boardCategory,
-			COUNT(c.id) commentCount
-			FROM Board b LEFT JOIN Comment c ON b.id = c.boardId
-			WHERE b.id = #{id}
-			GROUP BY
-			b.id, b.title, b.writer, b.region, b.inserted, b.boardCategory
+			b.id
+			, b.title
+			, b.writer
+			, b.inserted
+			, b.boardCategory
+			, COUNT(c.id) commentCount,
+			(
+			SELECT addressSggNm FROM
+			Member 
+			WHERE memberId = id
+			) 
+			addressSggNm
+		FROM Board b LEFT JOIN Comment c ON b.id = c.boardId
+		WHERE b.id = #{id}
+		GROUP BY
+		b.id, b.title, b.writer, b.inserted, b.boardCategory
 			""")
 	@ResultMap("replyCount")
 	List<FreeBoard> replyCounting(Integer id);
@@ -151,10 +163,13 @@ public interface FreeBoardMapper {
     SELECT b.id
            , b.title
            , b.writer
-           , b.region
            , b.inserted
            , COUNT(p.id) fileCount
            , b.boardCategory,
+           (SELECT addressSggNm 
+            FROM Member 
+            WHERE id = b.writer)  
+            addressSggNm,
            (
             SELECT COUNT (*)
             FROM Comment
@@ -181,12 +196,12 @@ public interface FreeBoardMapper {
     GROUP BY b.id
              , b.title
              , b.writer
-             , b.region
              , b.inserted 
              , b.boardCategory
     ORDER BY id DESC LIMIT #{startIndex}, #{rowPage}
     </script>
 			""")
+	@ResultMap("pagingMap")
 	List<FreeBoard> selectPaging( Integer startIndex, Integer rowPage, String search, String type, String boardCategory);
 
 	//검색 구조 기본설정
@@ -211,6 +226,13 @@ public interface FreeBoardMapper {
 			</script>
 			""") 
 	Integer countRecord(String search, String type);
+
+	@Select("""
+			SELECT id
+			FROM Board
+			WHERE writer = #{writer}
+			""")
+	List<Integer> selectByWriter(String writer);
 	
 //	@Select("""
 //			SELECT 

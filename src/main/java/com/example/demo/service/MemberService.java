@@ -19,16 +19,34 @@ public class MemberService {
 	private MemberMapper mapper;
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	//보드 서비스
+	@Autowired
 	private FreeBoardService freeBoardService;
-
 	@Autowired
 	private AdBoardService adBoardService;
-	
 	@Autowired
 	private PtBoardService ptBoardService;
+//======================================================================
 
+	//comment Mapper
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private FreeCommentMapper freeCommentMapper;
+	@Autowired
+	private PtCommentMapper ptCommentMapper;
+	@Autowired
+	private AdCommentMapper adCommentMapper;
+//======================================================================
+	
+	//like Mapper
+	@Autowired
+	private FreeBoardLikeMapper freeLikeMapper;
+	@Autowired
+	private PtBoardLikeMapper ptLikeMapper;
+	@Autowired
+	private AdBoardLikeMapper adLikeMapper;
+//======================================================================
 
 	public boolean signup(Member member) {
 
@@ -119,8 +137,20 @@ public class MemberService {
 			// 암호가 같다면
 
 			// 이 회원이 작성한 게시물 row 삭제
-//			freeBoardService.removeByWriter(member.getId());
-
+			freeBoardService.removeByWriter(member.getId()); // 자유게시판
+			ptBoardService.removeByPtWriter(member.getId()); // pt보드
+			adBoardService.removeByAdWriter(member.getId()); // ad보드
+			
+			// 이 회원이 작성한 댓글 삭제
+			freeCommentMapper.deleteByMemberId(member.getId()); // 자유게시판
+			ptCommentMapper.deleteByPtMemberId(member.getId()); // pt게시판
+			adCommentMapper.deleteByAdMemberId(member.getId()); // ad게시판
+			
+			//이 회원이 좋아요한 레코드 삭제
+			freeLikeMapper.deleteByMemberId(member.getId()); // 자유게시판
+			ptLikeMapper.deleteByPtLikeMemberId(member.getId()); // pt게시판
+			adLikeMapper.deleteByAdLikeMemberId(member.getId()); // ad게시판
+			
 			// 회원 테이블 삭제
 
 			cnt = mapper.deleteById(member.getId());

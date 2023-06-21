@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 body{
-	margin: 0em 1em;
+	margin: 1em 1em;
+	padding: 2em 0em;
 	width: 1100px; /* 콘텐츠 영역의 폭을 고정 값으로 설정 */
   	margin: 0 auto; /* 가운데 정렬 */
 }
@@ -56,13 +57,13 @@ body{
 	color:white;
 	}
 .comment_column-div{
-	border:0.8px solid rgba(0,0,0,0.2);
+	border:none;
 	margin:0px 3.5px 0px 20px;
-	padding: 1px 3px 1px 3px;
-	background-color: #F191B9;
+	padding: 3px 7px 3px 7px;
+	background-color:#f8f9fa;
 	border-radius: 7px;
-	color: white;
-	font-size: 23px;
+	color: black;
+	font-size: 18px;
 }	
 .comment_container-div {
 	margin: 10px 0px ;
@@ -157,6 +158,7 @@ body{
 </head>
 <body>
 	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 	<div style="padding: 0em 6em;">
 	<div class="container-lg">
 		<div class="row justify-content-center">
@@ -217,7 +219,8 @@ body{
 				<div class="mb-3">
 					<c:forEach items="${getBoard.photoName }" var="photo">
 						<div>
-							<img class="img-fluid img-thumbnail" src="${bucketUrl}/${getBoard.id}/${photo}" />
+							<label for="get-img" class="form-label"></label>
+							<img id="get-img" class="img-fluid img-thumbnail form-control" src="${bucketUrl}/${getBoard.id}/${photo}" />
 						</div>
 					</c:forEach>
 				</div>
@@ -229,7 +232,7 @@ body{
 
 				<div class="mb-3">
 					<label for="get-region" class="form-label"></label>지역 
-					<input id="get-region" type="text" class="form-control" name="region" value="${getBoard.region}" readonly />
+					<input id="get-region" type="text" class="form-control" name="addressSggNm" value="${getBoard.addressSggNm}" readonly />
 				</div>
 
 				 
@@ -239,9 +242,9 @@ body{
 
 	<div class="form-control"  id="commentContainer">
 	<sec:authorize access="isAuthenticated()">
-		<div id="addCommentContainer" style="display: flex; justify-content: center;align-items: center;">
+		<div id="addCommentContainer" style="display: flex; justify-content: center;align-items: center; text-align: center;">
 			<textarea rows="" id="commentTextArea" class="comment_input"></textarea>
-			<button id="sendCommentBtn" class="comment-commit">올리기</button>
+			<button id="sendCommentBtn" class="comment-commit"><span style="font-size: 16px; white-space: nowrap; ">올리기</span></button>
 		</div>
 		<!-- ajax 토글식으로 변경 
 			<div id="updateCommentContainer">
@@ -254,7 +257,6 @@ body{
 			<c:if test="${commentCnt.get(0).commentCount > 0}">
 			<div class="comment_container-div">
 			<span class="comment_column-div">
-			<i class="fa-solid fa-comment"></i>
     		 <span id="comment_counting-cnt">
         	  댓글수					
      	      ${commentCnt.get(0).commentCount}
