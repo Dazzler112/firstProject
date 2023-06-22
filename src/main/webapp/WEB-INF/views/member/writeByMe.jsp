@@ -12,45 +12,74 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-
 h1 {
 	font-size: 45px;
 	color: #55A44E;
 	margin: 20px;
-	/* 	font-weight: bold; */
 }
 
-.table-no-border {
+a {
+	text-decoration: none;
+}
+
+.table-no-border td,
+.table-no-border th {
 	border: none;
 }
 
-.table-no-border thead th {
-	border-top: 2px solid #55A44E; /* 제일 상단 선 색상 설정 */
+.myTab {
+	position: relative;
+	top: 50px;
+	right: 70px;
 }
 
-.table-no-border th, .table-no-border td {
-	border: none;
-	border-top: 1px solid #dee2e6; /* 상단 선 색상 설정 */
-	border-bottom: 1px solid #dee2e6; /* 하단 선 색상 설정 */
-	padding-right: 40px; /* 아이디와 아이디 값 사이의 간격 조정 */
+.detailPage {
+	border: 1px solid #CED4DA;
+	border-width: 1px 0 0;
+	padding: 10px;
 }
 
-.table-no-border th:first-child, .table-no-border td:first-child {
-	border-left: none; /* 좌측 선 제거 */
+.detailPage th:first-child,
+.detailPage td:first-child {
+	border-left: none;
 }
 
-.table-no-border th:last-child, .table-no-border td:last-child {
-	border-right: none; /* 우측 선 제거 */
+.detailPage th:last-child,
+.detailPage td:last-child {
+	border-right: none;
+}
+
+.detailPage th {
+	border-bottom: 1px solid #CED4DA;
+}
+
+.detailPage td {
+	border-bottom: 1px solid #CED4DA;
 }
 </style>
 <body>
 
-	<my:navBarForMyPage></my:navBarForMyPage>
+	<my:navBar></my:navBar>
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-10 col-lg-10">
-				<h1>${param.id }의 작성글</h1>
+			<div class="col-12 col-md-10 col-lg-3 myTab" style="position: relative; top: 70px; right: 42px">
+				<table class="table table-no-border">
+					<tbody>
+						<tr>
+							<td><a href="/member/info?id=${member.id}" style="color: #55A44E">내 정보</a></td>
+						</tr>
+						<tr>
+							<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내가 쓴 글</a></td>
+						</tr>
+						<tr>
+							<td><a href="#" style="color: #55A44E">내가 올린 상품</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12 col-md-10 col-lg-8 detailPage">
+				<h1>${param.id }님의 작성글</h1>
 				<!-- .mb-3*4>label+input -->
 				<table class="table table-no-border">
 					<thead>
@@ -58,7 +87,7 @@ h1 {
 							<th>분류</th>
 							<th>지역</th>
 							<th>제목</th>
-<!-- 							<th>본문</th> -->
+							<!-- 							<th>본문</th> -->
 							<th>올린 날짜</th>
 						</tr>
 					</thead>
@@ -68,7 +97,7 @@ h1 {
 								<td>${writing.sort}</td>
 								<td>${writing.region}</td>
 								<td><a href="/${writing.sort }/id/${writing.id}">${writing.title}</a></td>
-<%-- 								<td>${writing.body}</td> --%>
+								<%-- 								<td>${writing.body}</td> --%>
 								<td>${writing.inserted}</td>
 							</tr>
 						</c:forEach>

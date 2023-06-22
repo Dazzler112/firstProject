@@ -194,7 +194,7 @@ public class MemberService {
 
 	public Map<String, Object> getUserWriting(Integer page, String id) {
 		// 페이지 당 행의 수
-		Integer rowPerPage = 10;
+		Integer rowPerPage = 9;
 		// 쿼리 LIMIT 절에 사용할 시작 인덱스
 		Integer startIndex = (page - 1) * rowPerPage;
 		
