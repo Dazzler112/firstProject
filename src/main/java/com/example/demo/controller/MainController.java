@@ -131,10 +131,11 @@ public class MainController {
 	}
 	
 	@PostMapping("update/{id}")
-	public String update(@PathVariable("id") Integer id, Product product) {
+	public String update(@PathVariable("id") Integer id, Product product, @RequestParam ("files") MultipartFile files) throws Exception {
 		System.out.println(id);
 		System.out.println(product);
-		service.updateProduct(product);
+		System.out.println(files.getOriginalFilename());
+		service.updateProduct(product, files);
 		
 		return "redirect:/teamProject/exList/" + id;
 	}
@@ -187,21 +188,12 @@ public class MainController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> like(
-			@RequestBody Like like,
+	public Map<String, Object> like(
+			@RequestBody ProductLike productLike,
 			Authentication authentication) {
 		
+		System.out.println(productLike);
 		System.out.println(authentication);
-		
-		if (authentication == null) {
-			return ResponseEntity
-					.status(403)
-					.body(Map.of("message", "로그인 후 좋아요 클릭 해주세요."));
-		} else {
-			
-			return ResponseEntity
-					.ok()
-					.body(service.like(like, authentication));
-		}
+		return service.productLike(productLike, authentication);
 	}
 }

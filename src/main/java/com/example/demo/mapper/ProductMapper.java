@@ -41,13 +41,21 @@ public interface ProductMapper {
     @Update("UPDATE Product SET CategoryId = #{categoryId}, title = #{title}, body = #{body}, " +
             "price = #{price}, qty = #{qty}, address = #{address} WHERE id = #{id}")
     int updateProduct(Product product);
+    
+    @Update("UPDATE ProductPhoto SET ProductID = #{productId}, ProductTitle = #{productTitle}, ProductId = #{productId}"
+    		+ ", PhotoTitle = #{photoTitle})")
+    int updateProductPhoto(Product product);
 
     @Delete("DELETE FROM ProductPhoto WHERE ProductID = #{productId} AND ProductTitle = #{photoTitle}")
     int deleteFileNameUpdate(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
 
     Product getProductList(Integer id);
 
-    void updateFileName(Integer id, String originalFilename);
+    @Update("""
+    		UPDATE ProductPhoto SET ProductTitle = #{productTitle}
+    		WHERE ProductId = #{id}
+    		""")
+    void updateFileName(Integer id, String productTitle);
 
     @Delete("DELETE FROM Product WHERE id = #{id}")
     int removeForm(Integer id);
@@ -182,19 +190,6 @@ public interface ProductMapper {
          """)
    String allProductPhoto(Integer id);
 
-   @Insert("""
-         INSERT INTO ProductLike
-         VALUES (#{productId}, #{memberId})
-         """)
-   Integer insert(Like like);
-
-   @Delete("""
-         DELETE FROM Product
-         WHERE productId = #{productId}
-            AND memberId = #{memberId}
-         """)
-   Integer delete(Like like);
-
 //    검색을 하기위함
     @Select("""
          <script>
@@ -259,7 +254,12 @@ public interface ProductMapper {
     		LIMIT #{startIndex}, 12
     		""")
 	List<Product> listcustomer(Integer startIndex);
-   
-    
 
+    @Insert("""
+    		INSERT INTO Product (title, body, writer)
+    		VALUES (#title}, #{body}, #{writer})
+    		""")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(Product product);
+   
 }
