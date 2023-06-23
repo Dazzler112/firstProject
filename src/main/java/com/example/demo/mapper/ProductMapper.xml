@@ -97,6 +97,7 @@
         	
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC LIMIT #{startIndex}, 12
     </select>
+    
    <select id="selectLikedProducts" resultType="com.example.demo.domain.Product">
         SELECT * FROM Product WHERE id IN (
         SELECT productId FROM Likes WHERE memberId = #{memberId}
