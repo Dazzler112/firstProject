@@ -144,7 +144,7 @@ public class MemberController {
 	@GetMapping("info")
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void getInfo(String id, Model model) {
-		Member member = service.getUser(id);
+		Member member = service.getUser(id);		
 		model.addAttribute("member", member);
 	}
 
@@ -197,7 +197,6 @@ public class MemberController {
 	@PostMapping("remove")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
-//		System.out.println(member.getPassword());
 		if (ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴가 완료되었습니다.");
 

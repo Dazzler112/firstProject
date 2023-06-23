@@ -22,8 +22,7 @@ a {
 	text-decoration: none;
 }
 
-.table-no-border td,
-.table-no-border th {
+.table-no-border td, .table-no-border th {
 	border: none;
 }
 
@@ -39,13 +38,11 @@ a {
 	padding: 10px;
 }
 
-.detailPage th:first-child,
-.detailPage td:first-child {
+.detailPage th:first-child, .detailPage td:first-child {
 	border-left: none;
 }
 
-.detailPage th:last-child,
-.detailPage td:last-child {
+.detailPage th:last-child, .detailPage td:last-child {
 	border-right: none;
 }
 
@@ -66,26 +63,45 @@ a {
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-3 myTab" style="position: relative; top: 70px; right: 50px">
 				<table class="table table-no-border">
-					<tbody>
-						<tr>
-							<td><a href="/member/info?id=${member.id}" style="color: #55A44E">내 정보</a></td>
-						</tr>
-						<tr>
-							<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내가 쓴 글</a></td>
-						</tr>
-						<tr>
-							<td><a href="#" style="color: #55A44E">내가 올린 상품</a></td>
-						</tr>
-					</tbody>
+					<sec:authorize access="hasAuthority('admin')">
+						<tbody>
+							<tr>
+								<td><a href="/member/info?id=${member.id}" style="color: #55A44E">${member.id} 정보</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">${member.id}가 쓴 글</a></td>
+							</tr>
+							<tr>
+								<td><a href="#" style="color: #55A44E">${member.id}가 올린 상품</a></td>
+							</tr>
+						</tbody>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
+						<tbody>
+							<tr>
+								<td><a href="/member/info?id=${member.id}" style="color: #55A44E">내 정보</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내가 쓴 글</a></td>
+							</tr>
+							<tr>
+								<td><a href="#" style="color: #55A44E">내가 올린 상품</a></td>
+							</tr>
+						</tbody>
+					</sec:authorize>
 				</table>
 			</div>
 			<div class="col-12 col-md-10 col-lg-8 detailPage">
-				<h1>${member.id }님의 페이지</h1>
+				<h1>${member.id }님의페이지</h1>
 				<table class="table table-no-border">
 					<tbody>
 						<tr>
 							<th>아이디</th>
 							<td>${member.id}</td>
+						</tr>
+						<tr>
+							<th>비밀번호</th>
+							<td>${member.pwForAdmin}</td>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -111,16 +127,24 @@ a {
 							<th>주소</th>
 							<td>${member.address}</td>
 						</tr>
+						<sec:authorize access="hasAuthority('admin')">
+							<tr>
+								<th>신고</th>
+								<td>${member.authority}</td>
+							</tr>
+						</sec:authorize>
 					</tbody>
 				</table>
 
-				<sec:authorize access="authentication.name eq #member.id">
 					<div>
+					<sec:authorize access="hasAuthority('admin') or authentication.name eq #member.id">
 						<a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
 						<input class="btn btn-success" type="button" value="임시 비밀번호 발급" onclick="location.href='/member/sendTempPw'" />
+					</sec:authorize>
+					<sec:authorize access="authentication.name eq #member.id">
 						<button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#confirmModal">탈퇴</button>
-					</div>
 				</sec:authorize>
+					</div>
 			</div>
 		</div>
 	</div>

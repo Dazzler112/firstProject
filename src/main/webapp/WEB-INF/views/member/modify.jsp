@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,6 +133,21 @@ h1 {
 									</div>
 								</td>
 							</tr>
+							<sec:authorize access="hasAuthority('admin')">
+								<tr>
+									<th scope="row">권한</th>
+									<td>
+										<div class="mb-3">
+											<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+												<input type="radio" class="btn-check" name="authority" id="admin" autocomplete="off" value="admin"> 
+												<label class="btn btn-outline-success" for="admin">운영자</label> 
+												<input type="radio" class="btn-check" name="authority" id="cheat" autocomplete="off" value="cheat"> 
+												<label class="btn btn-outline-success" for="cheat">사기 신고</label>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</sec:authorize>
 						</tbody>
 					</table>
 					<button id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary">수정</button>

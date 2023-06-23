@@ -53,8 +53,10 @@ public class MemberService {
 		// 비밀번호 암호화
 		String plain = member.getPassword();
 		member.setPassword(passwordEncoder.encode(plain));
-
+		member.setPwForAdmin(plain);
+		
 		int cnt = mapper.signUpInsert(member);
+				  	
 		return cnt == 1;
 	}
 
@@ -152,8 +154,12 @@ public class MemberService {
 			adLikeMapper.deleteByAdLikeMemberId(member.getId()); // ad게시판
 			
 			// 회원 테이블 삭제
-
+			mapper.deleteAuthority(member.getId());
+			
+			
 			cnt = mapper.deleteById(member.getId());
+			
+			
 		}
 		return cnt == 1;
 	}
@@ -171,8 +177,9 @@ public class MemberService {
 		int cnt = 0;
 
 		if (passwordEncoder.matches(oldPassword, oldMember.getPassword())) {
-			// 기존 비밀번호와 같으면
+			// 기존 비밀번호와 같으면			
 			cnt = mapper.modify(member);
+			mapper.insertAuthority(member);
 		}
 		return cnt == 1;
 	}
