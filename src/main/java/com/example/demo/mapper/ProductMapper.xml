@@ -45,7 +45,16 @@
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
        
     </select>
-   <select id="selectAll4" resultType="com.example.demo.domain.Product">
+    
+    <select id="selectAll4"
+      resultType="com.example.demo.domain.Product">
+      SELECT p.*
+      FROM Product p
+      JOIN ProductLike pl ON p.id = pl.productId
+      WHERE pl.memberId = #{memberId}
+   </select>
+   <!-- 예전 좋아요 순 정렬 -->
+   <!-- <select id="selectAll4" resultType="com.example.demo.domain.Product">
    		 SELECT 
   			 p.ID,
         	p.CategoryID,
@@ -66,7 +75,7 @@
         	
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
         
-    </select>
+    </select> -->
    <select id="selectAll5" resultType="com.example.demo.domain.Product">
         SELECT * FROM Product
     </select>
@@ -91,21 +100,31 @@
         	p.body,
         	p.fileName,
         	ph.ProductTitle PhotoTitle
-        	
-        	
-    		
-        	 
-        	
+
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC LIMIT #{startIndex}, 12
     </select>
- 
 
-	<select id="selectAll4"
-		resultType="com.example.demo.domain.Product">
-		SELECT p.*
-		FROM Product p
-		JOIN ProductLike pl ON p.id = pl.productId
-		WHERE pl.memberId = #{memberId}
-	</select>
+    
+   <select id="selectLikedProducts" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product WHERE id IN (
+        SELECT productId FROM Likes WHERE memberId = #{memberId}
+        )
+    </select>
+   <select id="selectProductListPaging" resultType="com.example.demo.domain.Product">
+      SELECT * FROM (
+              select id, title, writer, inserted
+              from product
+      <if test="keyword != null">
+               where title like concat('%', #{keyword}, '%' )
+            </if>
+      order by id desc) as T1
+      limit #{skip}, #{amount}
+   </select>
+   <select id="getTotal" resultType="int">
+      SELECT count(*) FROM product
+      <if test="keyword != null">
+        WHERE title LIKE '%' || #{keyword} || '%'
+    </if>
+   </select>
 
 </mapper>

@@ -1,24 +1,33 @@
 package com.example.demo.service;
 
-import java.io.*;
-import java.time.*;
-import java.util.*;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.example.demo.controller.*;
-import com.example.demo.domain.*;
-import com.example.demo.mapper.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.domain.Notice;
+import com.example.demo.domain.Product;
+import com.example.demo.domain.ProductLike;
+import com.example.demo.mapper.ProductLikeMapper;
+import com.example.demo.mapper.ProductMapper;
+
 
 import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.services.s3.*;
-import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 public class ProductService {
@@ -26,12 +35,14 @@ public class ProductService {
 	@Autowired
 	private ProductMapper mapper;
 
+
 	@Autowired
 	private ProductLikeMapper likeMapper;
-	
+
 	@Autowired
 	private S3Client s3;
 
+	@Autowired
 	private ProductMapper productMapper;
 
 	@Autowired
@@ -42,25 +53,29 @@ public class ProductService {
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
+
 	public List<Notice> listBoard1(String title, LocalDateTime inserted, String body, String writer) {
 		return mapper.selectAll1(title, inserted, body, writer);
 	}
 
 
-   public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted, String address) {
-      return mapper.selectAll2(id, photoTitle ,title, price, inserted, address);
-   }
-
-   public List<Product> listBoard3(Integer id, String photoTitle, Integer price,  String title, LocalDateTime inserted, String address,
-         Integer likes) {
-      return mapper.selectAll3(id, photoTitle,title, price, inserted, address, likes);
-   }
+	public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
+			String address) {
+		return mapper.selectAll2(id, photoTitle, title, price, inserted, address);
+	}
 
 
-	public List<Product> listBoard4(String memberId, String title, Integer price, String title2, LocalDateTime inserted,
+	public List<Product> listBoard3(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
 			String address, Integer like) {
+		return mapper.selectAll3(id, photoTitle, title, price, inserted, address, like);
+	}
 
-		return mapper.selectAll4(memberId, price, title, inserted, address, like);
+	public List<Product> listBoard4( Integer id, String photoTitle, String memberId, String title, String title2, Integer price,
+			LocalDateTime inserted, String address, Integer like) {
+
+
+		return mapper.selectAll4(id, photoTitle, memberId, title, price, inserted, address, like);
+
 	}
 
 	public List<Product> listBoard5(String statusCode, String writer, String title, LocalDateTime inserted,
@@ -72,16 +87,17 @@ public class ProductService {
 	public List<Product> listBoard6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
 			Integer likes) {
 
+
 		return mapper.selectAll6(title, price, inserted, price, price, likes);
 	}
 
 //   카테고리 리스트로 에서 사용할 수 있는 서비스
 
-   public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price, String address,
-         LocalDateTime inserted) {
-	   return mapper.selectAll7(startIndex,categoryTitle, title, price, address, inserted);
-	   
-   }
+	public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price,
+			String address, LocalDateTime inserted) {
+		return mapper.selectAll7(startIndex, categoryTitle, title, price, address, inserted);
+
+	}
 
 
 	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
@@ -95,23 +111,11 @@ public class ProductService {
 		return mapper.selectById(id);
 	}
 
-	public boolean updateProduct(Product product, MultipartFile file) throws Exception {
 
+	
 
-		if(file != null && file.getSize() > 0) {
-		
-			productMapper.updateFileName(product.getId(), file.getOriginalFilename());
-			String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+	public boolean updateProduct(Product product) {
 
-			PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
-					.acl(ObjectCannedACL.PUBLIC_READ).build();
-
-			RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
-
-			s3.putObject(por, rb);
-		}
-		
-		
 		return mapper.updateProduct(product) > 0;
 	}
 
@@ -126,6 +130,24 @@ public class ProductService {
 //       return ProrductID != null;
 //   }
 
+
+	public boolean updateProduct(Product product, MultipartFile file) throws Exception {
+
+		if (file != null && file.getSize() > 0) {
+
+			productMapper.updateFileName(product.getId(), file.getOriginalFilename());
+			String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+
+			PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+
+			RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+
+			s3.putObject(por, rb);
+		}
+
+		return mapper.updateProduct(product) > 0;
+	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public boolean addProduct(Product product, MultipartFile[] files, Integer category) throws Exception {
@@ -215,6 +237,7 @@ public class ProductService {
 
 		return "product/productget";
 	}
+
 
 	public List<Product> productListService() {
 		List<Product> list = mapper.allProduct();

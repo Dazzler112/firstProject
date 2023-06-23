@@ -62,17 +62,29 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="container-lg">
-			<br> <br>
-			<h2>내가 찜한 상품</h2>
-			<table class="table">
-				<thead>
+
+	<div class="container-lg">
+		<br> <br>
+		<h2>내가 찜한 상품</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>가격</th>
+					<th>제목</th>
+					<th>주소</th>
+					<th>올린 시간</th>
+					<th>좋아요 개수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${productList4}" var="product">
 					<tr>
-						<th>가격</th>
-						<th>제목</th>
-						<th>주소</th>
-						<th>올린 시간</th>
-						<th>좋아요 개수</th>
+						<td>${product.price}</td>
+						<td><a href="/board/id/${product.id}">${product.title}</a></td>
+						<td>${product.address}</td>
+						<td>${product.inserted}</td>
+						<td>${product.like}</td>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -92,9 +104,10 @@
 			<h2 style="color: #55A44E; margin-bottom: 40px;">인기상품</h2>
 			<div class="box">
 
-				<div class="clear"></div>
 
-				<c:forEach items="${productList4}" var="product"  begin="0" end="9" step="1">
+				<div class="clear"></div> <!-- productList4 일수도 있음 -->
+				<c:forEach items="${productList3}" var="product"  begin="0" end="9" step="1">
+
 					<ul class="items">
 						<a href="/teamProject/exList/${product.id }">
 							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${product.id }/${product.photoTitle}" alt="" />

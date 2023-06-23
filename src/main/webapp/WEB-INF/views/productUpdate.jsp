@@ -49,6 +49,13 @@
                             <label for="titleInput" class="form-label">제목</label>
                             <input id="titleInput" class="form-control" type="text" name="title" value="${product.title}" />
                         </div>
+                        
+                        <!-- 파일 출력 -->
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <img class="img-thumbnail img-fluid" src="${bucketUrl}/${product.id}/${product.photoTitle}" alt="" />
+                            </div>
+                        </div>
 
 						
                         
