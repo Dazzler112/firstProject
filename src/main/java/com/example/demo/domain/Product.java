@@ -19,6 +19,7 @@ public class Product {
    private Integer views;
    private String address;
    private Integer likes;
+   private Integer like;
    private String content;
    private String statusCode;
    private String writer;
@@ -26,5 +27,10 @@ public class Product {
    private String keyword;
    private String categoryName;
    private String photoTitle;
+   
+   private Integer likeCount;
+   private Integer fileCount;
+   
+   private boolean liked;
 
 }

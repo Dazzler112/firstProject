@@ -8,10 +8,23 @@ import com.example.demo.domain.*;
 public interface MemberMapper {
 
 	@Insert("""
-			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email, addressSggNm)
-			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email}, #{addressSggNm})
+			INSERT INTO Member(id, password, nickName, address, name, gender, phoneNum, email, addressSggNm, pwForAdmin)
+			VALUES(#{id}, #{password}, #{nickName}, #{address}, #{name}, #{gender}, #{phoneNum}, #{email}, #{addressSggNm}, #{pwForAdmin})
 			""")
 	Integer signUpInsert(Member member);
+
+	@Insert("""
+			INSERT INTO MemberAuthority
+			VALUES(#{id}, #{authority})
+			""")
+	void insertAuthority(Member member);
+	
+	@Update("""
+			UPDATE MemberAuthority
+			SET authority = #{authority}
+			WHERE memberId = #{id};
+						""")
+	void updateAuthority(Member member);
 
 	@Select("""
 			SELECT *
@@ -42,23 +55,29 @@ public interface MemberMapper {
 	Member selectByNickName(String nickName);
 
 	@Delete("""
-			DELETE FROM Member
+			DELETE FROM MemberAuthority
+			WHERE memberId = #{id}
+			""")
+	void deleteAuthority(String id);
+
+	@Delete("""
+			DELETE FROM Member 
 			WHERE id = #{id}
 			""")
 	Integer deleteById(String id);
 
 	@Update("""
 			<script>
-			UPDATE Member
+			UPDATE Member m LEFT JOIN MemberAuthority ma ON m.id = ma.memberId
 			SET
 			 	<if test="password neq null and password neq ''">
 			 		password = #{password},
 			 	</if>
 
-			 	name = #{name},
-				phoneNum = #{phoneNum},
-				nickName = #{nickName},
-				address = #{address}
+			 	m.name = #{name},
+				m.phoneNum = #{phoneNum},
+				m.nickName = #{nickName},
+				m.address = #{address}
 			WHERE id = #{id}
 			</script>
 			""")
@@ -183,6 +202,8 @@ public interface MemberMapper {
 			LIMIT #{startIndex}, #{rowPerPage};
 			""")
 	List<myWrite> getUserWriting(String id, Integer startIndex, Integer rowPerPage);
+
+
 
 
 }

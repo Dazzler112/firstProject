@@ -73,13 +73,9 @@ function listComment() {
 	const boardId = $("#boardIdText").text().trim();
 	const depth = $("#depthText").val();
 	const data = { boardId, depth };
-	$.ajax("/comment/updateShape", {
-		method: "post",
-		contentType: "application/json",
-		data: JSON.stringify(data),
-		complete: function() {
 			$.ajax("/comment/list?board=" + boardId, {
 				method: "get",
+				contentType: "application/json",
 				success: function(comments) {
 					$("#commentListContainer").empty();
 					for (const comment of comments) {
@@ -184,8 +180,7 @@ function listComment() {
 
 				}
 			});
-		}
-	});
+		
 }
 // 수정 버튼 상호작용 (수정 부분 추가)
 $("#commentListContainer").on("click", ".commentUpdateButton", function() {

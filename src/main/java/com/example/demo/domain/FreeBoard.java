@@ -25,5 +25,7 @@ public class FreeBoard {
 	private Integer commentCount;
 	
 	private List<String> categoryList;
-	private List<String> addressSggNm;
+	private String addressSggNm;
+	private String sort;
+	
 }

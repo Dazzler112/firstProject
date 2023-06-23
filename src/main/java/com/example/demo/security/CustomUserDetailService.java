@@ -27,9 +27,10 @@ public class CustomUserDetailService implements UserDetailsService {
 		UserDetails user = User.builder()
 				.username(member.getId())
 				.password(member.getPassword())
-				.authorities(member.getAuthority().stream().map(SimpleGrantedAuthority::new).toList())
+//				.authorities(member.getAuthority().stream().map(SimpleGrantedAuthority::new).toList())							
+				.authorities(Collections.singletonList(new SimpleGrantedAuthority(member.getAuthority())))
 				.build();
-
+		
 		return user;
 	}
 

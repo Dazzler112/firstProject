@@ -35,8 +35,6 @@ public class MainController {
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "likes", defaultValue = "") Integer likes){
-		
-		
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(id, photoTitle,price, title, inserted, address);
@@ -54,6 +52,7 @@ public class MainController {
 
 	@GetMapping("list2")
 	public String list2(Model model,
+
 			@RequestParam(value = "id", defaultValue = "")Integer id,
 			@RequestParam(value = "photoTitle", defaultValue = "") String photoTitle,
 			@RequestParam(value = "title", defaultValue = "") String title,
@@ -74,6 +73,7 @@ public class MainController {
 		model.addAttribute("productList4", productList4);
 
 		return "mainList2";
+
 	}
 
 	@GetMapping("/exList/{id}")
@@ -84,7 +84,7 @@ public class MainController {
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category)  {
 		List<Product> list = service.productListService1(id);
-
+		System.out.println(list);
 		
 		String productPhoto = service.getProductPhoto(id);
 		
@@ -106,7 +106,7 @@ public class MainController {
 
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
-			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
+			@RequestParam("category") Integer category, Product product, RedirectAttributes rttr, Model model,
 			Authentication authentication)
 					throws Exception {
 			System.out.println(authentication.getName());
@@ -136,10 +136,11 @@ public class MainController {
 	}
 	
 	@PostMapping("update/{id}")
-	public String update(@PathVariable("id") Integer id, Product product) {
+	public String update(@PathVariable("id") Integer id, Product product, @RequestParam ("files") MultipartFile files) throws Exception {
 		System.out.println(id);
 		System.out.println(product);
-		service.updateProduct(product);
+		System.out.println(files.getOriginalFilename());
+		service.updateProduct(product, files);
 		
 		return "redirect:/teamProject/exList/" + id;
 	}
@@ -192,21 +193,17 @@ public class MainController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> like(
-			@RequestBody Like like,
+	public ResponseEntity<Map<String,Object>> productLike(
+			@RequestBody ProductLike productLike,
 			Authentication authentication) {
-		
-		System.out.println(authentication);
-		
-		if (authentication == null) {
+		if(authentication ==null) {
 			return ResponseEntity
 					.status(403)
-					.body(Map.of("message", "로그인 후 좋아요 클릭 해주세요."));
-		} else {
-			
+					.body(Map.of("message","로그인을 해주세요."));
+		}else {
 			return ResponseEntity
 					.ok()
-					.body(service.like(like, authentication));
+					.body(service.productLike(productLike,authentication));
 		}
 	}
 }

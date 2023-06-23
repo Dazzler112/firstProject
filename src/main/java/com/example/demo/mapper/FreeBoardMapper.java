@@ -53,8 +53,8 @@ public interface FreeBoardMapper {
 	FreeBoard getBoardList(Integer id);
 	
 	@Insert("""
-			INSERT INTO Board(boardCategory,title,body,writer)
-			VALUES(#{boardCategory} ,#{title}, #{body}, #{writer})
+			INSERT INTO Board(boardCategory,title,body,writer,sort)
+			VALUES(#{boardCategory} ,#{title}, #{body}, #{writer},#{sort})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertForm(FreeBoard board);
@@ -151,7 +151,7 @@ public interface FreeBoardMapper {
 		FROM Board b LEFT JOIN Comment c ON b.id = c.boardId
 		WHERE b.id = #{id}
 		GROUP BY
-		b.id, b.title, b.writer, b.inserted, b.boardCategory
+		b.id, b.title, b.writer, b.inserted, b.sort, b.boardCategory
 			""")
 	@ResultMap("replyCount")
 	List<FreeBoard> replyCounting(Integer id);
@@ -165,7 +165,8 @@ public interface FreeBoardMapper {
            , b.writer
            , b.inserted
            , COUNT(p.id) fileCount
-           , b.boardCategory,
+           , b.boardCategory
+           ,
            (SELECT addressSggNm 
             FROM Member 
             WHERE id = b.writer)  

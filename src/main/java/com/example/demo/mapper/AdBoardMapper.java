@@ -17,7 +17,7 @@ public interface AdBoardMapper {
 	List<AdBoard> selectAll();
 
 	@Select("""
-			SELECT 
+			SELECT
 				b.id,
 				b.title,
 				b.body,
@@ -25,17 +25,22 @@ public interface AdBoardMapper {
 				b.writer,
 				b.region,
 				f.fileName,
+
+				(SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
+
 				(SELECT COUNT(*)
 					FROM AdBoardLike
 					WHERE boardId = b.id) likeCount,
 				(SELECT COUNT(*)
 			     	FROM AdComment
 			     	WHERE boardId = b.id) commentCount
-				FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId			
+				FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
 				WHERE b.id = #{id}
 			""")
-	
-	
+
 	@ResultMap("boardResultMap")
 	AdBoard selectById(Integer id);
 
@@ -56,8 +61,10 @@ public interface AdBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO AdBoard (title, body, writer, region, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
+
+			INSERT INTO AdBoard (title, body, writer, region, category, sort)
+			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category}, #{sort} )
+
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(AdBoard board);
@@ -90,9 +97,9 @@ public interface AdBoardMapper {
 	@Select("""
 			<script>
 			<bind name="pattern" value="'%' + search + '%'" />
-			SELECT COUNT(*) 
+			SELECT COUNT(*)
 			FROM AdBoard
-			
+
 			<where>
 				<if test="(type eq 'all') or (type eq 'title')">
 				   title  LIKE #{pattern}
@@ -104,7 +111,7 @@ public interface AdBoardMapper {
 				OR writer LIKE #{pattern}
 				</if>
 			</where>
-			
+
 			</script>
 			""")
 	Integer countAll(String search, String type);
@@ -118,35 +125,45 @@ public interface AdBoardMapper {
 				b.writer,
 				b.inserted,
 				b.category,
-				b.region,
+				(SELECT addressSggNm
+				FROM Member
+				WHERE id = b.writer)
+				addressSggNm,
 				COUNT(f.id) fileCount,
+
+				 (SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
 			    (SELECT COUNT(*) 
 			     FROM AdBoardLike 
+
 			     WHERE boardId = b.id) likeCount,
 			    (SELECT COUNT(*)
 			     FROM AdComment
 			     WHERE boardId = b.id) commentCount
-			     
+
 			FROM AdBoard b LEFT JOIN AdFileName f ON b.id = f.boardId
+			WHERE (b.category = #{category} OR #{category} IS NULL)
+
 			
-			<where>
-				<if test="(type eq 'all') or (type eq 'title')">
-				   title  LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'body')">
-				OR body   LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'writer')">
-				OR writer LIKE #{pattern}
-				</if>
-			</where>
-			
+				 <if test="type eq 'title'">
+			         AND title LIKE #{pattern}
+			     </if>
+			     <if test="type eq 'body'">
+			         AND body LIKE #{pattern}
+			     </if>
+			     <if test="type eq 'writer'">
+			         AND writer LIKE #{pattern}
+			     </if>
+
 			GROUP BY b.id
 			ORDER BY b.id DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
-	List<AdBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+	@ResultMap("pagingMap")
+	List<AdBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type, String category);
 
 	@Select("""
 			SELECT id
@@ -155,18 +172,4 @@ public interface AdBoardMapper {
 			""")
 	List<Integer> selectIdByWriter(String writer);
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

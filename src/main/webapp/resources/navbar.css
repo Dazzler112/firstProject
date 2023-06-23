@@ -182,10 +182,11 @@
   right: 10px;
 }
 
+
 .show1{
   display: block; /* show 클래스가 추가되면 메뉴를 보이도록 설정 */
   width:100px;
-}
+} 
 .dropdown-toggle {
   background-color: transparent; /* 버튼의 배경색을 투명하게 설정 */
   border: none; /* 버튼의 주위 태두리를 없애는 속성 */
