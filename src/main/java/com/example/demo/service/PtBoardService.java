@@ -144,7 +144,7 @@ public class PtBoardService {
 		return cnt == 1;
 	}
 
-	public Map<String, Object> listBoard(Integer page, String search, String type) {
+	public Map<String, Object> listBoard(Integer page, String search, String type, String category) {
 		
 				
 				// 페이지당 행의 수
@@ -175,7 +175,7 @@ public class PtBoardService {
 				pageInfo.put("lastPageNum", lastPageNumber);
 
 				// 게시물 목록
-				List<PtBoard> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
+				List<PtBoard> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type, category);
 
 				return Map.of("pageInfo", pageInfo,
 						"ptBoardList", list);

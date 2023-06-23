@@ -117,6 +117,16 @@
 				<div class="mb-5">
 					<label for="fileInput" class="form-label">사진 첨부</label> <input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 				</div>
+
+			<div class="mid">
+				<span>카테고리</span>
+				<select class="cat" name="category">
+					<option value="구인해요">구인해요</option>
+					<option value="구직해요">구직해요</option>
+				</select>
+				<span class="reg">지역</span>
+				<input type="text" name="addressSggNm" value="${board.addressSggNm}" readonly>
+
 			</div>
 			<div class="butt">
 				<button type="submit" class="btn btn-dark">등록</button>
