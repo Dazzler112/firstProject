@@ -35,7 +35,7 @@ public interface FreeCommentMapper {
 			Comment 
 			WHERE id = #{id}
 			""")
-	FreeComment selectById(Integer id, Integer params);
+	FreeComment selectById(Integer id);
 
 	@Update("""
 			UPDATE Comment
