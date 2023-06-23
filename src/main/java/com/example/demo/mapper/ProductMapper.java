@@ -167,11 +167,15 @@ public interface ProductMapper {
 
 			price,
 			
-			body
+			body,
+			
+			categoryId,
+			
+			(select CategoryName from Category WHERE CategoryId = p.CategoryId) CategoryName
 
 			FROM
 
-			Product
+			Product p
 
 			WHERE id=#{id}
 
@@ -264,5 +268,7 @@ public interface ProductMapper {
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(Product product);
+
+	String getCategoryName(Integer categoryId);
 
 }

@@ -28,4 +28,5 @@
 		resultType="com.example.demo.domain.Product">
 		SELECT * FROM Product ORDER BY ID DESC
 	</select>
+	
 </mapper>

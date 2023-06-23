@@ -101,7 +101,7 @@ public class MainController {
 
 	@PostMapping("mainAdd")
 	public String addForm(@RequestParam("files") MultipartFile[] files,
-			@RequestParam("category") String category, Product product, RedirectAttributes rttr, Model model,
+			@RequestParam("category") Integer category, Product product, RedirectAttributes rttr, Model model,
 			Authentication authentication)
 					throws Exception {
 			System.out.println(authentication.getName());

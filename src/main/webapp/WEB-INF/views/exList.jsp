@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 목록</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+	integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,8 +32,7 @@
 
 			<div>
 				<h1>
-					<span id="likeIcon"> <i class="fa-regular fa-heart">
-					</i>
+					<span id="likeIcon"> <i class="fa-regular fa-heart"> </i>
 					</span> <span id="likeNumber"> ${product.likeCount } </span>
 				</h1>
 			</div>
@@ -43,28 +45,23 @@
 		</div>
 		<thead>
 			<tr>
-				<th>현재 상태</th>
+				<th>카테고리</th>
 				<th>제목</th>
 				<th>글쓴이</th>
 				<th>올린 날짜</th>
-				<th>조회</th>
-				<th>찜</th>
 				<th>가격</th>
 				<th>수정</th>
 				<th>삭제</th>
-			</tr>
+			</tr> 
 		</thead>
 		<tbody>
-			<%-- ${product[0].title} --%>
 			<c:forEach items="${list}" var="product">
 				<tr>
 					<td style="display: none;">${product.id}</td>
-					<td>${product.statusCode}</td>
+					<td>${product.categoryName}</td>
 					<td>${product.title}</td>
 					<td>${product.memberId}</a></td>
 					<td>${product.inserted}</td>
-					<td>${product.views}</td>
-					<td>${product.likes}</td>
 					<td>${product.price}</td>
 					<td><a href="/teamProject/update/${product.id}">수정</a></td>
 					<td>
@@ -101,7 +98,9 @@
 	</table>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
+		integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/product/like.js"></script>

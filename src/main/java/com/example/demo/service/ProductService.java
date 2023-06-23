@@ -121,7 +121,8 @@ public class ProductService {
 //   }
 
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addProduct(Product product, MultipartFile[] files, String category) throws Exception {
+	public boolean addProduct(Product product, MultipartFile[] files, Integer category) throws Exception {
+		product.setCategoryId(category);
 		Integer ProrductID = productMapper.insertForm(product);
 
 		System.out.println(product);
