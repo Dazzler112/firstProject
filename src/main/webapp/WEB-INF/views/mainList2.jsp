@@ -74,13 +74,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${likedProducts}" var="product">
+				<c:forEach items="${productList4}" var="product">
 					<tr>
 						<td>${product.price}</td>
 						<td><a href="/board/id/${product.id}">${product.title}</a></td>
 						<td>${product.address}</td>
 						<td>${product.inserted}</td>
-						<td>${product.likes}</td>
+						<td>${product.like}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -89,8 +89,8 @@
 		<h2 style="color:#55A44E; margin-bottom:40px; ">인기상품</h2>
 			<div class="box">
 
-				<div class="clear"></div>
-				<c:forEach items="${productList4}" var="product"  begin="0" end="9" step="1">
+				<div class="clear"></div> <!-- productList4 일수도 있음 -->
+				<c:forEach items="${productList3}" var="product"  begin="0" end="9" step="1">
 					<ul class="items">
 						<a href="/teamProject/exList/${product.id }">
 							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${product.id }/${product.photoTitle}" alt="" />

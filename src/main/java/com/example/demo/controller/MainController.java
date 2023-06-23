@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.domain.Like;
 import com.example.demo.domain.Notice;
 import com.example.demo.domain.Product;
 import com.example.demo.domain.ProductLike;
@@ -65,16 +64,15 @@ public class MainController {
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "like", defaultValue = "") Integer like,
-			@RequestParam(value = "memberId", defaultValue = "") String memberId) {
+			@RequestParam(value = "memberId", defaultValue = "") String memberId,
+			Authentication authentication	) {
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
-		List<Product> productList4 = service.listBoard4(id, photoTitle, memberId, title, price, inserted, address,
-				like);
-
 		List<Product> productList3 = service.listBoard3(id, photoTitle, price, title, inserted, address, like);
+		List<Product> productList4 = service.listBoard4(id, authentication.getName(), photoTitle, memberId, title, price, inserted, address,like);
 
 		model.addAttribute("notice", noticeList);
-
+		model.addAttribute("productList3", productList3);
 		model.addAttribute("productList4", productList4);
 
 		return "mainList2";
@@ -135,10 +133,11 @@ public class MainController {
 	}
 
 	@PostMapping("update/{id}")
-	public String update(@PathVariable("id") Integer id, Product product) {
+	public String update(@PathVariable("id") Integer id, Product product, @RequestParam ("files") MultipartFile files) throws Exception {
 		System.out.println(id);
 		System.out.println(product);
-		service.updateProduct(product);
+		System.out.println(files.getOriginalFilename());
+		service.updateProduct(product, files);
 
 		return "redirect:/teamProject/exList/" + id;
 	}

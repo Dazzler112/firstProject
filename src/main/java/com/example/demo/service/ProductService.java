@@ -30,79 +30,82 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 public class ProductService {
 
-   @Autowired
-   private ProductMapper mapper;
-   
-   @Autowired
-   private ProductLikeMapper likeMapper;
+	@Autowired
+	private ProductMapper mapper;
 
-   @Autowired
-   private S3Client s3;
-   
-   @Autowired
-   private ProductMapper productMapper;
+	@Autowired
+	private ProductLikeMapper likeMapper;
 
-   @Autowired
-   public ProductService(ProductMapper productMapper) {
-      this.productMapper = productMapper;
-   }
+	@Autowired
+	private S3Client s3;
 
-   @Value("${aws.s3.bucketName}")
-   private String bucketName;
+	@Autowired
+	private ProductMapper productMapper;
 
-   public List<Notice> listBoard1(String title, LocalDateTime inserted, String body, String writer) {
-      return mapper.selectAll1(title, inserted, body, writer);
-   }
+	@Autowired
+	public ProductService(ProductMapper productMapper) {
+		this.productMapper = productMapper;
+	}
 
-   public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted, String address) {
-      return mapper.selectAll2(id, photoTitle ,title, price, inserted, address);
-   }
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
 
-   public List<Product> listBoard3(Integer id, String photoTitle, Integer price,  String title, LocalDateTime inserted, String address,
-         Integer like) {
-      return mapper.selectAll3(id, photoTitle, title, price, inserted, address, like);
-   }
+	public List<Notice> listBoard1(String title, LocalDateTime inserted, String body, String writer) {
+		return mapper.selectAll1(title, inserted, body, writer);
+	}
 
-   public List<Product> listBoard4(Integer id, String photoTitle, String memberId, String title, Integer price, LocalDateTime inserted,
-	         String address, Integer like) {
-	   
-	      return mapper.selectAll4(id, photoTitle, memberId, title, price, inserted, address, like);
-	     
-	   }
+	public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
+			String address) {
+		return mapper.selectAll2(id, photoTitle, title, price, inserted, address);
+	}
 
-   public List<Product> listBoard5(String statusCode, String writer, String title, LocalDateTime inserted,
-         Integer views, Integer likes, Integer price, String content) {
+	public List<Product> listBoard3(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
+			String address, Integer like) {
+		return mapper.selectAll3(id, photoTitle, title, price, inserted, address, like);
+	}
 
-      return mapper.selectAll5(statusCode, writer, title, inserted, views, likes, price, content);
-   }
+	public List<Product> listBoard4( Integer id, String photoTitle, String memberId, String title, String title2, Integer price,
+			LocalDateTime inserted, String address, Integer like) {
 
-   public List<Product> listBoard6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
-         Integer likes) {
+		return mapper.selectAll4(id, photoTitle, memberId, title, price, inserted, address, like);
 
-      return mapper.selectAll6(title, price, inserted, price, price, likes);
-   }
+	}
+
+	public List<Product> listBoard5(String statusCode, String writer, String title, LocalDateTime inserted,
+			Integer views, Integer likes, Integer price, String content) {
+
+		return mapper.selectAll5(statusCode, writer, title, inserted, views, likes, price, content);
+	}
+
+	public List<Product> listBoard6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
+			Integer likes) {
+
+		return mapper.selectAll6(title, price, inserted, price, price, likes);
+	}
 
 //   카테고리 리스트로 에서 사용할 수 있는 서비스
-   public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price, String address,
-         LocalDateTime inserted) {
-	   return mapper.selectAll7(startIndex,categoryTitle, title, price, address, inserted);
-	   
-   }
+	public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price,
+			String address, LocalDateTime inserted) {
+		return mapper.selectAll7(startIndex, categoryTitle, title, price, address, inserted);
 
-   public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
-         Integer price, Integer views, Integer likes, String modi, String memberId, Integer ProrductID) {
+	}
 
-      return mapper.selectExList(statusCode, title, inserted, body, writer, price, views, likes, modi, memberId,
-            ProrductID);
-   }
+	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
+			Integer price, Integer views, Integer likes, String modi, String memberId, Integer ProrductID) {
 
-   public Product getProduct(Integer id) {
-      return mapper.selectById(id);
-   }
+		return mapper.selectExList(statusCode, title, inserted, body, writer, price, views, likes, modi, memberId,
+				ProrductID);
+	}
 
-   public boolean updateProduct(Product product) {
-      return mapper.updateProduct(product) > 0;
-   }
+	public Product getProduct(Integer id) {
+		return mapper.selectById(id);
+	}
+
+	
+
+	public boolean updateProduct(Product product) {
+		return mapper.updateProduct(product) > 0;
+	}
 
 //   @Transactional(rollbackFor = Exception.class)
 //   public boolean addProcess(Product product, MultipartFile[] files, String category) throws Exception {
@@ -115,173 +118,172 @@ public class ProductService {
 //       return ProrductID != null;
 //   }
 
-   public boolean updateProduct(Product product, MultipartFile file) throws Exception {
+	public boolean updateProduct(Product product, MultipartFile file) throws Exception {
 
-	      if(file != null && file.getSize() > 0) {
-	      
-	         productMapper.updateFileName(product.getId(), file.getOriginalFilename());
-	         String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+		if (file != null && file.getSize() > 0) {
 
-	         PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
-	               .acl(ObjectCannedACL.PUBLIC_READ).build();
+			productMapper.updateFileName(product.getId(), file.getOriginalFilename());
+			String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
 
-	         RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+			PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
 
-	         s3.putObject(por, rb);
-	      }
-	      
-	      
-	      return mapper.updateProduct(product) > 0;
-	   }
-   
-   @Transactional(rollbackFor = Exception.class)
-   public boolean addProduct(Product product, MultipartFile[] files, Integer category) throws Exception {
-      product.setCategoryId(category);
-      Integer ProrductID = productMapper.insertForm(product);
+			RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
 
-      System.out.println(product);
-      if (ProrductID != null) {
-         for (MultipartFile file : files) {
-            if (file.getSize() > 0) {
-               productMapper.insertFileName(product.getId(), file.getOriginalFilename());
-               String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+			s3.putObject(por, rb);
+		}
 
-               PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
-                     .acl(ObjectCannedACL.PUBLIC_READ).build();
+		return mapper.updateProduct(product) > 0;
+	}
 
-               RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+	@Transactional(rollbackFor = Exception.class)
+	public boolean addProduct(Product product, MultipartFile[] files, Integer category) throws Exception {
+		product.setCategoryId(category);
+		Integer ProrductID = productMapper.insertForm(product);
 
-               s3.putObject(por, rb);
-            }
-         }
+		System.out.println(product);
+		if (ProrductID != null) {
+			for (MultipartFile file : files) {
+				if (file.getSize() > 0) {
+					productMapper.insertFileName(product.getId(), file.getOriginalFilename());
+					String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
 
-         return true;
-      }
+					PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
+							.acl(ObjectCannedACL.PUBLIC_READ).build();
 
-      return false;
-   }
+					RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
 
-   @Transactional()
-   public boolean updateProcess(Product product, List<String> removeProductPhoto, MultipartFile[] addFile)
-         throws Exception {
+					s3.putObject(por, rb);
+				}
+			}
 
-      if (removeProductPhoto != null && !removeProductPhoto.isEmpty()) {
-         for (String fileName : removeProductPhoto) {
-            String objectKey = "teamprj/" + product.getId() + "/" + fileName;
-            DeleteObjectRequest pp = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
+			return true;
+		}
 
-            s3.deleteObject(pp);
+		return false;
+	}
 
-            mapper.deleteFileNameUpdate(product.getId(), fileName);
-         }
-      }
+	@Transactional()
+	public boolean updateProcess(Product product, List<String> removeProductPhoto, MultipartFile[] addFile)
+			throws Exception {
 
-      if (addFile != null) {
+		if (removeProductPhoto != null && !removeProductPhoto.isEmpty()) {
+			for (String fileName : removeProductPhoto) {
+				String objectKey = "teamprj/" + product.getId() + "/" + fileName;
+				DeleteObjectRequest pp = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
 
-         for (MultipartFile file : addFile) {
-            if (file.getSize() > 0) {
-               mapper.updateFileName(product.getId(), file.getOriginalFilename());
+				s3.deleteObject(pp);
 
-               String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
-               PutObjectRequest bb = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ).bucket(bucketName)
-                     .key(objectKey).build();
+				mapper.deleteFileNameUpdate(product.getId(), fileName);
+			}
+		}
 
-               RequestBody pb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
-               s3.putObject(bb, pb);
-            }
-         }
-      }
-      int cnt = mapper.updateProduct(product);
-      return cnt == 1;
-   }
+		if (addFile != null) {
 
-   public boolean removeProcess(Integer id) {
+			for (MultipartFile file : addFile) {
+				if (file.getSize() > 0) {
+					mapper.updateFileName(product.getId(), file.getOriginalFilename());
 
-      List<String> productPhoto = mapper.selectFileByProductId(id);
+					String objectKey = "teamPrj/" + product.getId() + "/" + file.getOriginalFilename();
+					PutObjectRequest bb = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ).bucket(bucketName)
+							.key(objectKey).build();
 
-      mapper.removeFileByProductId(id);
+					RequestBody pb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+					s3.putObject(bb, pb);
+				}
+			}
+		}
+		int cnt = mapper.updateProduct(product);
+		return cnt == 1;
+	}
 
-      for (String productPhotos : productPhoto) {
-         String objectKey = "teamPrj/" + id + "/" + productPhotos;
-         DeleteObjectRequest pp = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
+	public boolean removeProcess(Integer id) {
 
-         s3.deleteObject(pp);
-      }
+		List<String> productPhoto = mapper.selectFileByProductId(id);
 
-      int cnt = mapper.removeForm(id);
-      return cnt == 1;
-   }
+		mapper.removeFileByProductId(id);
 
-   @GetMapping("/id/{id}")
-   public String get(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+		for (String productPhotos : productPhoto) {
+			String objectKey = "teamPrj/" + id + "/" + productPhotos;
+			DeleteObjectRequest pp = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
 
-      List<Product> list = mapper.getCountReply(id);
-      Product product = mapper.getProcess(id, authentication);
+			s3.deleteObject(pp);
+		}
 
-      model.addAttribute("getProduct", product);
+		int cnt = mapper.removeForm(id);
+		return cnt == 1;
+	}
 
-      return "product/productget";
-   }
+	@GetMapping("/id/{id}")
+	public String get(@PathVariable("id") Integer id, Model model, Authentication authentication) {
 
-   public List<Product> productListService() {
-      List<Product> list = mapper.allProduct();
-      return list;
-   }
+		List<Product> list = mapper.getCountReply(id);
+		Product product = mapper.getProcess(id, authentication);
+
+		model.addAttribute("getProduct", product);
+
+		return "product/productget";
+	}
+
+	public List<Product> productListService() {
+		List<Product> list = mapper.allProduct();
+		return list;
+	}
 
 //   상품을 들어갔을때 상품 id하나만 나오기
-   public List<Product> productListService1(Integer id) {
-      List<Product> list = mapper.allProduct1(id);
-      Integer count = likeMapper.countByProductId(id);
-      list.forEach(e -> e.setLikeCount(count));
-      return list;
-   }
+	public List<Product> productListService1(Integer id) {
+		List<Product> list = mapper.allProduct1(id);
+		Integer count = likeMapper.countByProductId(id);
+		list.forEach(e -> e.setLikeCount(count));
+		return list;
+	}
 
-   /*
-    * public List<Product> productCategory(String productCategory){ List<Product>
-    * list = mapper.productCategoryList(productCategory); return list;
-    * 
-    * }
-    */
+	/*
+	 * public List<Product> productCategory(String productCategory){ List<Product>
+	 * list = mapper.productCategoryList(productCategory); return list;
+	 * 
+	 * }
+	 */
 
-   public String getProductPhoto(Integer id) {
-      String list = mapper.allProductPhoto(id);
-      return list;
-   }
+	public String getProductPhoto(Integer id) {
+		String list = mapper.allProductPhoto(id);
+		return list;
+	}
 
-   public Map<String, Object> productLike(ProductLike productLike, Authentication authentication) {
-      Map<String, Object> result = new HashMap<>();
+	public Map<String, Object> productLike(ProductLike productLike, Authentication authentication) {
+		Map<String, Object> result = new HashMap<>();
 
-      result.put("like", false);
+		result.put("like", false);
 
-      productLike.setMemberId(authentication.getName());
-      Integer deleteCnt = likeMapper.delete(productLike);
+		productLike.setMemberId(authentication.getName());
+		Integer deleteCnt = likeMapper.delete(productLike);
 
-      if (deleteCnt != 1) {
-         Integer insertCnt = likeMapper.insert(productLike);
-         result.put("like", true);
-      }
+		if (deleteCnt != 1) {
+			Integer insertCnt = likeMapper.insert(productLike);
+			result.put("like", true);
+		}
 
-      return result;
-   }
-   /*
-    * public List<String> getExlistProcess(Integer id, Authentication
-    * authentication) { // 상품 정보를 가져와서 Product 객체로 생성 List<String> photoList =
-    * mapper.selectFileByProductId(id);
-    * 
-    * return photoList; }
-    * 
-    * public Product getProductById(Integer id) { // TODO Auto-generated method
-    * stub return null; }
-    */
+		return result;
+	}
+	/*
+	 * public List<String> getExlistProcess(Integer id, Authentication
+	 * authentication) { // 상품 정보를 가져와서 Product 객체로 생성 List<String> photoList =
+	 * mapper.selectFileByProductId(id);
+	 * 
+	 * return photoList; }
+	 * 
+	 * public Product getProductById(Integer id) { // TODO Auto-generated method
+	 * stub return null; }
+	 */
 
-   // public int getTotal(Criteria cri);
+	// public int getTotal(Criteria cri);
 
-   /*
-    * public List<Product> productListService(Integer id) { List<Product> list =
-    * mapper.allProduct1(id); return list; }
-    * 
-    * public List<Product> productCategory(String productCategory) { List<Product>
-    * list = mapper.productCategoryList(productCategory); return list; }
-    */
+	/*
+	 * public List<Product> productListService(Integer id) { List<Product> list =
+	 * mapper.allProduct1(id); return list; }
+	 * 
+	 * public List<Product> productCategory(String productCategory) { List<Product>
+	 * list = mapper.productCategoryList(productCategory); return list; }
+	 */
 
 }

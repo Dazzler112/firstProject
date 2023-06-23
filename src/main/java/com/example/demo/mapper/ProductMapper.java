@@ -25,9 +25,9 @@ public interface ProductMapper {
 	List<Product> selectAll3(Integer id, String photoTitle, String title, Integer price, LocalDateTime inserted,
 			String address, Integer like);
 
-	List<Product> selectAll4(Integer id, String photoTitle, String memberId, String title, Integer price, LocalDateTime inserted, String address,
-			Integer like);
-	
+	List<Product> selectAll4(Integer id, String photoTitle, String memberId, String title, Integer price,
+			LocalDateTime inserted, String address, Integer like);
+
 	List<Product> selectLikedProductsByMemberId(String memberId);
 
 	List<Product> selectAll5(String statusCode, String writer, String title, LocalDateTime inserted, Integer views,
@@ -56,12 +56,20 @@ public interface ProductMapper {
 			+ "price = #{price}, qty = #{qty}, address = #{address} WHERE id = #{id}")
 	int updateProduct(Product product);
 
+	@Update("UPDATE ProductPhoto SET ProductID = #{productId}, ProductTitle = #{productTitle}, ProductId = #{productId}"
+			+ ", PhotoTitle = #{photoTitle})")
+	int updateProductPhoto(Product product);
+
 	@Delete("DELETE FROM ProductPhoto WHERE ProductID = #{productId} AND ProductTitle = #{photoTitle}")
 	int deleteFileNameUpdate(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
 
 	Product getProductList(Integer id);
 
-	void updateFileName(Integer id, String originalFilename);
+	@Update("""
+			UPDATE ProductPhoto SET ProductTitle = #{productTitle}
+			WHERE ProductId = #{id}
+			""")
+	void updateFileName(Integer id, String productTitle);
 
 	@Delete("DELETE FROM Product WHERE id = #{id}")
 	int removeForm(Integer id);
@@ -99,15 +107,9 @@ public interface ProductMapper {
 
 			 price,
 
-			body,
-
-			categoryId,
-
-			(select CategoryName from Category WHERE CategoryId = p.CategoryId) CategoryName
-
 			FROM
 
-			Product p
+			Product
 
 			 ORDER BY id DESC
 
@@ -167,11 +169,19 @@ public interface ProductMapper {
 
 			likes,
 
-			price
+			price,
+			
+			body,
+         
+         categoryId,
+         
+         (select CategoryName from Category WHERE CategoryId = p.CategoryId) CategoryName
 
-			FROM
+         FROM
 
-			Product
+         Product p
+
+			
 
 			WHERE id=#{id}
 
@@ -193,8 +203,6 @@ public interface ProductMapper {
 
 			""")
 	String allProductPhoto(Integer id);
-
-	
 
 //    검색을 하기위함
 	@Select("""
@@ -249,7 +257,6 @@ public interface ProductMapper {
 			""")
 	List<Product> listcustomer(Integer startIndex);
 
-	
 	@Insert("""
 			INSERT INTO Product (title, body, writer)
 			VALUES (#title}, #{body}, #{writer})

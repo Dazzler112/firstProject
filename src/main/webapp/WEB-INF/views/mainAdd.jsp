@@ -40,6 +40,9 @@
 							<option value="3">게임</option>
 							<option value="4">명품</option>
 							<option value="5">전자기기</option>
+							<option value="6">취미</option>
+							<option value="7">무료나눔</option>
+							
 						</select>
 					</div>
 					<div class="mb-3">
