@@ -26,6 +26,8 @@ public class MainController {
 
 	@GetMapping("list1")
 	public String list1(Model model,
+			@RequestParam(value = "id", defaultValue = "")Integer id,
+			@RequestParam(value = "photoTitle", defaultValue = "") String photoTitle,
 			@RequestParam(value = "title", defaultValue = "") String title,
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "body", defaultValue = "") String body,
@@ -37,11 +39,12 @@ public class MainController {
 		
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
-		List<Product> productList1 = service.listBoard2(price, title, inserted, address);
-		List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
+		List<Product> productList1 = service.listBoard2(id, photoTitle,price, title, inserted, address);
+		List<Product> productList2 = service.listBoard3(id,photoTitle, price, title, inserted, address, likes);
 		
 		
-		model.addAttribute("notices", noticeList);
+		
+		model.addAttribute("notice", noticeList);
 		model.addAttribute("productList1", productList1);
 		model.addAttribute("productList2", productList2);
 		
@@ -51,6 +54,8 @@ public class MainController {
 
 	@GetMapping("list2")
 	public String list2(Model model,
+			@RequestParam(value = "id", defaultValue = "")Integer id,
+			@RequestParam(value = "photoTitle", defaultValue = "") String photoTitle,
 			@RequestParam(value = "title", defaultValue = "") String title,
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "body", defaultValue = "") String body,
@@ -61,12 +66,12 @@ public class MainController {
 			@RequestParam(value = "memberId", defaultValue = "") String memberId) {
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
-		List<Product> productList3 = service.listBoard4(memberId, price, title, inserted, address, likes);
-		List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
+		List<Product> productList4 = service.listBoard4(memberId, price, title, inserted, address, likes);
+		List<Product> productList3 = service.listBoard3(id, photoTitle,price, title, inserted, address, likes);
 
 		model.addAttribute("notice", noticeList);
-		model.addAttribute("productList3", productList3);
-		model.addAttribute("productList2", productList2);
+	
+		model.addAttribute("productList4", productList4);
 
 		return "mainList2";
 	}

@@ -44,7 +44,24 @@
 					<button class="header__input--btn">검색</button>
 					<!-- http://localhost:8080?search=검색할 내용  -->
 				</form>
+				
+				
+				
+				<%-- <form action="./noticeList" class="d-flex" role="search">
+					<div class="input-group">
+						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
+							<option value="all">전체</option>
+							<option value="title" ${param.type eq 'title' ? 'selected' : '' }>제목</option>
+							<option value="body" ${param.type eq 'body' ? 'selected' : '' }>본문</option>
+							<option value="writer" ${param.type eq 'writer' ? 'selected' : '' }>작성자</option>
+						</select> <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-light" type="submit">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</div>
+				</form> --%>
 			</div>
+			
 			
 			
 		
@@ -54,12 +71,12 @@
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-toggle btn-secondary">
 				
-				<button class="dropdown-toggle" onclick="toggleDropdown()"><i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i></button>
+				<button class="dropdown-toggle" onclick="toggleDropdown()">
+				<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
+				</button>
 				
 				
-				<!-- <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
-					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
-				</button> -->
+				
 				<ul class="dropdown-menu" id="dropdownMenu">
 					<!-- Dropdown menu links -->
 					<sec:authorize access="isAnonymous">
@@ -87,16 +104,13 @@
 					</sec:authorize>
 					
 					
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
 							</button></li>
 					</sec:authorize>
-					<sec:authorize access="!isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
-							</button></li>
-					</sec:authorize>
+					
+
 					<sec:authorize access="isAuthenticated()">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor"  href="/member/logout">로그아웃</a>
@@ -150,20 +164,7 @@
 										<div id="collapseTwo" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
 
-											<div class="accordion-body">
-												<ul class="ulstyle">
-													<div>
-														<li class="listyle"><a class="linkcolor" href="#">콘솔게임</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">pc게임</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">플레이스테이션</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">psp</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">닌텐도</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">wii</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">xbox</a></li>
-														<li class="listyle"><a class="linkcolor" href="#">게임타이틀</a></li>
-													</div>
-												</ul>
-											</div>
+											
 										</div>
 									</div>
 									<div class="accordion-item">
@@ -222,26 +223,14 @@
 				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
 				<li><a href="http://localhost:8084/teamProject/list4">카테고리</a>
 					<ul>
-						<li><a href="#">패션 의류</a></li>
-						<li><a href="#">수입 명품</a></li>
+						<li><a href="#">패션</a></li>
+						<li><a href="#">가구</a></li>
+						<li><a href="#">게임</a></li>
+						<li><a href="#">명품</a></li>
 						<li><a href="#">전자기기</a></li>
-						<li><a href="#">가구</a>
-						<li><a href="#">게임</a>
-							<ul>
-								<li><a href="http://localhost:8084/category">콘솔게임</a>
-									<ul clas="subdeep">
-										<li><a href="#">Sub Deep 1</a></li>
-										<li><a href="#">Sub Deep 2</a></li>
-										<li><a href="#">Sub Deep 6</a></li>
-										<li><a href="#">Sub Deep 7</a></li>
-									</ul></li>
-								<li><a href="#">Deep Menu 2</a></li>
-								<li><a href="#">Deep Menu 2</a></li>
-								<li><a href="#">Deep Menu 2</a></li>
-								<li><a href="#">Deep Menu 2</a></li>
-							</ul>
-							</div></li>
-						<li><a href="#">Sub Menu 5</a></li>
+						<li><a href="#">취미</a></li>
+						<li><a href="#">무료나눔</a></li>
+							
 					</ul></li>
 				<li><a href="#">게시판</a>
 					<ul>

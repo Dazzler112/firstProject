@@ -11,10 +11,10 @@ import com.example.demo.domain.*;
 @Mapper
 public interface ProductMapper {   
 
+	
+    List<Product> selectAll2(Integer id, String photoTitle, String title, Integer price, LocalDateTime inserted, String address);
 
-    List<Product> selectAll2(String title, Integer price, LocalDateTime inserted, String address);
-
-    List<Product> selectAll3(String title, Integer price, LocalDateTime inserted, String address, Integer likes);
+    List<Product> selectAll3(Integer id, String photoTitle, String title, Integer price, LocalDateTime inserted, String address, Integer likes);
 
     List<Product> selectAll4(String title, Integer price, String title2, LocalDateTime inserted, String address, Integer likes);
 
@@ -25,7 +25,8 @@ public interface ProductMapper {
                              Integer likes);
     
 //    카테고리리스트 
-    List<Product> selectAll7( String categoryTitle, String title, Integer price, String address, LocalDateTime inserted);
+    
+    List<Product> selectAll7(Integer startIndex, String categoryTitle, String title, Integer price, String address, LocalDateTime inserted);
 
     @Select("SELECT * FROM Product WHERE id = #{id}")
     Product selectById(Integer id);
@@ -95,9 +96,81 @@ public interface ProductMapper {
 
           List<Product> allProduct();
 
-    		@Select("""
-			
-			SELECT
+    @Select("""
+         SELECT
+         statusCode,
+         productId,
+         title,
+         inserted,
+         body,
+         writer,
+         price,
+         views,
+         likes,
+         (select case when max(memberID) is not null then  'Y' else 'N' end From Product a where a.writer = b.memberId) as modi,
+         memberId
+         FROM
+         Product b
+         WHERE
+         statusCode = #{statusCode}
+         AND title = #{title}
+         AND inserted = #{inserted}
+         AND body = #{body}
+         AND writer = #{writer}
+         AND price = #{price}
+         AND views = #{views}
+         AND likes = #{likes}
+         AND modi = #{modi}
+         AND memberId = #{memberId}
+         AND productId = #{productId}
+         ORDER BY inserted DESC
+         """)
+   List<Product> selectExList(
+         @Param("statusCode") String statusCode,
+         @Param("title") String title,
+         @Param("inserted") LocalDateTime inserted,
+         @Param("body") String body,
+         @Param("writer") String writer,
+         @Param("price") Integer price,
+         @Param("views") Integer views,
+         @Param("likes") Integer likes,
+         @Param("modi") String modi,
+         @Param("memberId") String memberId,
+         @Param("productId") Integer productId);
+
+          @Select("""
+
+          SELECT
+
+          id,
+
+          StatusCode,
+
+          title,
+
+          memberId,
+
+          inserted,
+
+          views,
+
+          likes,
+
+          price
+
+          FROM
+
+          Product
+
+          WHERE id=#{id}
+
+          """)
+
+          List<Product> allProduct1(Integer id);
+
+          @Select("""
+         
+         SELECT
             
             ProductTitle
          
@@ -163,47 +236,21 @@ public interface ProductMapper {
     * @Select(""" SELECT COUNT(*) FROM Product ID """) Integer countAll();
     */
    
-//    처음 시작페이지 에서 몇개까지 보여줄지 정하는 코드
+   
+
     @Select("""
-
-    		SELECT 
-    			*
-    		FROM Product 
-    		
-    		
-    		ORDER BY ID DESC 
-    		LIMIT #{startIndex},  12
+    		SELECT COUNT(*) FROM Product
     		""")
-
-	List<Product> listcustomer(Integer startIndex);
-    
-    @Select("""
-    		SELECT COUNT(*)FROM Product
-    		""")
-
 	Integer countAll();
-    
-	/*
-	 * @Select(""" <script> <bind name="pattern" value="'%'+keyword+'%'"/> SELECT
-	 * id, name, contanctName address FROM Product where ORDER BY id DESC </script>
-	 * """) List<Product> sql1(String keyword);
-	 */
 
-    
-
-
-
-    
-	/*
-	 * @Select(""" SELECT memberId, address, title FROM Product WHERE Product LIKE
-	 * #{keyword} ORDER BY ID DESC """) List<Product> keyword(String keyword);
-	 */
-
-    
-    
-	
-	
-
+    @Select("""
+    		SELECT * 
+    		FROM Product
+    		ORDER BY ID DESC
+    		LIMIT #{startIndex}, 12
+    		""")
+	List<Product> listcustomer(Integer startIndex);
+   
     
 
 }

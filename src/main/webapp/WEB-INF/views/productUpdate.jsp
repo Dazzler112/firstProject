@@ -16,14 +16,20 @@
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+#bodycenter{
+		margin-top:30px;
+	}
 </style>
 </head>
 <body>
+	
+	<my:navBar></my:navBar>
+	
     <div class="container-lg" style="padding: 0em 6em;">
         <div class="row justify-content-center">
-            <div class="col-10 col-md-12 col-lg-14">
+            <div id="bodycenter"class="col-10 col-md-12 col-lg-14">
                 <c:forEach items="${list}" var="product">
-                    <h1>${product.id}번 게시물</h1>
+                    <h1 style="color: #55A44E;">${product.id}번 게시물</h1>
                 </c:forEach>
                 <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="${product.id}" /> <br>
@@ -44,12 +50,8 @@
                             <input id="titleInput" class="form-control" type="text" name="title" value="${product.title}" />
                         </div>
 
-                        <!-- 파일 출력 -->
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <img class="img-thumbnail img-fluid" src="${bucketUrl}/${product.id}/${product.photoTitle}" alt="" />
-                            </div>
-                        </div>
+						
+                        
                     </div>
                     <div class="mb-3">
                         <label for="bodyTextarea" class="form-label">내용</label>
@@ -72,7 +74,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="fileInput" class="form-label">상품 사진</label>
+                        <label for="fileInput" class="form-label">상품 사진 *선택하지 않을시 이미등록되어있는 사진으로 표시됩니다.*</label>
                         <input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
                         <div class="form-text">총 10MB, 하나의 파일은 1MB를 초과할 수 없습니다.</div>
                     </div>
@@ -80,7 +82,7 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <input class="btn btn-secondary" type="submit" value="수정" />
-                            <a class="btn btn-danger" href="/id/${product.id}">취소</a>
+                            <a class="btn btn-danger" href="/teamProject/exList/${product.id }">취소</a>
                         </div>
                     </div>
                 </form>
