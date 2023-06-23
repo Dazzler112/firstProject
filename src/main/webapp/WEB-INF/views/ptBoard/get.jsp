@@ -65,6 +65,9 @@
 .mod{
 	margin-left: 85%;
 }
+#chatBtn{
+	margin-left: 45px;
+}
 
 </style>
 <body>
@@ -112,7 +115,8 @@
 									</c:if>
 								</span>
 							</span>
-							<a class="btn btn-secondary" href="/ptBoard/list">목록으로</a>
+							<a class="btn btn-secondary" href="/ptBoard/list">목록</a>
+							<a id="chatBtn" class="btn btn-success" href="/chat">채팅하기</a>
 						</h2>
 						
 					</div>
@@ -122,7 +126,7 @@
 							<input class="tit" type="text" value="${board.title }" readonly />
 						</div>
 						<div class="head">
-							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |  찜 : ${board.likeCount}" readonly />
+							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |   지역 : ${addressSggNm}   |  찜 : ${board.likeCount}" readonly />
 						</div>
 
 						<div class="body">

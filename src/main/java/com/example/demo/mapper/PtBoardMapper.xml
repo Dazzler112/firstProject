@@ -16,6 +16,31 @@
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>
+		<collection property="addressSggNm" ofType="String">
+
+  		<result column="addressSggNm" property="addressSggNm"/>
+  		</collection>
+	</resultMap>
+	
+	<resultMap type="com.example.demo.domain.PtBoard" id="pagingMap">
+		<id column="id" property="id"></id>
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="inserted" property="inserted" />
+		<result column="category" property="category" />
+		<collection property="fileCount" ofType="Integer">
+			<result column="fileCount" property="fileCount" />
+		</collection>
+		<collection property="commentCount" ofType="Integer">
+			<result column="commentCount" property="commentCount" />
+		</collection>
+		<collection property="likeCount" ofType="Integer">
+			<result column="likeCount" property="likeCount" />
+		</collection>
+		<collection property="addressSggNm" ofType="String">
+  		<result column="addressSggNm" property="addressSggNm"/>
+
+  		</collection>
 	</resultMap>
 </mapper>
 

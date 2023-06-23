@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import com.example.demo.domain.ProductLike;
 import com.example.demo.mapper.ProductLikeMapper;
 import com.example.demo.mapper.ProductMapper;
 
+
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
@@ -32,6 +34,7 @@ public class ProductService {
 
 	@Autowired
 	private ProductMapper mapper;
+
 
 	@Autowired
 	private ProductLikeMapper likeMapper;
@@ -50,14 +53,17 @@ public class ProductService {
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
+
 	public List<Notice> listBoard1(String title, LocalDateTime inserted, String body, String writer) {
 		return mapper.selectAll1(title, inserted, body, writer);
 	}
+
 
 	public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
 			String address) {
 		return mapper.selectAll2(id, photoTitle, title, price, inserted, address);
 	}
+
 
 	public List<Product> listBoard3(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted,
 			String address, Integer like) {
@@ -66,6 +72,7 @@ public class ProductService {
 
 	public List<Product> listBoard4( Integer id, String photoTitle, String memberId, String title, String title2, Integer price,
 			LocalDateTime inserted, String address, Integer like) {
+
 
 		return mapper.selectAll4(id, photoTitle, memberId, title, price, inserted, address, like);
 
@@ -80,15 +87,18 @@ public class ProductService {
 	public List<Product> listBoard6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
 			Integer likes) {
 
+
 		return mapper.selectAll6(title, price, inserted, price, price, likes);
 	}
 
 //   카테고리 리스트로 에서 사용할 수 있는 서비스
+
 	public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price,
 			String address, LocalDateTime inserted) {
 		return mapper.selectAll7(startIndex, categoryTitle, title, price, address, inserted);
 
 	}
+
 
 	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
 			Integer price, Integer views, Integer likes, String modi, String memberId, Integer ProrductID) {
@@ -101,9 +111,11 @@ public class ProductService {
 		return mapper.selectById(id);
 	}
 
+
 	
 
 	public boolean updateProduct(Product product) {
+
 		return mapper.updateProduct(product) > 0;
 	}
 
@@ -117,6 +129,7 @@ public class ProductService {
 //       // 추가된 상품의 ID 값이 null이 아닌 경우, 상품 추가 성공으로 간주한다.
 //       return ProrductID != null;
 //   }
+
 
 	public boolean updateProduct(Product product, MultipartFile file) throws Exception {
 
@@ -225,6 +238,7 @@ public class ProductService {
 		return "product/productget";
 	}
 
+
 	public List<Product> productListService() {
 		List<Product> list = mapper.allProduct();
 		return list;
@@ -285,5 +299,6 @@ public class ProductService {
 	 * public List<Product> productCategory(String productCategory) { List<Product>
 	 * list = mapper.productCategoryList(productCategory); return list; }
 	 */
+
 
 }

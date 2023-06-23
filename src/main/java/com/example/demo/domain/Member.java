@@ -15,7 +15,8 @@ public class Member {
 	private String gender;
 	private String phoneNum;
 	private String email;
-	private List<String> authority;
+//	private List<String> authority;
+	private String authority;
 	private String addressSggNm;
-	
+	private String pwForAdmin;
 }

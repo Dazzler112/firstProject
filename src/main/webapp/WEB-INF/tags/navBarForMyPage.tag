@@ -6,7 +6,7 @@
 <link href="/resources/menubar.css" rel="stylesheet">
 <link href="/resources/navbar.css" rel="stylesheet">
 <script src="/js/navbar/navbar.js"></script>
-<script type="text/javascript" src="링크주소"></script>
+
 <!-- 글골 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,8 +40,10 @@
 			</div>
 			<!-- 프로필 -->
 			<div id="dropdown" class="btn-toggle btn-secondary">
+
 				<button class="dropdown-toggle" onclick="toggleDropdown()"><i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i></button>
 				
+
 				<ul class="dropdown-menu" id="dropdownMenu">
 					<!-- Dropdown menu links -->
 					<sec:authorize access="isAnonymous()">

@@ -9,6 +9,7 @@ import com.example.demo.domain.*;
 @Mapper
 public interface ProductLikeMapper {
 
+
    @Insert("""
          INSERT INTO ProductLike
          VALUES (#{productId}, #{memberId})
@@ -40,3 +41,5 @@ public interface ProductLikeMapper {
            """)
    List<Product> selectAllProducts();
 }
+
+

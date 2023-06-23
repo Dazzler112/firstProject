@@ -41,7 +41,9 @@ public class MainController {
 			@RequestParam(value = "writer", defaultValue = "") String writer,
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
+
 			@RequestParam(value = "likes", defaultValue = "") Integer likes) {
+
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(id, photoTitle, price, title, inserted, address);
@@ -55,7 +57,9 @@ public class MainController {
 	}
 
 	@GetMapping("list2")
+
 	public String list2(Model model, @RequestParam(value = "id", defaultValue = "") Integer id,
+
 			@RequestParam(value = "photoTitle", defaultValue = "") String photoTitle,
 			@RequestParam(value = "title", defaultValue = "") String title,
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
@@ -76,6 +80,7 @@ public class MainController {
 		model.addAttribute("productList4", productList4);
 
 		return "mainList2";
+
 	}
 
 	@GetMapping("/exList/{id}")
@@ -86,6 +91,8 @@ public class MainController {
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category) {
 		List<Product> list = service.productListService1(id);
+
+
 
 		String productPhoto = service.getProductPhoto(id);
 
@@ -104,9 +111,11 @@ public class MainController {
 	}
 
 	@PostMapping("mainAdd")
+
 	public String addForm(@RequestParam("files") MultipartFile[] files, @RequestParam("category") Integer category,
 			Product product, RedirectAttributes rttr, Model model, Authentication authentication) throws Exception {
 		System.out.println(authentication.getName());
+
 		product.setMemberId(authentication.getName());
 		boolean ok = service.addProduct(product, files, category);
 
@@ -188,12 +197,14 @@ public class MainController {
 
 	@PostMapping("/like")
 	@ResponseBody
+
 	public ResponseEntity<Map<String, Object>> productLike(@RequestBody ProductLike productLike,
 			Authentication authentication) {
 		if (authentication == null) {
 			return ResponseEntity.status(403).body(Map.of("message", "로그인을 해주세요."));
 		} else {
 			return ResponseEntity.ok().body(service.productLike(productLike, authentication));
+
 		}
 	}
 }

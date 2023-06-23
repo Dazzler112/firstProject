@@ -1,5 +1,6 @@
 $("#likeIcon").click(function() {
 
+
    const productId = $("#productIdText").text().trim();
    const url = `/teamProject/like`;
    const data = { productId }
@@ -31,3 +32,4 @@ $("#likeIcon").click(function() {
       }
    });
 });
+

@@ -25,32 +25,40 @@ public interface ProductMapper {
 	List<Product> selectAll3(Integer id, String photoTitle, String title, Integer price, LocalDateTime inserted,
 			String address, Integer like);
 
+
 	List<Product> selectAll4(Integer id, String photoTitle, String memberId, String title, Integer price,
 			LocalDateTime inserted, String address, Integer like);
 
 	List<Product> selectLikedProductsByMemberId(String memberId);
 
+
 	List<Product> selectAll5(String statusCode, String writer, String title, LocalDateTime inserted, Integer views,
 			Integer likes, Integer price, String content);
+
 
 	List<Product> selectAll6(String title, Integer price, LocalDateTime inserted, Integer price2, Integer price3,
 			Integer likes);
 
 //    카테고리리스트 
 
+
 	List<Product> selectAll7(Integer startIndex, String categoryTitle, String title, Integer price, String address,
 			LocalDateTime inserted);
+
 
 	@Select("SELECT * FROM Product WHERE id = #{id}")
 	Product selectById(Integer id);
 
+
 	@Insert("INSERT INTO Product(CategoryId, MemberID, writer, title, body, price, address, Qty) "
 			+ "VALUES(#{categoryId}, #{memberId}, #{writer}, #{title}, #{body}, #{price}, #{address}, #{qty})")
+
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertForm(Product product);
 
 	@Insert("INSERT INTO ProductPhoto(ProductID, ProductTitle) VALUES(#{productId}, #{photoTitle})")
 	Integer insertFileName(@Param("productId") Integer productId, @Param("photoTitle") String photoTitle);
+
 
 	@Update("UPDATE Product SET CategoryId = #{categoryId}, title = #{title}, body = #{body}, "
 			+ "price = #{price}, qty = #{qty}, address = #{address} WHERE id = #{id}")
@@ -113,6 +121,7 @@ public interface ProductMapper {
 
 			 ORDER BY id DESC
 
+
 			 """)
 
 	List<Product> allProduct();
@@ -165,6 +174,7 @@ public interface ProductMapper {
 
 			inserted,
 
+
 			views,
 
 			likes,
@@ -178,6 +188,7 @@ public interface ProductMapper {
          (select CategoryName from Category WHERE CategoryId = p.CategoryId) CategoryName
 
          FROM
+
 
          Product p
 
@@ -257,13 +268,18 @@ public interface ProductMapper {
 			""")
 	List<Product> listcustomer(Integer startIndex);
 
+
 	@Insert("""
+
 			INSERT INTO Product (title, body, writer)
 			VALUES (#title}, #{body}, #{writer})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(Product product);
 
+
 	String getCategoryName(Integer categoryId);
+
+
 
 }

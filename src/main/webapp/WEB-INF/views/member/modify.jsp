@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,6 +68,10 @@ h1 {
 									</div></td>
 							</tr>
 							<tr>
+								<th scope="row">관리자 비번</th>
+								<td><input value="${member.pwForAdmin }" readonly /></td>
+							</tr>
+							<tr>
 								<th scope="row">이름</th>
 								<td>
 									<div class="input-group">
@@ -127,11 +132,26 @@ h1 {
 									<div class="input-group">
 										<input name="address" id="inputAddress" type="text" class="form-control" value="${member.address }" required readonly />
 									</div>
+									<div class="d-none">
+										<input name="addressSggNm" id="inputAddressSggNm" type="text" class="form-control" value="${member.addressSggNm }" required />
+									</div>
 									<div class="d-none form-text text-primary" id="availableAddressMessage">
 										<i class="fa-solid fa-check"></i> 주소가 확인되었습니다.
 									</div>
 								</td>
 							</tr>
+							<sec:authorize access="hasAuthority('admin')">
+								<tr>
+									<th scope="row">권한</th>
+									<td>
+										<div class="mb-3">
+											<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+												<input type="radio" class="btn-check" name="authority" id="user" autocomplete="off" value="user" checked> <label class="btn btn-outline-success" for="user">사용자</label> <input type="radio" class="btn-check" name="authority" id="cheat" autocomplete="off" value="cheat"> <label class="btn btn-outline-success" for="cheat">사기 신고</label>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</sec:authorize>
 						</tbody>
 					</table>
 					<button id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary">수정</button>

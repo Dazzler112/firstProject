@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
+
    <select id="selectAll2" resultType="com.example.demo.domain.Product">
         SELECT 
         	p.ID,
@@ -102,6 +103,7 @@
 
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC LIMIT #{startIndex}, 12
     </select>
+
     
    <select id="selectLikedProducts" resultType="com.example.demo.domain.Product">
         SELECT * FROM Product WHERE id IN (
@@ -124,4 +126,5 @@
         WHERE title LIKE '%' || #{keyword} || '%'
     </if>
    </select>
+
 </mapper>
