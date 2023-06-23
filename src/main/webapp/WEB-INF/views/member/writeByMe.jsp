@@ -63,19 +63,41 @@ a {
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-10 col-lg-3 myTab" style="position: relative; top: 70px; right: 42px">
+			<div class="col-12 col-md-10 col-lg-3 myTab" style="position: relative; top: 70px; right: 50px">
 				<table class="table table-no-border">
-					<tbody>
-						<tr>
-							<td><a href="/member/info?id=${member.id}" style="color: #55A44E">내 정보</a></td>
-						</tr>
-						<tr>
-							<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내가 쓴 글</a></td>
-						</tr>
-						<tr>
-							<td><a href="#" style="color: #55A44E">내가 올린 상품</a></td>
-						</tr>
-					</tbody>
+					<sec:authorize access="hasAuthority('admin')">
+						<tbody>
+							<tr>
+								<td><a href="/member/info?id=${member.id}" style="color: #55A44E">${member.id} 정보</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">${member.id}가 쓴 글</a></td>
+							</tr>
+							<tr>
+								<td><a href="#" style="color: #55A44E">${member.id}가 올린 상품</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">${member.id} 스크랩</a></td>
+							</tr>
+						</tbody>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
+						<tbody>
+							<tr>
+								<td><a href="/member/info?id=${member.id}" style="color: #55A44E">내 정보</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내가 쓴 글</a></td>
+							</tr>
+							<tr>
+								<td><a href="#" style="color: #55A44E">내가 올린 상품</a></td>
+							</tr>
+							<tr>
+								<td><a href="/member/writeByMe?id=${member.id }" style="color: #55A44E">내 스크랩</a></td>
+							</tr>
+							
+						</tbody>
+					</sec:authorize>
 				</table>
 			</div>
 			<div class="col-12 col-md-10 col-lg-8 detailPage">

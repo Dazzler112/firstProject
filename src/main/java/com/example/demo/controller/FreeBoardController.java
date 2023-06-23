@@ -61,7 +61,7 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("freeadd")
-	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
+	@PreAuthorize("isAuthenticated()")
 	public void getAddView() {
 		// TODO Auto-generated method stub
 	}

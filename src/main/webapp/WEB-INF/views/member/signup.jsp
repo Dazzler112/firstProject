@@ -99,12 +99,7 @@ h1 {
 
 					<div class="mb-3">
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							<input type="radio" class="btn-check" name="gender" id="inputGenderM" autocomplete="off" value="남"> 
-							<label class="btn btn-outline-success" for="inputGenderM">남</label> 
-							<input type="radio" class="btn-check" name="gender" id="inputGenderW" autocomplete="off" value="여"> 
-							<label class="btn btn-outline-success" for="inputGenderW">여</label> 
-							<input type="radio" class="btn-check" name="gender" id="inputGenderX" autocomplete="off" value="선택 안함"> 
-							<label class="btn btn-outline-success" for="inputGenderX">선택 안함</label>
+							<input type="radio" class="btn-check" name="gender" id="inputGenderM" autocomplete="off" value="남"> <label class="btn btn-outline-success" for="inputGenderM">남</label> <input type="radio" class="btn-check" name="gender" id="inputGenderW" autocomplete="off" value="여"> <label class="btn btn-outline-success" for="inputGenderW">여</label> <input type="radio" class="btn-check" name="gender" id="inputGenderX" autocomplete="off" value="선택 안함"> <label class="btn btn-outline-success" for="inputGenderX">선택 안함</label>
 						</div>
 					</div>
 
@@ -175,13 +170,10 @@ h1 {
 							<input name="addressSggNm" id="inputAddressSggNm" type="text" class="form-control" placeholder="Enter Address" required />
 						</div>
 					</div>
-					
+
 					<div class="d-none">
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							<input type="radio" class="btn-check" name="authority" id="user" autocomplete="off" value="user" checked> 
-							<label class="btn btn-outline-success" for="user">사용자</label> 
-							<input type="radio" class="btn-check" name="authority" id="cheat" autocomplete="off" value="cheat"> 
-							<label class="btn btn-outline-success" for="cheat">사기 신고</label> 							
+							<input type="radio" class="btn-check" name="authority" id="user" autocomplete="off" value="user" checked> <label class="btn btn-outline-success" for="user">사용자</label> <input type="radio" class="btn-check" name="authority" id="cheat" autocomplete="off" value="cheat"> <label class="btn btn-outline-success" for="cheat">사기 신고</label>
 						</div>
 					</div>
 

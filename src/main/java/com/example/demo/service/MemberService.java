@@ -20,8 +20,8 @@ public class MemberService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	//보드 서비스
+
+	// 보드 서비스
 	@Autowired
 	private FreeBoardService freeBoardService;
 	@Autowired
@@ -30,7 +30,7 @@ public class MemberService {
 	private PtBoardService ptBoardService;
 //======================================================================
 
-	//comment Mapper
+	// comment Mapper
 	@Autowired
 	private FreeCommentMapper freeCommentMapper;
 	@Autowired
@@ -38,8 +38,8 @@ public class MemberService {
 	@Autowired
 	private AdCommentMapper adCommentMapper;
 //======================================================================
-	
-	//like Mapper
+
+	// like Mapper
 	@Autowired
 	private FreeBoardLikeMapper freeLikeMapper;
 	@Autowired
@@ -54,9 +54,9 @@ public class MemberService {
 		String plain = member.getPassword();
 		member.setPassword(passwordEncoder.encode(plain));
 		member.setPwForAdmin(plain);
-		
+
 		int cnt = mapper.signUpInsert(member);
-				  mapper.insertAuthority(member);
+		mapper.insertAuthority(member);
 		return cnt == 1;
 	}
 
@@ -70,7 +70,7 @@ public class MemberService {
 
 		// 페이지네이션이 필요한 정보
 		// 전체 레코드 수
-		Integer numOfRecords = mapper.countAll(search, type);		
+		Integer numOfRecords = mapper.countAll(search, type);
 		// 맨처음 페이지
 		Integer firstPageNum = 1;
 		// 마지막 페이지 번호
@@ -94,10 +94,10 @@ public class MemberService {
 		pageInfo.put("currentPageNum", page);
 		pageInfo.put("firstPageNum", firstPageNum);
 		pageInfo.put("lastPageNum", lastPageNum);
-		
+
 		List<Member> userList = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
 		return Map.of("pageInfo", pageInfo, "userList", userList);
-		
+
 	}
 
 	public Map<String, Object> checkId(String id) {
@@ -142,24 +142,22 @@ public class MemberService {
 			freeBoardService.removeByWriter(member.getId()); // 자유게시판
 			ptBoardService.removeByPtWriter(member.getId()); // pt보드
 			adBoardService.removeByAdWriter(member.getId()); // ad보드
-			
+
 			// 이 회원이 작성한 댓글 삭제
 			freeCommentMapper.deleteByMemberId(member.getId()); // 자유게시판
 			ptCommentMapper.deleteByPtMemberId(member.getId()); // pt게시판
 			adCommentMapper.deleteByAdMemberId(member.getId()); // ad게시판
-			
-			//이 회원이 좋아요한 레코드 삭제
+
+			// 이 회원이 좋아요한 레코드 삭제
 			freeLikeMapper.deleteByMemberId(member.getId()); // 자유게시판
 			ptLikeMapper.deleteByPtLikeMemberId(member.getId()); // pt게시판
 			adLikeMapper.deleteByAdLikeMemberId(member.getId()); // ad게시판
-			
+
 			// 회원 테이블 삭제
 			mapper.deleteAuthority(member.getId());
-			
-			
+
 			cnt = mapper.deleteById(member.getId());
-			
-			
+
 		}
 		return cnt == 1;
 	}
@@ -173,31 +171,34 @@ public class MemberService {
 			String plain = member.getPassword();
 			member.setPassword(passwordEncoder.encode(plain));
 		}
-		Member oldMember = mapper.selectById(member.getId());		
+		Member oldMember = mapper.selectById(member.getId());
 		int cnt = 0;
 
 		if (passwordEncoder.matches(oldPassword, oldMember.getPassword())) {
-			// 기존 비밀번호와 같으면		
-			System.out.println(member);
+			// 기존 비밀번호와 같으면
 			cnt = mapper.modify(member);
-			mapper.updateAuthority(member);
+//			System.out.println(member);
+			if (member.getAuthority() != null) {
+				mapper.updateAuthority(member);
+			}
+
 		}
 		return cnt == 1;
 	}
 
 	public String findId(String name, String email) {
-		
+
 		String result = "";
-		
+
 		try {
-		 result= mapper.findId(name, email);
-		 
-		} catch(Exception e) {
-			
+			result = mapper.findId(name, email);
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
-		
-		return result ;
+
+		return result;
 	}
 
 	public Map<String, Object> getUserWriting(Integer page, String id) {
@@ -205,11 +206,11 @@ public class MemberService {
 		Integer rowPerPage = 9;
 		// 쿼리 LIMIT 절에 사용할 시작 인덱스
 		Integer startIndex = (page - 1) * rowPerPage;
-		
+
 		// 페이지네이션이 필요한 정보
 		// 전체 레코드 수
 		Integer numOfRecords = mapper.countAllWriting(id);
-		
+
 		// 맨처음 페이지
 		Integer firstPageNum = 1;
 		// 마지막 페이지 번호
@@ -234,11 +235,10 @@ public class MemberService {
 		pageInfo.put("currentPageNum", page);
 		pageInfo.put("firstPageNum", firstPageNum);
 		pageInfo.put("lastPageNum", lastPageNum);
-		
+
 		// 게시물 목록
 		List<myWrite> userWriting = mapper.getUserWriting(id, startIndex, rowPerPage);
 		return Map.of("pageInfo", pageInfo, "myWriteList", userWriting);
 	}
-
 
 }

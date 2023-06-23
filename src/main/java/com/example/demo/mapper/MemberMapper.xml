@@ -9,6 +9,7 @@
 		<result property="pwForAdmin" column="pwForAdmin"></result>
 		<result property="nickName" column="nickName"></result>
 		<result property="address" column="address"></result>
+		<result property="addressSggNm" column="addressSggNm"></result>
 		<result property="name" column="name"></result>
 		<result property="gender" column="gender"></result>
 		<result property="phoneNum" column="phoneNum"></result>
