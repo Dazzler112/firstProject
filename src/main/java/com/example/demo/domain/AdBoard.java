@@ -24,4 +24,6 @@ public class AdBoard {
 	private Integer fileCount;
 	private Integer likeCount;
 	private Integer commentCount;
+	
+	private List<String> addressSggNm;
 }

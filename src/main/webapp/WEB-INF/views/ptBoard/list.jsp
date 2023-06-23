@@ -130,10 +130,10 @@ h1 {
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
 	<h1>알바게시판</h1>
-	<form action="" method="get">
+	<form id="categoryForm" method="get">
 		<div id="category_div">
-			<input type="button" class="category_button" name="boardCategory" value="구인해요" />
-			<input type="button" class="category_button" name="boardCategory" value="구직해요" />			
+			<input type="button" class="category_button" name="category" value="구인해요" />
+			<input type="button" class="category_button" name="category" value="구직해요" />			
 		</div>
 
 		<table>
@@ -151,7 +151,7 @@ h1 {
 				<c:forEach items="${ptBoardList}" var="board">
 					<tr>
 						<td>${board.category}</td>
-						<td>${board.region}</td>
+						<td>${board.addressSggNm}</td>
 						<td class="text">
 							<c:if test="${board.fileCount > 0 }">
 								<span class="badge rounded-pill text-bg-info">
@@ -179,25 +179,25 @@ h1 {
 
 						<!-- 이전 버튼 -->
 						<c:if test="${pageInfo.currentPageNum gt 1 }">
-							<my:pageItem pageNum="${pageInfo.currentPageNum - 1 }">
+							<my:ptPageItem pageNum="${pageInfo.currentPageNum - 1 }">
 								<i class="fa-solid fa-angle-left"></i>
-							</my:pageItem>
+							</my:ptPageItem>
 						</c:if>
 
 
 
 						<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
-							<my:pageItem pageNum="${pageNum }">
+							<my:ptPageItem pageNum="${pageNum }">
 							${pageNum }
-						</my:pageItem>
+						</my:ptPageItem>
 						</c:forEach>
 
 						<!-- 다음 버튼 -->
 						<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
 							<%-- 페이지 번호 : ${pageInfo.currentPageNum + 1 } --%>
-							<my:pageItem pageNum="${pageInfo.currentPageNum + 1 }">
+							<my:ptPageItem pageNum="${pageInfo.currentPageNum + 1 }">
 								<i class="fa-solid fa-angle-right"></i>
-							</my:pageItem>
+							</my:ptPageItem>
 
 						</c:if>
 
@@ -219,6 +219,7 @@ h1 {
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/ptBoard/category.js"></script>
 
 </body>
 </html>

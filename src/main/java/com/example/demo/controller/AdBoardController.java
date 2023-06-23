@@ -22,13 +22,14 @@ public class AdBoardController {
 	@Autowired
 	private AdBoardService service;
 
-	@RequestMapping("list")
+	@GetMapping("list")
 	public String list(Model model,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "search", defaultValue = "") String search,
-			@RequestParam(value = "type", required = false) String type) {
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "category", required = false) String category) {
 		
-		Map<String, Object> result = service.listBoard(page, search, type);
+		Map<String, Object> result = service.listBoard(page, search, type, category);
 		
 		model.addAllAttributes(result);
 		
