@@ -25,5 +25,7 @@ public class AdBoard {
 	private Integer likeCount;
 	private Integer commentCount;
 	
-	private List<String> addressSggNm;
+
+	private String addressSggNm;
+
 }

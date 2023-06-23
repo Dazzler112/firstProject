@@ -154,6 +154,29 @@ body{
 	box-shadow: 0px 0px 0px 5px rgb(194,219,254);
 }
 /*             */
+
+/*    댓        글    */
+.commentDeleteButton{
+	background-color: red; 
+	border:none;
+	border-radius:5px; 
+	color:rgba(0,0,0,0.3);
+  	background-color:rgba(0,0,0,0);
+}
+.commentUpdateButton{
+	background-color: #FFCF96; 
+	border:none;
+	border-radius:5px;
+	color:rgba(0,0,0,0.8);
+	background-color:rgba(0,0,0,0);
+}
+.commentReplyButton{
+	background-color: #FFCF96;
+	border:none; 
+	border-radius:5px; 
+	color:rgba(0,0,0,0.8); 
+	background-color:rgba(0,0,0,0);
+}
 </style>
 </head>
 <body>
@@ -166,7 +189,7 @@ body{
 				<div style="display:none;">
 					<span id="boardIdText">${getBoard.id }</span>
 				</div>
-				<div style="display: flex; justify-content: space-between; align-items: center;">
+				<div style="display: flex; justify-content: space-between; ">
 					<div class="mb-3" style="display: flex; align-items: center;">
 						<label for="category-text" class="form-label"></label>카테고리
 						<input id="category-text" type="text"  class="form-control" name="boardCategory" value="${getBoard.boardCategory}" style="width: 330px; margin: 0px 0px px 5px; text-align:center; " readonly/>

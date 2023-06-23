@@ -13,6 +13,9 @@
 		<result column="region" property="region" />
 		<result column="likeCount" property="likeCount"></result>
 		<result column="commentCount" property="commentCount"></result>
+		<collection property="addressSggNm" ofType="String">
+  		<result column="addressSggNm" property="addressSggNm"/>
+  		</collection>
 		<collection property="fileName" ofType="string">
 			<result column="fileName" />
 		</collection>

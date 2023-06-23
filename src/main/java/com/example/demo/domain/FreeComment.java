@@ -16,4 +16,6 @@ public class FreeComment {
 	private Integer parentId;
 	
 	private Boolean editable;
+	
+
 }

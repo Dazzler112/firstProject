@@ -99,9 +99,11 @@
 						<option value="금융">금융</option>
 						<option value="기타">기타</option>
 					</select>
+
 					<span class="reg">지역</span>
 					<input type="text" name="addressSggNm" value="${board.addressSggNm}" readonly>
 					
+
 				</div>
 			</div>
 			<div class="content">

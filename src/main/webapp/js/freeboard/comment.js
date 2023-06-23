@@ -74,29 +74,29 @@ function listComment() {
 	const depth = $("#depthText").val();
 	const data = { boardId, depth };
 			$.ajax("/comment/list?board=" + boardId, {
-		method: "post",
+				method: "get",
+				contentType: "application/json",
 				success: function(comments) {
-					$("#commentListContainer").empty();
+					const commentListContainer = document.getElementById("commentListContainer");
+					commentListContainer.innerHTML = '';
 					for (const comment of comments) {
 						const editBtn = `
 				<button 
 						id="commentDeleteBtn${comment.id}" 
 						class="commentDeleteButton"
-						style="background-color: red; border:none; border-radius:5px; color:rgba(0,0,0,0.3); background-color:rgba(0,0,0,0);"
 						data-comment-id="${comment.id}">
 							<i class="fa-regular fa-trash-can"></i>
 						</button>
 					<button
 						id="commentUpdateBtn${comment.id}"
 						class="commentUpdateButton"
-						style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);"
 						data-comment-id="${comment.id}">
 							<i class="fa-solid fa-repeat"></i>
 						</button>
 					
 			`;
 
-						$("#commentListContainer").append(`
+						commentListContainer.innerHTML += `
 					<li style="margin:5px 0px; padding:3px 7px;">
 					<div>
 						<div class="user_name">${comment.memberId}</div>
@@ -107,8 +107,7 @@ function listComment() {
 						${comment.editable ? editBtn : ''}
 						<button id="commentReplyBtn${comment.id}"
 						 class="commentReplyButton"
-						 data-comment-id="${comment.id}"
-						 style="background-color: #FFCF96; border:none; border-radius:5px; color:rgba(0,0,0,0.8); background-color:rgba(0,0,0,0);">
+						 data-comment-id="${comment.id}">
 						 <i class="fa-solid fa-reply">!대댓글!</i>
 						</button>
 						</div>
@@ -124,9 +123,33 @@ function listComment() {
                   <textarea id="commentUpdateTextArea${comment.id}" class="update_comment-text" placeholder="내용을 입력해주세요"></textarea>
                   <button id="updateCommentBtn" class="update-commit" data-comment-id="${comment.id}" style="">수정</button>
                   </div>
-				`);
+				`;
 					};
-
+					//대댓글 리스트?
+					function reReply() {
+						const boardId = $("#boardIdText").text().trim();
+						const commentId = $(this).attr("data-comment-id");
+						const content = $(`#commentReplyContent${commentId}`).val();
+						const id = $(this).attr("data-comment-id");
+						const data = { boardId, commentId, content, id };
+					$.ajax("/comment/relist?board=" + boardId ,{
+						method: "get",
+						contentType: "application/json",
+						success: function(comments){
+					const commentListContainer = document.getElementById("commentListContainer");
+					commentListContainer.innerHTML = '';
+							for(const comment of comments){
+								commentListContainer.innerHTML += `
+									<p>${comment.memberId}</p>
+		       	              		<span>${comment.content}</span>
+								`;
+							}
+							change.html(commentListContainer);
+						}
+					});
+					}
+					
+					
 					//대댓글 클릭 상호작용	
 					$(".commentReplyButton").click(function() {
 						const commentId = $(this).data("comment-id");
@@ -138,7 +161,8 @@ function listComment() {
 						const boardId = $("#boardIdText").text().trim();
 						const commentId = $(this).attr("data-comment-id");
 						const content = $(`#commentReplyContent${commentId}`).val();
-						const data = { boardId, commentId, content };
+						const id = $(this).attr("data-comment-id");
+						const data = { boardId, commentId, content, id };
 
 						$.ajax("/comment/addReply", {
 							method: "post",
@@ -181,6 +205,15 @@ function listComment() {
 			});
 		
 }
+
+
+
+
+
+
+
+
+
 // 수정 버튼 상호작용 (수정 부분 추가)
 $("#commentListContainer").on("click", ".commentUpdateButton", function() {
 	const commentId = $(this).attr("data-comment-id");

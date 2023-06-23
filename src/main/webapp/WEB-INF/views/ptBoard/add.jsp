@@ -124,6 +124,7 @@
 					<option value="구인해요">구인해요</option>
 					<option value="구직해요">구직해요</option>
 				</select>
+
 				<span class="reg">지역</span>
 				<input type="text" name="addressSggNm" value="${board.addressSggNm}" readonly>
 
