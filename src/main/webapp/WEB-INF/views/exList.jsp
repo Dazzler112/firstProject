@@ -12,12 +12,12 @@
 </head>
 <body>
 
-	<div class="toast-contatiner top-0 start-50 translate-middle-x p-3">
+	<div class="toast-container position-fixed top-0 end-0 p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 			<div class="toast-header">
 				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
 			</div>
-			<div class="toast-body"></div>
+			<div class="toast-body">로그인 후 이용해주세요.</div>
 		</div>
 	</div>
 
@@ -31,7 +31,7 @@
 				<h1>
 					<span id="likeIcon"> <i class="fa-regular fa-heart">
 					</i>
-					</span> <span id="likeNumber"> ${product.like } </span>
+					</span> <span id="likeNumber"> ${product.likeCount } </span>
 				</h1>
 			</div>
 
@@ -46,7 +46,7 @@
 				<th>현재 상태</th>
 				<th>제목</th>
 				<th>글쓴이</th>
-				<th>올린 시간</th>
+				<th>올린 날짜</th>
 				<th>조회</th>
 				<th>찜</th>
 				<th>가격</th>
@@ -87,7 +87,7 @@
 
 		<div class="mb-3">
 			<label for="contentTextarea" class="form-label"></label>
-			<textarea rows="5" id="contentTextarea" class="form-control" name="content"></textarea>
+			<textarea rows="5" id="contentTextarea" class="form-control" name="content">${list[0].body }</textarea>
 		</div> <sec:authentication property="name" var="usedId" /> <c:if test="${userId eq product.writer }">
 
 			<div class="d-none">

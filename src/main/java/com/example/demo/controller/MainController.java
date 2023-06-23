@@ -33,8 +33,6 @@ public class MainController {
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "address", defaultValue = "") String address,
 			@RequestParam(value = "likes", defaultValue = "") Integer likes){
-		
-		
 
 		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
 		List<Product> productList1 = service.listBoard2(price, title, inserted, address);
@@ -51,24 +49,26 @@ public class MainController {
 
 	@GetMapping("list2")
 	public String list2(Model model,
-			@RequestParam(value = "title", defaultValue = "") String title,
-			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
-			@RequestParam(value = "body", defaultValue = "") String body,
-			@RequestParam(value = "writer", defaultValue = "") String writer,
-			@RequestParam(value = "price", defaultValue = "") Integer price,
-			@RequestParam(value = "address", defaultValue = "") String address,
-			@RequestParam(value = "likes", defaultValue = "") Integer likes,
-			@RequestParam(value = "memberId", defaultValue = "") String memberId) {
+	        @RequestParam(value = "title", defaultValue = "") String title,
+	        @RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
+	        @RequestParam(value = "body", defaultValue = "") String body,
+	        @RequestParam(value = "writer", defaultValue = "") String writer,
+	        @RequestParam(value = "price", defaultValue = "") Integer price,
+	        @RequestParam(value = "address", defaultValue = "") String address,
+	        @RequestParam(value = "like", defaultValue = "") Integer like,
+	        @RequestParam(value = "memberId", defaultValue = "") String memberId,
+	        Authentication authentication) {
 
-		List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
-		List<Product> productList3 = service.listBoard4(memberId, price, title, inserted, address, likes);
-		List<Product> productList2 = service.listBoard3(price, title, inserted, address, likes);
+		System.out.println(authentication.getName());
+	    List<Notice> noticeList = service.listBoard1(title, inserted, body, writer);
+	    List<Product> productList3 = service.listBoard3(price, title, inserted, address, like);
+	    List<Product> productList4 = service.listBoard4(authentication.getName(), memberId, price, title, inserted, address, like);
 
-		model.addAttribute("notice", noticeList);
-		model.addAttribute("productList3", productList3);
-		model.addAttribute("productList2", productList2);
+	    model.addAttribute("notice", noticeList);
+	    model.addAttribute("productList3", productList3);
+	    model.addAttribute("productList4", productList4);
 
-		return "mainList2";
+	    return "mainList2";
 	}
 
 	@GetMapping("/exList/{id}")
@@ -79,7 +79,7 @@ public class MainController {
 			@RequestParam(value = "inserted", defaultValue = "") LocalDateTime inserted,
 			@RequestParam(value = "category", defaultValue = "") String category)  {
 		List<Product> list = service.productListService1(id);
-
+		System.out.println(list);
 		
 		String productPhoto = service.getProductPhoto(id);
 		
@@ -188,12 +188,17 @@ public class MainController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public Map<String, Object> like(
+	public ResponseEntity<Map<String,Object>> productLike(
 			@RequestBody ProductLike productLike,
 			Authentication authentication) {
-		
-		System.out.println(productLike);
-		System.out.println(authentication);
-		return service.productLike(productLike, authentication);
+		if(authentication ==null) {
+			return ResponseEntity
+					.status(403)
+					.body(Map.of("message","로그인을 해주세요."));
+		}else {
+			return ResponseEntity
+					.ok()
+					.body(service.productLike(productLike,authentication));
+		}
 	}
 }

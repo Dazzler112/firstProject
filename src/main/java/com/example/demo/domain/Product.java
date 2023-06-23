@@ -27,5 +27,10 @@ public class Product {
    private String keyword;
    private String categoryName;
    private String photoTitle;
+   
+   private Integer likeCount;
+   private Integer fileCount;
+   
+   private boolean liked;
 
 }

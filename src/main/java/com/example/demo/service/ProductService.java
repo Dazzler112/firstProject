@@ -51,14 +51,14 @@ public class ProductService {
 	}
 
 	public List<Product> listBoard3(Integer price, String title, LocalDateTime inserted, String address,
-			Integer likes) {
-		return mapper.selectAll3(title, price, inserted, address, likes);
+			Integer like) {
+		return mapper.selectAll3(title, price, inserted, address, like);
 	}
 
-	public List<Product> listBoard4(String memberId, Integer price, String title, LocalDateTime inserted,
-			String address, Integer likes) {
+	public List<Product> listBoard4(String memberId, String title, Integer price, String title2, LocalDateTime inserted,
+			String address, Integer like) {
 
-		return mapper.selectAll4(memberId, price, title, inserted, address, likes);
+		return mapper.selectAll4(memberId, price, title, inserted, address, like);
 	}
 
 	public List<Product> listBoard5(String statusCode, String writer, String title, LocalDateTime inserted,
@@ -216,6 +216,8 @@ public class ProductService {
 //   상품을 들어갔을때 상품 id하나만 나오기
 	public List<Product> productListService1(Integer id) {
 		List<Product> list = mapper.allProduct1(id);
+		Integer count = likeMapper.countByProductId(id);
+		list.forEach(e -> e.setLikeCount(count));
 		return list;
 	}
 

@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
-   <select id="selectAll2" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product ORDER BY ID DESC
-    </select>
-   <select id="selectAll3" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product ORDER BY Likes DESC
-    </select>
-   <select id="selectAll4" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product
-    </select>
-   <select id="selectAll5" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product
-    </select>
-   <select id="selectAll6" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product 
-    </select>
-   <select id="selectAll7" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product ORDER BY ID DESC
-    </select>
-   <select id="selectLikedProducts" resultType="com.example.demo.domain.Product">
-        SELECT * FROM Product WHERE id IN (
-        SELECT productId FROM Likes WHERE memberId = #{memberId}
-        )
-    </select>
-   <select id="selectProductListPaging" resultType="com.example.demo.domain.Product">
-      SELECT * FROM (
-              select id, title, writer, inserted
-              from product
-      <if test="keyword != null">
-               where title like concat('%', #{keyword}, '%' )
-            </if>
-      order by id desc) as T1
-      limit #{skip}, #{amount}
-   </select>
-   <select id="getTotal" resultType="int">
-      SELECT count(*) FROM product
-      <if test="keyword != null">
-        WHERE title LIKE '%' || #{keyword} || '%'
-    </if>
-   </select>
+	<select id="selectAll2"
+		resultType="com.example.demo.domain.Product">
+		SELECT * FROM Product ORDER BY ID DESC
+	</select>
+	<select id="selectAll3"
+		resultType="com.example.demo.domain.Product">
+		SELECT * FROM Product ORDER BY Likes DESC
+	</select>
+	<select id="selectAll4"
+		resultType="com.example.demo.domain.Product">
+		SELECT p.*
+		FROM Product p
+		JOIN ProductLike pl ON p.id = pl.productId
+		WHERE pl.memberId = #{memberId}
+	</select>
+	<select id="selectAll5"
+		resultType="com.example.demo.domain.Product">
+		SELECT * FROM Product
+	</select>
+	<select id="selectAll6"
+		resultType="com.example.demo.domain.Product">
+		SELECT * FROM Product
+	</select>
+	<select id="selectAll7"
+		resultType="com.example.demo.domain.Product">
+		SELECT * FROM Product ORDER BY ID DESC
+	</select>
 </mapper>
