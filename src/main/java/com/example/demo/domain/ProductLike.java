@@ -3,8 +3,8 @@ package com.example.demo.domain;
 import lombok.*;
 
 @Data
-public class Like {
+public class ProductLike {
 
-	private Integer boardId;
+	private Integer productId;
 	private String memberId;
 }

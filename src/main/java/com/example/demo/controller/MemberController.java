@@ -186,8 +186,10 @@ public class MemberController {
 	public String modifyProcess(Member member, RedirectAttributes rttr, String oldPassword) {
 		boolean ok = service.modifyAccount(member, oldPassword);
 		if (ok) {
+			rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
 			return "redirect:/member/info?id=" + member.getId();
 		} else {
+			rttr.addFlashAttribute("message", "회원 정보 수정중 오류가 발생하였습니다.");
 			return "redirect:/member/modify?id=" + member.getId();
 		}
 	}
@@ -195,9 +197,8 @@ public class MemberController {
 	@PostMapping("remove")
 	public String idRemove(Member member, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		boolean ok = service.removeAccount(member);
-//		System.out.println(member.getPassword());
 		if (ok) {
-			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
+			rttr.addFlashAttribute("message", "회원 탈퇴가 완료되었습니다.");
 
 			// 로그아웃
 			request.logout();

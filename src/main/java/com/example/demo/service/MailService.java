@@ -46,8 +46,8 @@ public class MailService {
 		int randomNumber = random.nextInt(900000) + 100000;
 
 		simpleMessage.setSubject("[Secont Stop] 회원 인증메일입니다.");
-		simpleMessage.setText("안녕하세요! Second Stop입니다! Second Stop 인증 관련 번호를 보내드립니다.\n" + "\n" + "인증 번호\n" + "++++++++++\n"
-				+ randomNumber + "\n++++++++++");
+		simpleMessage.setText("안녕하세요! Second Stop입니다!\n" + "본인 확인 인증 번호를 보내드립니다.\n" + "\n" + "인증 번호 : " + randomNumber +"\n"
+				+ "\n 타인에게 노출 시 계정 도용의 위험이 있습니다.");
 
 		javaMailSender.send(simpleMessage);
 
@@ -75,8 +75,6 @@ public class MailService {
 		String ok = memberMapper.checkUser(name, email);
 		
 		int cnt = 0;
-		
-		if (ok.equals("sonny")) {
 			toUserList.add(email);
 
 			int toUserSize = toUserList.size();
@@ -100,15 +98,7 @@ public class MailService {
 					+ randomNumber + "\n++++++++++");
 
 			javaMailSender.send(simpleMessage);
-		} 
 		return cnt == 1;
 	}
-
-//	public AuthenticatedNum checkAuthenticId() {
-//		AuthenticatedNum checkId = mailMapper.checkAuthenticId(randomNumber);
-//		System.out.println(randomNumber);
-//		System.out.println(checkId);
-//		return checkId;
-//	}
 
 }

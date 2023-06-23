@@ -73,8 +73,10 @@ public class FreeCommentController {
 	}
 	
 	@GetMapping("id/{id}")
-	@ResponseBody
-	public FreeComment get(@PathVariable("id")Integer id) {
+
+
+	public FreeComment get(@PathVariable("id")Integer id ) {
+
 		return service.get(id);
 	}
 	

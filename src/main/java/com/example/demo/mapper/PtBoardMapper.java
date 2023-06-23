@@ -25,10 +25,12 @@ public interface PtBoardMapper {
 				b.writer,
 				b.region,
 				f.fileName,
+
 				(SELECT addressSggNm 
 			         FROM Member 
 			         WHERE id = b.writer)  
 			         addressSggNm,
+
 				(SELECT COUNT(*)
 					FROM PtBoardLike
 					WHERE boardId = b.id) likeCount,
@@ -60,8 +62,10 @@ public interface PtBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO PtBoard (title, body, writer, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{category} )
+
+			INSERT INTO PtBoard (title, body, writer, region, category, sort)
+			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category}, #{sort} )
+
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(PtBoard board);
@@ -122,7 +126,10 @@ public interface PtBoardMapper {
 				b.writer,
 				b.inserted,
 				b.category,
-				b.region,
+				(SELECT addressSggNm
+				FROM Member
+				WHERE id = b.writer)
+				addressSggNm,
 				COUNT(f.id) fileCount,
 				(SELECT addressSggNm 
 			         FROM Member 
@@ -136,25 +143,25 @@ public interface PtBoardMapper {
 			     WHERE boardId = b.id) commentCount
 			     
 			FROM PtBoard b LEFT JOIN PtFileName f ON b.id = f.boardId
+			WHERE (b.category = #{category} OR #{category} IS NULL)
 			
-			<where>
-				<if test="(type eq 'all') or (type eq 'title')">
-				   title  LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'body')">
-				OR body   LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'writer')">
-				OR writer LIKE #{pattern}
-				</if>
-			</where>
+				<if test="type eq 'title'">
+			         AND title LIKE #{pattern}
+			     </if>
+			     <if test="type eq 'body'">
+			         AND body LIKE #{pattern}
+			     </if>
+			     <if test="type eq 'writer'">
+			         AND writer LIKE #{pattern}
+			     </if>
 			
 			GROUP BY b.id
 			ORDER BY b.id DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
-	List<PtBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+	@ResultMap("pagingMap")
+	List<PtBoard> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type, String category);
 
 	
 	@Select("""

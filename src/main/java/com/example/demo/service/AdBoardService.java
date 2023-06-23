@@ -144,7 +144,7 @@ public class AdBoardService {
 		return cnt == 1;
 	}
 
-	public Map<String, Object> listBoard(Integer page, String search, String type) {
+	public Map<String, Object> listBoard(Integer page, String search, String type, String category) {
 		
 		// 페이지당 행의 수
 				Integer rowPerPage = 10;
@@ -174,7 +174,7 @@ public class AdBoardService {
 				pageInfo.put("lastPageNum", lastPageNumber);
 
 				// 게시물 목록
-				List<AdBoard> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
+				List<AdBoard> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type, category);
 
 				return Map.of("pageInfo", pageInfo,
 						"adBoardList", list);

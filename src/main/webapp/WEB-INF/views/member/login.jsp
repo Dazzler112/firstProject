@@ -85,20 +85,16 @@ body {
 	font-size: 16px;
 	background-color: #55A44E;
 }
-
 </style>
 </head>
 <body>
+	<my:alert></my:alert>
 	<div class="login-wrapper">
 		<h1>Login</h1>
 		<form method="post" id="login-form">
-			<input id="inputUsername" type="text" name="username" placeholder="ID">
-			<input id="inputPassword" type="password" name="password" placeholder="Password"> 
-			<input type="submit" value="Login"> 
-			<input type="button" value="Sign Up" onclick="location.href='/member/signup'" />
+			<input id="inputUsername" type="text" name="username" placeholder="ID"> <input id="inputPassword" type="password" name="password" placeholder="Password"> <input type="submit" value="Login"> <input type="button" value="Sign Up" onclick="location.href='/member/signup'" />
 			<div class="find-buttons">
-				<input type="button" value="아이디 찾기" onclick="location.href='/member/userSearch '" /> 
-				<input type="button" value="임시 비밀번호 발급" onclick="location.href='/member/sendTempPw'" />
+				<input type="button" value="아이디 찾기" onclick="location.href='/member/userSearch '" /> <input type="button" value="임시 비밀번호 발급" onclick="location.href='/member/sendTempPw'" />
 			</div>
 		</form>
 	</div>
