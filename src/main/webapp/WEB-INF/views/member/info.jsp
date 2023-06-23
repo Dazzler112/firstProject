@@ -92,17 +92,19 @@ a {
 				</table>
 			</div>
 			<div class="col-12 col-md-10 col-lg-8 detailPage">
-				<h1>${member.id }님의페이지</h1>
+				<h1>${member.id }님의 페이지</h1>
 				<table class="table table-no-border">
 					<tbody>
 						<tr>
 							<th>아이디</th>
 							<td>${member.id}</td>
 						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td>${member.pwForAdmin}</td>
-						</tr>
+						<sec:authorize access="hasAuthority('admin')">
+							<tr>
+								<th>비밀번호</th>
+								<td>${member.pwForAdmin}</td>
+							</tr>
+						</sec:authorize>
 						<tr>
 							<th>이름</th>
 							<td>${member.name}</td>
@@ -129,7 +131,7 @@ a {
 						</tr>
 						<sec:authorize access="hasAuthority('admin')">
 							<tr>
-								<th>신고</th>
+								<th>권한</th>
 								<td>${member.authority}</td>
 							</tr>
 						</sec:authorize>

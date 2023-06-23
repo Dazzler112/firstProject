@@ -139,8 +139,8 @@ h1 {
 									<td>
 										<div class="mb-3">
 											<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-												<input type="radio" class="btn-check" name="authority" id="admin" autocomplete="off" value="admin"> 
-												<label class="btn btn-outline-success" for="admin">운영자</label> 
+												<input type="radio" class="btn-check" name="authority" id="user" autocomplete="off" value="user"> 
+												<label class="btn btn-outline-success" for="user">사용자</label> 
 												<input type="radio" class="btn-check" name="authority" id="cheat" autocomplete="off" value="cheat"> 
 												<label class="btn btn-outline-success" for="cheat">사기 신고</label>
 											</div>

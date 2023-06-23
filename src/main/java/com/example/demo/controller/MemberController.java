@@ -144,7 +144,8 @@ public class MemberController {
 	@GetMapping("info")
 	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	public void getInfo(String id, Model model) {
-		Member member = service.getUser(id);		
+		Member member = service.getUser(id);	
+		
 		model.addAttribute("member", member);
 	}
 

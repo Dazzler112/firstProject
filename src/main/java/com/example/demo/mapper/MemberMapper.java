@@ -18,6 +18,13 @@ public interface MemberMapper {
 			VALUES(#{id}, #{authority})
 			""")
 	void insertAuthority(Member member);
+	
+	@Update("""
+			UPDATE MemberAuthority
+			SET authority = #{authority}
+			WHERE memberId = #{id};
+						""")
+	void updateAuthority(Member member);
 
 	@Select("""
 			SELECT *

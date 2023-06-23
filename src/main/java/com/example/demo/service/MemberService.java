@@ -56,7 +56,7 @@ public class MemberService {
 		member.setPwForAdmin(plain);
 		
 		int cnt = mapper.signUpInsert(member);
-				  	
+				  mapper.insertAuthority(member);
 		return cnt == 1;
 	}
 
@@ -177,9 +177,10 @@ public class MemberService {
 		int cnt = 0;
 
 		if (passwordEncoder.matches(oldPassword, oldMember.getPassword())) {
-			// 기존 비밀번호와 같으면			
+			// 기존 비밀번호와 같으면		
+			System.out.println(member);
 			cnt = mapper.modify(member);
-			mapper.insertAuthority(member);
+			mapper.updateAuthority(member);
 		}
 		return cnt == 1;
 	}
