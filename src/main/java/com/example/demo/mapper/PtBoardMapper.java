@@ -25,6 +25,10 @@ public interface PtBoardMapper {
 				b.writer,
 				b.region,
 				f.fileName,
+				(SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
 				(SELECT COUNT(*)
 					FROM PtBoardLike
 					WHERE boardId = b.id) likeCount,
@@ -56,8 +60,8 @@ public interface PtBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO PtBoard (title, body, writer, region, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
+			INSERT INTO PtBoard (title, body, writer, category)
+			VALUES ( #{title}, #{body}, #{writer}, #{category} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(PtBoard board);
@@ -120,6 +124,10 @@ public interface PtBoardMapper {
 				b.category,
 				b.region,
 				COUNT(f.id) fileCount,
+				(SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
 			    (SELECT COUNT(*) 
 			     FROM PtBoardLike 
 			     WHERE boardId = b.id) likeCount,

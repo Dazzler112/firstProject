@@ -56,6 +56,9 @@ body{
 						<label for="add-file" class="form-label"></label>사진
 						<input id="add-file" class="form-control" type="file"  name="fileList" accept="image/*" multiple/>
 					</div>
+					<div class="mb-3" style="display: none;">
+					<input id="add-sort" type="text"  class="form-control" name="sort" value="freeboard" readonly/>
+					</div>		
 					<button class="btn btn-primary">글쓰기</button>
 					<a href="/freeboard/freelist" class="btn btn-danger" style="margin: 0px 0px 0px 10px;">취소</a>
 				</form>

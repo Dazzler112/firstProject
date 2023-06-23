@@ -23,4 +23,6 @@ public class PtBoard {
 	private Integer fileCount;
 	private Integer likeCount;
 	private Integer commentCount;
+	
+	private String addressSggNm;
 }

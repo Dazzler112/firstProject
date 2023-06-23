@@ -16,6 +16,9 @@
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>
+		<collection property="addressSggNm" ofType="String">
+  			<result column="addressSggNm" property="addressSggNm"/>
+  		</collection>
 	</resultMap>
 </mapper>
 

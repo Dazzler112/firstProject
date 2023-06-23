@@ -25,6 +25,10 @@ public interface AdBoardMapper {
 				b.writer,
 				b.region,
 				f.fileName,
+				(SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
 				(SELECT COUNT(*)
 					FROM AdBoardLike
 					WHERE boardId = b.id) likeCount,
@@ -56,8 +60,8 @@ public interface AdBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO AdBoard (title, body, writer, region, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
+			INSERT INTO AdBoard (title, body, writer, category)
+			VALUES ( #{title}, #{body}, #{writer},  #{category} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(AdBoard board);
@@ -120,6 +124,10 @@ public interface AdBoardMapper {
 				b.category,
 				b.region,
 				COUNT(f.id) fileCount,
+				 (SELECT addressSggNm 
+			         FROM Member 
+			         WHERE id = b.writer)  
+			         addressSggNm,
 			    (SELECT COUNT(*) 
 			     FROM AdBoardLike 
 			     WHERE boardId = b.id) likeCount,

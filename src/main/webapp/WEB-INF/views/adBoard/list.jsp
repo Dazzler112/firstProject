@@ -152,7 +152,7 @@ h1 {
 				<c:forEach items="${adBoardList}" var="board">
 					<tr>
 						<td>${board.category}</td>
-						<td>${board.region}</td>
+						<td>${board.addressSggNm}</td>
 						<td class="text">
 							<c:if test="${board.fileCount > 0 }">
 								<span class="badge rounded-pill text-bg-info">
