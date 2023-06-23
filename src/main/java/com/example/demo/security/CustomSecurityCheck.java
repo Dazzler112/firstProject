@@ -61,7 +61,7 @@ public class CustomSecurityCheck {
 	
 	public boolean checkCommentWriter(Authentication authentication,
 								      Integer commentId) {
-		FreeComment comment = commentMapper.selectById(commentId);
+		FreeComment comment = commentMapper.selectById( commentId);
 		
 		return comment.getMemberId().equals(authentication.getName());
 	}

@@ -17,15 +17,20 @@
 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+	#bodycenter{
+		margin-top:30px;
+	}
+</style>
 <body>
 
-
+	<my:navBar></my:navBar>
 
 	<div class="container-lg">
 
 		<div class="row justify-content-center">
-			<div class="col-1 col-md-3 col-lg-6">
-				<h1>게시물 작성</h1>
+			<div id="bodycenter" class="col-1 col-md-3 col-lg-6">
+				<h1 style="color: #55A44E;">게시물 작성</h1>
 				<form method="post" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="categorySelect" class="form-label">카테고리 지정</label> <select id="categorySelect"
@@ -63,7 +68,7 @@
 						</div>
 
 						<div class="mb-3">
-							<label for="fileInput" class="form-label">상품 사진</label> <input class="form-control"
+							<label for="fileInput" class="form-label">상품 사진 </label> <input class="form-control"
 								type="file" id="fileInput" name="files" accept="image/*" multiple>
 							<div class="form-text">총 10MB, 하나의 파일은 1MB를 초과할 수 없습니다.</div>
 						</div>
@@ -75,6 +80,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 		crossorigin="anonymous"></script>

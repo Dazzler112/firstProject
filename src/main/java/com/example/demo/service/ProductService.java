@@ -46,14 +46,16 @@ public class ProductService {
 		return mapper.selectAll1(title, inserted, body, writer);
 	}
 
-	public List<Product> listBoard2(Integer price, String title, LocalDateTime inserted, String address) {
-		return mapper.selectAll2(title, price, inserted, address);
-	}
 
-	public List<Product> listBoard3(Integer price, String title, LocalDateTime inserted, String address,
-			Integer like) {
-		return mapper.selectAll3(title, price, inserted, address, like);
-	}
+   public List<Product> listBoard2(Integer id, String photoTitle, Integer price, String title, LocalDateTime inserted, String address) {
+      return mapper.selectAll2(id, photoTitle ,title, price, inserted, address);
+   }
+
+   public List<Product> listBoard3(Integer id, String photoTitle, Integer price,  String title, LocalDateTime inserted, String address,
+         Integer likes) {
+      return mapper.selectAll3(id, photoTitle,title, price, inserted, address, likes);
+   }
+
 
 	public List<Product> listBoard4(String memberId, String title, Integer price, String title2, LocalDateTime inserted,
 			String address, Integer like) {
@@ -74,10 +76,13 @@ public class ProductService {
 	}
 
 //   카테고리 리스트로 에서 사용할 수 있는 서비스
-	public List<Product> listBoard7(String categoryTitle, String title, Integer price, String address,
-			LocalDateTime inserted) {
-		return mapper.selectAll7(categoryTitle, title, price, address, inserted);
-	}
+
+   public List<Product> listBoard7(Integer startIndex, String categoryTitle, String title, Integer price, String address,
+         LocalDateTime inserted) {
+	   return mapper.selectAll7(startIndex,categoryTitle, title, price, address, inserted);
+	   
+   }
+
 
 	public List<Product> exList(String statusCode, String title, LocalDateTime inserted, String body, String writer,
 			Integer price, Integer views, Integer likes, String modi, String memberId, Integer ProrductID) {
@@ -91,6 +96,7 @@ public class ProductService {
 	}
 
 	public boolean updateProduct(Product product, MultipartFile file) throws Exception {
+
 
 		if(file != null && file.getSize() > 0) {
 		
@@ -119,6 +125,7 @@ public class ProductService {
 //       // 추가된 상품의 ID 값이 null이 아닌 경우, 상품 추가 성공으로 간주한다.
 //       return ProrductID != null;
 //   }
+
 
 	@Transactional(rollbackFor = Exception.class)
 	public boolean addProduct(Product product, MultipartFile[] files, Integer category) throws Exception {
@@ -269,5 +276,6 @@ public class ProductService {
 	 * public List<Product> productCategory(String productCategory) { List<Product>
 	 * list = mapper.productCategoryList(productCategory); return list; }
 	 */
+
 
 }

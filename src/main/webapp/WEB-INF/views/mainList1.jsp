@@ -21,6 +21,12 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <style>
+
+.mainimg{
+
+	border-radius: 5%;
+
+}
 </style>
 
 <body>
@@ -32,11 +38,14 @@
 		<div class="swiper mySwiper" >
 		<h1 style="text-align: left;margin-left:5px;color:#55A44E; margin-bottom:40px; margin-top:20px;">요즘 뜨는상품</h1>
 			<div class="swiper-wrapper">
-				<div class="swiper-slide"><img src="/productimg/sample1.jpg" alt=""></div>
-				<div class="swiper-slide"><img src="/productimg/sample2.jpg" alt=""></div>
-				<div class="swiper-slide"><img src="/productimg/sample3.jpg" alt=""></div>
-				<div class="swiper-slide"><img src="/productimg/sample4.jpg" alt=""></div>
-				<div class="swiper-slide"><img src="/productimg/sample5.jpg" alt=""></div>
+				<div class="swiper-slide"><a href=https://earthplogging.com/><img class="mainimg" src="/img/campaign8.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a href=https://www.sas.org.uk/><img class="mainimg" src="/img/campaign1.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a href=https://www.patagonia.com/stories/dont-buy-this-jacket-black-friday-and-the-new-york-times/story-18615.html>
+											<img class="mainimg" src="/img/campaign3.jpg"alt=""></a></div>
+				<div class="swiper-slide"><a href=https://post.naver.com/viewer/postView.naver?volumeNo=35922195&memberNo=53135705>
+											<img class="mainimg" src="/img/campaign6.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a href=https://www.ehyundai.com/newPortal/EV/EV000003_14_V.do?eventNo=27279&eventCd=B0349900&list_page=&search=&keyword=&eventSearch=&eventSearchDep=&imgLink=/attachfiles/event/20230608125451265.png>
+											<img class="mainimg" src="/img/campaign7.jpg" alt=""></a></div>
 		
 			</div>
 		</div>	
@@ -71,9 +80,11 @@
 
 				
 				<c:forEach items="${productList1}"    var="product"  begin="0" end="4" step="1">
+				
 					<ul class="items">
+					
 						<a href="/teamProject/exList/${product.id }">
-							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${list[0].id }/${list[0].photoTitle}" alt="" />
+							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${product.id }/${product.photoTitle}" alt="" />
                      	</a>
 						<li class="title"><a href="/board/id/${product.id }"> ${product.title}
 						</a></li>
@@ -127,7 +138,7 @@
 				<c:forEach items="${productList2}" var="product"  begin="0" end="9" step="1">
 					<ul class="items">
 						<a href="/teamProject/exList/${product.id }">
-							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${list[0].id }/${list[0].photoTitle}" alt="" />
+							<img class="img-thumbnail img-fluid" src="${bucketUrl }/${product.id }/${product.photoTitle}" alt="" />
                      	</a>
 						<li class="title"><a href="/board/id/${product.id }"> ${product.title}
 						</a></li>

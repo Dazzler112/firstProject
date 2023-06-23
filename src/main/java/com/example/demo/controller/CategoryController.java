@@ -91,14 +91,13 @@ public class CategoryController {
 		
 //		오른쪽 페이지 번호가 마지막 페이지 번호보다 클 수 없음
 		rightPageNum = Math.min(rightPageNum, lastPageNum);
+		//수정 및 삭제버튼 보이게하는 코드
+		/* List<Product> pagenation = mapper.listcustomer(startIndex); */
+		List<Product> categoryList = service.listBoard7(startIndex, title,categoryTitle, price, address, inserted);
 		
-		
-		List<Product> pagenation = mapper.listcustomer(startIndex);
-		List<Product> categoryList = service.listBoard7( title,categoryTitle, price, address, inserted);
-		
-		
+	
 		model.addAttribute("CategoryList", categoryList);
-		model.addAttribute("CategoryList", pagenation);
+		/* model.addAttribute("pagenation", pagenation); */
 		model.addAttribute("rightPageNum" , rightPageNum);
 		model.addAttribute("leftPageNum" , leftPageNum);
 		model.addAttribute("nextPageNum" , nextPageNum);

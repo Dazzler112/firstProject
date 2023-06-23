@@ -56,6 +56,7 @@ public class FreeCommentService {
 		return list;
 	}
 
+
 	public FreeComment get(Integer id) {
 
 		return mapper.selectById(id);

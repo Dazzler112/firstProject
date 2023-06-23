@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
-	<select id="selectAll2"
-		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product ORDER BY ID DESC
-	</select>
-	<select id="selectAll3"
-		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product ORDER BY Likes DESC
-	</select>
+
+   <select id="selectAll2" resultType="com.example.demo.domain.Product">
+        SELECT 
+        	p.ID,
+        	p.CategoryID,
+        	p.MemberID,
+        	p.Price,
+        	p.Qty,
+        	p.Title,
+        	p.Inserted,
+        	p.Address,
+        	p.Likes,
+        	p.StatusCode,
+        	p.views,
+        	p.writer,
+        	p.body,
+        	p.fileName,
+        	ph.ProductTitle PhotoTitle
+        	 
+        	
+         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC
+    </select>
+   <select id="selectAll3" resultType="com.example.demo.domain.Product">
+   SELECT 
+        	p.ID,
+        	p.CategoryID,
+        	p.MemberID,
+        	p.Price,
+        	p.Qty,
+        	p.Title,
+        	p.Inserted,
+        	p.Address,
+        	p.Likes,
+        	p.StatusCode,
+        	p.views,
+        	p.writer,
+        	p.body,
+        	p.fileName,
+        	ph.ProductTitle PhotoTitle
+        	 
+        	
+         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
+       
+    </select>
+   <select id="selectAll4" resultType="com.example.demo.domain.Product">
+   		 SELECT 
+  			 p.ID,
+        	p.CategoryID,
+        	p.MemberID,
+        	p.Price,
+        	p.Qty,
+        	p.Title,
+        	p.Inserted,
+        	p.Address,
+        	p.Likes,
+        	p.StatusCode,
+        	p.views,
+        	p.writer,
+        	p.body,
+        	p.fileName,
+        	ph.ProductTitle PhotoTitle
+        	 
+        	
+         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
+        
+    </select>
+   <select id="selectAll5" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product
+    </select>
+   <select id="selectAll6" resultType="com.example.demo.domain.Product">
+        SELECT * FROM Product 
+    </select>
+   <select id="selectAll7" resultType="com.example.demo.domain.Product">
+   
+        SELECT 
+        	p.ID,
+        	p.CategoryID,
+        	p.MemberID,
+        	p.Price,
+        	p.Qty,
+        	p.Title,
+        	p.Inserted,
+        	p.Address,
+        	p.Likes,
+        	p.StatusCode,
+        	p.views,
+        	p.writer,
+        	p.body,
+        	p.fileName,
+        	ph.ProductTitle PhotoTitle
+        	
+        	
+    		
+        	 
+        	
+         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC LIMIT #{startIndex}, 12
+    </select>
+ 
+
 	<select id="selectAll4"
 		resultType="com.example.demo.domain.Product">
 		SELECT p.*
@@ -16,17 +107,5 @@
 		JOIN ProductLike pl ON p.id = pl.productId
 		WHERE pl.memberId = #{memberId}
 	</select>
-	<select id="selectAll5"
-		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product
-	</select>
-	<select id="selectAll6"
-		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product
-	</select>
-	<select id="selectAll7"
-		resultType="com.example.demo.domain.Product">
-		SELECT * FROM Product ORDER BY ID DESC
-	</select>
-	
+
 </mapper>

@@ -201,9 +201,11 @@
 			<div class="clear"></div>
 			<c:forEach items="${CategoryList}" var="product">
 				<ul class="items">
+				
 					<a href="/teamProject/exList/${product.id }"> <img
-						class="productimg" src="/productimg/sample1.jpg">
+						class="productimg" src="${bucketUrl }/${product.id }/${product.photoTitle}">
 					</a>
+				
 					<li class="title">${product.id}</li>
 					<li class="title">${product.title}</li>
 					<li class="price">${product.price}</li>
@@ -215,8 +217,9 @@
 		</div>
 		<div class="clear"></div>
 	</section>
+	
 
-	<my:categorylistsearch></my:categorylistsearch>
+	
 <!-- 페이지네이션 -->
 	<div class="container-lg">
 		<div class="row">
