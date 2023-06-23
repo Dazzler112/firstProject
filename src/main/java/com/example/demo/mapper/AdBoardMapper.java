@@ -59,8 +59,8 @@ public interface AdBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO AdBoard (title, body, writer, region, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
+			INSERT INTO AdBoard (title, body, writer, region, category, sort)
+			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category}, #{sort} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(AdBoard board);

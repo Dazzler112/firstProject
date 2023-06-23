@@ -57,9 +57,7 @@
 				<button class="dropdown-toggle" onclick="toggleDropdown()"><i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i></button>
 				
 				
-				<!-- <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 3em;">
-					<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
-				</button> -->
+				
 				<ul class="dropdown-menu" id="dropdownMenu">
 					<!-- Dropdown menu links -->
 					<sec:authorize access="isAnonymous">
@@ -87,13 +85,7 @@
 					</sec:authorize>
 					
 					
-					<sec:authorize access="isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
-							</button></li>
-					</sec:authorize>
-					
-					<sec:authorize access="!isAuthenticated()">
+					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 						<li><button class="dropdown-item" type="button">
 								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
 							</button></li>

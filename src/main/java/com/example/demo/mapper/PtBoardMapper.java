@@ -60,8 +60,8 @@ public interface PtBoardMapper {
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO PtBoard (title, body, writer, region, category)
-			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category} )
+			INSERT INTO PtBoard (title, body, writer, region, category, sort)
+			VALUES ( #{title}, #{body}, #{writer}, #{region}, #{category}, #{sort} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(PtBoard board);

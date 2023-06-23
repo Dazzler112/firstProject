@@ -83,6 +83,9 @@
 					<label for="titleInput" class="form-label">제목</label>
 					<input id="titleInput" type="text" name="title" placeholder="제목 입력" class="tit_con" value="${board.title }" />
 				</div>
+				<div class="d-none">
+					<input type="text" name="sort" class="tit_con" value="adBoard" />
+				</div>
 				<div class="mid">
 					<span>카테고리</span>
 					<select class="cat" name="category">
@@ -114,7 +117,7 @@
 				<button type="submit" class="btn btn-dark">등록</button>
 				<a href="/adBoard/list" class="btn btn-dark">취소</a>
 			</div>
-
+			
 		</form>
 	</div>
 

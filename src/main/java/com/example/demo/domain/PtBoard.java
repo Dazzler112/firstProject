@@ -15,6 +15,7 @@ public class PtBoard {
 	private String writer;
 	private String region;
 	private String category;
+	private String sort;
 
 	private List<String> fileName;
 
@@ -23,6 +24,7 @@ public class PtBoard {
 	private Integer fileCount;
 	private Integer likeCount;
 	private Integer commentCount;
-	
-	private List<String> addressSggNm;
+
+	private String addressSggNm;
+
 }
