@@ -33,8 +33,8 @@ public class FreeCommentService {
 		comment.setMemberId(authentication.getName());
 		
 		var res = new HashMap<String,Object>();
-		int cnt = mapper.insert(comment);
 		comment.setDepth(0);
+		int cnt = mapper.insert(comment);
 		if(cnt == 1) {
 			res.put("message", "댓글이 등록되었습니다.");
 		}else {
@@ -56,9 +56,9 @@ public class FreeCommentService {
 		return list;
 	}
 
-	public FreeComment get(Integer id, Integer params) {
-		// TODO Auto-generated method stub
-		return mapper.selectById(id ,params);
+	public FreeComment get(Integer id) {
+		
+		return mapper.selectById(id);
 	}
 
 	public Map<String, Object> update(FreeComment comment) {
@@ -77,9 +77,11 @@ public class FreeCommentService {
 		
 		comment.setMemberId(authentication.getName());
 		
+		comment.setDepth(1);
+		comment.setParentId(comment.getId());
 		var res = new HashMap<String,Object>();
 		int cnt = mapper.insertReply(comment);
-		comment.setDepth(1);
+		System.out.println("parentId => " + comment.getParentId());
 		if(cnt == 1) {
 			res.put("message", "댓글이 등록되었습니다.");
 		}else {
@@ -88,9 +90,16 @@ public class FreeCommentService {
 		return res;
 	}
 
-	public void updateCommentShape(Integer boardId, Integer depth) {
-		mapper.updateCommentShape(boardId,depth);
+	public List<FreeComment> reList(Integer boardId, Authentication authentication) {
+		List<FreeComment> comments = mapper.selectReplyId(boardId);
 		
+		if(authentication != null) {
+		
+		  for(FreeComment comment : comments) {
+		 	comment.setEditable(comment.getMemberId().equals(authentication.getName()));
+			}
+		}		
+		return comments;
 	}
 
 	

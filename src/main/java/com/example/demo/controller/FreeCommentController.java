@@ -27,6 +27,14 @@ public class FreeCommentController {
 		return service.list(boardId,authentication);
 	}
 	
+	@GetMapping("relist")
+	@ResponseBody
+	public List<FreeComment> reList(@RequestParam("board") Integer boardId, Authentication authentication) {
+		
+		return service.reList(boardId,authentication);
+		
+	}
+	
 	@PostMapping("add")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> add(@RequestBody FreeComment comment,
@@ -46,7 +54,6 @@ public class FreeCommentController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> addReply(@RequestBody FreeComment comment,Authentication authentication) {
 		
-		
 		if(authentication == null) {
 			Map<String, Object> list = Map.of("message","로그인 후 댓글을 달아주세요.");
 			return ResponseEntity.status(401).body(list);
@@ -65,10 +72,10 @@ public class FreeCommentController {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@PostMapping("id/{id}")
-	public FreeComment get(@PathVariable("id")Integer id ,
-						  @RequestBody Integer params) {
-		return service.get(id , params);
+	@GetMapping("id/{id}")
+	@ResponseBody
+	public FreeComment get(@PathVariable("id")Integer id) {
+		return service.get(id);
 	}
 	
 	@PutMapping("update")
@@ -80,12 +87,4 @@ public class FreeCommentController {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@PostMapping("updateShape")
-	@ResponseBody
-	public String updateCommentShape(@RequestParam("boardId")Integer boardId,
-									@RequestParam("depth")Integer depth) {
-
-		service.updateCommentShape(boardId,depth);
-		return "ok";
-	}
 }

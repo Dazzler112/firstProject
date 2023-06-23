@@ -12,8 +12,8 @@ public interface FreeCommentMapper {
 	@Select("""
 			SELECT *
 			FROM Comment
-			WHERE boardId = #{boardId}
-			ORDER BY parentId ASC, id ASC
+			WHERE depth = 0
+			AND boardId = #{boardId}
 			""")
 	List<FreeComment> selectAllComment(Integer boardId);
 
@@ -35,7 +35,7 @@ public interface FreeCommentMapper {
 			Comment 
 			WHERE id = #{id}
 			""")
-	FreeComment selectById(Integer id, Integer params);
+	FreeComment selectById(Integer id);
 
 	@Update("""
 			UPDATE Comment
@@ -58,18 +58,20 @@ public interface FreeCommentMapper {
 			""")
 	Integer insertReply(FreeComment comment);
 
-	//댓글 정렬
-	@Update("""
-			UPDATE Comment
-			SET depth = depth +1
-			WHERE boardId = #{boardId} AND depth > #{newdepth}
-			""")
-	Integer updateCommentShape(Integer boardId, Integer newdepth);
 
 	@Delete("""
 			DELETE FROM Comment
 			WHERE memberId = #{memberId}
 			""")
 	Integer deleteByMemberId(String memberId);
+
+	@Select("""
+			SELECT *
+			FROM Comment
+			WHERE boardId = #{boardId}
+			AND depth = 1
+			AND parentId = #{id}
+			""")
+	List<FreeComment> selectReplyId(Integer boardId);
 
 }
