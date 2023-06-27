@@ -1,8 +1,9 @@
+
 $("#likeIcon").click(function() {
 
 
    const productId = $("#productIdText").text().trim();
-   const url = `/teamProject/like`;
+   const url = `/SecondStop/like`;
    const data = { productId }
    $.ajax(url, {
       method: 'post',
@@ -32,4 +33,3 @@ $("#likeIcon").click(function() {
       }
    });
 });
-

@@ -37,6 +37,7 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("id/{id}")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public String board(@PathVariable("id") Integer id, Model model, Authentication authentication) {
 		AdBoard board = service.getBoard(id, authentication); 
 		
@@ -46,7 +47,7 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkAdBoardWriter(authentication, #id)")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public String modifyForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("board", service.getBoard(id));
 		
@@ -85,7 +86,7 @@ public class AdBoardController {
 	}
 	
 	@GetMapping("add")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public void addForm() {
 		
 	}

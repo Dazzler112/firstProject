@@ -19,9 +19,6 @@
 		<collection property="fileName" ofType="string">
 			<result column="fileName" />
 		</collection>
-		<collection property="addressSggNm" ofType="String">
-  		<result column="addressSggNm" property="addressSggNm"/>
-  		</collection>
 	</resultMap>
 
 	<resultMap type="com.example.demo.domain.AdBoard" id="pagingMap">

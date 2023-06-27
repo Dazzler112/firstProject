@@ -40,6 +40,10 @@ public interface ProductLikeMapper {
            SELECT * FROM Product
            """)
    List<Product> selectAllProducts();
+   
+	
+
+
 }
 
 

@@ -13,235 +13,147 @@
 <style>
 </style>
 <body style="margin-top: 150px;">
-	<!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
-	<header class="header">
-		<div class="header__wrapper">
-			<!-- 로고 -->
-			<div class="header__start">
+
+<%
+      String link = "http://3.35.52.151:8081/SecondStop/list4";
+   %>
+   <!-- 시맨틱 태그 header로 헤더 부분을 묶음 -->
+   <header class="header">
+      <div class="header__wrapper">
+         <!-- 로고 -->
+         <div class="header__start">
 
 
 
-			<sec:authorize access="isAnonymous()">
-				<span class="header__title"><a class="linkcolor"
-					href="/teamProject/list1"><img  class="navbarimage" src="/img/navbarimage.png"
-					alt="My Image"/></a> </span>
-			</sec:authorize>		
-			<sec:authorize access="isAuthenticated()">		
-					<a class="linkcolor"
-					href="/teamProject/list2"><img  class="navbarimage" src="/img/navbarimage.png"
-					alt="My Image"/></a> 
-			</sec:authorize>
+         <sec:authorize access="isAnonymous()">
+            <span class="header__title"><a class="linkcolor"
+               href="/SecondStop/list1"><img  class="navbarimage" src="/img/navbarimage.png"
+               alt="My Image"/></a> </span>
+         </sec:authorize>      
+         <sec:authorize access="isAuthenticated()">      
+               <a class="linkcolor"
+               href="/SecondStop/list2"><img  class="navbarimage" src="/img/navbarimage.png"
+               alt="My Image"/></a> 
+         </sec:authorize>
 
 
 
-			
-			</div>
-			<!-- 검색창 -->
-			<div class="header__center">
-				<form class="header__searchForm" onsubmit="return false;">
-					<input class="header__input--text" type="text" />
-					
-					<button class="header__input--btn">검색</button>
-					<!-- http://localhost:8080?search=검색할 내용  -->
-				</form>
-				
-				
-				
-				<%-- <form action="./noticeList" class="d-flex" role="search">
-					<div class="input-group">
-						<select class="form-select flex-grow-0" style="width: 100px;" name="type" id="">
-							<option value="all">전체</option>
-							<option value="title" ${param.type eq 'title' ? 'selected' : '' }>제목</option>
-							<option value="body" ${param.type eq 'body' ? 'selected' : '' }>본문</option>
-							<option value="writer" ${param.type eq 'writer' ? 'selected' : '' }>작성자</option>
-						</select> <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-light" type="submit">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</div>
-				</form> --%>
-			</div>
-			
-			
-			
-		
+         
+         </div>
+         <!-- 검색창 -->
+         <div class="header__center">
+         <form action="./list4" class="d-flex" role="search">
+            <div class="input-group">
+               <input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-light" type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+               </button>
+            </div>
+         </form>
+            
+            
+            
+            
+         </div>
+         
+         
+         
+      
 
   
 
-			<!-- 프로필 -->
-			<div id="dropdown" class="btn-toggle btn-secondary">
-				
-				<button class="dropdown-toggle" onclick="toggleDropdown()">
-				<i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
-				</button>
-				
-				
-				
+         <!-- 프로필 -->
+         <div id="dropdown" class="btn-toggle btn-secondary">
+            
+            <button class="dropdown-toggle" onclick="toggleDropdown()">
+            <i class="fa-regular fa-circle-user" style="color: #FFFFFF; margin-left: 10px;"></i>
+            </button>
+            
+            
+            
 
-				<ul class="dropdown-menu" id="dropdownMenu">
-					<!-- Dropdown menu links -->
-					<sec:authorize access="isAnonymous">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/member/login">로그인</a>
-							</button></li>
-					</sec:authorize>
-					<sec:authorize access="isAnonymous()">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/member/signup">회원가입</a>
-							</button></li>
-					</sec:authorize>
-					
-					<sec:authorize access="hasAuthority('admin')">
-						<li>
-							<button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
-							</button>
-						</li>
-					</sec:authorize>
-					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
-							</button></li>
-					</sec:authorize>
-					
-					
-					<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor" href="/teamProject/mainAdd">상품등록</a>
-							</button></li>
-					</sec:authorize>
-					
+            <ul class="dropdown-menu" id="dropdownMenu">
+               <!-- Dropdown menu links -->
+               <sec:authorize access="isAnonymous">
+                  <li><button class="dropdown-item" type="button">
+                        <a class="linkcolor" href="/member/login">로그인</a>
+                     </button></li>
+               </sec:authorize>
+               <sec:authorize access="isAnonymous()">
+                  <li><button class="dropdown-item" type="button">
+                        <a class="linkcolor" href="/member/signup">회원가입</a>
+                     </button></li>
+               </sec:authorize>
+               
+               <sec:authorize access="hasAuthority('admin')">
+                  <li>
+                     <button class="dropdown-item" type="button">
+                        <a class="linkcolor" href="/member/adminPage?id=<sec:authentication property="name" />">운영자 페이지</a>
+                     </button>
+                  </li>
+               </sec:authorize>
+               <sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
+                  <li><button class="dropdown-item" type="button">
+                        <a class="linkcolor" href="/member/info?id=<sec:authentication property="name" />">마이페이지</a>
+                     </button></li>
+               </sec:authorize>
+               
+               
+               <sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
+                  <li><button class="dropdown-item" type="button">
+                        <a class="linkcolor" href="/SecondStop/mainAdd">상품등록</a>
+                     </button></li>
+               </sec:authorize>
+               
 
-					<sec:authorize access="isAuthenticated()">
-						<li><button class="dropdown-item" type="button">
-								<a class="linkcolor"  href="/member/logout">로그아웃</a>
-							</button></li>
-					</sec:authorize>
-				</ul>
-			</div>
+               <sec:authorize access="isAuthenticated()">
+                  <li><button class="dropdown-item" type="button">
+                        <a class="linkcolor"  href="/member/logout">로그아웃</a>
+                     </button></li>
+               </sec:authorize>
+            </ul>
+         </div>
 
-			<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
-				class="fa-solid fa-bars"></i></label>
-			<div class="closedsidebar">
-				<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
-				<!--  -->
+         
+               
+                  
+      </div>
+            
 
-				<!--  -->
-				<div class="accordion" id="accordionExample">
-					<div class="accordion-item">
-						<h2 class="accordion-header">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">패션</button>
+      
+                  
+         
 
-
-							<input type="checkbox" id="iconemenu"> <label for="iconemenu"> <i
-								class="fa-solid fa-bars"></i></label>
-
-							<div class="closedsidebar">
-								<h1 style="position: static; margin: 50px 0px 30px 60px; font-size: 30px;">Home</h1>
-								<div class="accordion" id="accordionExample">
-									<div class="accordion-item">
-										<h2 class="accordion-header">
-
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-												data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-												패션</button>
-										</h2>
-										<div id="collapseOne" class="accordion-collapse collapse"
-											data-bs-parent="#accordionExample">
-
-											<div class="accordion-body"></div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header">
-
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-												data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">게임</button>
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-												data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-												게임</button>
-										</h2>
-										<div id="collapseTwo" class="accordion-collapse collapse"
-											data-bs-parent="#accordionExample">
-
-											
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header">
-
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion
-												Item #3</button>
-										</h2>
-										<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-												data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-												Accordion Item #3</button>
-						</h2>
-						<div id="collapseThree" class="accordion-collapse collapse"
-							data-bs-parent="#accordionExample">
-
-							<div class="accordion-body"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			</input> 
-						
-			<button style="background-color: rgba(0, 0, 0, 0); border: 0 solid black;" id="iconsearch"
-				type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</button>
-
-		</div>
-		<div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-
-						<input class="header__input--text" type="text"><i
-							class="fa-solid fa-magnifying-glass"></i></input>
-						<button type="button" data-bs-dismiss="modal" aria-label="Close"
-							style="border: 0 solid black;">
-
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</div>
-					<div class="modal-body">...</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<nav id="primary_nav_wrap">
-			<ul>
-				<li class="current-menu-item"><a href="/teamProject/list1">홈</a></li>
-				<li><a href="http://localhost:8084/teamProject/list4">카테고리</a>
-					<ul>
-						<li><a href="#">패션</a></li>
-						<li><a href="#">가구</a></li>
-						<li><a href="#">게임</a></li>
-						<li><a href="#">명품</a></li>
-						<li><a href="#">전자기기</a></li>
-						<li><a href="#">취미</a></li>
-						<li><a href="#">무료나눔</a></li>
-							
-					</ul></li>
-				<li><a href="#">게시판</a>
-					<ul>
-						<li><a href="/freeboard/freelist">지역게시판</a></li>
-						<li><a href="/adBoard/list">광고게시판</a></li>
-						<li><a href="/ptBoard/list">알바게시판</a></li>
-					</ul>
-				<li><a href="/cheat/check">조회</a>
-				<li><a href="/notice/noticeList">공지사항</a></li>
-			</ul>
-		</nav>
-	</header>
+      
+      
+      <nav id="primary_nav_wrap">
+         <ul>
+            <sec:authorize access="isAnonymous">
+         <li class="current-menu-item"><a href="/SecondStop/list1">홈</a></li>
+         </sec:authorize>
+         <sec:authorize access="isAuthenticated()">
+         <li class="current-menu-item"><a href="/SecondStop/list2">홈</a></li>
+         </sec:authorize>
+            <li><a href="/SecondStop/list4">카테고리</a>
+               <ul>
+                  <li><a onClick="location.href='<%=link%>?search=패션'">패션</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=가구'">가구</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=게임'">게임</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=명품'">명품</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=전자기기'">전자기기</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=취미'">취미</a></li>
+                  <li><a onClick="location.href='<%=link%>?search=무료나눔'">무료나눔</a></li>
+                     
+               </ul></li>
+            <li><a href="#">게시판</a>
+               <ul>
+                  <li><a href="/freeboard/freelist">자유게시판</a></li>
+                  <li><a href="/adBoard/list">광고게시판</a></li>
+                  <li><a href="/ptBoard/list">알바게시판</a></li>
+               </ul>
+            <li><a href="/cheat/check">조회</a>
+            <li><a href="/notice/noticeList">공지사항</a></li>
+         </ul>
+      </nav>
+   </header>
 </body>

@@ -18,52 +18,52 @@ import software.amazon.awssdk.services.s3.*;
 @EnableMethodSecurity
 
 public class CustomConfig {
-	
-	@Value("${aws.accessKeyId}")
-	private String accessKeyId;
-	@Value("${aws.secretAccessKey}")
-	private String secretAcessKey;
-	
-	@Value("${aws.bucketUrl}")
-	private String bucketUrl;
-	
-	@Autowired
-	private ServletContext application;
-	
-	@PostConstruct
-	public void init() {
-		application.setAttribute("bucketUrl", bucketUrl);
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		http.csrf().disable();
-//		http.authorizeHttpRequests().anyRequest().permitAll();
-		
-		http.formLogin().loginPage("/member/login")
-						.defaultSuccessUrl("/teamProject/list2", true);
-		http.logout().logoutUrl("/member/logout")
-		  			 .logoutSuccessUrl("/teamProject/list1");
-		return http.build();
-		
-	}
-	@Bean
-	public S3Client s3client() {
-		
-		AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKeyId, secretAcessKey); 
-		AwsCredentialsProvider provider = StaticCredentialsProvider.create(credentials);
-		
-		S3Client s3client = S3Client.builder()
-				.credentialsProvider(provider)
-				.region(Region.AP_NORTHEAST_2)
-				.build();
-		
-		return s3client;
-	}
+   
+   @Value("${aws.accessKeyId}")
+   private String accessKeyId;
+   @Value("${aws.secretAccessKey}")
+   private String secretAcessKey;
+   
+   @Value("${aws.bucketUrl}")
+   private String bucketUrl;
+   
+   @Autowired
+   private ServletContext application;
+   
+   @PostConstruct
+   public void init() {
+      application.setAttribute("bucketUrl", bucketUrl);
+   }
+   
+   @Bean
+   public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+   }
+   
+   @Bean
+   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+      http.csrf().disable();
+//      http.authorizeHttpRequests().anyRequest().permitAll();
+      
+      http.formLogin().loginPage("/member/login")
+                  .defaultSuccessUrl("/SecondStop/list2", true);
+      http.logout().logoutUrl("/member/logout")
+                  .logoutSuccessUrl("/SecondStop/list1");
+      return http.build();
+      
+   }
+   @Bean
+   public S3Client s3client() {
+      
+      AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKeyId, secretAcessKey); 
+      AwsCredentialsProvider provider = StaticCredentialsProvider.create(credentials);
+      
+      S3Client s3client = S3Client.builder()
+            .credentialsProvider(provider)
+            .region(Region.AP_NORTHEAST_2)
+            .build();
+      
+      return s3client;
+   }
 
 }
