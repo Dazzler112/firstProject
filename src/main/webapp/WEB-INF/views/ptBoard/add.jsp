@@ -87,28 +87,15 @@
 					<input type="text" name="sort" class="tit_con" value="ptBoard" />
 				</div>
 				<div class="mid">
-					<span>카테고리</span> <select class="cat" name="category">
-						<option value="구인해요">구인해요</option>
-						<option value="구직해요">구직해요</option>
-					</select> <span class="reg">지역</span> <select class="reg_con" name="region">
-						<option value="서울">서울</option>
-						<option value="경기">경기</option>
-						<option value="강원">강원</option>
-						<option value="대전">대전</option>
-						<option value="광주">광주</option>
-						<option value="대구">대구</option>
-						<option value="부산">부산</option>
-						<option value="울산">울산</option>
-						<option value="인천">인천</option>
-						<option value="제주">제주</option>
-						<option value="충북">충북</option>
-						<option value="충남">충남</option>
-						<option value="전북">전북</option>
-						<option value="전북">전북</option>
-						<option value="경북">경북</option>
-						<option value="경남">경남</option>
-					</select>
-				</div>
+				<span>카테고리</span>
+				<select class="cat" name="category">
+					<option value="구인해요">구인해요</option>
+					<option value="구직해요">구직해요</option>
+				</select>
+			
+
+			</div>
+			
 			</div>
 			<div class="content">
 				<textarea class="cont_box" name="body" placeholder="내용 입력">${board.body }</textarea>
@@ -118,17 +105,7 @@
 					<label for="fileInput" class="form-label">사진 첨부</label> <input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
 				</div>
 
-			<div class="mid">
-				<span>카테고리</span>
-				<select class="cat" name="category">
-					<option value="구인해요">구인해요</option>
-					<option value="구직해요">구직해요</option>
-				</select>
-
-				<span class="reg">지역</span>
-				<input type="text" name="addressSggNm" value="${board.addressSggNm}" readonly>
-
-			</div>
+			
 			<div class="butt">
 				<button type="submit" class="btn btn-dark">등록</button>
 				<a href="/ptBoard/list" class="btn btn-dark">취소</a>

@@ -3,76 +3,87 @@
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
    <select id="selectAll2" resultType="com.example.demo.domain.Product">
-        SELECT 
-        	p.ID,
-        	p.CategoryID,
-        	p.MemberID,
-        	p.Price,
-        	p.Qty,
-        	p.Title,
-        	p.Inserted,
-        	p.Address,
-        	p.Likes,
-        	p.StatusCode,
-        	p.views,
-        	p.writer,
-        	p.body,
-        	p.fileName,
-        	ph.ProductTitle PhotoTitle
-        	 
-        	
-         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC
+          SELECT 
+           p.ID,
+           p.CategoryID,
+           p.MemberID,
+           p.Price,
+           p.Qty,
+           p.Title,
+           p.Inserted,
+           p.Address,
+           p.Likes,
+           p.StatusCode,
+           p.views,
+           p.writer,
+           p.body,
+           p.fileName,
+           ph.ProductTitle PhotoTitle,
+           IFNULL(plv.count, 0) as count,
+           ca.CategoryName
+         FROM Product p 
+         left join ProductPhoto ph on p.id=ph.ProductID 
+         left join Category ca on p.CategoryID=ca.CategoryID 
+         left join Product_Likes_View plv on p.ID=plv.productId 
+         ORDER BY ID DESC
     </select>
    <select id="selectAll3" resultType="com.example.demo.domain.Product">
-   SELECT 
-        	p.ID,
-        	p.CategoryID,
-        	p.MemberID,
-        	p.Price,
-        	p.Qty,
-        	p.Title,
-        	p.Inserted,
-        	p.Address,
-        	p.Likes,
-        	p.StatusCode,
-        	p.views,
-        	p.writer,
-        	p.body,
-        	p.fileName,
-        	ph.ProductTitle PhotoTitle
-        	 
-        	
-         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
+           SELECT 
+           p.ID,
+           p.CategoryID,
+           p.MemberID,
+           p.Price,
+           p.Qty,
+           p.Title,
+           p.Inserted,
+           p.Address,
+           p.Likes,
+           p.StatusCode,
+           p.views,
+           p.writer,
+           p.body,
+           p.fileName,
+           ph.ProductTitle PhotoTitle,
+           IFNULL(plv.count, 0) as count,
+           ca.CategoryName
+         FROM Product p 
+         left join ProductPhoto ph on p.id=ph.ProductID 
+         left join Category ca on p.CategoryID=ca.CategoryID 
+         left join Product_Likes_View plv on p.ID=plv.productId 
+         ORDER BY plv.count DESC
+        
        
     </select>
     
     <select id="selectAll4"
       resultType="com.example.demo.domain.Product">
-      SELECT p.*
+      SELECT p.*, pp.ProductTitle as photoTitle
       FROM Product p
-      JOIN ProductLike pl ON p.id = pl.productId
+      left join ProductLike pl ON p.id = pl.productId
+      left join ProductPhoto pp ON p.ID = pp.ProductID 
+     
       WHERE pl.memberId = #{memberId}
    </select>
    <!-- 예전 좋아요 순 정렬 -->
    <!-- <select id="selectAll4" resultType="com.example.demo.domain.Product">
-   		 SELECT 
-  			 p.ID,
-        	p.CategoryID,
-        	p.MemberID,
-        	p.Price,
-        	p.Qty,
-        	p.Title,
-        	p.Inserted,
-        	p.Address,
-        	p.Likes,
-        	p.StatusCode,
-        	p.views,
-        	p.writer,
-        	p.body,
-        	p.fileName,
-        	ph.ProductTitle PhotoTitle
-        	 
-        	
+          SELECT 
+            p.ID,
+           p.CategoryID,
+           p.MemberID,
+           p.Price,
+           p.Qty,
+           p.Title,
+           p.Inserted,
+           p.Address,
+           p.Likes,
+           p.StatusCode,
+           p.views,
+           p.writer,
+           p.body,
+           p.fileName,
+           ph.ProductTitle PhotoTitle
+            
+           
          FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY Likes DESC
         
     </select> -->
@@ -83,25 +94,30 @@
         SELECT * FROM Product 
     </select>
    <select id="selectAll7" resultType="com.example.demo.domain.Product">
-   
         SELECT 
-        	p.ID,
-        	p.CategoryID,
-        	p.MemberID,
-        	p.Price,
-        	p.Qty,
-        	p.Title,
-        	p.Inserted,
-        	p.Address,
-        	p.Likes,
-        	p.StatusCode,
-        	p.views,
-        	p.writer,
-        	p.body,
-        	p.fileName,
-        	ph.ProductTitle PhotoTitle
-
-         FROM Product p left join ProductPhoto ph on p.id=ph.ProductID ORDER BY ID DESC LIMIT #{startIndex}, 12
+           p.ID,
+           p.CategoryID,
+           p.MemberID,
+           p.Price,
+           p.Qty,
+           p.Title,
+           p.Inserted,
+           p.Address,
+           p.Likes,
+           p.StatusCode,
+           p.views,
+           p.writer,
+           p.body,
+           p.fileName,
+           ph.ProductTitle PhotoTitle,
+           IFNULL(plv.count, 0) as count,
+           ca.CategoryName
+         FROM Product p 
+         left join ProductPhoto ph on p.id=ph.ProductID 
+         left join Category ca on p.CategoryID=ca.CategoryID 
+         left join Product_Likes_View plv on p.ID=plv.productId 
+         WHERE p.Title Like "%${search}%" or ca.CategoryName 
+         Like "%${search}%" or p.writer Like "%${search}%" ORDER BY ID DESC LIMIT #{startIndex}, 12 
     </select>
 
     

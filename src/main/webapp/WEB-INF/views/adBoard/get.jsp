@@ -130,7 +130,7 @@
 							<input class="tit" type="text" value="${board.title }" readonly />
 						</div>
 						<div class="head">
-							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |   지역 : ${addressSggNm}   |  찜 : ${board.likeCount}" readonly />
+							<input class="tit2" type="text" value="작성자 : ${board.writer }  |  ${board.inserted}   |   지역 : ${board.addressSggNm}   |  찜 : ${board.likeCount}" readonly />
 						</div>
 
 						<div class="body">

@@ -88,7 +88,7 @@ h1 {
 }
 
 .reg {
-	width: 100px;
+	width: 200px;
 }
 
 .wri {
@@ -96,7 +96,7 @@ h1 {
 }
 
 .tit {
-	width: 600px;
+	width: 500px;
 }
 .text{
 	text-align: left;

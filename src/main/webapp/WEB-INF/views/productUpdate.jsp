@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
@@ -17,14 +19,14 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 #bodycenter{
-		margin-top:30px;
-	}
+      margin-top:30px;
+   }
 </style>
 </head>
 <body>
-	
-	<my:navBar></my:navBar>
-	
+   
+   <my:navBar></my:navBar>
+   
     <div class="container-lg" style="padding: 0em 6em;">
         <div class="row justify-content-center">
             <div id="bodycenter"class="col-10 col-md-12 col-lg-14">
@@ -57,7 +59,7 @@
                             </div>
                         </div>
 
-						
+                  
                         
                     </div>
                     <div class="mb-3">
@@ -89,7 +91,7 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <input class="btn btn-secondary" type="submit" value="수정" />
-                            <a class="btn btn-danger" href="/teamProject/exList/${product.id }">취소</a>
+                            <a class="btn btn-danger" href="/SecondStop/exList/${product.id }">취소</a>
                         </div>
                     </div>
                 </form>

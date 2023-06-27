@@ -48,6 +48,7 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/id/{id}")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public String get(@PathVariable("id") Integer id, Model model
 						,Authentication authentication) {
 		
@@ -61,7 +62,7 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("freeadd")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public void getAddView() {
 		// TODO Auto-generated method stub
 	}
@@ -102,7 +103,7 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("/freeupdate/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityCheck.checkBoardWriter(authentication, #id)")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('cheat')")
 	public String updateView(@PathVariable("id")Integer id,Model model) {
 		
 		model.addAttribute("board",service.getBoard(id));
